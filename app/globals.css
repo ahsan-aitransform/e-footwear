@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+/* ---- Theme tokens: blue + white, black text (single source of truth for colours) ---- */
+@theme {
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+  --color-ink: #000000;
+  --color-ink-muted: #374151;
+  --color-surface: #ffffff;
+  --color-canvas: #f5f8ff;
+  --font-sans: var(--font-geist-sans), "Noto Nastaliq Urdu", system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* ---- Reusable component classes (used by every screen) ---- */
+@layer components {
+  .card {
+    @apply rounded-2xl border border-brand-100 bg-surface shadow-sm;
+  }
+  .card-body {
+    @apply p-4 sm:p-6;
+  }
+  .page-title {
+    @apply text-2xl font-semibold tracking-tight text-ink sm:text-3xl;
+  }
+  .section-title {
+    @apply text-lg font-semibold text-ink;
+  }
+  .muted {
+    @apply text-sm text-ink-muted;
+  }
+
+  .label {
+    @apply text-sm font-medium text-ink;
+  }
+  .input {
+    @apply w-full rounded-lg border border-slate-300 bg-surface px-3 py-2 text-ink outline-none transition
+      placeholder:text-slate-400 focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20
+      aria-[invalid=true]:border-red-500 aria-[invalid=true]:ring-red-500/20;
+  }
+  .select {
+    @apply rounded-lg border border-slate-300 bg-surface px-2 py-1.5 text-sm text-ink outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20;
+  }
+  .field-error {
+    @apply text-sm text-red-600;
+  }
+  .alert-error {
+    @apply rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700;
+  }
+  .alert-success {
+    @apply rounded-lg border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-800;
+  }
+  .alert-warning {
+    @apply rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition
+      focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600
+      disabled:cursor-not-allowed disabled:opacity-50 bg-brand-600 text-white shadow-sm hover:bg-brand-700;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition
+      focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600
+      disabled:cursor-not-allowed disabled:opacity-50 border border-brand-200 bg-surface text-brand-700 hover:bg-brand-50;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+
+  .table-wrap {
+    @apply rounded-2xl border border-brand-100 bg-surface shadow-sm overflow-x-auto;
+  }
+  .data-table {
+    @apply w-full min-w-[36rem] text-sm text-ink;
+  }
+  .data-table thead {
+    @apply bg-brand-50 text-brand-900;
+  }
+  .data-table th {
+    @apply px-4 py-3 text-start font-semibold;
+  }
+  .data-table td {
+    @apply border-t border-brand-50 px-4 py-3;
+  }
+  .data-table tbody tr {
+    @apply transition hover:bg-brand-50/60;
+  }
+
+  .badge-success {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-100 text-green-800;
+  }
+  .badge-danger {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-red-100 text-red-800;
+  }
+  .badge-muted {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-slate-100 text-slate-700;
+  }
+  .badge-brand {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-brand-100 text-brand-800;
+  }
 }
