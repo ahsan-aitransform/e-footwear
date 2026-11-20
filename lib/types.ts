@@ -32,7 +32,7 @@ export type Company = {
 
 export type UserRow = {
   id: number;
-  username: string;
+  email: string;
   fullName: string;
   roleCode: string;
   allStores: boolean;

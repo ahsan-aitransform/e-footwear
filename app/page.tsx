@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Loading } from "@/components/ui";
+import { Loading } from "@/components/kit";
 import { isCompanySession, loadSession } from "@/lib/client/session";
 
 // Entry point. It runs in the browser so it also works offline: the stored session decides where to go.

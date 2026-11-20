@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { CreateUserForm } from "@/components/CreateUserForm";
 import { Notice } from "@/components/Notice";
-import { Badge, Card, EmptyState, Loading, PageTitle, RoleBadge, StatusBadge, TableShell, Td, Th } from "@/components/ui";
+import { Badge, Card, EmptyState, Loading, PageTitle, RoleBadge, StatusBadge, TableShell, Td, Th } from "@/components/kit";
 import { loadCompanyData, type CompanyData } from "@/lib/client/companyData";
 import { isCompanySession, loadSession } from "@/lib/client/session";
 import { useAuthGuard } from "@/lib/client/useAuthGuard";
@@ -89,7 +89,7 @@ export default function DashboardPage() {
               <TableShell>
                 <thead>
                   <tr>
-                    <Th>Username</Th>
+                    <Th>Email</Th>
                     <Th>Name</Th>
                     <Th>Role</Th>
                     <Th>Stores</Th>
@@ -99,7 +99,7 @@ export default function DashboardPage() {
                 <tbody className="divide-y divide-slate-100">
                   {data.users.map((user) => (
                     <tr key={user.id} className="transition hover:bg-slate-50">
-                      <Td strong>{user.username}</Td>
+                      <Td strong>{user.email}</Td>
                       <Td>{user.fullName}</Td>
                       <Td>
                         <RoleBadge code={user.roleCode} label={roleLabel(user.roleCode)} />

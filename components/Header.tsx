@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { clientApi } from "@/lib/client/api";
 import { clearSession, loadSession } from "@/lib/client/session";
-import { Logo } from "./ui";
+import { Logo } from "./kit";
 
 // Top bar for every signed-in screen. Shows whether the device is online and signs out
 // locally even without a connection, so a shared device is always cleared.

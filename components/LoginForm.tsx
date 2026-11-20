@@ -20,12 +20,11 @@ export function LoginForm() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const company = String(form.get("company") ?? "").trim();
-    const username = String(form.get("username") ?? "").trim();
+    const email = String(form.get("email") ?? "").trim();
     const password = String(form.get("password") ?? "");
 
-    if (!company || !username || !password) {
-      setError("Enter your company, username and password.");
+    if (!email || !password) {
+      setError("Enter your email and password.");
       return;
     }
 
@@ -34,7 +33,7 @@ export function LoginForm() {
 
     const login = await clientApi<{ accessToken: string; mustChangePassword: boolean }>("/auth/login", {
       method: "POST",
-      body: { company, username, password },
+      body: { email, password },
     });
     if (!login.ok) {
       setPending(false);
@@ -59,15 +58,7 @@ export function LoginForm() {
       {params.get("changed") === "1" && (
         <Notice message="Password changed. Sign in with your new password." />
       )}
-      <Field
-        label="Company"
-        name="company"
-        placeholder="e.g. Bilal Footwear"
-        hint="Your company name, or its number."
-        autoComplete="organization"
-        required
-      />
-      <Field label="Username" name="username" autoComplete="username" required />
+      <Field label="Email" name="email" type="email" autoComplete="email" placeholder="you@company.com" required />
       <Field label="Password" name="password" type="password" autoComplete="current-password" required />
       <Notice error={error} />
       <SubmitButton label="Sign in" pendingLabel="Signing in..." pending={pending} fullWidth />

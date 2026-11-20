@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Loading } from "@/components/ui";
+import { Loading } from "@/components/kit";
 import { Header } from "@/components/Header";
 import { useAuthGuard } from "@/lib/client/useAuthGuard";
 import type { CompanyMe } from "@/lib/types";

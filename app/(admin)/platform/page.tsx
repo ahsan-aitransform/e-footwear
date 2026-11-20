@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { CreateCompanyForm } from "@/components/CreateCompanyForm";
 import { Notice } from "@/components/Notice";
-import { Badge, Card, EmptyState, Loading, PageTitle, TableShell, Td, Th } from "@/components/ui";
+import { Badge, Card, EmptyState, Loading, PageTitle, TableShell, Td, Th } from "@/components/kit";
 import { clientApi } from "@/lib/client/api";
 import { loadSession } from "@/lib/client/session";
 import type { Company } from "@/lib/types";

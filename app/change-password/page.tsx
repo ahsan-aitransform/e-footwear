@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loading } from "@/components/ui";
+import { Loading } from "@/components/kit";
 import { ChangePasswordForm } from "@/components/ChangePasswordForm";
 import { Shell } from "@/components/Shell";
 import { isCompanySession, loadSession } from "@/lib/client/session";

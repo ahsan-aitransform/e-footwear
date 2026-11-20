@@ -45,7 +45,7 @@ export function CreateUserForm({
       token: session.token,
       body: {
         companyId: companyId ?? null,
-        username: String(data.get("username") ?? "").trim(),
+        email: String(data.get("email") ?? "").trim(),
         fullName: String(data.get("fullName") ?? "").trim(),
         roleCode: String(data.get("roleCode") ?? ""),
         storeIds: data.getAll("storeIds").map((value) => Number(value)),
@@ -62,7 +62,7 @@ export function CreateUserForm({
 
   return (
     <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
-      <Field label="Username" name="username" autoComplete="off" required />
+      <Field label="Email" name="email" type="email" autoComplete="off" hint="They sign in with this email." required />
       <Field label="Full name" name="fullName" required />
 
       <div className="space-y-1">

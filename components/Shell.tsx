@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Logo } from "./ui";
+import { Logo } from "./kit";
 
 // Layout for the sign-in and password pages. On a wide screen: a brand panel beside the form.
 // On a phone: just the form, with the logo above it.

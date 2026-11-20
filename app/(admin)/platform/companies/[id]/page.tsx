@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { CreateStoreForm } from "@/components/CreateStoreForm";
 import { CreateUserForm } from "@/components/CreateUserForm";
 import { Notice } from "@/components/Notice";
-import { Badge, Card, EmptyState, Loading, PageTitle, RoleBadge, StatusBadge, TableShell, Td, Th } from "@/components/ui";
+import { Badge, Card, EmptyState, Loading, PageTitle, RoleBadge, StatusBadge, TableShell, Td, Th } from "@/components/kit";
 import { clientApi } from "@/lib/client/api";
 import { loadSession } from "@/lib/client/session";
 import type { CreationOptions, Store, UserRow } from "@/lib/types";
@@ -15,7 +15,15 @@ import { roleLabel } from "@/lib/types";
 type Detail = { stores: Store[]; users: UserRow[]; options: CreationOptions };
 
 // One company: its stores and users, with the forms to add a store and a store manager or owner.
-export default function CompanyPage() {
+export default function CompanyPageWrapper() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <CompanyPage />
+    </Suspense>
+  );
+}
+
+function CompanyPage() {
   const params = useParams<{ id: string }>();
   const companyId = Number(params.id);
   const [detail, setDetail] = useState<Detail>();
@@ -95,7 +103,7 @@ export default function CompanyPage() {
               <TableShell>
                 <thead>
                   <tr>
-                    <Th>Username</Th>
+                    <Th>Email</Th>
                     <Th>Name</Th>
                     <Th>Role</Th>
                     <Th>Stores</Th>
@@ -105,7 +113,7 @@ export default function CompanyPage() {
                 <tbody className="divide-y divide-slate-100">
                   {detail.users.map((user) => (
                     <tr key={user.id} className="transition hover:bg-slate-50">
-                      <Td strong>{user.username}</Td>
+                      <Td strong>{user.email}</Td>
                       <Td>{user.fullName}</Td>
                       <Td>
                         <RoleBadge code={user.roleCode} label={roleLabel(user.roleCode)} />

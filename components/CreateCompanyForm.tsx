@@ -29,7 +29,7 @@ export function CreateCompanyForm() {
       body: {
         name: text("name"),
         timezone: text("timezone") || null,
-        ownerUsername: text("ownerUsername"),
+        ownerEmail: text("ownerEmail"),
         ownerFullName: text("ownerFullName"),
         ownerPassword: String(form.get("ownerPassword") ?? ""),
         firstStoreCode: text("firstStoreCode"),
@@ -50,7 +50,7 @@ export function CreateCompanyForm() {
       </div>
       <Field label="Time zone" name="timezone" defaultValue="Asia/Karachi" />
       <div />
-      <Field label="Owner username" name="ownerUsername" autoComplete="off" required />
+      <Field label="Owner email" name="ownerEmail" type="email" autoComplete="off" required />
       <Field label="Owner full name" name="ownerFullName" required />
       <div className="sm:col-span-2">
         <Field label="Owner temporary password" name="ownerPassword" type="password" autoComplete="new-password" minLength={8} required />
