@@ -17,7 +17,7 @@ export function CreateUserForm({
   online,
   onCreated,
 }: {
-  companyId?: number;
+  companyId?: string;
   options: CreationOptions;
   online: boolean;
   onCreated: () => void;
@@ -40,7 +40,7 @@ export function CreateUserForm({
     setPending(true);
     setError(undefined);
     setMessage(undefined);
-    const result = await clientApi<{ id: number }>("/users", {
+    const result = await clientApi<{ id: string }>("/users", {
       method: "POST",
       token: session.token,
       body: {
@@ -48,7 +48,7 @@ export function CreateUserForm({
         email: String(data.get("email") ?? "").trim(),
         fullName: String(data.get("fullName") ?? "").trim(),
         roleCode: String(data.get("roleCode") ?? ""),
-        storeIds: data.getAll("storeIds").map((value) => Number(value)),
+        storeIds: data.getAll("storeIds").map(String),
         password: String(data.get("password") ?? ""),
       },
     });

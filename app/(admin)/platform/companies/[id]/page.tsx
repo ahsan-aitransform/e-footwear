@@ -25,13 +25,13 @@ export default function CompanyPageWrapper() {
 
 function CompanyPage() {
   const params = useParams<{ id: string }>();
-  const companyId = Number(params.id);
+  const companyId = params.id;
   const [detail, setDetail] = useState<Detail>();
   const [error, setError] = useState<string>();
 
   const load = useCallback(async () => {
     const session = await loadSession();
-    if (!session || !Number.isInteger(companyId) || companyId <= 0) return;
+    if (!session || !/^[0-9a-f-]{36}$/i.test(companyId)) return;
     const token = session.token;
     const [stores, users, options] = await Promise.all([
       clientApi<Store[]>(`/platform/companies/${companyId}/stores`, { token }),
@@ -60,7 +60,7 @@ function CompanyPage() {
           ← All companies
         </Link>
       </div>
-      <PageTitle title={`Company ${companyId}`} subtitle="Stores and people of this company." />
+      <PageTitle title="Company" subtitle="Stores and people of this company." />
 
       {error && <Notice error={error} />}
       {!error && !detail && <Loading />}

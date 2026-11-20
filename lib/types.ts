@@ -1,20 +1,20 @@
 // Shapes of the API responses the screens use. They mirror the API's records (camelCase JSON).
 
 // Who is signed in, as reported by GET /auth/me.
-export type PlatformMe = { platformAdmin: true; adminId: number; username: string };
+export type PlatformMe = { platformAdmin: true; adminId: string; username: string };
 export type CompanyMe = {
   platformAdmin: false;
-  companyId: number;
-  userId: number;
+  companyId: string;
+  userId: string;
   roleCode: string;
   allStores: boolean;
-  storeIds: number[];
+  storeIds: string[];
   mustChangePassword: boolean;
 };
 export type Me = PlatformMe | CompanyMe;
 
 export type Store = {
-  id: number;
+  id: string;
   code: string;
   name: string;
   isHeadOffice: boolean;
@@ -22,7 +22,7 @@ export type Store = {
 };
 
 export type Company = {
-  id: number;
+  id: string;
   name: string;
   status: string;
   timezone: string;
@@ -31,14 +31,14 @@ export type Company = {
 };
 
 export type UserRow = {
-  id: number;
+  id: string;
   email: string;
   fullName: string;
   roleCode: string;
   allStores: boolean;
   status: string;
   mustChangePassword: boolean;
-  storeIds: number[];
+  storeIds: string[];
   storeCodes: string[];
 };
 

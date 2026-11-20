@@ -8,7 +8,7 @@ import { Notice } from "./Notice";
 import { SubmitButton } from "./SubmitButton";
 
 // Adds a store to a company (platform administrators only). onCreated reloads the store list.
-export function CreateStoreForm({ companyId, onCreated }: { companyId: number; onCreated: () => void }) {
+export function CreateStoreForm({ companyId, onCreated }: { companyId: string; onCreated: () => void }) {
   const [error, setError] = useState<string>();
   const [message, setMessage] = useState<string>();
   const [pending, setPending] = useState(false);
@@ -23,7 +23,7 @@ export function CreateStoreForm({ companyId, onCreated }: { companyId: number; o
     setPending(true);
     setError(undefined);
     setMessage(undefined);
-    const result = await clientApi<{ id: number }>(`/platform/companies/${companyId}/stores`, {
+    const result = await clientApi<{ id: string }>(`/platform/companies/${companyId}/stores`, {
       method: "POST",
       token: session.token,
       body: { code: String(data.get("code") ?? "").trim(), name: String(data.get("name") ?? "").trim() },

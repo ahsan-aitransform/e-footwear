@@ -16,7 +16,7 @@ export function CompanyFrame({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-slate-50">
       <Header
-        title={`Company ${me.companyId}`}
+        title="E-Footwear"
         who={`${roleLabel(me.roleCode)} (user ${me.userId})`}
         online={guard.online}
         kind="company"

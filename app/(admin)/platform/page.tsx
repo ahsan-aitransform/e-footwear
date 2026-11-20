@@ -62,7 +62,7 @@ export default function PlatformPage() {
             <tbody className="divide-y divide-slate-100">
               {companies.map((company) => (
                 <tr key={company.id} className="transition hover:bg-slate-50">
-                  <Td>{company.id}</Td>
+                  <Td>{company.id.slice(0, 8)}</Td>
                   <Td strong>
                     <Link href={`/platform/companies/${company.id}`} className="text-indigo-600 hover:text-indigo-500">
                       {company.name}

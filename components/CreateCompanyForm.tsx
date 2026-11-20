@@ -23,7 +23,7 @@ export function CreateCompanyForm() {
     const text = (name: string) => String(form.get(name) ?? "").trim();
     setPending(true);
     setError(undefined);
-    const result = await clientApi<{ companyId: number }>("/platform/companies", {
+    const result = await clientApi<{ companyId: string }>("/platform/companies", {
       method: "POST",
       token: session.token,
       body: {

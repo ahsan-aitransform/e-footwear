@@ -79,7 +79,7 @@ function CompanyNode({ company }: { company: Company }) {
         <ChevronRight className={cn("size-4 shrink-0 text-muted-foreground transition-transform", open && "rotate-90")} />
         <Building2 className="size-4 shrink-0 text-primary" />
         <span className="min-w-0 flex-1 truncate font-medium">{company.name}</span>
-        <span className="text-xs text-muted-foreground">#{company.id}</span>
+        <span className="text-xs text-muted-foreground">{company.id.slice(0, 8)}</span>
         <Badge variant={company.status === "ACTIVE" ? "secondary" : "destructive"}>{company.status.toLowerCase()}</Badge>
       </CollapsibleTrigger>
 
