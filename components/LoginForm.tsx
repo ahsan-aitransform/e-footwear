@@ -50,6 +50,7 @@ export function LoginForm() {
     }
 
     await saveSession({ token, me: me.data, signedInAt: new Date().toISOString() });
+    setPending(false);
     router.replace(login.data.mustChangePassword ? "/change-password" : "/dashboard");
   }
 

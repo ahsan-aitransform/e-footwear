@@ -39,6 +39,7 @@ export function PlatformLoginForm() {
       return setError(me.message);
     }
     await saveSession({ token: login.data.accessToken, me: me.data, signedInAt: new Date().toISOString() });
+    setPending(false);
     router.replace("/platform");
   }
 
