@@ -49,9 +49,9 @@ export function ChangePasswordForm() {
       <Field label="Current (temporary) password" name="currentPassword" type="password" autoComplete="current-password" required />
       <Field label="New password" name="newPassword" type="password" autoComplete="new-password" minLength={8} required />
       <Field label="Repeat new password" name="confirmPassword" type="password" autoComplete="new-password" minLength={8} required />
-      <p className="text-xs text-zinc-500">At least 8 characters. You will sign in again afterwards.</p>
+      <p className="text-xs text-slate-500">At least 8 characters. You will sign in again afterwards.</p>
       <Notice error={error} />
-      <SubmitButton label="Change password" pendingLabel="Saving..." pending={pending} />
+      <SubmitButton label="Change password" pendingLabel="Saving..." pending={pending} fullWidth />
     </form>
   );
 }

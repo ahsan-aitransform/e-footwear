@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Loading } from "@/components/ui";
 import { isCompanySession, loadSession } from "@/lib/client/session";
 
 // Entry point. It runs in the browser so it also works offline: the stored session decides where to go.
@@ -16,5 +17,5 @@ export default function Home() {
     });
   }, [router]);
 
-  return <p className="p-6 text-sm text-zinc-500">Loading...</p>;
+  return <div className="mx-auto max-w-6xl px-6"><Loading /></div>;
 }

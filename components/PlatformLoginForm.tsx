@@ -47,7 +47,7 @@ export function PlatformLoginForm() {
       <Field label="Username" name="username" autoComplete="username" required />
       <Field label="Password" name="password" type="password" autoComplete="current-password" required />
       <Notice error={error} />
-      <SubmitButton label="Sign in" pendingLabel="Signing in..." pending={pending} />
+      <SubmitButton label="Sign in" pendingLabel="Signing in..." pending={pending} fullWidth />
     </form>
   );
 }

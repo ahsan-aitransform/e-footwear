@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CreateStoreForm } from "@/components/CreateStoreForm";
 import { CreateUserForm } from "@/components/CreateUserForm";
 import { Notice } from "@/components/Notice";
+import { Badge, Card, EmptyState, Loading, PageTitle, RoleBadge, StatusBadge, TableShell, Td, Th } from "@/components/ui";
 import { clientApi } from "@/lib/client/api";
 import { loadSession } from "@/lib/client/session";
 import type { CreationOptions, Store, UserRow } from "@/lib/types";
@@ -47,85 +48,85 @@ export default function CompanyPage() {
   return (
     <>
       <div>
-        <Link href="/platform" className="text-sm underline">
+        <Link href="/platform" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
           ← All companies
         </Link>
-        <h2 className="mt-2 text-xl font-semibold text-zinc-900">Company {companyId}</h2>
       </div>
+      <PageTitle title={`Company ${companyId}`} subtitle="Stores and people of this company." />
 
       {error && <Notice error={error} />}
-      {!error && !detail && <p className="text-sm text-zinc-500">Loading...</p>}
+      {!error && !detail && <Loading />}
 
       {detail && (
         <>
-          <section className="space-y-3">
-            <h3 className="text-lg font-semibold text-zinc-900">Stores</h3>
-            <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white">
-              <table className="min-w-full divide-y divide-zinc-200 text-sm">
-                <thead className="bg-zinc-50 text-left text-zinc-600">
+          <Card title="Stores" padded={false}>
+            <TableShell>
+              <thead>
+                <tr>
+                  <Th>Code</Th>
+                  <Th>Name</Th>
+                  <Th>Type</Th>
+                  <Th>Status</Th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {detail.stores.map((store) => (
+                  <tr key={store.id} className="transition hover:bg-slate-50">
+                    <Td strong>{store.code}</Td>
+                    <Td>{store.name}</Td>
+                    <Td>{store.isHeadOffice ? <Badge tone="violet">Head office</Badge> : <Badge>Store</Badge>}</Td>
+                    <Td>
+                      <Badge tone={store.isActive ? "green" : "red"}>{store.isActive ? "Active" : "Inactive"}</Badge>
+                    </Td>
+                  </tr>
+                ))}
+              </tbody>
+            </TableShell>
+          </Card>
+
+          <Card title="Add a store" description="Each store gets its own stock, cash and sales accounts automatically.">
+            <CreateStoreForm companyId={companyId} onCreated={load} />
+          </Card>
+
+          <Card title="Users" padded={false}>
+            {detail.users.length === 0 ? (
+              <EmptyState title="No users yet" text="Add the first one below." />
+            ) : (
+              <TableShell>
+                <thead>
                   <tr>
-                    <th className="px-4 py-2 font-medium">Code</th>
-                    <th className="px-4 py-2 font-medium">Name</th>
-                    <th className="px-4 py-2 font-medium">Type</th>
-                    <th className="px-4 py-2 font-medium">Status</th>
+                    <Th>Username</Th>
+                    <Th>Name</Th>
+                    <Th>Role</Th>
+                    <Th>Stores</Th>
+                    <Th>Status</Th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-100">
-                  {detail.stores.map((store) => (
-                    <tr key={store.id}>
-                      <td className="px-4 py-2">{store.code}</td>
-                      <td className="px-4 py-2">{store.name}</td>
-                      <td className="px-4 py-2">{store.isHeadOffice ? "Head office" : "Store"}</td>
-                      <td className="px-4 py-2">{store.isActive ? "Active" : "Inactive"}</td>
+                <tbody className="divide-y divide-slate-100">
+                  {detail.users.map((user) => (
+                    <tr key={user.id} className="transition hover:bg-slate-50">
+                      <Td strong>{user.username}</Td>
+                      <Td>{user.fullName}</Td>
+                      <Td>
+                        <RoleBadge code={user.roleCode} label={roleLabel(user.roleCode)} />
+                      </Td>
+                      <Td>{user.allStores ? "All stores" : user.storeCodes.join(", ") || "-"}</Td>
+                      <Td>
+                        <span className="inline-flex items-center gap-2">
+                          <StatusBadge status={user.status} />
+                          {user.mustChangePassword && <Badge tone="amber">Temporary password</Badge>}
+                        </span>
+                      </Td>
                     </tr>
                   ))}
                 </tbody>
-              </table>
-            </div>
-            <div className="rounded-lg border border-zinc-200 bg-white p-4">
-              <h4 className="mb-3 font-medium text-zinc-900">Add a store</h4>
-              <CreateStoreForm companyId={companyId} onCreated={load} />
-            </div>
-          </section>
-
-          <section className="space-y-3">
-            <h3 className="text-lg font-semibold text-zinc-900">Users</h3>
-            {detail.users.length === 0 ? (
-              <p className="text-sm text-zinc-600">No users yet.</p>
-            ) : (
-              <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white">
-                <table className="min-w-full divide-y divide-zinc-200 text-sm">
-                  <thead className="bg-zinc-50 text-left text-zinc-600">
-                    <tr>
-                      <th className="px-4 py-2 font-medium">Username</th>
-                      <th className="px-4 py-2 font-medium">Name</th>
-                      <th className="px-4 py-2 font-medium">Role</th>
-                      <th className="px-4 py-2 font-medium">Stores</th>
-                      <th className="px-4 py-2 font-medium">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-zinc-100">
-                    {detail.users.map((user) => (
-                      <tr key={user.id}>
-                        <td className="px-4 py-2">{user.username}</td>
-                        <td className="px-4 py-2">{user.fullName}</td>
-                        <td className="px-4 py-2">{roleLabel(user.roleCode)}</td>
-                        <td className="px-4 py-2">{user.allStores ? "All stores" : user.storeCodes.join(", ") || "-"}</td>
-                        <td className="px-4 py-2">
-                          {user.status}
-                          {user.mustChangePassword && <span className="ml-2 text-xs text-amber-700">temporary password</span>}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              </TableShell>
             )}
-            <div className="rounded-lg border border-zinc-200 bg-white p-4 sm:p-6">
-              <h4 className="mb-3 font-medium text-zinc-900">Add a user</h4>
-              <CreateUserForm companyId={companyId} options={detail.options} online onCreated={load} />
-            </div>
-          </section>
+          </Card>
+
+          <Card title="Add a user" description="Store managers and company owners. They must change the temporary password at first sign-in.">
+            <CreateUserForm companyId={companyId} options={detail.options} online onCreated={load} />
+          </Card>
         </>
       )}
     </>

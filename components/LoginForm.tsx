@@ -20,12 +20,12 @@ export function LoginForm() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const companyId = Number(form.get("companyId"));
+    const company = String(form.get("company") ?? "").trim();
     const username = String(form.get("username") ?? "").trim();
     const password = String(form.get("password") ?? "");
 
-    if (!Number.isInteger(companyId) || companyId <= 0 || !username || !password) {
-      setError("Enter the company id, username and password.");
+    if (!company || !username || !password) {
+      setError("Enter your company, username and password.");
       return;
     }
 
@@ -34,7 +34,7 @@ export function LoginForm() {
 
     const login = await clientApi<{ accessToken: string; mustChangePassword: boolean }>("/auth/login", {
       method: "POST",
-      body: { companyId, username, password },
+      body: { company, username, password },
     });
     if (!login.ok) {
       setPending(false);
@@ -59,11 +59,18 @@ export function LoginForm() {
       {params.get("changed") === "1" && (
         <Notice message="Password changed. Sign in with your new password." />
       )}
-      <Field label="Company id" name="companyId" type="number" inputMode="numeric" min={1} required />
+      <Field
+        label="Company"
+        name="company"
+        placeholder="e.g. Bilal Footwear"
+        hint="Your company name, or its number."
+        autoComplete="organization"
+        required
+      />
       <Field label="Username" name="username" autoComplete="username" required />
       <Field label="Password" name="password" type="password" autoComplete="current-password" required />
       <Notice error={error} />
-      <SubmitButton label="Sign in" pendingLabel="Signing in..." pending={pending} />
+      <SubmitButton label="Sign in" pendingLabel="Signing in..." pending={pending} fullWidth />
     </form>
   );
 }

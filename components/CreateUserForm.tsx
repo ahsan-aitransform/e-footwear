@@ -27,7 +27,7 @@ export function CreateUserForm({
   const [pending, setPending] = useState(false);
 
   if (options.roles.length === 0) {
-    return <p className="text-sm text-zinc-600">Your role cannot create users.</p>;
+    return <p className="text-sm text-slate-600">Your role cannot create users.</p>;
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -66,7 +66,7 @@ export function CreateUserForm({
       <Field label="Full name" name="fullName" required />
 
       <div className="space-y-1">
-        <label htmlFor="field-roleCode" className="block text-sm font-medium text-zinc-700">
+        <label htmlFor="field-roleCode" className="block text-sm font-medium text-slate-700">
           Role
         </label>
         <select
@@ -74,7 +74,7 @@ export function CreateUserForm({
           name="roleCode"
           required
           defaultValue={options.roles[0]}
-          className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-base focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+          className="block w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
         >
           {options.roles.map((role) => (
             <option key={role} value={role}>
@@ -87,16 +87,16 @@ export function CreateUserForm({
       <Field label="Temporary password" name="password" type="password" autoComplete="new-password" minLength={8} required />
 
       <fieldset className="space-y-2 sm:col-span-2">
-        <legend className="text-sm font-medium text-zinc-700">
+        <legend className="text-sm font-medium text-slate-700">
           Store (one for a store manager; one or more for staff; none for a company owner)
         </legend>
         {options.stores.length === 0 ? (
-          <p className="text-sm text-zinc-500">No stores available.</p>
+          <p className="text-sm text-slate-500">No stores available.</p>
         ) : (
           <div className="grid gap-2 sm:grid-cols-2">
             {options.stores.map((store) => (
-              <label key={store.id} className="flex items-center gap-2 rounded-md border border-zinc-200 px-3 py-2 text-sm">
-                <input type="checkbox" name="storeIds" value={store.id} className="h-4 w-4" />
+              <label key={store.id} className="flex cursor-pointer items-center gap-3 rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50/40 has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50">
+                <input type="checkbox" name="storeIds" value={store.id} className="h-4 w-4 rounded border-slate-300 text-indigo-600" />
                 <span>
                   {store.code} · {store.name}
                 </span>
@@ -109,7 +109,7 @@ export function CreateUserForm({
       <div className="space-y-3 sm:col-span-2">
         {!online && <Notice error="You are offline. Users can be added when the device is back online." />}
         <Notice error={error} message={message} />
-        <SubmitButton label="Create user" pendingLabel="Creating..." pending={pending || !online} />
+        <SubmitButton label="Create user" pendingLabel="Creating..." pending={pending} disabled={!online} />
       </div>
     </form>
   );

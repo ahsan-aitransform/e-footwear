@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Loading } from "@/components/ui";
 import { ChangePasswordForm } from "@/components/ChangePasswordForm";
 import { Shell } from "@/components/Shell";
 import { isCompanySession, loadSession } from "@/lib/client/session";
@@ -19,7 +20,7 @@ export default function ChangePasswordPage() {
     });
   }, [router]);
 
-  if (!ready) return <p className="p-6 text-sm text-zinc-500">Loading...</p>;
+  if (!ready) return <div className="mx-auto max-w-6xl px-6"><Loading /></div>;
 
   return (
     <Shell title="Choose a new password" subtitle="Your password is temporary. Change it before continuing.">

@@ -57,7 +57,7 @@ export function CreateCompanyForm() {
       </div>
       <Field label="First store code" name="firstStoreCode" maxLength={20} required />
       <Field label="First store name" name="firstStoreName" maxLength={120} required />
-      <p className="text-xs text-zinc-500 sm:col-span-2">The owner must change the temporary password at first sign-in.</p>
+      <p className="text-xs text-slate-500 sm:col-span-2">The owner must change the temporary password at first sign-in.</p>
       <div className="space-y-3 sm:col-span-2">
         <Notice error={error} />
         <SubmitButton label="Create company" pendingLabel="Creating..." pending={pending} />

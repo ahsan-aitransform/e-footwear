@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { CreateUserForm } from "@/components/CreateUserForm";
 import { Notice } from "@/components/Notice";
+import { Badge, Card, EmptyState, Loading, PageTitle, RoleBadge, StatusBadge, TableShell, Td, Th } from "@/components/ui";
 import { loadCompanyData, type CompanyData } from "@/lib/client/companyData";
 import { isCompanySession, loadSession } from "@/lib/client/session";
 import { useAuthGuard } from "@/lib/client/useAuthGuard";
@@ -38,88 +39,88 @@ export default function DashboardPage() {
     if (guard.status === "ready") void refresh();
   }, [guard.status, refresh]);
 
-  if (guard.status === "loading") return <p className="text-sm text-zinc-500">Loading...</p>;
+  if (guard.status === "loading") return <Loading />;
 
   const savedAt = data ? new Date(data.savedAt).toLocaleString() : "";
 
   return (
     <>
-      <p className="text-sm text-zinc-600">
-        {source === "server" && `Up to date (${savedAt}).`}
-        {source === "cache" && `Showing saved data from ${savedAt}. It will refresh when you are online.`}
-        {source === "none" && "No saved data yet."}
-      </p>
+      <PageTitle title="Dashboard" subtitle="Your stores and the people who work in them." />
+
+      {source === "cache" && (
+        <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-800">
+          You are working offline. Showing saved data from {savedAt}. It refreshes when the connection returns.
+        </p>
+      )}
+      {source === "server" && <p className="text-xs text-slate-500">Up to date · {savedAt}</p>}
       {message && <Notice error={message} />}
 
       {data && (
         <>
-          <section className="space-y-3">
-            <h2 className="text-lg font-semibold text-zinc-900">Your stores</h2>
+          <Card title="Your stores" padded={false}>
             {data.stores.length === 0 ? (
-              <p className="text-sm text-zinc-600">You are not assigned to any store yet.</p>
+              <EmptyState title="No stores yet" text="You are not assigned to any store." />
             ) : (
-              <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white">
-                <table className="min-w-full divide-y divide-zinc-200 text-sm">
-                  <thead className="bg-zinc-50 text-left text-zinc-600">
-                    <tr>
-                      <th className="px-4 py-2 font-medium">Code</th>
-                      <th className="px-4 py-2 font-medium">Name</th>
-                      <th className="px-4 py-2 font-medium">Type</th>
+              <TableShell>
+                <thead>
+                  <tr>
+                    <Th>Code</Th>
+                    <Th>Name</Th>
+                    <Th>Type</Th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {data.stores.map((store) => (
+                    <tr key={store.id} className="transition hover:bg-slate-50">
+                      <Td strong>{store.code}</Td>
+                      <Td>{store.name}</Td>
+                      <Td>{store.isHeadOffice ? <Badge tone="violet">Head office</Badge> : <Badge>Store</Badge>}</Td>
                     </tr>
-                  </thead>
-                  <tbody className="divide-y divide-zinc-100">
-                    {data.stores.map((store) => (
-                      <tr key={store.id}>
-                        <td className="px-4 py-2">{store.code}</td>
-                        <td className="px-4 py-2">{store.name}</td>
-                        <td className="px-4 py-2">{store.isHeadOffice ? "Head office" : "Store"}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </TableShell>
             )}
-          </section>
+          </Card>
 
-          <section className="space-y-3">
-            <h2 className="text-lg font-semibold text-zinc-900">Users</h2>
+          <Card title="People" padded={false}>
             {data.users.length === 0 ? (
-              <p className="text-sm text-zinc-600">No users to show.</p>
+              <EmptyState title="No users to show" />
             ) : (
-              <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white">
-                <table className="min-w-full divide-y divide-zinc-200 text-sm">
-                  <thead className="bg-zinc-50 text-left text-zinc-600">
-                    <tr>
-                      <th className="px-4 py-2 font-medium">Username</th>
-                      <th className="px-4 py-2 font-medium">Name</th>
-                      <th className="px-4 py-2 font-medium">Role</th>
-                      <th className="px-4 py-2 font-medium">Stores</th>
-                      <th className="px-4 py-2 font-medium">Status</th>
+              <TableShell>
+                <thead>
+                  <tr>
+                    <Th>Username</Th>
+                    <Th>Name</Th>
+                    <Th>Role</Th>
+                    <Th>Stores</Th>
+                    <Th>Status</Th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {data.users.map((user) => (
+                    <tr key={user.id} className="transition hover:bg-slate-50">
+                      <Td strong>{user.username}</Td>
+                      <Td>{user.fullName}</Td>
+                      <Td>
+                        <RoleBadge code={user.roleCode} label={roleLabel(user.roleCode)} />
+                      </Td>
+                      <Td>{user.allStores ? "All stores" : user.storeCodes.join(", ") || "-"}</Td>
+                      <Td>
+                        <span className="inline-flex items-center gap-2">
+                          <StatusBadge status={user.status} />
+                          {user.mustChangePassword && <Badge tone="amber">Temporary password</Badge>}
+                        </span>
+                      </Td>
                     </tr>
-                  </thead>
-                  <tbody className="divide-y divide-zinc-100">
-                    {data.users.map((user) => (
-                      <tr key={user.id}>
-                        <td className="px-4 py-2">{user.username}</td>
-                        <td className="px-4 py-2">{user.fullName}</td>
-                        <td className="px-4 py-2">{roleLabel(user.roleCode)}</td>
-                        <td className="px-4 py-2">{user.allStores ? "All stores" : user.storeCodes.join(", ") || "-"}</td>
-                        <td className="px-4 py-2">
-                          {user.status}
-                          {user.mustChangePassword && <span className="ml-2 text-xs text-amber-700">temporary password</span>}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </TableShell>
             )}
-          </section>
+          </Card>
 
-          <section className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4 sm:p-6">
-            <h2 className="text-lg font-semibold text-zinc-900">Add a user</h2>
+          <Card title="Add a user" description="They must change the temporary password at first sign-in.">
             <CreateUserForm options={data.options} online={guard.status === "ready" && guard.online} onCreated={refresh} />
-          </section>
+          </Card>
         </>
       )}
     </>

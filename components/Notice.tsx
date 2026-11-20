@@ -2,15 +2,17 @@
 export function Notice({ error, message }: { error?: string; message?: string }) {
   if (error) {
     return (
-      <p role="alert" className="rounded-md border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">
-        {error}
+      <p role="alert" className="flex gap-2 rounded-lg border border-red-200 bg-red-50 px-3.5 py-2.5 text-sm text-red-800">
+        <span aria-hidden="true" className="mt-0.5 font-bold">!</span>
+        <span>{error}</span>
       </p>
     );
   }
   if (message) {
     return (
-      <p role="status" className="rounded-md border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-800">
-        {message}
+      <p role="status" className="flex gap-2 rounded-lg border border-green-200 bg-green-50 px-3.5 py-2.5 text-sm text-green-800">
+        <span aria-hidden="true" className="mt-0.5 font-bold">✓</span>
+        <span>{message}</span>
       </p>
     );
   }
