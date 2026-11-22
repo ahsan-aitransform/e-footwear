@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR ?? ".next",
   experimental: {
     agentFeedback: true,
+    // Development-only check that every page can open instantly. Every screen here shows nothing until the sign-in check
+    // (GET /auth/me) has answered, so none of them can, and the check would warn on each page. "manual-warning" validates
+    // only segments that opt in with `export const instant = true`. A layout's `instant = false` does not cover its pages.
+    instantInsights: { validationLevel: "manual-warning" },
   },
   cacheComponents: true,
   partialPrefetching: true,

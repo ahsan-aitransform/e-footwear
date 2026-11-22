@@ -53,7 +53,8 @@ export function ApplicationShell({ children }: { children: ReactNode }) {
         {translateMessage("common.skipToContent")}
       </a>
 
-      <aside className="hidden w-64 shrink-0 flex-col border-e bg-sidebar text-sidebar-foreground md:flex print:hidden">
+      {/* Pinned to the screen height (sticky + h-screen + self-start) so the menu inside scrolls on its own while the page scrolls. */}
+      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col self-start border-e bg-sidebar text-sidebar-foreground md:flex print:hidden">
         {brand}
         <ApplicationNavigation />
       </aside>

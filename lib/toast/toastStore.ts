@@ -11,7 +11,10 @@ export type ToastMessage = {
 export const TOAST_VISIBLE_MILLISECONDS = 6000;
 
 const listeners = new Set<() => void>();
-let toasts: readonly ToastMessage[] = [];
+// React compares snapshots by identity: a snapshot function must return the SAME object while nothing changed,
+// otherwise useSyncExternalStore reports an infinite loop. That is why the server value is one shared constant.
+const NO_TOASTS: readonly ToastMessage[] = [];
+let toasts: readonly ToastMessage[] = NO_TOASTS;
 let nextToastId = 1;
 
 function publish(next: readonly ToastMessage[]): void {
@@ -24,7 +27,7 @@ export function getToastsSnapshot(): readonly ToastMessage[] {
 }
 
 export function getServerToastsSnapshot(): readonly ToastMessage[] {
-  return [];
+  return NO_TOASTS;
 }
 
 export function subscribeToToasts(listener: () => void): () => void {
