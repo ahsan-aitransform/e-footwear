@@ -113,7 +113,7 @@ describe("platform administrator sign-in", () => {
     );
     render(<PlatformAdministratorSignInForm />);
     await userEvent.type(screen.getByLabelText(/Username/), "superadmin");
-    await userEvent.type(screen.getByLabelText(/Password/), "SuperAdmin#2026");
+    await userEvent.type(screen.getByLabelText(/Password/), "Example-Password-1");
     await userEvent.click(screen.getByRole("button", { name: "Sign in" }));
     await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.platformCompanies));
     expect(requests[0].url).toBe("/api/v1/platform/auth/login");
