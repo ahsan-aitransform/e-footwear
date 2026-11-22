@@ -20,8 +20,8 @@ async function buildSessionHeaders(): Promise<{ headers: Record<string, string>;
   return { headers, hasToken: accessToken !== null };
 }
 
-// PUTs one file as multipart/form-data. The browser sets the multipart boundary itself, so no content type is given.
-export async function uploadApiFile<TData = void>(path: string, file: File): Promise<ApiResult<TData>> {
+// Sends one file as multipart/form-data (PUT by default; POST for an endpoint that reads a file and answers a preview). The browser sets the multipart boundary itself, so no content type is given.
+export async function uploadApiFile<TData = void>(path: string, file: File, method: "PUT" | "POST" = "PUT"): Promise<ApiResult<TData>> {
   const { headers, hasToken } = await buildSessionHeaders();
   headers[HttpHeaderNames.accept] = JSON_MEDIA_TYPE;
   const form = new FormData();
@@ -29,7 +29,7 @@ export async function uploadApiFile<TData = void>(path: string, file: File): Pro
 
   let response: Response;
   try {
-    response = await fetch(`${API_BASE_PATH}${path}`, { method: "PUT", headers, body: form, cache: "no-store" });
+    response = await fetch(`${API_BASE_PATH}${path}`, { method, headers, body: form, cache: "no-store" });
   } catch {
     return { ok: false, status: 0, kind: "offline", problem: normaliseApiProblem(0, null) };
   }

@@ -98,6 +98,18 @@ export type ProductVariantDetailResponse = {
 
 export type ProductImageResponse = { slot: number };
 
+// One size as a product picker lists it: names and codes only (never prices or stock).
+export type ProductLookupResponse = {
+  productId: string;
+  variantId: string;
+  productCode: string;
+  productName: string;
+  barcode: string;
+  sizeCode: string;
+  colorName: string | null;
+  brandName: string | null;
+};
+
 export type ProductDetailResponse = {
   id: string;
   code: string;

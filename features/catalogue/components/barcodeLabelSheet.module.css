@@ -1,0 +1,38 @@
+/* The label sheet is printed on paper, so it is always dark ink on a white label, whatever theme the screen uses. */
+.sheet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2mm;
+}
+
+.label {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 1.5mm;
+  border: 1px dashed;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  line-height: 1.15;
+}
+
+.barcode {
+  display: block;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+@media print {
+  .sheet {
+    gap: 0;
+  }
+
+  .label {
+    border: none;
+    color: black !important;
+    background: white !important;
+  }
+}

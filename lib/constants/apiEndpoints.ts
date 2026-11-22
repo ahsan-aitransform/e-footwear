@@ -214,6 +214,10 @@ export const ApiEndpoints = {
     variantsSearch: "/products/variants/search",
     variantsForDiscounts: "/products/variants/for-discounts",
     variantsForDiscountRemoval: "/products/variants/for-discount-removal",
+    // The product pickers of the screens that work on one product: names and codes only, each bound to its screen's permission.
+    lookupForLedger: "/products/lookup/for-ledger",
+    lookupForDiscountsOnStores: "/products/lookup/for-discounts-on-stores",
+    lookupForLabels: "/products/lookup/for-labels",
     byId: (productId: string) => `/products/${encodeURIComponent(productId)}`,
     nextCode: "/products/next-code",
     priceHistory: (productId: string) => `/products/${encodeURIComponent(productId)}/price-history`,

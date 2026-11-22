@@ -10,6 +10,8 @@ export const CatalogueLimits = {
   sizeCodeMaximumLength: 20,
   barcodeMaximumLength: 48,
   maximumVariantsPerProduct: 200,
+  imageSlotCount: 4,
+  imageMaximumSizeBytes: 2 * 1024 * 1024,
   maximumPrice: 999_999_999,
   increasePercentageMinimum: 0.01,
   increasePercentageMaximum: 1000,
@@ -20,6 +22,8 @@ export const CatalogueLimits = {
   priceBandSortOrderMaximum: 100_000,
   // The server refuses a bulk change that touches more products than this.
   maximumProductsPerBulkChange: 5000,
-  maximumLabelCopiesPerSize: 500,
+  maximumLabelKinds: 500,
+  maximumLabelCopiesPerSize: 1000,
+  maximumLabelsPerRequest: 5000,
   maximumReplacementRows: 5000,
 } as const;
