@@ -16,6 +16,7 @@ import { masterDataUrduMessages } from "./masterData";
 import { partiesUrduMessages } from "./parties";
 import { accountingUrduMessages } from "./accounting";
 import { cashManagementUrduMessages } from "./cashManagement";
+import { catalogueUrduMessages } from "./catalogue";
 // <urdu-messages-imports:end>
 
 export const urduMessages: Record<keyof typeof englishMessages, string> = {
@@ -31,5 +32,6 @@ export const urduMessages: Record<keyof typeof englishMessages, string> = {
   ...partiesUrduMessages,
   ...accountingUrduMessages,
   ...cashManagementUrduMessages,
+  ...catalogueUrduMessages,
   // <urdu-messages-spread:end>
 };

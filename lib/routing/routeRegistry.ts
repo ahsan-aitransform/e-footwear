@@ -15,7 +15,6 @@ import type { MessageKey } from "@/lib/i18n/messageKeys";
 import type { PermissionRequirement } from "@/lib/types/permissions";
 import { NavigationGroupCodes, type NavigationGroupCode } from "./navigationGroups";
 import { masterDataRouteDefinitions } from "@/features/masterData/masterDataRouteDefinitions";
-import { catalogueRouteDefinitions } from "@/features/catalogue/catalogueRouteDefinitions";
 import { partyRouteDefinitions } from "@/features/parties/partyRouteDefinitions";
 
 export type RouteAudience = "public" | "platformAdministrator" | "companyUser";
@@ -367,7 +366,6 @@ export const applicationRouteRegistry: readonly ApplicationRouteDefinition[] = [
   },
   ...masterDataRouteDefinitions,
   ...partyRouteDefinitions,
-  ...catalogueRouteDefinitions,
   ...(
     [
       ["paymentVoucher", ApplicationRoutePatterns.paymentVoucher, PermissionCodes.VOUCHER.PAYMENT_VOUCHER.ADD, "navigation.item.paymentVoucher", "cash", PermissionModuleCodes.VOUCHER, 10],

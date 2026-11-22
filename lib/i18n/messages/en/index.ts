@@ -15,6 +15,7 @@ import { masterDataEnglishMessages } from "./masterData";
 import { partiesEnglishMessages } from "./parties";
 import { accountingEnglishMessages } from "./accounting";
 import { cashManagementEnglishMessages } from "./cashManagement";
+import { catalogueEnglishMessages } from "./catalogue";
 // <english-messages-imports:end>
 
 export const englishMessages = {
@@ -30,5 +31,6 @@ export const englishMessages = {
   ...partiesEnglishMessages,
   ...accountingEnglishMessages,
   ...cashManagementEnglishMessages,
+  ...catalogueEnglishMessages,
   // <english-messages-spread:end>
 };
