@@ -1,0 +1,215 @@
+// SINGLE SOURCE OF TRUTH FOR EVERY ROUTE STRING OF THE APPLICATION.
+// No other file may contain a literal route such as "/dashboard". Link, redirect and registry code uses these constants.
+//
+// This file must stay free of imports: scripts/generateServiceWorkerShell.mjs loads it directly with Node
+// (type stripping), so it can only use erasable TypeScript syntax (no enums, no parameter properties).
+//
+// Adding a route: add the concrete path to ApplicationRoutes (a string, or a builder function for dynamic
+// segments), the file-system pattern to ApplicationRoutePatterns, then register it in lib/routing/routeRegistry.ts.
+
+export const ApplicationRoutes = {
+  home: "/",
+  companySignIn: "/login",
+  platformSignIn: "/platform/login",
+  changePassword: "/change-password",
+  companyDashboard: "/dashboard",
+  platformCompanies: "/platform",
+  platformDirectory: "/platform/directory",
+  platformCompanyDetail: (companyId: string) => `/platform/companies/${encodeURIComponent(companyId)}`,
+  // The company sign-in page with the "password changed" notice (shown after a forced password change).
+  companySignInAfterPasswordChange: "/login?changed=1",
+  forgotPassword: "/forgot-password",
+  resetPassword: "/reset-password",
+  usersList: "/users",
+  usersNew: "/users/new",
+  userEdit: (userId: string) => `/users/${encodeURIComponent(userId)}`,
+  usersActivity: "/users/activity",
+  roleTemplates: "/users/roles",
+  devices: "/devices",
+  accountSessions: "/account/sessions",
+  // Settings module (company users)
+  companyProfile: "/settings/company-profile",
+  businessInfoAndPreferences: "/settings/preference",
+  paymentMethods: "/settings/payment-methods",
+  storeManagement: "/settings/stores",
+  documentNumbering: "/settings/document-numbering",
+  posTerminals: "/settings/pos-terminals",
+  backup: "/settings/backup",
+  restore: "/settings/restore",
+  myPreferences: "/settings/my-preferences",
+  // Platform administration (settings module)
+  platformPlans: "/platform/plans",
+  platformAuditLog: "/platform/audit-log",
+  platformBackup: "/platform/backup",
+  // Master data and accounting master data (Settings module, docx chapter 2)
+  departments: "/settings/department",
+  categories: "/settings/category",
+  brands: "/settings/company-brand",
+  seasons: "/settings/season",
+  genders: "/settings/gender",
+  colors: "/settings/color",
+  locations: "/settings/location",
+  units: "/settings/unit",
+  citiesAndAreas: "/settings/city-area",
+  sizeGroups: "/settings/size-group",
+  productTypes: "/settings/product-type",
+  glAccounts: "/settings/gl-accounts",
+  newSecondLevelAccountGroup: "/settings/new-second-level",
+  viewSecondLevelAccountGroups: "/settings/view-second-level",
+  openingBalances: "/settings/opening-balance",
+  // Party chapter (docx chapter 3)
+  newParty: "/party/new-party",
+  editParty: (partyId: string) => `/party/new-party/${encodeURIComponent(partyId)}`,
+  manageParties: "/party/manage-party",
+  searchParties: "/party/search-party",
+  partyAccountDetail: "/party/account-detail",
+  customerPromises: "/party/promise",
+  cashCalculator: "/party/cash-calculator",
+  viewCashDetails: "/party/view-cash-detail",
+  paymentVoucher: "/voucher/payment",
+  receiptVoucher: "/voucher/receipt",
+  expenseVoucher: "/voucher/expense",
+  journalVoucher: "/voucher/journal",
+  viewVoucher: "/voucher/view",
+  voucherReport: "/voucher/report",
+  accountingPeriods: "/voucher/periods",
+  cashAndBankBalances: "/voucher/cash-and-bank",
+  accountLedger: "/reports/account-ledger",
+  accountBalance: "/reports/account-balance",
+  trialBalance: "/reports/trial-balance",
+  detailTrialBalance: "/reports/detail-trial-balance",
+  generalJournal: "/reports/general-journal",
+  // Products menu (module catalogue, docx chapter 4).
+  newProduct: "/products/new-product",
+  editProduct: (productId: string) => `/products/new-product/${encodeURIComponent(productId)}`,
+  viewProducts: "/products/view-products",
+  searchProduct: "/products/search-product",
+  productLedger: "/products/product-ledger",
+  generateBarcodes: "/products/generate-barcodes",
+  priceCheck: "/products/price-check",
+  changeAttributes: "/products/change-attributes",
+  changePricesOldToNew: "/products/change-prices-old-to-new",
+  changePricesByPercentage: "/products/change-prices-by-percentage",
+  changeDiscounts: "/products/change-discounts",
+  productDiscounts: "/products/product-discounts",
+  productDiscountsOnMultipleStores: "/products/product-discounts-on-multiple-stores",
+  removeDiscountsAndReversePrice: "/products/remove-discounts-and-reverse-price",
+  replaceBarcodes: "/products/replace-barcodes",
+  productStockWithSizes: "/products/stock-with-sizes-on-multiple-stores",
+  productReport: "/products/product-report",
+  priceBands: "/products/price-bands",
+  // <application-routes:end> (shared file: append new routes above this marker, with Edit only)
+} as const;
+
+// The route as written in the app/ folder: dynamic segments are in square brackets. The route registry matches
+// browser paths against these patterns.
+export const ApplicationRoutePatterns = {
+  home: "/",
+  companySignIn: "/login",
+  platformSignIn: "/platform/login",
+  changePassword: "/change-password",
+  companyDashboard: "/dashboard",
+  platformCompanies: "/platform",
+  platformDirectory: "/platform/directory",
+  platformCompanyDetail: "/platform/companies/[companyId]",
+  forgotPassword: "/forgot-password",
+  resetPassword: "/reset-password",
+  usersList: "/users",
+  usersNew: "/users/new",
+  userEdit: "/users/[userId]",
+  usersActivity: "/users/activity",
+  roleTemplates: "/users/roles",
+  devices: "/devices",
+  accountSessions: "/account/sessions",
+  companyProfile: "/settings/company-profile",
+  businessInfoAndPreferences: "/settings/preference",
+  paymentMethods: "/settings/payment-methods",
+  storeManagement: "/settings/stores",
+  documentNumbering: "/settings/document-numbering",
+  posTerminals: "/settings/pos-terminals",
+  backup: "/settings/backup",
+  restore: "/settings/restore",
+  myPreferences: "/settings/my-preferences",
+  platformPlans: "/platform/plans",
+  platformAuditLog: "/platform/audit-log",
+  platformBackup: "/platform/backup",
+  departments: "/settings/department",
+  categories: "/settings/category",
+  brands: "/settings/company-brand",
+  seasons: "/settings/season",
+  genders: "/settings/gender",
+  colors: "/settings/color",
+  locations: "/settings/location",
+  units: "/settings/unit",
+  citiesAndAreas: "/settings/city-area",
+  sizeGroups: "/settings/size-group",
+  productTypes: "/settings/product-type",
+  glAccounts: "/settings/gl-accounts",
+  newSecondLevelAccountGroup: "/settings/new-second-level",
+  viewSecondLevelAccountGroups: "/settings/view-second-level",
+  openingBalances: "/settings/opening-balance",
+  newParty: "/party/new-party",
+  editParty: "/party/new-party/[partyId]",
+  manageParties: "/party/manage-party",
+  searchParties: "/party/search-party",
+  partyAccountDetail: "/party/account-detail",
+  customerPromises: "/party/promise",
+  cashCalculator: "/party/cash-calculator",
+  viewCashDetails: "/party/view-cash-detail",
+  paymentVoucher: "/voucher/payment",
+  receiptVoucher: "/voucher/receipt",
+  expenseVoucher: "/voucher/expense",
+  journalVoucher: "/voucher/journal",
+  viewVoucher: "/voucher/view",
+  voucherReport: "/voucher/report",
+  accountingPeriods: "/voucher/periods",
+  cashAndBankBalances: "/voucher/cash-and-bank",
+  accountLedger: "/reports/account-ledger",
+  accountBalance: "/reports/account-balance",
+  trialBalance: "/reports/trial-balance",
+  detailTrialBalance: "/reports/detail-trial-balance",
+  generalJournal: "/reports/general-journal",
+  newProduct: "/products/new-product",
+  editProduct: "/products/new-product/[productId]",
+  viewProducts: "/products/view-products",
+  searchProduct: "/products/search-product",
+  productLedger: "/products/product-ledger",
+  generateBarcodes: "/products/generate-barcodes",
+  priceCheck: "/products/price-check",
+  changeAttributes: "/products/change-attributes",
+  changePricesOldToNew: "/products/change-prices-old-to-new",
+  changePricesByPercentage: "/products/change-prices-by-percentage",
+  changeDiscounts: "/products/change-discounts",
+  productDiscounts: "/products/product-discounts",
+  productDiscountsOnMultipleStores: "/products/product-discounts-on-multiple-stores",
+  removeDiscountsAndReversePrice: "/products/remove-discounts-and-reverse-price",
+  replaceBarcodes: "/products/replace-barcodes",
+  productStockWithSizes: "/products/stock-with-sizes-on-multiple-stores",
+  productReport: "/products/product-report",
+  priceBands: "/products/price-bands",
+  // <application-route-patterns:end> (shared file: append above this marker, with Edit only)
+} as const;
+
+// Pages the service worker stores at install time so the application opens without a connection.
+// Only fixed paths belong here (no dynamic segments). scripts/generateServiceWorkerShell.mjs writes them into public/sw.js.
+export const ServiceWorkerPrecachedRoutes = [
+  ApplicationRoutes.home,
+  ApplicationRoutes.companySignIn,
+  ApplicationRoutes.companyDashboard,
+  ApplicationRoutes.changePassword,
+  ApplicationRoutes.platformCompanies,
+  ApplicationRoutes.platformSignIn,
+] as const;
+
+// The query parameter that makes the company sign-in page show the "password changed" notice.
+export const PASSWORD_CHANGED_QUERY_PARAMETER_NAME = "changed";
+
+// The page the service worker shows for a navigation it cannot serve while offline.
+export const SERVICE_WORKER_OFFLINE_FALLBACK_ROUTE = ApplicationRoutes.companyDashboard;
+
+// Every path below this prefix belongs to the platform administration area.
+export const PLATFORM_AREA_PATH_PREFIX = "/platform";
+
+export function isPlatformAreaPath(pathname: string): boolean {
+  return pathname === PLATFORM_AREA_PATH_PREFIX || pathname.startsWith(`${PLATFORM_AREA_PATH_PREFIX}/`);
+}

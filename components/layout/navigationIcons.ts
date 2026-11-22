@@ -1,0 +1,42 @@
+import {
+  Activity,
+  Banknote,
+  Building2,
+  Contact,
+  KeyRound,
+  LayoutDashboard,
+  ListChecks,
+  Scale,
+  MonitorSmartphone,
+  Network,
+  Package,
+  ScanBarcode,
+  Settings,
+  ShieldCheck,
+  Tags,
+  UserPlus,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
+import type { NavigationIconName } from "@/lib/routing/routeRegistry";
+
+// The drawing of each icon name a route registry entry can use. Add an icon here when you add it to NavigationIconName.
+export const navigationIconByName: Record<NavigationIconName, LucideIcon> = {
+  dashboard: LayoutDashboard,
+  companies: Building2,
+  directory: Network,
+  users: Users,
+  settings: Settings,
+  newUser: UserPlus,
+  activity: Activity,
+  roles: ShieldCheck,
+  devices: MonitorSmartphone,
+  sessions: KeyRound,
+  masterList: ListChecks,
+  chartOfAccounts: Scale,
+  party: Contact,
+  cash: Banknote,
+  product: Package,
+  barcode: ScanBarcode,
+  priceTag: Tags,
+};

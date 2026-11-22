@@ -1,3 +1,6 @@
+// GENERATED INTO public/sw.js by scripts/generateServiceWorkerShell.mjs. Edit this template, not public/sw.js.
+// The values in double underscores are filled from lib/constants (the single source of truth for routes and names).
+//
 // Service worker: lets the app open with no connection.
 // - App shell (pages, JavaScript, CSS): cached, so the screens open offline.
 // - Navigations: network first, falling back to the cached copy of the page.
@@ -5,7 +8,8 @@
 //   where the app controls what is kept and when it is removed.
 
 const CACHE = "efw-shell-v1";
-const SHELL = ["/", "/login", "/dashboard", "/change-password", "/platform", "/platform/login"];
+const SHELL = ["/","/login","/dashboard","/change-password","/platform","/platform/login"];
+const OFFLINE_FALLBACK = "/dashboard";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -57,7 +61,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE).then((cache) => cache.put(request, copy));
           return response;
         })
-        .catch(() => caches.match(request).then((hit) => hit || caches.match("/dashboard"))),
+        .catch(() => caches.match(request).then((hit) => hit || caches.match(OFFLINE_FALLBACK))),
     );
   }
 });

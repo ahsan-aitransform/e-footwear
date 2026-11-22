@@ -1,0 +1,5218 @@
+{
+  "modules": [
+    {
+      "moduleCode": "USER_ACCOUNT",
+      "displayName": "User Account",
+      "screens": [
+        {
+          "screenCode": "CREATE_USER",
+          "displayName": "Create New User",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "USER_ACCOUNT.CREATE_USER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.CREATE_USER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.CREATE_USER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.CREATE_USER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.CREATE_USER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.CREATE_USER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_USERS",
+          "displayName": "View Users",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "USER_ACCOUNT.VIEW_USERS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.VIEW_USERS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.VIEW_USERS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.VIEW_USERS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.VIEW_USERS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "USERS_ACTIVITY",
+          "displayName": "Users Activity",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "USER_ACCOUNT.USERS_ACTIVITY.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.USERS_ACTIVITY.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.USERS_ACTIVITY.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "LOGIN_HISTORY",
+          "displayName": "Login History",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "USER_ACCOUNT.LOGIN_HISTORY.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.LOGIN_HISTORY.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.LOGIN_HISTORY.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "CHANGE_PASSWORD",
+          "displayName": "Change Password",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "USER_ACCOUNT.CHANGE_PASSWORD.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.CHANGE_PASSWORD.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "ROLES_AND_PERMISSIONS",
+          "displayName": "Roles and Permissions",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "USER_ACCOUNT.ROLES_AND_PERMISSIONS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.ROLES_AND_PERMISSIONS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.ROLES_AND_PERMISSIONS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.ROLES_AND_PERMISSIONS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.ROLES_AND_PERMISSIONS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "USER_ACCOUNT.ROLES_AND_PERMISSIONS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "PRODUCTS",
+      "displayName": "Products",
+      "screens": [
+        {
+          "screenCode": "NEW_PRODUCT",
+          "displayName": "New Product",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.NEW_PRODUCT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.NEW_PRODUCT.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "PRODUCTS.NEW_PRODUCT.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PRODUCTS.NEW_PRODUCT.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PRODUCTS.NEW_PRODUCT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PRODUCTS.NEW_PRODUCT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "PRODUCTS.NEW_PRODUCT.CHANGE_SELLING_PRICE",
+              "actionCode": "CHANGE_SELLING_PRICE",
+              "displayName": "Change selling price"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_PRODUCTS",
+          "displayName": "View Products",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.VIEW_PRODUCTS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.VIEW_PRODUCTS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PRODUCTS.VIEW_PRODUCTS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PRODUCTS.VIEW_PRODUCTS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PRODUCTS.VIEW_PRODUCTS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SEARCH_PRODUCT",
+          "displayName": "Search Product",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.SEARCH_PRODUCT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRODUCT_LEDGER",
+          "displayName": "Product Ledger",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_LEDGER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_LEDGER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_LEDGER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "GENERATE_BARCODES",
+          "displayName": "Generate Barcodes",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.GENERATE_BARCODES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.GENERATE_BARCODES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRICE_CHECK",
+          "displayName": "Price Check",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.PRICE_CHECK.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            }
+          ]
+        },
+        {
+          "screenCode": "CHANGE_ATTRIBUTES",
+          "displayName": "Change Attributes",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.CHANGE_ATTRIBUTES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.CHANGE_ATTRIBUTES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "CHANGE_PRICES_OLD_TO_NEW",
+          "displayName": "Change Prices (Old to New)",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.CHANGE_PRICES_OLD_TO_NEW.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.CHANGE_PRICES_OLD_TO_NEW.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "CHANGE_PRICES_BY_PERCENTAGE",
+          "displayName": "Change Prices (In %)",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.CHANGE_PRICES_BY_PERCENTAGE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.CHANGE_PRICES_BY_PERCENTAGE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "CHANGE_DISCOUNTS",
+          "displayName": "Change Discounts",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.CHANGE_DISCOUNTS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.CHANGE_DISCOUNTS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRODUCT_DISCOUNTS",
+          "displayName": "Product Discounts",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_DISCOUNTS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_DISCOUNTS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRODUCT_DISCOUNTS_ON_MULTIPLE_STORES",
+          "displayName": "Product Discounts on Multiple Stores",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_DISCOUNTS_ON_MULTIPLE_STORES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_DISCOUNTS_ON_MULTIPLE_STORES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "REMOVE_DISCOUNTS_AND_REVERSE_PRICE",
+          "displayName": "Remove Discounts and Reverse Price",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.REMOVE_DISCOUNTS_AND_REVERSE_PRICE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.REMOVE_DISCOUNTS_AND_REVERSE_PRICE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "REPLACE_BARCODES",
+          "displayName": "Replace Barcodes",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.REPLACE_BARCODES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.REPLACE_BARCODES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRODUCTS_STOCK_WITH_SIZES_ON_MULTIPLE_STORES",
+          "displayName": "Products Stock with Sizes on Multiple Stores",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.PRODUCTS_STOCK_WITH_SIZES_ON_MULTIPLE_STORES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCTS_STOCK_WITH_SIZES_ON_MULTIPLE_STORES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCTS_STOCK_WITH_SIZES_ON_MULTIPLE_STORES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRODUCT_CLAIM",
+          "displayName": "Product Claim",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_CLAIM.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_CLAIM.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_CLAIM.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_CLAIM.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            }
+          ]
+        },
+        {
+          "screenCode": "CLAIM_APPROVAL",
+          "displayName": "Claim Approval",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.CLAIM_APPROVAL.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.CLAIM_APPROVAL.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRODUCT_REPORT",
+          "displayName": "Product Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRODUCT_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRICE_BANDS",
+          "displayName": "Price Bands",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PRODUCTS.PRICE_BANDS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRICE_BANDS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRICE_BANDS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRICE_BANDS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRICE_BANDS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PRODUCTS.PRICE_BANDS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "PARTY",
+      "displayName": "Party",
+      "screens": [
+        {
+          "screenCode": "NEW_PARTY",
+          "displayName": "New Party",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PARTY.NEW_PARTY.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PARTY.NEW_PARTY.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "PARTY.NEW_PARTY.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PARTY.NEW_PARTY.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PARTY.NEW_PARTY.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PARTY.NEW_PARTY.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_PARTY",
+          "displayName": "View Party",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PARTY.VIEW_PARTY.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_PARTY.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_PARTY.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_PARTY.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_PARTY.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SEARCH_PARTY",
+          "displayName": "Search Party",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PARTY.SEARCH_PARTY.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            }
+          ]
+        },
+        {
+          "screenCode": "ACCOUNT_DETAIL",
+          "displayName": "Account Detail",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PARTY.ACCOUNT_DETAIL.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PARTY.ACCOUNT_DETAIL.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PARTY.ACCOUNT_DETAIL.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PARTY.ACCOUNT_DETAIL.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PARTY.ACCOUNT_DETAIL.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PROMISE",
+          "displayName": "Promise",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PARTY.PROMISE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PARTY.PROMISE.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "PARTY.PROMISE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PARTY.PROMISE.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PARTY.PROMISE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PARTY.PROMISE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "CASH_CALCULATOR",
+          "displayName": "Cash Calculator",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PARTY.CASH_CALCULATOR.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PARTY.CASH_CALCULATOR.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "PARTY.CASH_CALCULATOR.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PARTY.CASH_CALCULATOR.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PARTY.CASH_CALCULATOR.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PARTY.CASH_CALCULATOR.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_CASH_DETAIL",
+          "displayName": "View Cash Detail",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PARTY.VIEW_CASH_DETAIL.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_CASH_DETAIL.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_CASH_DETAIL.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_CASH_DETAIL.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_CASH_DETAIL.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "NEW_SALARY_SHEET",
+          "displayName": "New Salary Sheet",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PARTY.NEW_SALARY_SHEET.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PARTY.NEW_SALARY_SHEET.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "PARTY.NEW_SALARY_SHEET.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PARTY.NEW_SALARY_SHEET.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PARTY.NEW_SALARY_SHEET.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PARTY.NEW_SALARY_SHEET.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_SALARY_SHEET",
+          "displayName": "View Salary Sheet",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PARTY.VIEW_SALARY_SHEET.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_SALARY_SHEET.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_SALARY_SHEET.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_SALARY_SHEET.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PARTY.VIEW_SALARY_SHEET.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "INVOICE",
+      "displayName": "Invoice",
+      "screens": [
+        {
+          "screenCode": "NEW_SALE",
+          "displayName": "New Sale",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.NEW_SALE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_SALE.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_SALE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_SALE.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_SALE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_SALE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_SALE.CHANGE_SELLING_PRICE",
+              "actionCode": "CHANGE_SELLING_PRICE",
+              "displayName": "Change selling price"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_SALE.GIVE_DISCOUNT",
+              "actionCode": "GIVE_DISCOUNT",
+              "displayName": "Give discount"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_RETURN",
+          "displayName": "Sale Return",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.SALE_RETURN.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.SALE_RETURN.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.SALE_RETURN.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.SALE_RETURN.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.SALE_RETURN.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.SALE_RETURN.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "EXCHANGE_INVOICE",
+          "displayName": "Exchange Invoice",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.EXCHANGE_INVOICE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.EXCHANGE_INVOICE.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.EXCHANGE_INVOICE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.EXCHANGE_INVOICE.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.EXCHANGE_INVOICE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.EXCHANGE_INVOICE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "INVOICE.EXCHANGE_INVOICE.CHANGE_SELLING_PRICE",
+              "actionCode": "CHANGE_SELLING_PRICE",
+              "displayName": "Change selling price"
+            },
+            {
+              "permissionCode": "INVOICE.EXCHANGE_INVOICE.GIVE_DISCOUNT",
+              "actionCode": "GIVE_DISCOUNT",
+              "displayName": "Give discount"
+            }
+          ]
+        },
+        {
+          "screenCode": "NEW_PURCHASE",
+          "displayName": "New Purchase",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.NEW_PURCHASE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_PURCHASE.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_PURCHASE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_PURCHASE.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_PURCHASE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.NEW_PURCHASE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PURCHASE_RETURN",
+          "displayName": "Purchase Return",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.PURCHASE_RETURN.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.PURCHASE_RETURN.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.PURCHASE_RETURN.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.PURCHASE_RETURN.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.PURCHASE_RETURN.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.PURCHASE_RETURN.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PURCHASE_ORDER",
+          "displayName": "Purchase Order",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.PURCHASE_ORDER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.PURCHASE_ORDER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.PURCHASE_ORDER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_ADJUSTMENT",
+          "displayName": "Stock Adjustment",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_ADJUSTMENT_NON_ZERO_STOCK",
+          "displayName": "Stock Adjustment (Non Zero Stock)",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT_NON_ZERO_STOCK.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT_NON_ZERO_STOCK.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT_NON_ZERO_STOCK.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT_NON_ZERO_STOCK.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT_NON_ZERO_STOCK.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT_NON_ZERO_STOCK.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_ADJUSTMENT_NON_ZERO_STOCK.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_TRANSFER",
+          "displayName": "Stock Transfer",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_TRANSFER_MULTI",
+          "displayName": "Stock Transfer Multi",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_MULTI.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_MULTI.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_MULTI.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_MULTI.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_MULTI.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_MULTI.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_TRANSFER_OF_PURCHASE_INVOICE",
+          "displayName": "Stock Transfer of Purchase Invoice",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_OF_PURCHASE_INVOICE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_OF_PURCHASE_INVOICE.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_OF_PURCHASE_INVOICE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_OF_PURCHASE_INVOICE.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_OF_PURCHASE_INVOICE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_TRANSFER_OF_PURCHASE_INVOICE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_AUDIT",
+          "displayName": "Stock Audit",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.STOCK_AUDIT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_AUDIT.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_AUDIT.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_AUDIT.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_AUDIT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_AUDIT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "INVOICE.STOCK_AUDIT.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_INVOICES",
+          "displayName": "View Invoices",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.VIEW_INVOICES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.VIEW_INVOICES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVOICE.VIEW_INVOICES.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVOICE.VIEW_INVOICES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.VIEW_INVOICES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_DELETED_INVOICES",
+          "displayName": "View Deleted Invoices",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVOICE.VIEW_DELETED_INVOICES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVOICE.VIEW_DELETED_INVOICES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVOICE.VIEW_DELETED_INVOICES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "ORDERS",
+      "displayName": "Orders",
+      "screens": [
+        {
+          "screenCode": "NEW_SALE_ORDER",
+          "displayName": "New Sale Order",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "ORDERS.NEW_SALE_ORDER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "ORDERS.NEW_SALE_ORDER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "ORDERS.NEW_SALE_ORDER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "ORDERS.NEW_SALE_ORDER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "ORDERS.NEW_SALE_ORDER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "ORDERS.NEW_SALE_ORDER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_RETURN_ORDER",
+          "displayName": "Sale Return Order",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "ORDERS.SALE_RETURN_ORDER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "ORDERS.SALE_RETURN_ORDER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "ORDERS.SALE_RETURN_ORDER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "ORDERS.SALE_RETURN_ORDER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "ORDERS.SALE_RETURN_ORDER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "ORDERS.SALE_RETURN_ORDER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "NEW_PURCHASE_ORDER",
+          "displayName": "New Purchase Order",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "ORDERS.NEW_PURCHASE_ORDER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "ORDERS.NEW_PURCHASE_ORDER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "ORDERS.NEW_PURCHASE_ORDER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "ORDERS.NEW_PURCHASE_ORDER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "ORDERS.NEW_PURCHASE_ORDER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "ORDERS.NEW_PURCHASE_ORDER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PURCHASE_RETURN_ORDER",
+          "displayName": "Purchase Return Order",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "ORDERS.PURCHASE_RETURN_ORDER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "ORDERS.PURCHASE_RETURN_ORDER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "ORDERS.PURCHASE_RETURN_ORDER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "ORDERS.PURCHASE_RETURN_ORDER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "ORDERS.PURCHASE_RETURN_ORDER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "ORDERS.PURCHASE_RETURN_ORDER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VENDOR_PURCHASE_ORDER",
+          "displayName": "Vendor Purchase Order",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "ORDERS.VENDOR_PURCHASE_ORDER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "ORDERS.VENDOR_PURCHASE_ORDER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "ORDERS.VENDOR_PURCHASE_ORDER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "ORDERS.VENDOR_PURCHASE_ORDER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "ORDERS.VENDOR_PURCHASE_ORDER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "ORDERS.VENDOR_PURCHASE_ORDER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "COMPANY_PURCHASE_ORDER",
+          "displayName": "Company Purchase Order",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "ORDERS.COMPANY_PURCHASE_ORDER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "ORDERS.COMPANY_PURCHASE_ORDER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "ORDERS.COMPANY_PURCHASE_ORDER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "ORDERS.COMPANY_PURCHASE_ORDER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "ORDERS.COMPANY_PURCHASE_ORDER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "ORDERS.COMPANY_PURCHASE_ORDER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_ORDERS",
+          "displayName": "View Orders",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "ORDERS.VIEW_ORDERS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "ORDERS.VIEW_ORDERS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "ORDERS.VIEW_ORDERS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "ORDERS.VIEW_ORDERS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "ORDERS.VIEW_ORDERS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "VOUCHER",
+      "displayName": "Voucher",
+      "screens": [
+        {
+          "screenCode": "PAYMENT_VOUCHER",
+          "displayName": "Payment Voucher",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VOUCHER.PAYMENT_VOUCHER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VOUCHER.PAYMENT_VOUCHER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "VOUCHER.PAYMENT_VOUCHER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VOUCHER.PAYMENT_VOUCHER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VOUCHER.PAYMENT_VOUCHER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VOUCHER.PAYMENT_VOUCHER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "VOUCHER.PAYMENT_VOUCHER.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "RECEIPT_VOUCHER",
+          "displayName": "Receipt Voucher",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VOUCHER.RECEIPT_VOUCHER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VOUCHER.RECEIPT_VOUCHER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "VOUCHER.RECEIPT_VOUCHER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VOUCHER.RECEIPT_VOUCHER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VOUCHER.RECEIPT_VOUCHER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VOUCHER.RECEIPT_VOUCHER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "VOUCHER.RECEIPT_VOUCHER.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "EXPENSE_VOUCHER",
+          "displayName": "Expense Voucher",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VOUCHER.EXPENSE_VOUCHER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VOUCHER.EXPENSE_VOUCHER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "VOUCHER.EXPENSE_VOUCHER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VOUCHER.EXPENSE_VOUCHER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VOUCHER.EXPENSE_VOUCHER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VOUCHER.EXPENSE_VOUCHER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "VOUCHER.EXPENSE_VOUCHER.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "JOURNAL_VOUCHER",
+          "displayName": "Journal Voucher",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VOUCHER.JOURNAL_VOUCHER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VOUCHER.JOURNAL_VOUCHER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "VOUCHER.JOURNAL_VOUCHER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VOUCHER.JOURNAL_VOUCHER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VOUCHER.JOURNAL_VOUCHER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VOUCHER.JOURNAL_VOUCHER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "VOUCHER.JOURNAL_VOUCHER.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_VOUCHER",
+          "displayName": "View Voucher",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VOUCHER.VIEW_VOUCHER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VOUCHER.VIEW_VOUCHER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VOUCHER.VIEW_VOUCHER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VOUCHER.VIEW_VOUCHER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VOUCHER.VIEW_VOUCHER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VOUCHER_REPORT",
+          "displayName": "Voucher Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VOUCHER.VOUCHER_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VOUCHER.VOUCHER_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VOUCHER.VOUCHER_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "ACCOUNTING_PERIODS",
+          "displayName": "Accounting Periods",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VOUCHER.ACCOUNTING_PERIODS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VOUCHER.ACCOUNTING_PERIODS.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "CASH_AND_BANK_BALANCES",
+          "displayName": "Cash and Bank Balances",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VOUCHER.CASH_AND_BANK_BALANCES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VOUCHER.CASH_AND_BANK_BALANCES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VOUCHER.CASH_AND_BANK_BALANCES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "REPORTS",
+      "displayName": "Reports",
+      "screens": [
+        {
+          "screenCode": "ACCOUNT_LEDGER",
+          "displayName": "Account Ledger",
+          "subGroupCode": "ACCOUNT_REPORTS",
+          "actions": [
+            {
+              "permissionCode": "REPORTS.ACCOUNT_LEDGER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.ACCOUNT_LEDGER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.ACCOUNT_LEDGER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "ACCOUNT_BALANCE",
+          "displayName": "Account Balance",
+          "subGroupCode": "ACCOUNT_REPORTS",
+          "actions": [
+            {
+              "permissionCode": "REPORTS.ACCOUNT_BALANCE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.ACCOUNT_BALANCE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.ACCOUNT_BALANCE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "TRIAL_BALANCE",
+          "displayName": "Trial Balance",
+          "subGroupCode": "ACCOUNT_REPORTS",
+          "actions": [
+            {
+              "permissionCode": "REPORTS.TRIAL_BALANCE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.TRIAL_BALANCE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.TRIAL_BALANCE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "DETAIL_TRIAL_BALANCE",
+          "displayName": "Detail Trial Balance",
+          "subGroupCode": "ACCOUNT_REPORTS",
+          "actions": [
+            {
+              "permissionCode": "REPORTS.DETAIL_TRIAL_BALANCE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.DETAIL_TRIAL_BALANCE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.DETAIL_TRIAL_BALANCE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PURCHASE_REPORT",
+          "displayName": "Purchase Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.PURCHASE_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.PURCHASE_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.PURCHASE_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_REPORT",
+          "displayName": "Sale Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.SALE_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_REPORT_CONSOLIDATED",
+          "displayName": "Sale Report (Consolidated)",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_CONSOLIDATED.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_CONSOLIDATED.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_CONSOLIDATED.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_REPORT_CATEGORY_COUNT",
+          "displayName": "Sale Report (Category Count)",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_CATEGORY_COUNT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_CATEGORY_COUNT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_CATEGORY_COUNT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_REPORT_PRICE_WISE",
+          "displayName": "Sale Report (Price Wise)",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_PRICE_WISE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_PRICE_WISE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_PRICE_WISE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_REPORT_PRICE_WISE_DETAIL",
+          "displayName": "Sale Report (Price Wise Detail)",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_PRICE_WISE_DETAIL.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_PRICE_WISE_DETAIL.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_REPORT_PRICE_WISE_DETAIL.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_VALUE_REPORT",
+          "displayName": "Sale Value Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.SALE_VALUE_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_VALUE_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_VALUE_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "AGING_REPORT",
+          "displayName": "Aging Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.AGING_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.AGING_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.AGING_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PROFIT_REPORT",
+          "displayName": "Profit Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.PROFIT_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.PROFIT_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.PROFIT_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "COMMISSION_REPORT",
+          "displayName": "Commission Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.COMMISSION_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.COMMISSION_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.COMMISSION_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "CUT_SIZE_REPORT",
+          "displayName": "Cut Size Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.CUT_SIZE_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.CUT_SIZE_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.CUT_SIZE_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_REPORT_CONSOLIDATED",
+          "displayName": "Stock Report (Consolidated)",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STOCK_REPORT_CONSOLIDATED.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_REPORT_CONSOLIDATED.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_REPORT_CONSOLIDATED.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_REPORT_CATEGORY_COUNT",
+          "displayName": "Stock Report (Category Count)",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STOCK_REPORT_CATEGORY_COUNT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_REPORT_CATEGORY_COUNT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_REPORT_CATEGORY_COUNT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_QUANTITY_REPORT",
+          "displayName": "Stock Quantity Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STOCK_QUANTITY_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_QUANTITY_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_QUANTITY_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_VALUE_REPORT",
+          "displayName": "Stock Value Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STOCK_VALUE_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_VALUE_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_VALUE_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_ADJUSTMENT_REPORT",
+          "displayName": "Stock Adjustment Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STOCK_ADJUSTMENT_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_ADJUSTMENT_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_ADJUSTMENT_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_TRANSFER_REPORT",
+          "displayName": "Stock Transfer Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STOCK_TRANSFER_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_TRANSFER_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_TRANSFER_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_TRANSFER_SUMMARY",
+          "displayName": "Stock Transfer Summary",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STOCK_TRANSFER_SUMMARY.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_TRANSFER_SUMMARY.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_TRANSFER_SUMMARY.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_TURN_REPORT",
+          "displayName": "Stock Turn Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STOCK_TURN_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_TURN_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_TURN_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_AUDIT_REPORT",
+          "displayName": "Stock Audit Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STOCK_AUDIT_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_AUDIT_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_AUDIT_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_AND_STOCK_REPORT",
+          "displayName": "Sale and Stock Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.SALE_AND_STOCK_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_AND_STOCK_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.SALE_AND_STOCK_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "AREA_WISE_BALANCE_REPORT",
+          "displayName": "Area Wise Balance Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.AREA_WISE_BALANCE_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.AREA_WISE_BALANCE_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.AREA_WISE_BALANCE_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "DEAD_ITEMS_REPORT",
+          "displayName": "Dead Items Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.DEAD_ITEMS_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.DEAD_ITEMS_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.DEAD_ITEMS_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "GENERAL_JOURNAL",
+          "displayName": "General Journal",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.GENERAL_JOURNAL.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.GENERAL_JOURNAL.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.GENERAL_JOURNAL.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "BUSINESS_REPORT",
+          "displayName": "Business Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.BUSINESS_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.BUSINESS_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.BUSINESS_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "BUSINESS_OVERVIEW",
+          "displayName": "Business Overview",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.BUSINESS_OVERVIEW.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.BUSINESS_OVERVIEW.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.BUSINESS_OVERVIEW.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "CLAIM_REPORT",
+          "displayName": "Claim Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.CLAIM_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.CLAIM_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.CLAIM_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VENDOR_BALANCE_AND_AGING_REPORT",
+          "displayName": "Vendor Balance and Aging Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.VENDOR_BALANCE_AND_AGING_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.VENDOR_BALANCE_AND_AGING_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.VENDOR_BALANCE_AND_AGING_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VENDOR_PAYMENT_SCHEDULE_REPORT",
+          "displayName": "Vendor Payment Schedule Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.VENDOR_PAYMENT_SCHEDULE_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.VENDOR_PAYMENT_SCHEDULE_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.VENDOR_PAYMENT_SCHEDULE_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VENDOR_PURCHASE_HISTORY_REPORT",
+          "displayName": "Vendor Purchase History Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.VENDOR_PURCHASE_HISTORY_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.VENDOR_PURCHASE_HISTORY_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.VENDOR_PURCHASE_HISTORY_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VENDOR_PRODUCT_MAPPING_REPORT",
+          "displayName": "Vendor Product Mapping Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.VENDOR_PRODUCT_MAPPING_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.VENDOR_PRODUCT_MAPPING_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.VENDOR_PRODUCT_MAPPING_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STAFF_SALARY_REPORT",
+          "displayName": "Staff Salary Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STAFF_SALARY_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STAFF_SALARY_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STAFF_SALARY_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALARY_OUTSTANDING_REPORT",
+          "displayName": "Salary Outstanding Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.SALARY_OUTSTANDING_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.SALARY_OUTSTANDING_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.SALARY_OUTSTANDING_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "COMMISSION_ACCRUAL_AND_PAYMENT_REPORT",
+          "displayName": "Commission Accrual and Payment Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.COMMISSION_ACCRUAL_AND_PAYMENT_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.COMMISSION_ACCRUAL_AND_PAYMENT_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.COMMISSION_ACCRUAL_AND_PAYMENT_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STORE_EXPENSES_REPORT",
+          "displayName": "Store Expenses Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STORE_EXPENSES_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STORE_EXPENSES_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STORE_EXPENSES_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "COMPANY_EXPENSE_ALLOCATION_REPORT",
+          "displayName": "Company Expense Allocation Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.COMPANY_EXPENSE_ALLOCATION_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.COMPANY_EXPENSE_ALLOCATION_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.COMPANY_EXPENSE_ALLOCATION_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PROMOTION_PERFORMANCE_REPORT",
+          "displayName": "Promotion Performance Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.PROMOTION_PERFORMANCE_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.PROMOTION_PERFORMANCE_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.PROMOTION_PERFORMANCE_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "OFFLINE_SYNCHRONIZATION_STATUS_REPORT",
+          "displayName": "Offline Synchronization Status Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.OFFLINE_SYNCHRONIZATION_STATUS_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.OFFLINE_SYNCHRONIZATION_STATUS_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.OFFLINE_SYNCHRONIZATION_STATUS_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "OFFLINE_TRANSACTION_RECONCILIATION_REPORT",
+          "displayName": "Offline Transaction Reconciliation Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.OFFLINE_TRANSACTION_RECONCILIATION_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.OFFLINE_TRANSACTION_RECONCILIATION_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.OFFLINE_TRANSACTION_RECONCILIATION_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_TRANSFER_DISCREPANCIES_REPORT",
+          "displayName": "Stock Transfer Discrepancies Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.STOCK_TRANSFER_DISCREPANCIES_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_TRANSFER_DISCREPANCIES_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.STOCK_TRANSFER_DISCREPANCIES_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRODUCT_PERFORMANCE_BY_STORE_REPORT",
+          "displayName": "Product Performance by Store Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.PRODUCT_PERFORMANCE_BY_STORE_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.PRODUCT_PERFORMANCE_BY_STORE_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.PRODUCT_PERFORMANCE_BY_STORE_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRICE_BAND_PERFORMANCE_REPORT",
+          "displayName": "Price Band Performance Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.PRICE_BAND_PERFORMANCE_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.PRICE_BAND_PERFORMANCE_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.PRICE_BAND_PERFORMANCE_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SLOW_MOVING_STOCK_REPORT",
+          "displayName": "Slow-Moving Stock Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.SLOW_MOVING_STOCK_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.SLOW_MOVING_STOCK_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.SLOW_MOVING_STOCK_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "DEAD_STOCK_REPORT",
+          "displayName": "Dead Stock Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.DEAD_STOCK_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.DEAD_STOCK_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.DEAD_STOCK_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "TRANSFER_OPPORTUNITY_ANALYSIS_REPORT",
+          "displayName": "Transfer Opportunity Analysis Report",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORTS.TRANSFER_OPPORTUNITY_ANALYSIS_REPORT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "REPORTS.TRANSFER_OPPORTUNITY_ANALYSIS_REPORT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "REPORTS.TRANSFER_OPPORTUNITY_ANALYSIS_REPORT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "SETTINGS",
+      "displayName": "Settings",
+      "screens": [
+        {
+          "screenCode": "GL_ACCOUNTS",
+          "displayName": "GL Accounts",
+          "subGroupCode": "GL_ACCOUNT",
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.GL_ACCOUNTS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.GL_ACCOUNTS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.GL_ACCOUNTS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.GL_ACCOUNTS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.GL_ACCOUNTS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.GL_ACCOUNTS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "NEW_SECOND_LEVEL",
+          "displayName": "New Second Level",
+          "subGroupCode": "GL_ACCOUNT",
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.NEW_SECOND_LEVEL.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.NEW_SECOND_LEVEL.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.NEW_SECOND_LEVEL.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.NEW_SECOND_LEVEL.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.NEW_SECOND_LEVEL.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.NEW_SECOND_LEVEL.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_SECOND_LEVEL",
+          "displayName": "View Second Level",
+          "subGroupCode": "GL_ACCOUNT",
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.VIEW_SECOND_LEVEL.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.VIEW_SECOND_LEVEL.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.VIEW_SECOND_LEVEL.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.VIEW_SECOND_LEVEL.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.VIEW_SECOND_LEVEL.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "DEPARTMENT",
+          "displayName": "Department",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.DEPARTMENT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.DEPARTMENT.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.DEPARTMENT.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.DEPARTMENT.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.DEPARTMENT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.DEPARTMENT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "CATEGORY",
+          "displayName": "Category",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.CATEGORY.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.CATEGORY.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.CATEGORY.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.CATEGORY.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.CATEGORY.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.CATEGORY.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "COMPANY_BRAND",
+          "displayName": "Company / Brand",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.COMPANY_BRAND.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.COMPANY_BRAND.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.COMPANY_BRAND.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.COMPANY_BRAND.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.COMPANY_BRAND.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.COMPANY_BRAND.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SEASON",
+          "displayName": "Season",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.SEASON.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.SEASON.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.SEASON.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.SEASON.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.SEASON.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.SEASON.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "GENDER",
+          "displayName": "Gender",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.GENDER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.GENDER.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.GENDER.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.GENDER.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.GENDER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.GENDER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "COLOR",
+          "displayName": "Color",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.COLOR.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.COLOR.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.COLOR.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.COLOR.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.COLOR.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.COLOR.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "LOCATION",
+          "displayName": "Location",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.LOCATION.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.LOCATION.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.LOCATION.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.LOCATION.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.LOCATION.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.LOCATION.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "UNIT",
+          "displayName": "Unit",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.UNIT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.UNIT.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.UNIT.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.UNIT.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.UNIT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.UNIT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SIZE_GROUP",
+          "displayName": "Size Group",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.SIZE_GROUP.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.SIZE_GROUP.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.SIZE_GROUP.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.SIZE_GROUP.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.SIZE_GROUP.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.SIZE_GROUP.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRODUCT_TYPE",
+          "displayName": "Product Type",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPE.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPE.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "DEALS",
+          "displayName": "Deals",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.DEALS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.DEALS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.DEALS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.DEALS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.DEALS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.DEALS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SPECIAL_OFFERS",
+          "displayName": "Special Offers",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFERS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFERS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFERS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFERS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFERS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFERS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SPECIAL_OFFER_DETAILS",
+          "displayName": "Special Offer Details",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFER_DETAILS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFER_DETAILS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFER_DETAILS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFER_DETAILS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFER_DETAILS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.SPECIAL_OFFER_DETAILS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_ON_STORES",
+          "displayName": "Sale on Stores",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.SALE_ON_STORES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.SALE_ON_STORES.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.SALE_ON_STORES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.SALE_ON_STORES.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.SALE_ON_STORES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.SALE_ON_STORES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALE_ON_CATEGORIES",
+          "displayName": "Sale on Categories",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.SALE_ON_CATEGORIES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.SALE_ON_CATEGORIES.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.SALE_ON_CATEGORIES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.SALE_ON_CATEGORIES.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.SALE_ON_CATEGORIES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.SALE_ON_CATEGORIES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "CITY_AREA",
+          "displayName": "City / Area",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.CITY_AREA.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.CITY_AREA.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.CITY_AREA.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.CITY_AREA.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.CITY_AREA.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.CITY_AREA.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "OPENING_BALANCE",
+          "displayName": "Opening Balance",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.OPENING_BALANCE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.OPENING_BALANCE.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.OPENING_BALANCE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.OPENING_BALANCE.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.OPENING_BALANCE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.OPENING_BALANCE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PREFERENCE",
+          "displayName": "Preference",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.PREFERENCE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.PREFERENCE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "BACKUP",
+          "displayName": "Backup",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.BACKUP.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.BACKUP.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            }
+          ]
+        },
+        {
+          "screenCode": "RESTORE",
+          "displayName": "Restore",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.RESTORE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.RESTORE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "COMPANY_PROFILE",
+          "displayName": "Company Profile",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.COMPANY_PROFILE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.COMPANY_PROFILE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "STORE_MANAGEMENT",
+          "displayName": "Store Management",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.STORE_MANAGEMENT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.STORE_MANAGEMENT.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.STORE_MANAGEMENT.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.STORE_MANAGEMENT.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.STORE_MANAGEMENT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.STORE_MANAGEMENT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "DEVICES_AND_POS_TERMINALS",
+          "displayName": "Devices and POS Terminals",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.DEVICES_AND_POS_TERMINALS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.DEVICES_AND_POS_TERMINALS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.DEVICES_AND_POS_TERMINALS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.DEVICES_AND_POS_TERMINALS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.DEVICES_AND_POS_TERMINALS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.DEVICES_AND_POS_TERMINALS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "SETTINGS.DEVICES_AND_POS_TERMINALS.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "DOCUMENT_NUMBERING",
+          "displayName": "Document Numbering",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.DOCUMENT_NUMBERING.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.DOCUMENT_NUMBERING.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "PAYMENT_METHODS",
+          "displayName": "Payment Methods",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.PAYMENT_METHODS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.PAYMENT_METHODS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        },
+        {
+          "screenCode": "SIZES_AND_SIZE_GROUPS",
+          "displayName": "Sizes and Size Groups",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.SIZES_AND_SIZE_GROUPS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.SIZES_AND_SIZE_GROUPS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.SIZES_AND_SIZE_GROUPS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.SIZES_AND_SIZE_GROUPS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.SIZES_AND_SIZE_GROUPS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.SIZES_AND_SIZE_GROUPS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRODUCT_TYPES",
+          "displayName": "Product Types",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPES.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPES.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "SETTINGS.PRODUCT_TYPES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "INVENTORY",
+      "displayName": "Inventory",
+      "screens": [
+        {
+          "screenCode": "STOCK_BALANCES",
+          "displayName": "Stock Balances",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVENTORY.STOCK_BALANCES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_BALANCES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_BALANCES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_LEDGER",
+          "displayName": "Stock Ledger",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVENTORY.STOCK_LEDGER.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_LEDGER.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_LEDGER.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_RECONCILIATION",
+          "displayName": "Stock Reconciliation",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVENTORY.STOCK_RECONCILIATION.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_RECONCILIATION.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_RECONCILIATION.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_TRANSFER_RECEIVING",
+          "displayName": "Receive Stock Transfer",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVENTORY.STOCK_TRANSFER_RECEIVING.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_TRANSFER_RECEIVING.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_TRANSFER_RECEIVING.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_TRANSFER_RECEIVING.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_TRANSFER_RECEIVING.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_TRANSFER_RECEIVING.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "TRANSFER_DISCREPANCIES",
+          "displayName": "Transfer Discrepancies",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVENTORY.TRANSFER_DISCREPANCIES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVENTORY.TRANSFER_DISCREPANCIES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "INVENTORY.TRANSFER_DISCREPANCIES.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            },
+            {
+              "permissionCode": "INVENTORY.TRANSFER_DISCREPANCIES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "INVENTORY.TRANSFER_DISCREPANCIES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK_EXCEPTIONS",
+          "displayName": "Stock Exceptions",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INVENTORY.STOCK_EXCEPTIONS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INVENTORY.STOCK_EXCEPTIONS.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "VENDORS",
+      "displayName": "Vendors",
+      "screens": [
+        {
+          "screenCode": "VENDOR_MANAGEMENT",
+          "displayName": "Vendor Management",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VENDORS.VENDOR_MANAGEMENT.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_MANAGEMENT.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_MANAGEMENT.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_MANAGEMENT.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_MANAGEMENT.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_MANAGEMENT.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VENDOR_PAYMENT_SCHEDULE",
+          "displayName": "Vendor Payment Schedule",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VENDORS.VENDOR_PAYMENT_SCHEDULE.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_PAYMENT_SCHEDULE.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_PAYMENT_SCHEDULE.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_PAYMENT_SCHEDULE.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_PAYMENT_SCHEDULE.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_PAYMENT_SCHEDULE.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VENDOR_PRODUCT_MAPPING",
+          "displayName": "Vendor Product Mapping",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VENDORS.VENDOR_PRODUCT_MAPPING.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_PRODUCT_MAPPING.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_PRODUCT_MAPPING.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_PRODUCT_MAPPING.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_PRODUCT_MAPPING.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_PRODUCT_MAPPING.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "EXPENSES",
+      "displayName": "Expenses",
+      "screens": [
+        {
+          "screenCode": "EXPENSE_CATEGORIES",
+          "displayName": "Expense Categories",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "EXPENSES.EXPENSE_CATEGORIES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_CATEGORIES.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_CATEGORIES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_CATEGORIES.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_CATEGORIES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_CATEGORIES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "EXPENSE_RECORDING",
+          "displayName": "Expenses",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "EXPENSES.EXPENSE_RECORDING.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_RECORDING.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_RECORDING.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_RECORDING.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_RECORDING.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_RECORDING.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_RECORDING.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "EXPENSE_ALLOCATIONS",
+          "displayName": "Expense Allocations",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "EXPENSES.EXPENSE_ALLOCATIONS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_ALLOCATIONS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_ALLOCATIONS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_ALLOCATIONS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_ALLOCATIONS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "EXPENSES.EXPENSE_ALLOCATIONS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "RECURRING_EXPENSES",
+          "displayName": "Recurring Expenses",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "EXPENSES.RECURRING_EXPENSES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "EXPENSES.RECURRING_EXPENSES.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "EXPENSES.RECURRING_EXPENSES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "EXPENSES.RECURRING_EXPENSES.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "EXPENSES.RECURRING_EXPENSES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "EXPENSES.RECURRING_EXPENSES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "HUMAN_RESOURCES",
+      "displayName": "Human Resources",
+      "screens": [
+        {
+          "screenCode": "STAFF_PROFILES",
+          "displayName": "Staff Profiles",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_PROFILES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_PROFILES.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_PROFILES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_PROFILES.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_PROFILES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_PROFILES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "STAFF_TRANSFERS",
+          "displayName": "Staff Transfers",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_TRANSFERS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_TRANSFERS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_TRANSFERS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_TRANSFERS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALARY_TERMS",
+          "displayName": "Salary Terms",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.SALARY_TERMS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.SALARY_TERMS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.SALARY_TERMS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.SALARY_TERMS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.SALARY_TERMS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.SALARY_TERMS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PAYROLL_RUNS",
+          "displayName": "Payroll Runs",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.PAYROLL_RUNS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.PAYROLL_RUNS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.PAYROLL_RUNS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.PAYROLL_RUNS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.PAYROLL_RUNS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.PAYROLL_RUNS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.PAYROLL_RUNS.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        },
+        {
+          "screenCode": "SALARY_PAYMENTS",
+          "displayName": "Salary Payments",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.SALARY_PAYMENTS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.SALARY_PAYMENTS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.SALARY_PAYMENTS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.SALARY_PAYMENTS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "COMMISSIONS",
+      "displayName": "Commissions",
+      "screens": [
+        {
+          "screenCode": "COMMISSION_PLANS",
+          "displayName": "Commission Plans",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "COMMISSIONS.COMMISSION_PLANS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "COMMISSIONS.COMMISSION_PLANS.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "COMMISSIONS.COMMISSION_PLANS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "COMMISSIONS.COMMISSION_PLANS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "COMMISSIONS.COMMISSION_PLANS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "COMMISSIONS.COMMISSION_PLANS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "COMMISSION_ENTRIES",
+          "displayName": "Commission Entries",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "COMMISSIONS.COMMISSION_ENTRIES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "COMMISSIONS.COMMISSION_ENTRIES.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            },
+            {
+              "permissionCode": "COMMISSIONS.COMMISSION_ENTRIES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "COMMISSIONS.COMMISSION_ENTRIES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "PROMOTIONS",
+      "displayName": "Promotions",
+      "screens": [
+        {
+          "screenCode": "PROMOTION_RULES",
+          "displayName": "Promotion Rules",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_RULES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_RULES.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_RULES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_RULES.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_RULES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_RULES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PROMOTION_BUNDLES",
+          "displayName": "Promotion Bundles",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_BUNDLES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_BUNDLES.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_BUNDLES.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_BUNDLES.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_BUNDLES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_BUNDLES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PROMOTION_CONFLICT_RESOLUTION",
+          "displayName": "Promotion Conflict Resolution",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_CONFLICT_RESOLUTION.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "PROMOTIONS.PROMOTION_CONFLICT_RESOLUTION.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "DASHBOARDS",
+      "displayName": "Dashboards",
+      "screens": [
+        {
+          "screenCode": "OWNER_DASHBOARD",
+          "displayName": "Company Owner Dashboard",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "DASHBOARDS.OWNER_DASHBOARD.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            }
+          ]
+        },
+        {
+          "screenCode": "STORE_MANAGER_DASHBOARD",
+          "displayName": "Store Manager Dashboard",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "DASHBOARDS.STORE_MANAGER_DASHBOARD.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            }
+          ]
+        },
+        {
+          "screenCode": "ACCOUNTANT_DASHBOARD",
+          "displayName": "Accountant Dashboard",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "DASHBOARDS.ACCOUNTANT_DASHBOARD.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            }
+          ]
+        },
+        {
+          "screenCode": "INVENTORY_MANAGER_DASHBOARD",
+          "displayName": "Inventory Manager Dashboard",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "DASHBOARDS.INVENTORY_MANAGER_DASHBOARD.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRODUCT_PERFORMANCE_ANALYTICS",
+          "displayName": "Product Performance Analytics",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "DASHBOARDS.PRODUCT_PERFORMANCE_ANALYTICS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "DASHBOARDS.PRODUCT_PERFORMANCE_ANALYTICS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "DASHBOARDS.PRODUCT_PERFORMANCE_ANALYTICS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "PRICE_BAND_ANALYTICS",
+          "displayName": "Price Band Analytics",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "DASHBOARDS.PRICE_BAND_ANALYTICS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "DASHBOARDS.PRICE_BAND_ANALYTICS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "DASHBOARDS.PRICE_BAND_ANALYTICS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "TRANSFER_OPPORTUNITIES",
+          "displayName": "Stock Transfer Opportunities",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "DASHBOARDS.TRANSFER_OPPORTUNITIES.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "DASHBOARDS.TRANSFER_OPPORTUNITIES.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "DASHBOARDS.TRANSFER_OPPORTUNITIES.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "OFFLINE_SYNCHRONIZATION",
+      "displayName": "Offline Synchronization",
+      "screens": [
+        {
+          "screenCode": "SYNCHRONIZATION_MONITORING",
+          "displayName": "Synchronization Monitoring",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "OFFLINE_SYNCHRONIZATION.SYNCHRONIZATION_MONITORING.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "OFFLINE_SYNCHRONIZATION.SYNCHRONIZATION_MONITORING.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SYNCHRONIZATION_CONFLICTS",
+          "displayName": "Synchronization Conflicts",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "OFFLINE_SYNCHRONIZATION.SYNCHRONIZATION_CONFLICTS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "OFFLINE_SYNCHRONIZATION.SYNCHRONIZATION_CONFLICTS.APPROVE",
+              "actionCode": "APPROVE",
+              "displayName": "Approve"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "INTEGRATIONS",
+      "displayName": "Integrations",
+      "screens": [
+        {
+          "screenCode": "SHOPIFY_INTEGRATION",
+          "displayName": "Shopify Integration",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "INTEGRATIONS.SHOPIFY_INTEGRATION.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "INTEGRATIONS.SHOPIFY_INTEGRATION.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleCode": "RESTRICTED_OPERATIONS",
+      "displayName": "Restricted Operations",
+      "screens": [
+        {
+          "screenCode": "SALES",
+          "displayName": "Sales",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "SALE_CREATE",
+              "actionCode": "SALE_CREATE",
+              "displayName": "Create sales"
+            },
+            {
+              "permissionCode": "SALE_RETURN",
+              "actionCode": "SALE_RETURN",
+              "displayName": "Process returns and exchanges"
+            },
+            {
+              "permissionCode": "PRICE_CHANGE",
+              "actionCode": "PRICE_CHANGE",
+              "displayName": "Manual price change on a sale"
+            },
+            {
+              "permissionCode": "DISCOUNT_MANUAL",
+              "actionCode": "DISCOUNT_MANUAL",
+              "displayName": "Manual discount on a sale"
+            },
+            {
+              "permissionCode": "DISCOUNT_APPROVE",
+              "actionCode": "DISCOUNT_APPROVE",
+              "displayName": "Approve manual price or discount"
+            }
+          ]
+        },
+        {
+          "screenCode": "PROMOTIONS",
+          "displayName": "Promotions",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PROMO_MANAGE",
+              "actionCode": "PROMO_MANAGE",
+              "displayName": "Create and end promotions"
+            },
+            {
+              "permissionCode": "PROMO_CONFLICT_RESOLVE",
+              "actionCode": "PROMO_CONFLICT_RESOLVE",
+              "displayName": "Choose which overlapping discount applies"
+            }
+          ]
+        },
+        {
+          "screenCode": "PURCHASES",
+          "displayName": "Purchases and Vendors",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "PURCHASE_CREATE",
+              "actionCode": "PURCHASE_CREATE",
+              "displayName": "Record purchases"
+            },
+            {
+              "permissionCode": "PURCHASE_PAY",
+              "actionCode": "PURCHASE_PAY",
+              "displayName": "Pay vendors"
+            },
+            {
+              "permissionCode": "VENDOR_MANAGE",
+              "actionCode": "VENDOR_MANAGE",
+              "displayName": "Manage vendors and vendor articles"
+            }
+          ]
+        },
+        {
+          "screenCode": "STOCK",
+          "displayName": "Stock and Transfers",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "STOCK_ADJUST",
+              "actionCode": "STOCK_ADJUST",
+              "displayName": "Stock adjustments"
+            },
+            {
+              "permissionCode": "STOCK_AUDIT",
+              "actionCode": "STOCK_AUDIT",
+              "displayName": "Stock audits"
+            },
+            {
+              "permissionCode": "TRANSFER_CREATE",
+              "actionCode": "TRANSFER_CREATE",
+              "displayName": "Create and ship transfers"
+            },
+            {
+              "permissionCode": "TRANSFER_RECEIVE",
+              "actionCode": "TRANSFER_RECEIVE",
+              "displayName": "Receive transfers"
+            },
+            {
+              "permissionCode": "TRANSFER_LOSS_DECIDE",
+              "actionCode": "TRANSFER_LOSS_DECIDE",
+              "displayName": "Assign or write off transfer losses"
+            },
+            {
+              "permissionCode": "CLAIM_REQUEST",
+              "actionCode": "CLAIM_REQUEST",
+              "displayName": "Raise product claims"
+            },
+            {
+              "permissionCode": "CLAIM_APPROVE",
+              "actionCode": "CLAIM_APPROVE",
+              "displayName": "Approve product claims"
+            },
+            {
+              "permissionCode": "STOCK_EXCEPTION_RESOLVE",
+              "actionCode": "STOCK_EXCEPTION_RESOLVE",
+              "displayName": "Resolve stock shortfalls from offline and Shopify sales"
+            }
+          ]
+        },
+        {
+          "screenCode": "ACCOUNTING",
+          "displayName": "Accounting and Cash",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VOUCHER_POST",
+              "actionCode": "VOUCHER_POST",
+              "displayName": "Post vouchers"
+            },
+            {
+              "permissionCode": "VOUCHER_DELETE",
+              "actionCode": "VOUCHER_DELETE",
+              "displayName": "Void vouchers"
+            },
+            {
+              "permissionCode": "OPENING_BALANCE",
+              "actionCode": "OPENING_BALANCE",
+              "displayName": "Enter opening balances"
+            },
+            {
+              "permissionCode": "CASH_COUNT",
+              "actionCode": "CASH_COUNT",
+              "displayName": "End-of-day cash count"
+            }
+          ]
+        },
+        {
+          "screenCode": "EXPENSES_AND_PAYROLL",
+          "displayName": "Expenses, Payroll and Commissions",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "EXPENSE_RECORD",
+              "actionCode": "EXPENSE_RECORD",
+              "displayName": "Record expenses"
+            },
+            {
+              "permissionCode": "EXPENSE_APPROVE",
+              "actionCode": "EXPENSE_APPROVE",
+              "displayName": "Approve expenses"
+            },
+            {
+              "permissionCode": "PAYROLL_PREPARE",
+              "actionCode": "PAYROLL_PREPARE",
+              "displayName": "Prepare salary sheets"
+            },
+            {
+              "permissionCode": "PAYROLL_APPROVE",
+              "actionCode": "PAYROLL_APPROVE",
+              "displayName": "Approve and pay salaries"
+            },
+            {
+              "permissionCode": "COMMISSION_VIEW",
+              "actionCode": "COMMISSION_VIEW",
+              "displayName": "View commissions"
+            },
+            {
+              "permissionCode": "COMMISSION_APPROVE",
+              "actionCode": "COMMISSION_APPROVE",
+              "displayName": "Approve commissions"
+            }
+          ]
+        },
+        {
+          "screenCode": "REPORTING",
+          "displayName": "Reporting",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "REPORT_VIEW",
+              "actionCode": "REPORT_VIEW",
+              "displayName": "View reports"
+            },
+            {
+              "permissionCode": "REPORT_ACCOUNTS",
+              "actionCode": "REPORT_ACCOUNTS",
+              "displayName": "Accounting reports: ledger, trial balance, journal"
+            },
+            {
+              "permissionCode": "REPORT_BUILDER",
+              "actionCode": "REPORT_BUILDER",
+              "displayName": "Build and share custom reports"
+            }
+          ]
+        },
+        {
+          "screenCode": "ADMINISTRATION",
+          "displayName": "Administration",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "MASTER_EDIT",
+              "actionCode": "MASTER_EDIT",
+              "displayName": "Edit master lists and products"
+            },
+            {
+              "permissionCode": "USER_ADMIN",
+              "actionCode": "USER_ADMIN",
+              "displayName": "Manage users and roles"
+            },
+            {
+              "permissionCode": "USER_PASSWORD_RESET",
+              "actionCode": "USER_PASSWORD_RESET",
+              "displayName": "Reset another user's password (temporary password, forced change at next login)"
+            },
+            {
+              "permissionCode": "USER_BLOCK",
+              "actionCode": "USER_BLOCK",
+              "displayName": "Block or unblock a user account"
+            },
+            {
+              "permissionCode": "LOGIN_HISTORY_VIEW",
+              "actionCode": "LOGIN_HISTORY_VIEW",
+              "displayName": "View the login history of other users"
+            },
+            {
+              "permissionCode": "SHOPIFY_ADMIN",
+              "actionCode": "SHOPIFY_ADMIN",
+              "displayName": "Connect and manage Shopify"
+            },
+            {
+              "permissionCode": "SYNC_CONFLICT_RESOLVE",
+              "actionCode": "SYNC_CONFLICT_RESOLVE",
+              "displayName": "Decide offline sync conflicts (accept by hand or reject, with a note)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
