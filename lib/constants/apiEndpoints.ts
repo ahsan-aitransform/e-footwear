@@ -272,5 +272,50 @@ export const ApiEndpoints = {
     staffSalaryReport: "/payroll/reports/staff-salary",
     salaryOutstandingReport: "/payroll/reports/salary-outstanding",
   },
+  // Sales: every screen has its own paths because the screens are granted separately (backend ApiRoutes.Sales).
+  sales: {
+    newSale: {
+      entryContext: "/sales/new-sale/entry-context",
+      itemByBarcode: "/sales/new-sale/items/by-barcode",
+      itemSearch: "/sales/new-sale/items/search",
+      itemPicture: (productId: string) => `/sales/new-sale/items/${encodeURIComponent(productId)}/picture`,
+      customers: "/sales/new-sale/customers",
+      salesmen: "/sales/new-sale/salesmen",
+      paymentAccounts: "/sales/new-sale/payment-accounts",
+      posTerminals: "/sales/new-sale/pos-terminals",
+      save: "/sales/new-sale",
+    },
+    saleReturn: {
+      entryContext: "/sales/sale-returns/entry-context",
+      invoiceByNumber: "/sales/sale-returns/invoice-by-number",
+      save: "/sales/sale-returns",
+    },
+    exchange: {
+      entryContext: "/sales/exchanges/entry-context",
+      invoiceByNumber: "/sales/exchanges/invoice-by-number",
+      itemByBarcode: "/sales/exchanges/items/by-barcode",
+      itemSearch: "/sales/exchanges/items/search",
+      itemPicture: (productId: string) => `/sales/exchanges/items/${encodeURIComponent(productId)}/picture`,
+      customers: "/sales/exchanges/customers",
+      salesmen: "/sales/exchanges/salesmen",
+      paymentAccounts: "/sales/exchanges/payment-accounts",
+      posTerminals: "/sales/exchanges/pos-terminals",
+      save: "/sales/exchanges",
+    },
+    invoices: {
+      list: "/sales/invoices",
+      byId: (invoiceId: string) => `/sales/invoices/${encodeURIComponent(invoiceId)}`,
+      printDocument: (invoiceId: string) => `/sales/invoices/${encodeURIComponent(invoiceId)}/print-document`,
+      voidInvoice: (invoiceId: string) => `/sales/invoices/${encodeURIComponent(invoiceId)}/void`,
+      voidAndReenter: (invoiceId: string) => `/sales/invoices/${encodeURIComponent(invoiceId)}/void-and-reenter`,
+      customers: "/sales/invoices/customers",
+      salesmen: "/sales/invoices/salesmen",
+    },
+    deletedInvoices: {
+      list: "/sales/deleted-invoices",
+      byId: (invoiceId: string) => `/sales/deleted-invoices/${encodeURIComponent(invoiceId)}`,
+      printDocument: (invoiceId: string) => `/sales/deleted-invoices/${encodeURIComponent(invoiceId)}/print-document`,
+    },
+  },
   // <api-endpoints:end> (shared file: append new groups above this marker, with Edit only)
 } as const;

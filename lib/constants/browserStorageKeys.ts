@@ -11,6 +11,9 @@ export const IndexedDatabaseKeys = {
   offlineScreenData: (companyId: string, userId: string, cacheName: string) =>
     `offlineScreenData:${companyId}:${userId}:${cacheName}`,
   offlineScreenDataForPlatformAdministrator: (cacheName: string) => `offlineScreenData:platform:${cacheName}`,
+  // The sale being typed (Part 23 offline readiness): kept per person and store until it is saved, so a reload or a lost connection loses nothing.
+  salesEntryDraft: (companyId: string, userId: string, storeId: string, screenCode: string) =>
+    `salesEntryDraft:${companyId}:${userId}:${storeId}:${screenCode}`,
   // <indexed-database-keys:end> (shared file: append above this marker, with Edit only)
 } as const;
 

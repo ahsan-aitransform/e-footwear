@@ -19,6 +19,7 @@ import { cashManagementUrduMessages } from "./cashManagement";
 import { catalogueUrduMessages } from "./catalogue";
 import { humanResourcesUrduMessages } from "./humanResources";
 import { payrollUrduMessages } from "./payroll";
+import { salesUrduMessages } from "./sales";
 // <urdu-messages-imports:end>
 
 export const urduMessages: Record<keyof typeof englishMessages, string> = {
@@ -37,5 +38,6 @@ export const urduMessages: Record<keyof typeof englishMessages, string> = {
   ...catalogueUrduMessages,
   ...humanResourcesUrduMessages,
   ...payrollUrduMessages,
+  ...salesUrduMessages,
   // <urdu-messages-spread:end>
 };

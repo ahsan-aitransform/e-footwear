@@ -100,6 +100,11 @@ export const navigationEnglishMessages = {
   "navigation.item.salaryPayments": "Salary Payments",
   "navigation.item.staffSalaryReport": "Staff Salary Report",
   "navigation.item.salaryOutstandingReport": "Salary Outstanding Report",
+  "navigation.item.newSale": "New Sale",
+  "navigation.item.saleReturn": "Sale Return",
+  "navigation.item.exchangeInvoice": "Exchange Invoice",
+  "navigation.item.viewInvoices": "View Invoices",
+  "navigation.item.viewDeletedInvoices": "View Deleted Invoices",
   // <navigation-messages:end> (shared file: add the entries of a new screen above this marker, with Edit only)
   "navigation.mainMenuLabel": "Main menu",
   "navigation.openMenu": "Open menu",

@@ -107,6 +107,12 @@ export const ApplicationRoutes = {
   salaryPayments: "/payroll/salary-payments",
   staffSalaryReport: "/reports/staff-salary",
   salaryOutstandingReport: "/reports/salary-outstanding",
+  // Sales (docx 5.1 to 5.3, 5.13, Parts 11 and 12).
+  newSale: "/sales/new-sale",
+  saleReturn: "/sales/sale-return",
+  exchangeInvoice: "/sales/exchange-invoice",
+  viewInvoices: "/sales/invoices",
+  viewDeletedInvoices: "/sales/deleted-invoices",
   // <application-routes:end> (shared file: append new routes above this marker, with Edit only)
 } as const;
 
@@ -204,6 +210,11 @@ export const ApplicationRoutePatterns = {
   salaryPayments: "/payroll/salary-payments",
   staffSalaryReport: "/reports/staff-salary",
   salaryOutstandingReport: "/reports/salary-outstanding",
+  newSale: "/sales/new-sale",
+  saleReturn: "/sales/sale-return",
+  exchangeInvoice: "/sales/exchange-invoice",
+  viewInvoices: "/sales/invoices",
+  viewDeletedInvoices: "/sales/deleted-invoices",
   // <application-route-patterns:end> (shared file: append above this marker, with Edit only)
 } as const;
 

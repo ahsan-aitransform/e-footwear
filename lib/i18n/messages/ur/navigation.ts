@@ -100,6 +100,11 @@ export const navigationUrduMessages: Record<keyof typeof navigationEnglishMessag
   "navigation.item.salaryPayments": "تنخواہ کی ادائیگیاں",
   "navigation.item.staffSalaryReport": "عملے کی تنخواہ رپورٹ",
   "navigation.item.salaryOutstandingReport": "باقی تنخواہ رپورٹ",
+  "navigation.item.newSale": "نئی فروخت",
+  "navigation.item.saleReturn": "فروخت کی واپسی",
+  "navigation.item.exchangeInvoice": "تبادلہ انوائس",
+  "navigation.item.viewInvoices": "انوائسز دیکھیں",
+  "navigation.item.viewDeletedInvoices": "حذف شدہ انوائسز دیکھیں",
   // <navigation-messages:end> (shared file: add the entries of a new screen above this marker, with Edit only)
   "navigation.mainMenuLabel": "مین مینو",
   "navigation.openMenu": "مینو کھولیں",

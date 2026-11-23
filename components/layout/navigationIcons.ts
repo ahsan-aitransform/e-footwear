@@ -10,7 +10,10 @@ import {
   MonitorSmartphone,
   Network,
   Package,
+  Receipt,
   ScanBarcode,
+  ShoppingCart,
+  Undo2,
   Settings,
   ShieldCheck,
   Tags,
@@ -43,4 +46,7 @@ export const navigationIconByName: Record<NavigationIconName, LucideIcon> = {
   priceTag: Tags,
   staff: UserCog,
   payroll: Wallet,
+  sale: ShoppingCart,
+  invoice: Receipt,
+  saleReturn: Undo2,
 };

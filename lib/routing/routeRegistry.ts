@@ -42,7 +42,10 @@ export type NavigationIconName =
   | "barcode"
   | "priceTag"
   | "staff"
-  | "payroll";
+  | "payroll"
+  | "sale"
+  | "invoice"
+  | "saleReturn";
 
 export type NavigationEntryDefinition = {
   labelMessageKey: MessageKey;
@@ -399,5 +402,22 @@ export const applicationRouteRegistry: readonly ApplicationRouteDefinition[] = [
   ),
   ...humanResourcesRouteDefinitions,
   ...payrollRouteDefinitions,
+  ...(
+    [
+      ["newSale", ApplicationRoutePatterns.newSale, PermissionCodes.INVOICE.NEW_SALE.VIEW, "navigation.item.newSale", "sale", 10],
+      ["saleReturn", ApplicationRoutePatterns.saleReturn, PermissionCodes.INVOICE.SALE_RETURN.VIEW, "navigation.item.saleReturn", "saleReturn", 20],
+      ["exchangeInvoice", ApplicationRoutePatterns.exchangeInvoice, PermissionCodes.INVOICE.EXCHANGE_INVOICE.VIEW, "navigation.item.exchangeInvoice", "saleReturn", 30],
+      ["viewInvoices", ApplicationRoutePatterns.viewInvoices, PermissionCodes.INVOICE.VIEW_INVOICES.VIEW, "navigation.item.viewInvoices", "invoice", 40],
+      ["viewDeletedInvoices", ApplicationRoutePatterns.viewDeletedInvoices, PermissionCodes.INVOICE.VIEW_DELETED_INVOICES.VIEW, "navigation.item.viewDeletedInvoices", "invoice", 50],
+    ] as const
+  ).map(
+    ([routeKey, pathPattern, permissionCode, labelMessageKey, iconName, sortOrder]): ApplicationRouteDefinition => ({
+      routeKey,
+      pathPattern,
+      audience: "companyUser",
+      requiredPermissions: requireAnyPermission(permissionCode),
+      navigation: { labelMessageKey, iconName, groupCode: PermissionModuleCodes.INVOICE, sortOrder },
+    }),
+  ),
   // <route-registry:end> (shared file: append new routes above this marker, with Edit only)
 ];
