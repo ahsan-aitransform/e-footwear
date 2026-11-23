@@ -256,5 +256,21 @@ export const ApiEndpoints = {
     list: "/price-bands",
     byId: (priceBandId: string) => `/price-bands/${encodeURIComponent(priceBandId)}`,
   },
+  staff: {
+    list: "/staff",
+    transfers: "/staff/transfers",
+    byId: (partyId: string) => `/staff/${encodeURIComponent(partyId)}`,
+    salaryTerms: (partyId: string) => `/staff/${encodeURIComponent(partyId)}/salary-terms`,
+  },
+  payroll: {
+    sheet: "/payroll/sheets",
+    prepareSheet: "/payroll/sheets/prepare",
+    approveSheet: (runId: string) => `/payroll/sheets/${encodeURIComponent(runId)}/approve`,
+    adjustments: "/payroll/adjustments",
+    payments: "/payroll/payments",
+    linePayments: (lineId: string) => `/payroll/lines/${encodeURIComponent(lineId)}/payments`,
+    staffSalaryReport: "/payroll/reports/staff-salary",
+    salaryOutstandingReport: "/payroll/reports/salary-outstanding",
+  },
   // <api-endpoints:end> (shared file: append new groups above this marker, with Edit only)
 } as const;

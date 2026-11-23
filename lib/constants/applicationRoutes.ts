@@ -98,6 +98,15 @@ export const ApplicationRoutes = {
   productStockWithSizes: "/products/stock-with-sizes-on-multiple-stores",
   productReport: "/products/product-report",
   priceBands: "/products/price-bands",
+  // Staff and payroll (module hr-payroll-expenses, docx 3.8 and 3.9, Part 16).
+  staffList: "/staff",
+  staffDetail: (partyId: string) => `/staff/${encodeURIComponent(partyId)}`,
+  staffTransfers: "/staff/transfers",
+  newSalarySheet: "/payroll/new-salary-sheet",
+  viewSalarySheet: "/payroll/view-salary-sheet",
+  salaryPayments: "/payroll/salary-payments",
+  staffSalaryReport: "/reports/staff-salary",
+  salaryOutstandingReport: "/reports/salary-outstanding",
   // <application-routes:end> (shared file: append new routes above this marker, with Edit only)
 } as const;
 
@@ -187,6 +196,14 @@ export const ApplicationRoutePatterns = {
   productStockWithSizes: "/products/stock-with-sizes-on-multiple-stores",
   productReport: "/products/product-report",
   priceBands: "/products/price-bands",
+  staffList: "/staff",
+  staffDetail: "/staff/[partyId]",
+  staffTransfers: "/staff/transfers",
+  newSalarySheet: "/payroll/new-salary-sheet",
+  viewSalarySheet: "/payroll/view-salary-sheet",
+  salaryPayments: "/payroll/salary-payments",
+  staffSalaryReport: "/reports/staff-salary",
+  salaryOutstandingReport: "/reports/salary-outstanding",
   // <application-route-patterns:end> (shared file: append above this marker, with Edit only)
 } as const;
 

@@ -93,6 +93,13 @@ export const navigationEnglishMessages = {
   "navigation.item.productStockWithSizes": "Products Stock with Sizes on Multiple Stores",
   "navigation.item.productReport": "Product Report",
   "navigation.item.priceBands": "Price Bands",
+  "navigation.item.staffList": "Staff",
+  "navigation.item.staffTransfers": "Staff Transfers",
+  "navigation.item.newSalarySheet": "New Salary Sheet",
+  "navigation.item.viewSalarySheet": "View Salary Sheet",
+  "navigation.item.salaryPayments": "Salary Payments",
+  "navigation.item.staffSalaryReport": "Staff Salary Report",
+  "navigation.item.salaryOutstandingReport": "Salary Outstanding Report",
   // <navigation-messages:end> (shared file: add the entries of a new screen above this marker, with Edit only)
   "navigation.mainMenuLabel": "Main menu",
   "navigation.openMenu": "Open menu",

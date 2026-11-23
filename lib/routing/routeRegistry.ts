@@ -16,6 +16,8 @@ import type { PermissionRequirement } from "@/lib/types/permissions";
 import { NavigationGroupCodes, type NavigationGroupCode } from "./navigationGroups";
 import { masterDataRouteDefinitions } from "@/features/masterData/masterDataRouteDefinitions";
 import { partyRouteDefinitions } from "@/features/parties/partyRouteDefinitions";
+import { humanResourcesRouteDefinitions } from "@/features/humanResources/humanResourcesRouteDefinitions";
+import { payrollRouteDefinitions } from "@/features/payroll/payrollRouteDefinitions";
 import { catalogueRouteDefinitions } from "@/features/catalogue/catalogueRouteDefinitions";
 
 export type RouteAudience = "public" | "platformAdministrator" | "companyUser";
@@ -38,7 +40,9 @@ export type NavigationIconName =
   | "cash"
   | "product"
   | "barcode"
-  | "priceTag";
+  | "priceTag"
+  | "staff"
+  | "payroll";
 
 export type NavigationEntryDefinition = {
   labelMessageKey: MessageKey;
@@ -393,5 +397,7 @@ export const applicationRouteRegistry: readonly ApplicationRouteDefinition[] = [
       navigation: { labelMessageKey, iconName, groupCode, sortOrder },
     }),
   ),
+  ...humanResourcesRouteDefinitions,
+  ...payrollRouteDefinitions,
   // <route-registry:end> (shared file: append new routes above this marker, with Edit only)
 ];

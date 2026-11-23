@@ -93,6 +93,13 @@ export const navigationUrduMessages: Record<keyof typeof navigationEnglishMessag
   "navigation.item.productStockWithSizes": "کئی اسٹورز پر سائز کے ساتھ پروڈکٹ اسٹاک",
   "navigation.item.productReport": "پروڈکٹ رپورٹ",
   "navigation.item.priceBands": "قیمت کی حدیں",
+  "navigation.item.staffList": "عملہ",
+  "navigation.item.staffTransfers": "عملے کے تبادلے",
+  "navigation.item.newSalarySheet": "نئی تنخواہ شیٹ",
+  "navigation.item.viewSalarySheet": "تنخواہ شیٹ دیکھیں",
+  "navigation.item.salaryPayments": "تنخواہ کی ادائیگیاں",
+  "navigation.item.staffSalaryReport": "عملے کی تنخواہ رپورٹ",
+  "navigation.item.salaryOutstandingReport": "باقی تنخواہ رپورٹ",
   // <navigation-messages:end> (shared file: add the entries of a new screen above this marker, with Edit only)
   "navigation.mainMenuLabel": "مین مینو",
   "navigation.openMenu": "مینو کھولیں",

@@ -14,8 +14,10 @@ import {
   Settings,
   ShieldCheck,
   Tags,
+  UserCog,
   UserPlus,
   Users,
+  Wallet,
   type LucideIcon,
 } from "lucide-react";
 import type { NavigationIconName } from "@/lib/routing/routeRegistry";
@@ -39,4 +41,6 @@ export const navigationIconByName: Record<NavigationIconName, LucideIcon> = {
   product: Package,
   barcode: ScanBarcode,
   priceTag: Tags,
+  staff: UserCog,
+  payroll: Wallet,
 };

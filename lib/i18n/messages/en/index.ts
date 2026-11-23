@@ -16,6 +16,8 @@ import { partiesEnglishMessages } from "./parties";
 import { accountingEnglishMessages } from "./accounting";
 import { cashManagementEnglishMessages } from "./cashManagement";
 import { catalogueEnglishMessages } from "./catalogue";
+import { humanResourcesEnglishMessages } from "./humanResources";
+import { payrollEnglishMessages } from "./payroll";
 // <english-messages-imports:end>
 
 export const englishMessages = {
@@ -32,5 +34,7 @@ export const englishMessages = {
   ...accountingEnglishMessages,
   ...cashManagementEnglishMessages,
   ...catalogueEnglishMessages,
+  ...humanResourcesEnglishMessages,
+  ...payrollEnglishMessages,
   // <english-messages-spread:end>
 };
