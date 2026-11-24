@@ -1,6 +1,11 @@
 import {
   Activity,
+  ArrowLeftRight,
   Banknote,
+  ClipboardCheck,
+  PackageCheck,
+  PackagePlus,
+  TriangleAlert,
   Building2,
   Contact,
   KeyRound,
@@ -49,4 +54,9 @@ export const navigationIconByName: Record<NavigationIconName, LucideIcon> = {
   sale: ShoppingCart,
   invoice: Receipt,
   saleReturn: Undo2,
+  stockAdjustment: PackagePlus,
+  stockAudit: ClipboardCheck,
+  transfer: ArrowLeftRight,
+  receiving: PackageCheck,
+  discrepancy: TriangleAlert,
 };

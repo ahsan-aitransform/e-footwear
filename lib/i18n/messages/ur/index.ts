@@ -20,6 +20,7 @@ import { catalogueUrduMessages } from "./catalogue";
 import { humanResourcesUrduMessages } from "./humanResources";
 import { payrollUrduMessages } from "./payroll";
 import { salesUrduMessages } from "./sales";
+import { inventoryUrduMessages } from "./inventory";
 // <urdu-messages-imports:end>
 
 export const urduMessages: Record<keyof typeof englishMessages, string> = {
@@ -39,5 +40,6 @@ export const urduMessages: Record<keyof typeof englishMessages, string> = {
   ...humanResourcesUrduMessages,
   ...payrollUrduMessages,
   ...salesUrduMessages,
+  ...inventoryUrduMessages,
   // <urdu-messages-spread:end>
 };

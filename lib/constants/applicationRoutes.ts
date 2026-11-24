@@ -113,6 +113,22 @@ export const ApplicationRoutes = {
   exchangeInvoice: "/sales/exchange-invoice",
   viewInvoices: "/sales/invoices",
   viewDeletedInvoices: "/sales/deleted-invoices",
+  // Inventory and stock (Parts 10 and 19; docx 4.16, 4.17, 5.7 to 5.12, 8.20 to 8.24, 8.31).
+  stockAdjustment: "/inventory/stock-adjustment",
+  nonZeroStockAdjustment: "/inventory/non-zero-stock-adjustment",
+  stockAudit: "/inventory/stock-audit",
+  stockTransfer: "/inventory/stock-transfer",
+  stockTransferMulti: "/inventory/stock-transfer-multi",
+  stockTransferReceiving: "/inventory/stock-transfer-receiving",
+  transferDiscrepancies: "/inventory/transfer-discrepancies",
+  stockReconciliation: "/inventory/stock-reconciliation",
+  productClaim: "/products/product-claim",
+  claimApproval: "/products/claim-approval",
+  stockAdjustmentReport: "/reports/stock-adjustment",
+  stockTransferReport: "/reports/stock-transfer",
+  stockTransferSummaryReport: "/reports/stock-transfer-summary",
+  stockAuditReport: "/reports/stock-audit",
+  claimReport: "/reports/claim",
   // <application-routes:end> (shared file: append new routes above this marker, with Edit only)
 } as const;
 
@@ -215,6 +231,21 @@ export const ApplicationRoutePatterns = {
   exchangeInvoice: "/sales/exchange-invoice",
   viewInvoices: "/sales/invoices",
   viewDeletedInvoices: "/sales/deleted-invoices",
+  stockAdjustment: "/inventory/stock-adjustment",
+  nonZeroStockAdjustment: "/inventory/non-zero-stock-adjustment",
+  stockAudit: "/inventory/stock-audit",
+  stockTransfer: "/inventory/stock-transfer",
+  stockTransferMulti: "/inventory/stock-transfer-multi",
+  stockTransferReceiving: "/inventory/stock-transfer-receiving",
+  transferDiscrepancies: "/inventory/transfer-discrepancies",
+  stockReconciliation: "/inventory/stock-reconciliation",
+  productClaim: "/products/product-claim",
+  claimApproval: "/products/claim-approval",
+  stockAdjustmentReport: "/reports/stock-adjustment",
+  stockTransferReport: "/reports/stock-transfer",
+  stockTransferSummaryReport: "/reports/stock-transfer-summary",
+  stockAuditReport: "/reports/stock-audit",
+  claimReport: "/reports/claim",
   // <application-route-patterns:end> (shared file: append above this marker, with Edit only)
 } as const;
 

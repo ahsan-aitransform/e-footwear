@@ -19,6 +19,7 @@ import { catalogueEnglishMessages } from "./catalogue";
 import { humanResourcesEnglishMessages } from "./humanResources";
 import { payrollEnglishMessages } from "./payroll";
 import { salesEnglishMessages } from "./sales";
+import { inventoryEnglishMessages } from "./inventory";
 // <english-messages-imports:end>
 
 export const englishMessages = {
@@ -38,5 +39,6 @@ export const englishMessages = {
   ...humanResourcesEnglishMessages,
   ...payrollEnglishMessages,
   ...salesEnglishMessages,
+  ...inventoryEnglishMessages,
   // <english-messages-spread:end>
 };

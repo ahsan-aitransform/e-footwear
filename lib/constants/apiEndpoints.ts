@@ -317,5 +317,66 @@ export const ApiEndpoints = {
       printDocument: (invoiceId: string) => `/sales/deleted-invoices/${encodeURIComponent(invoiceId)}/print-document`,
     },
   },
+  // Inventory: every screen has its own paths because the screens are granted separately (backend ApiRoutes.Inventory).
+  inventory: {
+    stockAdjustments: {
+      list: "/inventory/stock-adjustments",
+      byId: (adjustmentId: string) => `/inventory/stock-adjustments/${encodeURIComponent(adjustmentId)}`,
+      voidAdjustment: (adjustmentId: string) => `/inventory/stock-adjustments/${encodeURIComponent(adjustmentId)}/void`,
+      itemByBarcode: "/inventory/stock-adjustments/items/by-barcode",
+      itemSearch: "/inventory/stock-adjustments/items/search",
+    },
+    nonZeroStock: {
+      list: "/inventory/non-zero-stock",
+      countUpdates: "/inventory/non-zero-stock/count-updates",
+      countFilePreview: "/inventory/non-zero-stock/count-file-preview",
+    },
+    stockAudits: {
+      list: "/inventory/stock-audits",
+      byId: (auditId: string) => `/inventory/stock-audits/${encodeURIComponent(auditId)}`,
+      scans: (auditId: string) => `/inventory/stock-audits/${encodeURIComponent(auditId)}/scans`,
+      post: (auditId: string) => `/inventory/stock-audits/${encodeURIComponent(auditId)}/post`,
+      reportList: "/inventory/reports/stock-audits",
+      reportById: (auditId: string) => `/inventory/reports/stock-audits/${encodeURIComponent(auditId)}`,
+    },
+    productClaims: {
+      list: "/inventory/product-claims",
+      itemByBarcode: "/inventory/product-claims/items/by-barcode",
+      itemSearch: "/inventory/product-claims/items/search",
+      report: "/inventory/reports/product-claims",
+    },
+    claimApprovals: {
+      list: "/inventory/claim-approvals",
+      approve: "/inventory/claim-approvals/approve",
+      reject: (claimId: string) => `/inventory/claim-approvals/${encodeURIComponent(claimId)}/reject`,
+    },
+    stockTransfers: {
+      list: "/inventory/stock-transfers",
+      byId: (transferId: string) => `/inventory/stock-transfers/${encodeURIComponent(transferId)}`,
+      sendScans: (transferId: string) => `/inventory/stock-transfers/${encodeURIComponent(transferId)}/send-scans`,
+      dispatch: (transferId: string) => `/inventory/stock-transfers/${encodeURIComponent(transferId)}/dispatch`,
+      cancel: (transferId: string) => `/inventory/stock-transfers/${encodeURIComponent(transferId)}/cancel`,
+      multi: "/inventory/stock-transfers/multi",
+      stores: "/inventory/stock-transfers/stores",
+      itemByBarcode: "/inventory/stock-transfers/items/by-barcode",
+      itemSearch: "/inventory/stock-transfers/items/search",
+    },
+    stockTransferReceiving: {
+      list: "/inventory/stock-transfer-receiving",
+      byId: (transferId: string) => `/inventory/stock-transfer-receiving/${encodeURIComponent(transferId)}`,
+      scans: (transferId: string) => `/inventory/stock-transfer-receiving/${encodeURIComponent(transferId)}/scans`,
+      complete: (transferId: string) => `/inventory/stock-transfer-receiving/${encodeURIComponent(transferId)}/complete`,
+    },
+    transferDiscrepancies: {
+      list: "/inventory/transfer-discrepancies",
+      decide: (lossCaseId: string) => `/inventory/transfer-discrepancies/${encodeURIComponent(lossCaseId)}/decide`,
+    },
+    stockReconciliation: "/inventory/stock-reconciliation",
+    reports: {
+      stockAdjustments: "/inventory/reports/stock-adjustments",
+      stockTransfers: "/inventory/reports/stock-transfers",
+      stockTransferSummary: "/inventory/reports/stock-transfer-summary",
+    },
+  },
   // <api-endpoints:end> (shared file: append new groups above this marker, with Edit only)
 } as const;

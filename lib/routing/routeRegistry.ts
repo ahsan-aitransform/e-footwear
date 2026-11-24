@@ -45,7 +45,12 @@ export type NavigationIconName =
   | "payroll"
   | "sale"
   | "invoice"
-  | "saleReturn";
+  | "saleReturn"
+  | "stockAdjustment"
+  | "stockAudit"
+  | "transfer"
+  | "receiving"
+  | "discrepancy";
 
 export type NavigationEntryDefinition = {
   labelMessageKey: MessageKey;
@@ -417,6 +422,34 @@ export const applicationRouteRegistry: readonly ApplicationRouteDefinition[] = [
       audience: "companyUser",
       requiredPermissions: requireAnyPermission(permissionCode),
       navigation: { labelMessageKey, iconName, groupCode: PermissionModuleCodes.INVOICE, sortOrder },
+    }),
+  ),
+  // Inventory and stock (Parts 10 and 19). Each screen is granted on its own, so each has its own permission.
+  ...(
+    [
+      ["stockAdjustment", ApplicationRoutePatterns.stockAdjustment, PermissionCodes.INVOICE.STOCK_ADJUSTMENT.VIEW, "navigation.item.stockAdjustment", "stockAdjustment", PermissionModuleCodes.INVOICE, 60],
+      ["nonZeroStockAdjustment", ApplicationRoutePatterns.nonZeroStockAdjustment, PermissionCodes.INVOICE.STOCK_ADJUSTMENT_NON_ZERO_STOCK.VIEW, "navigation.item.nonZeroStockAdjustment", "stockAdjustment", PermissionModuleCodes.INVOICE, 62],
+      ["stockAudit", ApplicationRoutePatterns.stockAudit, PermissionCodes.INVOICE.STOCK_AUDIT.VIEW, "navigation.item.stockAudit", "stockAudit", PermissionModuleCodes.INVOICE, 64],
+      ["stockTransfer", ApplicationRoutePatterns.stockTransfer, PermissionCodes.INVOICE.STOCK_TRANSFER.VIEW, "navigation.item.stockTransfer", "transfer", PermissionModuleCodes.INVOICE, 66],
+      ["stockTransferMulti", ApplicationRoutePatterns.stockTransferMulti, PermissionCodes.INVOICE.STOCK_TRANSFER_MULTI.VIEW, "navigation.item.stockTransferMulti", "transfer", PermissionModuleCodes.INVOICE, 68],
+      ["stockTransferReceiving", ApplicationRoutePatterns.stockTransferReceiving, PermissionCodes.INVENTORY.STOCK_TRANSFER_RECEIVING.VIEW, "navigation.item.stockTransferReceiving", "receiving", PermissionModuleCodes.INVENTORY, 10],
+      ["transferDiscrepancies", ApplicationRoutePatterns.transferDiscrepancies, PermissionCodes.INVENTORY.TRANSFER_DISCREPANCIES.VIEW, "navigation.item.transferDiscrepancies", "discrepancy", PermissionModuleCodes.INVENTORY, 20],
+      ["stockReconciliation", ApplicationRoutePatterns.stockReconciliation, PermissionCodes.INVENTORY.STOCK_RECONCILIATION.VIEW, "navigation.item.stockReconciliation", "stockAudit", PermissionModuleCodes.INVENTORY, 30],
+      ["productClaim", ApplicationRoutePatterns.productClaim, PermissionCodes.PRODUCTS.PRODUCT_CLAIM.VIEW, "navigation.item.productClaim", "product", PermissionModuleCodes.PRODUCTS, 170],
+      ["claimApproval", ApplicationRoutePatterns.claimApproval, PermissionCodes.PRODUCTS.CLAIM_APPROVAL.VIEW, "navigation.item.claimApproval", "product", PermissionModuleCodes.PRODUCTS, 180],
+      ["stockAdjustmentReport", ApplicationRoutePatterns.stockAdjustmentReport, PermissionCodes.REPORTS.STOCK_ADJUSTMENT_REPORT.VIEW, "navigation.item.stockAdjustmentReport", "stockAdjustment", PermissionModuleCodes.REPORTS, 200],
+      ["stockTransferReport", ApplicationRoutePatterns.stockTransferReport, PermissionCodes.REPORTS.STOCK_TRANSFER_REPORT.VIEW, "navigation.item.stockTransferReport", "transfer", PermissionModuleCodes.REPORTS, 210],
+      ["stockTransferSummaryReport", ApplicationRoutePatterns.stockTransferSummaryReport, PermissionCodes.REPORTS.STOCK_TRANSFER_SUMMARY.VIEW, "navigation.item.stockTransferSummaryReport", "transfer", PermissionModuleCodes.REPORTS, 220],
+      ["stockAuditReport", ApplicationRoutePatterns.stockAuditReport, PermissionCodes.REPORTS.STOCK_AUDIT_REPORT.VIEW, "navigation.item.stockAuditReport", "stockAudit", PermissionModuleCodes.REPORTS, 230],
+      ["claimReport", ApplicationRoutePatterns.claimReport, PermissionCodes.REPORTS.CLAIM_REPORT.VIEW, "navigation.item.claimReport", "product", PermissionModuleCodes.REPORTS, 240],
+    ] as const
+  ).map(
+    ([routeKey, pathPattern, permissionCode, labelMessageKey, iconName, groupCode, sortOrder]): ApplicationRouteDefinition => ({
+      routeKey,
+      pathPattern,
+      audience: "companyUser",
+      requiredPermissions: requireAnyPermission(permissionCode),
+      navigation: { labelMessageKey, iconName, groupCode, sortOrder },
     }),
   ),
   // <route-registry:end> (shared file: append new routes above this marker, with Edit only)
