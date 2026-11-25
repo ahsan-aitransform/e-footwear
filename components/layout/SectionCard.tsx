@@ -18,7 +18,10 @@ export function SectionCard({
   isPadded?: boolean;
 }) {
   return (
-    <Card className={cn(!isPadded && "gap-0 py-0")}>
+    // The shadcn Card clips its content (overflow-hidden). A padded card holds forms, and a dropdown list opened near the
+    // bottom of a form must be able to overlap what follows instead of being cut off at the card edge. An edge-to-edge
+    // card (isPadded = false) holds a table and keeps the clipping so the table follows the rounded corners.
+    <Card className={cn(isPadded ? "overflow-visible" : "gap-0 py-0")}>
       {(title || action) && (
         <CardHeader className={cn(!isPadded && "border-b py-4")}>
           {title && <CardTitle>{title}</CardTitle>}

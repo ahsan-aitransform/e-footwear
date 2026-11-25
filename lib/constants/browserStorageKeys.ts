@@ -22,6 +22,8 @@ export const LocalStorageKeys = {
   languageCode: "efootwear.languageCode",
   themePreference: "efootwear.themePreference",
   selectedStoreId: "efootwear.selectedStoreId",
+  // Sidebar: collapsed or not, and which menu groups the person opened or closed by hand (JSON).
+  sidebarPreference: "efootwear.sidebarPreference",
   // <local-storage-keys:end> (shared file: append above this marker, with Edit only)
 } as const;
 

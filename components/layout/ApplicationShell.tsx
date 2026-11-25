@@ -1,11 +1,14 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Menu, PanelLeftClose, PanelLeftOpen, X } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { QuickActionToolbar } from "@/features/security/components/QuickActionToolbar";
 import { useTranslation } from "@/lib/i18n/useTranslation";
+import { setSidebarCollapsed } from "@/lib/layout/sidebarPreferenceStore";
+import { useSidebarPreference } from "@/lib/layout/useSidebarPreference";
 import { useCurrentSession, useIsOnline } from "@/lib/session/useSessionState";
+import { cn } from "@/lib/utils";
 import { ApplicationNavigation } from "./ApplicationNavigation";
 import { BrandLogo } from "./BrandLogo";
 import { ConnectivityBadge } from "./ConnectivityBadge";
@@ -20,6 +23,7 @@ export function ApplicationShell({ children }: { children: ReactNode }) {
   const { translateMessage } = useTranslation();
   const session = useCurrentSession();
   const isOnline = useIsOnline();
+  const { isCollapsed: isSidebarCollapsed } = useSidebarPreference();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Escape closes the drawer.
@@ -53,10 +57,34 @@ export function ApplicationShell({ children }: { children: ReactNode }) {
         {translateMessage("common.skipToContent")}
       </a>
 
-      {/* Pinned to the screen height (sticky + h-screen + self-start) so the menu inside scrolls on its own while the page scrolls. */}
-      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col self-start border-e bg-sidebar text-sidebar-foreground md:flex print:hidden">
-        {brand}
-        <ApplicationNavigation />
+      {/* Pinned to the screen height (sticky + h-screen + self-start) so the menu inside scrolls on its own while the page scrolls.
+          Collapsed, it is a narrow strip of icons; the choice is remembered (lib/layout/sidebarPreferenceStore.ts). */}
+      <aside
+        id="application-sidebar"
+        className={cn(
+          "sticky top-0 hidden h-screen shrink-0 flex-col self-start border-e bg-sidebar text-sidebar-foreground transition-[width] duration-200 md:flex print:hidden",
+          isSidebarCollapsed ? "w-16" : "w-64",
+        )}
+      >
+        <div className={cn("flex items-center", isSidebarCollapsed ? "flex-col gap-2 px-2 py-3" : "gap-3 py-4 ps-5 pe-3")}>
+          <BrandLogo />
+          {!isSidebarCollapsed && (
+            <span className="min-w-0 flex-1 truncate text-base font-semibold tracking-tight">{translateMessage("common.applicationName")}</span>
+          )}
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            aria-label={translateMessage(isSidebarCollapsed ? "navigation.expandSidebar" : "navigation.collapseSidebar")}
+            title={translateMessage(isSidebarCollapsed ? "navigation.expandSidebar" : "navigation.collapseSidebar")}
+            aria-expanded={!isSidebarCollapsed}
+            aria-controls="application-sidebar"
+            onClick={() => setSidebarCollapsed(!isSidebarCollapsed)}
+          >
+            {isSidebarCollapsed ? <PanelLeftOpen className="rtl:rotate-180" /> : <PanelLeftClose className="rtl:rotate-180" />}
+          </Button>
+        </div>
+        <ApplicationNavigation isCollapsed={isSidebarCollapsed} onRequestExpand={() => setSidebarCollapsed(false)} />
       </aside>
 
       {isMenuOpen && (
