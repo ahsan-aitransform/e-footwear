@@ -20,7 +20,10 @@ export type AccountLedgerRowResponse = {
   entryId: string;
   sourceTypeCode: string;
   description: string | null;
-  partyId: string | null;
+  contactKindCode: string | null;
+  customerId: string | null;
+  vendorId: string | null;
+  staffId: string | null;
   debitAmount: number;
   creditAmount: number;
   runningBalanceAmount: number;
@@ -45,7 +48,9 @@ export type AccountBalanceTypeOptionResponse = { filterCode: string; title: stri
 
 export type AccountBalanceRowResponse = {
   accountId: string | null;
-  partyId: string | null;
+  customerId: string | null;
+  vendorId: string | null;
+  staffId: string | null;
   code: string;
   title: string;
   typeTitle: string;
@@ -100,7 +105,7 @@ export type GeneralJournalRowResponse = {
   storeName: string;
   accountCode: string;
   accountTitle: string;
-  partyName: string | null;
+  contactName: string | null;
   typeCode: string;
   voucherNumber: number | null;
   description: string | null;

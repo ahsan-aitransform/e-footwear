@@ -16,7 +16,7 @@ export function isPayFrequencyCode(text: string): text is PayFrequencyCode {
 }
 
 export type StaffListItemResponse = {
-  partyId: string;
+  staffId: string;
   code: string;
   name: string;
   designation: string | null;
@@ -27,7 +27,7 @@ export type StaffListItemResponse = {
   payFrequencyCode: PayFrequencyCode;
   joinedOn: string | null;
   leftOn: string | null;
-  partyStatusCode: string;
+  statusCode: string;
 };
 
 export type SalaryTermResponse = {
@@ -67,7 +67,7 @@ export type UpdateStaffSalaryTermsRequest = {
 
 export type StaffTransferListItemResponse = {
   id: string;
-  partyId: string;
+  staffId: string;
   staffCode: string;
   staffName: string;
   fromStoreId: string | null;
@@ -80,5 +80,5 @@ export type StaffTransferListItemResponse = {
   changedAt: string;
 };
 
-// POST /parties/{partyId}/staff-transfers (the parties module owns the endpoint).
+// POST /staff-members/{staffId}/transfers (the staff module owns the endpoint).
 export type TransferStaffRequest = { toStoreId: string; effectiveOn: string };

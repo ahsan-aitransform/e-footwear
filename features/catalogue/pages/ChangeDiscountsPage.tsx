@@ -11,7 +11,7 @@ import { SearchableSelect } from "@/components/forms/SearchableSelect";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionCard } from "@/components/layout/SectionCard";
 import { Button } from "@/components/ui/button";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import { apiRequest } from "@/lib/api/apiRequest";
 import { createClientTransactionId } from "@/lib/api/sendApiRequest";
 import { ApiEndpoints } from "@/lib/constants/apiEndpoints";

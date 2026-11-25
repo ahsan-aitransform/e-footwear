@@ -32,7 +32,7 @@ describe("permission contract", () => {
     expect(PermissionCodes.REPORTS.TRIAL_BALANCE.EXPORT).toBe("REPORTS.TRIAL_BALANCE.EXPORT");
     expect(PermissionCodes.RESTRICTED_OPERATIONS.SALES.SALE_CREATE).toBe("SALE_CREATE");
     const moduleCodes = snapshot.modules.map((moduleDefinition) => moduleDefinition.moduleCode);
-    expect(moduleCodes.slice(0, 8)).toEqual(["USER_ACCOUNT", "PRODUCTS", "PARTY", "INVOICE", "ORDERS", "VOUCHER", "REPORTS", "SETTINGS"]);
+    expect(moduleCodes.slice(0, 9)).toEqual(["USER_ACCOUNT", "PRODUCTS", "CUSTOMERS", "CASH_MANAGEMENT", "INVOICE", "ORDERS", "VOUCHER", "REPORTS", "SETTINGS"]);
   });
 
   it("isKnownPermissionCode accepts catalog codes and rejects anything else", () => {

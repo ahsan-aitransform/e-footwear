@@ -20,11 +20,11 @@ export const VoucherPaymentModeCodes = {
 } as const;
 export type VoucherPaymentModeCode = (typeof VoucherPaymentModeCodes)[keyof typeof VoucherPaymentModeCodes];
 
-// What the "To" and "From" boxes of a voucher can name: a general ledger account, or a party.
-export const VoucherTargetKindCodes = { account: "ACCOUNT", party: "PARTY" } as const;
+// What the "To" and "From" boxes of a voucher can name: a general ledger account, a customer, a vendor or a staff member.
+export const VoucherTargetKindCodes = { account: "ACCOUNT", customer: "CUSTOMER", vendor: "VENDOR", staff: "STAFF" } as const;
 export type VoucherTargetKindCode = (typeof VoucherTargetKindCodes)[keyof typeof VoucherTargetKindCodes];
 
-// The "Type" dropdown of a voucher box: accounts, or one kind of party.
+// The "Type" dropdown of a voucher box: accounts, or one kind of contact.
 export const VoucherTargetTypeCodes = {
   account: "ACCOUNT",
   customer: "CUSTOMER",
@@ -36,7 +36,7 @@ export type VoucherTargetTypeCode = (typeof VoucherTargetTypeCodes)[keyof typeof
 export const BalanceSideCodes = { debit: "DEBIT", credit: "CREDIT", all: "ALL" } as const;
 export type BalanceSideCode = (typeof BalanceSideCodes)[keyof typeof BalanceSideCodes];
 
-export type VoucherTargetRequest = { accountId: string | null; partyId: string | null };
+export type VoucherTargetRequest = { accountId: string | null; customerId: string | null; vendorId: string | null; staffId: string | null };
 
 export type VoucherAllocationRequest = { invoiceId: string; amount: number };
 
@@ -56,8 +56,10 @@ export type PostVoucherRequest = {
 export type VoucherLineResponse = {
   accountCode: string;
   accountTitle: string;
-  partyId: string | null;
-  partyName: string | null;
+  customerId: string | null;
+  vendorId: string | null;
+  staffId: string | null;
+  contactName: string | null;
   debitAmount: number;
   creditAmount: number;
   description: string | null;
@@ -78,8 +80,10 @@ export type VoucherResponse = {
   voucherNumber: number;
   voucherDate: string;
   amount: number;
-  partyId: string | null;
-  partyName: string | null;
+  customerId: string | null;
+  vendorId: string | null;
+  staffId: string | null;
+  contactName: string | null;
   paymentMode: VoucherPaymentModeCode | null;
   referenceNumber: string | null;
   description: string | null;
@@ -102,7 +106,7 @@ export type VoucherListItemResponse = {
   amount: number;
   debitAccountTitle: string;
   creditAccountTitle: string;
-  partyName: string | null;
+  contactName: string | null;
   referenceNumber: string | null;
   description: string | null;
   statusCode: VoucherStatusCode;
@@ -113,7 +117,9 @@ export type VoucherEntryContextResponse = { voucherTypeCode: VoucherTypeCode; st
 export type VoucherTargetOptionResponse = {
   kindCode: VoucherTargetKindCode;
   accountId: string | null;
-  partyId: string | null;
+  customerId: string | null;
+  vendorId: string | null;
+  staffId: string | null;
   code: string;
   title: string;
   typeTitle: string;

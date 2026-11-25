@@ -15,15 +15,15 @@ describe("pay terms form", () => {
 });
 
 describe("staff transfer form", () => {
-  const valid = { staffPartyId: "party-1", toStoreId: "store-2", effectiveOn: "2026-10-15" };
+  const valid = { staffId: "staff-1", toStoreId: "store-2", effectiveOn: "2026-10-15" };
 
   it("accepts a move to a different store from a valid date", () => {
     expect(hasFormErrors(validateTransferForm(valid, "store-1"))).toBe(false);
   });
 
   it("asks for the person, the store and a date", () => {
-    const errors = validateTransferForm({ staffPartyId: "", toStoreId: "", effectiveOn: "" }, "");
-    expect(errors.staffPartyId?.messageKey).toBe("humanResources.transfer.error.staff");
+    const errors = validateTransferForm({ staffId: "", toStoreId: "", effectiveOn: "" }, "");
+    expect(errors.staffId?.messageKey).toBe("humanResources.transfer.error.staff");
     expect(errors.toStoreId?.messageKey).toBe("humanResources.transfer.error.store");
     expect(errors.effectiveOn?.messageKey).toBe("humanResources.transfer.error.date");
   });

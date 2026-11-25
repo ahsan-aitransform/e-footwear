@@ -48,7 +48,7 @@ export function isSalaryPaymentMethodCode(text: string): text is SalaryPaymentMe
 
 export type PayrollSheetLineResponse = {
   lineId: string;
-  employeePartyId: string;
+  staffId: string;
   employeeCode: string;
   employeeName: string;
   designation: string | null;
@@ -89,7 +89,7 @@ export type PrepareSalarySheetRequest = { storeId: string; month: string };
 
 export type PayrollAdjustmentResponse = {
   id: string;
-  employeePartyId: string;
+  staffId: string;
   employeeName: string;
   periodMonth: string;
   adjustmentTypeCode: PayrollAdjustmentTypeCode;
@@ -100,7 +100,7 @@ export type PayrollAdjustmentResponse = {
 };
 
 export type CreatePayrollAdjustmentRequest = {
-  employeePartyId: string;
+  staffId: string;
   month: string;
   adjustmentTypeCode: PayrollAdjustmentTypeCode;
   amount: number;
@@ -118,7 +118,7 @@ export type PaySalaryRequest = {
 export type SalaryPaymentResponse = {
   id: string;
   payrollLineId: string;
-  employeePartyId: string;
+  staffId: string;
   employeeName: string;
   storeId: string;
   storeName: string;
@@ -138,7 +138,7 @@ export type StaffSalaryReportRowResponse = {
   periodMonth: string;
   storeId: string;
   storeName: string;
-  employeePartyId: string;
+  staffId: string;
   employeeCode: string;
   employeeName: string;
   designation: string | null;
@@ -169,7 +169,7 @@ export type SalaryOutstandingReportRowResponse = {
   periodMonth: string;
   storeId: string;
   storeName: string;
-  employeePartyId: string;
+  staffId: string;
   employeeName: string;
   netPay: number;
   paidAmount: number;

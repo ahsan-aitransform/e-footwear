@@ -2,7 +2,7 @@ import { PermissionModuleCodes, type PermissionModuleCode } from "@/lib/contract
 import type { MessageKey } from "@/lib/i18n/messageKeys";
 
 // The groups of the navigation menu. The module groups are the modules of the permission catalog (the docx 1.2 tree:
-// User Account, Products, Party, Invoice, Orders, Voucher, Reports, Settings); two extra groups hold the screens that
+// User Account, Products, Customers, Invoice, Orders, Voucher, Reports, Settings); two extra groups hold the screens that
 // need no permission module.
 export const NavigationGroupCodes = {
   general: "general",
@@ -20,7 +20,8 @@ export const navigationGroupDefinitions: Record<NavigationGroupCode, NavigationG
   [NavigationGroupCodes.general]: { sortOrder: 0, labelMessageKey: "navigation.group.general" },
   [NavigationGroupCodes.platformAdministration]: { sortOrder: 5, labelMessageKey: "navigation.group.platformAdministration" },
   [PermissionModuleCodes.DASHBOARDS]: { sortOrder: 2, labelMessageKey: "navigation.group.DASHBOARDS" },
-  [PermissionModuleCodes.PARTY]: { sortOrder: 10, labelMessageKey: "navigation.group.PARTY" },
+  [PermissionModuleCodes.CUSTOMERS]: { sortOrder: 10, labelMessageKey: "navigation.group.CUSTOMERS" },
+  [PermissionModuleCodes.CASH_MANAGEMENT]: { sortOrder: 12, labelMessageKey: "navigation.group.CASH_MANAGEMENT" },
   [PermissionModuleCodes.PRODUCTS]: { sortOrder: 20, labelMessageKey: "navigation.group.PRODUCTS" },
   [PermissionModuleCodes.INVENTORY]: { sortOrder: 25, labelMessageKey: "navigation.group.INVENTORY" },
   [PermissionModuleCodes.INVOICE]: { sortOrder: 30, labelMessageKey: "navigation.group.INVOICE" },

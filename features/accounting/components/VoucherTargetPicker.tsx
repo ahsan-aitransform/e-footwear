@@ -22,11 +22,11 @@ const TYPE_OPTIONS: readonly { typeCode: VoucherTargetTypeCode; messageKey: Mess
 ];
 
 function optionValue(option: VoucherTargetOptionResponse): string {
-  return option.accountId ?? option.partyId ?? option.code;
+  return option.accountId ?? option.customerId ?? option.vendorId ?? option.staffId ?? option.code;
 }
 
 // One of the two boxes of a voucher ("To" / "From"): the Type dropdown (Account, Customer, Vendor, Staff), a search that asks the server
-// (so a company with thousands of parties still finds one), the choice itself, and the current balance of what was chosen, derived from the
+// (so a company with thousands of customers still finds one), the choice itself, and the current balance of what was chosen, derived from the
 // journal. Changing the type clears the choice, because an account is not a customer.
 export function VoucherTargetPicker({
   fieldName,
@@ -51,7 +51,7 @@ export function VoucherTargetPicker({
   const debouncedSearchText = useDebouncedValue(searchText, SEARCH_INPUT_DEBOUNCE_MILLISECONDS);
   const lookup = toTargetLookupQuery(choice.typeCode);
   const targets = useApiQuery<VoucherTargetOptionResponse[]>(targetsPath, {
-    query: { kindCode: lookup.kindCode, partyTypeCode: lookup.partyTypeCode, searchText: debouncedSearchText },
+    query: { kindCode: lookup.kindCode, searchText: debouncedSearchText },
   });
 
   // The chosen option stays in the list even when a newer search no longer returns it.

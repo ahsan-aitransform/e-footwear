@@ -22,7 +22,7 @@ import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import { usePermissions } from "@/lib/permissions/usePermissions";
 import { showToast } from "@/lib/toast/toastStore";
 import type { StoreSummaryResponse } from "@/lib/types/store";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import {
   calculateOpeningBalanceTotals,
   setRowAmount,
@@ -43,7 +43,7 @@ function todayAsIsoDate(): string {
   return `${now.getFullYear()}-${month}-${day}`;
 }
 
-// Opening Balance (docx 2.18): one grid of every postable account and every party of the store, a debit and a credit column,
+// Opening Balance (docx 2.18): one grid of every postable account, customer, vendor and staff member of the store, a debit and a credit column,
 // and a footer with the totals and the difference. Saving posts a new opening entry for each changed row; the old entry is
 // reversed, never edited (the books are append-only). Rows left unchanged are not touched.
 export function OpeningBalancesPage() {

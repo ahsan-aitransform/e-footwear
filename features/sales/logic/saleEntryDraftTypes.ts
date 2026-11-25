@@ -6,7 +6,7 @@ import type { SaleCustomerLookupResponse, SalePaymentMethodCode, SalePrintFormat
 export type SaleHeaderState = {
   saleDate: string;
   customer: SaleCustomerLookupResponse | null;
-  salesmanPartyId: string | null;
+  salesmanStaffId: string | null;
   walkInCustomerName: string;
   walkInCustomerMobile: string;
   posTerminalDeviceId: string | null;

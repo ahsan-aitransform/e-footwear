@@ -54,12 +54,12 @@ export function NewSalarySheetPage() {
   const [adjustingLine, setAdjustingLine] = useState<PayrollSheetLineResponse | null>(null);
   const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false);
 
-  const mayPrepare = hasPermission(PermissionCodes.PARTY.NEW_SALARY_SHEET.ADD) && hasPermission(PermissionCodes.RESTRICTED_OPERATIONS.EXPENSES_AND_PAYROLL.PAYROLL_PREPARE);
-  const mayAdjust = hasPermission(PermissionCodes.PARTY.NEW_SALARY_SHEET.EDIT) && hasPermission(PermissionCodes.RESTRICTED_OPERATIONS.EXPENSES_AND_PAYROLL.PAYROLL_PREPARE);
+  const mayPrepare = hasPermission(PermissionCodes.HUMAN_RESOURCES.NEW_SALARY_SHEET.ADD) && hasPermission(PermissionCodes.RESTRICTED_OPERATIONS.EXPENSES_AND_PAYROLL.PAYROLL_PREPARE);
+  const mayAdjust = hasPermission(PermissionCodes.HUMAN_RESOURCES.NEW_SALARY_SHEET.EDIT) && hasPermission(PermissionCodes.RESTRICTED_OPERATIONS.EXPENSES_AND_PAYROLL.PAYROLL_PREPARE);
   const mayApprovePermission = hasPermission(PermissionCodes.HUMAN_RESOURCES.PAYROLL_RUNS.APPROVE) && hasPermission(PermissionCodes.RESTRICTED_OPERATIONS.EXPENSES_AND_PAYROLL.PAYROLL_APPROVE);
   // Approving posts to the head office, which only people who may work in every store can do (the server refuses everybody else).
   const mayPostToHeadOffice = session?.audience === "COMPANY_USER" && session.hasAccessToAllStores;
-  const mayPrint = hasPermission(PermissionCodes.PARTY.NEW_SALARY_SHEET.PRINT);
+  const mayPrint = hasPermission(PermissionCodes.HUMAN_RESOURCES.NEW_SALARY_SHEET.PRINT);
 
   const currentSheet = sheet.data;
   const isDraft = currentSheet?.statusCode === PayrollStatusCodes.draft;

@@ -42,8 +42,8 @@ export function ViewCashDetailsPage() {
       <PageHeader title={translateMessage("navigation.item.viewCashDetails")} subtitle={translateMessage("cash.view.subtitle")} />
       <SectionCard>
         <div className="grid gap-4 md:grid-cols-2">
-          <DateField label={translateMessage("parties.ledger.from")} name="cashViewFrom" value={fromDate} onValueChange={setFromDate} />
-          <DateField label={translateMessage("parties.ledger.to")} name="cashViewTo" value={toDate} onValueChange={setToDate} />
+          <DateField label={translateMessage("customers.ledger.from")} name="cashViewFrom" value={fromDate} onValueChange={setFromDate} />
+          <DateField label={translateMessage("customers.ledger.to")} name="cashViewTo" value={toDate} onValueChange={setToDate} />
         </div>
       </SectionCard>
       <SectionCard isPadded={false}>

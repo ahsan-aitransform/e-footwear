@@ -27,7 +27,7 @@ import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import { formatPercentage, formatQuantity } from "@/lib/money/quantityAndPercentage";
 import { usePermissions } from "@/lib/permissions/usePermissions";
 import { showToast } from "@/lib/toast/toastStore";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import { CatalogueFilterFields, type CatalogueFilterFieldName } from "../components/CatalogueFilterFields";
 import { ProductRowActionsMenu } from "../components/ProductRowActionsMenu";
 import { ProductStatusBadge } from "../components/ProductStatusBadge";

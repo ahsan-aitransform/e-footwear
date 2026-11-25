@@ -19,20 +19,24 @@ import {
 } from "./voucherEntryLogic";
 
 const vendorOption: VoucherTargetOptionResponse = {
-  kindCode: VoucherTargetKindCodes.party,
+  kindCode: VoucherTargetKindCodes.vendor,
   accountId: null,
-  partyId: "11111111-1111-1111-1111-111111111111",
+  customerId: null,
+  vendorId: "11111111-1111-1111-1111-111111111111",
+  staffId: null,
   code: "10300001",
   title: "Zubair Umair Shoes",
   typeTitle: "Vendor",
   balanceAmount: 60_000,
   balanceSideCode: "CREDIT",
 };
-const customerOption: VoucherTargetOptionResponse = { ...vendorOption, partyId: "22222222-2222-2222-2222-222222222222", title: "A Customer", typeTitle: "Customer" };
+const customerOption: VoucherTargetOptionResponse = { ...vendorOption, kindCode: VoucherTargetKindCodes.customer, customerId: "22222222-2222-2222-2222-222222222222", vendorId: null, title: "A Customer", typeTitle: "Customer" };
 const cashOption: VoucherTargetOptionResponse = {
   kindCode: VoucherTargetKindCodes.account,
   accountId: "33333333-3333-3333-3333-333333333333",
-  partyId: null,
+  customerId: null,
+  vendorId: null,
+  staffId: null,
   code: "CASH-S1",
   title: "Cash in hand",
   typeTitle: "Cash",
@@ -80,9 +84,9 @@ describe("voucher form defaults", () => {
     expect(createEmptyVoucherForm(VoucherTypeCodes.journal, "store-1", "2026-11-20").paymentMode).toBeNull();
   });
 
-  it("asks the server for accounts or for one kind of party", () => {
+  it("asks the server for accounts or for one kind of contact", () => {
     expect(toTargetLookupQuery(VoucherTargetTypeCodes.account)).toEqual({ kindCode: "ACCOUNT" });
-    expect(toTargetLookupQuery(VoucherTargetTypeCodes.vendor)).toEqual({ kindCode: "PARTY", partyTypeCode: "VENDOR" });
+    expect(toTargetLookupQuery(VoucherTargetTypeCodes.vendor)).toEqual({ kindCode: "VENDOR" });
   });
 });
 
@@ -107,14 +111,14 @@ describe("voucher form validation", () => {
     }
   });
 
-  it("refuses the same account or party on both sides", () => {
+  it("refuses the same account or contact on both sides", () => {
     const sameAccount = paymentForm({ debit: { typeCode: VoucherTargetTypeCodes.account, option: cashOption } });
     expect(validateVoucherForm(sameAccount).credit).toBe("accounting.voucher.error.sameBothSides");
   });
 
-  it("refuses two parties against each other because an account has to sit between them", () => {
-    const twoParties = paymentForm({ credit: { typeCode: VoucherTargetTypeCodes.customer, option: customerOption } });
-    expect(validateVoucherForm(twoParties).credit).toBe("accounting.voucher.error.twoParties");
+  it("refuses two contacts against each other because an account has to sit between them", () => {
+    const twoContacts = paymentForm({ credit: { typeCode: VoucherTargetTypeCodes.customer, option: customerOption } });
+    expect(validateVoucherForm(twoContacts).credit).toBe("accounting.voucher.error.twoContacts");
   });
 
   it("refuses an impossible calendar date", () => {
@@ -123,13 +127,13 @@ describe("voucher form validation", () => {
 });
 
 describe("the request sent to the server", () => {
-  it("names a party by party id and an account by account id, with whole rupees", () => {
+  it("names a vendor by vendor id and an account by account id, with whole rupees", () => {
     const request = buildPostVoucherRequest(paymentForm({ referenceNumber: "  CHQ-77 ", description: " Rent " }), "tx-1");
     expect(request).toEqual({
       storeId: "store-1",
       voucherDate: "2026-11-20",
-      debitTarget: { accountId: null, partyId: vendorOption.partyId },
-      creditTarget: { accountId: cashOption.accountId, partyId: null },
+      debitTarget: { accountId: null, customerId: null, vendorId: vendorOption.vendorId, staffId: null },
+      creditTarget: { accountId: cashOption.accountId, customerId: null, vendorId: null, staffId: null },
       amount: 60_000,
       paymentMode: "CASH",
       referenceNumber: "CHQ-77",

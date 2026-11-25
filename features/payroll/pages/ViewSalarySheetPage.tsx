@@ -41,7 +41,7 @@ export function ViewSalarySheetPage() {
   // Paying posts to the head office, which only people who may work in every store can do (the server refuses everybody else).
   const mayPostToHeadOffice = session?.audience === "COMPANY_USER" && session.hasAccessToAllStores;
   const maySeePayments = hasPermission(PermissionCodes.HUMAN_RESOURCES.SALARY_PAYMENTS.VIEW);
-  const mayPrint = hasPermission(PermissionCodes.PARTY.VIEW_SALARY_SHEET.PRINT);
+  const mayPrint = hasPermission(PermissionCodes.HUMAN_RESOURCES.VIEW_SALARY_SHEET.PRINT);
   const currentSheet = sheet.data;
   const monthLabel = formatSalaryMonth(salaryMonth, translateMessage);
 

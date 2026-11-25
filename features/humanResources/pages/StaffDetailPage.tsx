@@ -29,23 +29,23 @@ function formatTimestamp(isoTimestamp: string): string {
 }
 
 // One staff member: profile and pay terms, the salary history (every change of pay, with who made it) and the store history (every move between stores).
-// The profile itself (name, designation, joining date) is edited as a party; the pay terms are edited here.
-export function StaffDetailPage({ partyId }: { partyId: string }) {
+// The profile itself (name, designation, joining date) is edited with Edit Staff; the pay terms are edited here.
+export function StaffDetailPage({ staffId }: { staffId: string }) {
   const { translateMessage } = useTranslation();
   // A route parameter that is not a UUID is refused before any request is made (decision D-006).
-  if (!isUuid(partyId)) return <InlineNotice tone={ToneNames.danger}>{translateMessage("humanResources.detail.notFound")}</InlineNotice>;
-  return <StaffDetailContent partyId={partyId} />;
+  if (!isUuid(staffId)) return <InlineNotice tone={ToneNames.danger}>{translateMessage("humanResources.detail.notFound")}</InlineNotice>;
+  return <StaffDetailContent staffId={staffId} />;
 }
 
-function StaffDetailContent({ partyId }: { partyId: string }) {
+function StaffDetailContent({ staffId }: { staffId: string }) {
   const { translateMessage } = useTranslation();
   const { hasPermission } = usePermissions();
-  const detail = useApiQuery<StaffDetailResponse>(ApiEndpoints.staff.byId(partyId));
+  const detail = useApiQuery<StaffDetailResponse>(ApiEndpoints.staff.byId(staffId));
   const [isTransferOpen, setIsTransferOpen] = useState(false);
 
   const mayEditSalary = hasPermission(PermissionCodes.HUMAN_RESOURCES.SALARY_TERMS.EDIT);
   const mayTransfer = hasPermission(PermissionCodes.HUMAN_RESOURCES.STAFF_TRANSFERS.ADD);
-  const mayOpenParty = hasPermission(PermissionCodes.PARTY.NEW_PARTY.VIEW);
+  const mayOpenStaff = hasPermission(PermissionCodes.HUMAN_RESOURCES.NEW_STAFF.VIEW);
 
   const salaryColumns: DataGridColumn<SalaryTermResponse>[] = [
     { key: "effectiveFrom", header: translateMessage("humanResources.salaryHistory.column.effectiveFrom"), render: (term) => <span dir="ltr">{term.effectiveFrom}</span> },
@@ -99,10 +99,10 @@ function StaffDetailContent({ partyId }: { partyId: string }) {
         subtitle={[profile.currentStoreName, formatWholeRupees(profile.baseSalary), payFrequencyLabel].join(", ")}
         actions={
           <div className="flex flex-wrap gap-2">
-            {mayOpenParty && (
-              <Link href={ApplicationRoutes.editParty(profile.partyId)} className={buttonVariants({ variant: "outline" })}>
+            {mayOpenStaff && (
+              <Link href={ApplicationRoutes.editStaffMember(profile.staffId)} className={buttonVariants({ variant: "outline" })}>
                 <Pencil />
-                {translateMessage("humanResources.detail.editParty")}
+                {translateMessage("humanResources.detail.editStaff")}
               </Link>
             )}
             {backLink}
@@ -169,7 +169,7 @@ function StaffDetailContent({ partyId }: { partyId: string }) {
 
       {isTransferOpen && (
         <StaffTransferDialog
-          fixedStaff={{ partyId: profile.partyId, name: profile.name, currentStoreId: profile.currentStoreId }}
+          fixedStaff={{ staffId: profile.staffId, name: profile.name, currentStoreId: profile.currentStoreId }}
           onClose={() => setIsTransferOpen(false)}
           onTransferred={() => {
             setIsTransferOpen(false);

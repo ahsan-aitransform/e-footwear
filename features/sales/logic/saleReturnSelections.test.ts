@@ -33,7 +33,7 @@ function line(overrides: Partial<ReturnableSaleLineResponse> = {}): ReturnableSa
 }
 
 function invoice(lines: ReturnableSaleLineResponse[], invoiceId = "invoice-1"): ReturnableInvoiceResponse {
-  return { invoiceId, invoiceNumber: 7, storeId: "store-1", saleDate: "2026-11-10", customerPartyId: null, customerName: null, walkInCustomerName: null, lines };
+  return { invoiceId, invoiceNumber: 7, storeId: "store-1", saleDate: "2026-11-10", customerId: null, customerName: null, walkInCustomerName: null, lines };
 }
 
 const chosen = (quantity: number): ReturnSelections => ({ "line-1": { quantity, reasonText: " Too tight ", itemConditionCode: "SELLABLE" } });

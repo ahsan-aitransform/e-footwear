@@ -20,7 +20,7 @@ export type AccountResponse = {
   storeId: string;
   systemRole: string | null;
   isPostable: boolean;
-  isPartyControl: boolean;
+  isSubledgerControl: boolean;
   isActive: boolean;
   rowVersion: number;
 };
@@ -34,7 +34,9 @@ export type NextAccountCodeResponse = { accountCode: string };
 
 export type OpeningBalanceRowResponse = {
   accountId: string | null;
-  partyId: string | null;
+  customerId: string | null;
+  vendorId: string | null;
+  staffId: string | null;
   code: string;
   name: string;
   areaName: string | null;
@@ -53,7 +55,9 @@ export type OpeningBalanceSheetResponse = {
 
 export type OpeningBalanceLineRequest = {
   accountId: string | null;
-  partyId: string | null;
+  customerId: string | null;
+  vendorId: string | null;
+  staffId: string | null;
   debitAmount: number;
   creditAmount: number;
 };

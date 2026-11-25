@@ -128,7 +128,7 @@ export const ApiEndpoints = {
   platformBackup: {
     overview: "/platform/backup/overview",
   },
-  // Master data (module masterdata-parties). The list paths are used with the helpers below.
+  // Master data (module master-data). The list paths are used with the helpers below.
   masterData: {
     departments: "/departments",
     brands: "/brands",
@@ -159,20 +159,38 @@ export const ApiEndpoints = {
   openingBalances: {
     sheet: "/opening-balances",
   },
-  parties: {
-    list: "/parties",
-    search: "/parties/search",
-    lookup: "/parties/lookup",
-    byId: (partyId: string) => `/parties/${encodeURIComponent(partyId)}`,
-    staffTransfers: (partyId: string) => `/parties/${encodeURIComponent(partyId)}/staff-transfers`,
+  customers: {
+    list: "/customers",
+    search: "/customers/search",
+    lookup: "/customers/lookup",
+    byId: (customerId: string) => `/customers/${encodeURIComponent(customerId)}`,
   },
-  partyLedger: {
-    ledger: "/party-ledger",
+  customerLedger: {
+    ledger: "/customer-ledger",
+  },
+  vendors: {
+    list: "/vendors",
+    search: "/vendors/search",
+    lookup: "/vendors/lookup",
+    byId: (vendorId: string) => `/vendors/${encodeURIComponent(vendorId)}`,
+  },
+  vendorLedger: {
+    ledger: "/vendor-ledger",
+  },
+  staffMembers: {
+    list: "/staff-members",
+    search: "/staff-members/search",
+    lookup: "/staff-members/lookup",
+    byId: (staffId: string) => `/staff-members/${encodeURIComponent(staffId)}`,
+    transfers: (staffId: string) => `/staff-members/${encodeURIComponent(staffId)}/transfers`,
+  },
+  staffLedger: {
+    ledger: "/staff-ledger",
   },
   promises: {
     list: "/promises",
     byId: (promiseId: string) => `/promises/${encodeURIComponent(promiseId)}`,
-    customerBalance: (customerPartyId: string) => `/promises/customers/${encodeURIComponent(customerPartyId)}/balance`,
+    customerBalance: (customerId: string) => `/promises/customers/${encodeURIComponent(customerId)}/balance`,
   },
   cashCounts: {
     list: "/cash-counts",
@@ -259,8 +277,8 @@ export const ApiEndpoints = {
   staff: {
     list: "/staff",
     transfers: "/staff/transfers",
-    byId: (partyId: string) => `/staff/${encodeURIComponent(partyId)}`,
-    salaryTerms: (partyId: string) => `/staff/${encodeURIComponent(partyId)}/salary-terms`,
+    byId: (staffId: string) => `/staff/${encodeURIComponent(staffId)}`,
+    salaryTerms: (staffId: string) => `/staff/${encodeURIComponent(staffId)}/salary-terms`,
   },
   payroll: {
     sheet: "/payroll/sheets",

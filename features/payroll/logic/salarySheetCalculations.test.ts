@@ -5,7 +5,7 @@ import { calculateNetPay, calculateOutstanding, isLinePayable, maximumPaymentOf,
 function line(overrides: Partial<PayrollSheetLineResponse>): PayrollSheetLineResponse {
   return {
     lineId: "line-1",
-    employeePartyId: "party-1",
+    staffId: "staff-1",
     employeeCode: "10300001",
     employeeName: "Imran",
     designation: "Manager",

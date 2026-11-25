@@ -35,8 +35,8 @@ afterEach(() => {
 function salaryReport(overrides: Partial<StaffSalaryReportResponse> = {}): StaffSalaryReportResponse {
   return {
     rows: [
-      { periodMonth: "2026-10-01", storeId: TEST_STORE_ID, storeName: "Main Store", employeePartyId: "p1", employeeCode: "10300001", employeeName: "Imran", designation: "Manager", baseSalary: 20_000, commissionAmount: 0, incentiveAmount: 4_000, deductionAmount: 0, netPay: 24_000, paidAmount: 10_000, outstandingAmount: 14_000, statusCode: "APPROVED" },
-      { periodMonth: "2026-10-01", storeId: TEST_STORE_ID, storeName: "Main Store", employeePartyId: "p2", employeeCode: "10300002", employeeName: "Zaman", designation: "Salesman", baseSalary: 30_000, commissionAmount: 0, incentiveAmount: 0, deductionAmount: 0, netPay: 30_000, paidAmount: 0, outstandingAmount: 30_000, statusCode: "DRAFT" },
+      { periodMonth: "2026-10-01", storeId: TEST_STORE_ID, storeName: "Main Store", staffId: "p1", employeeCode: "10300001", employeeName: "Imran", designation: "Manager", baseSalary: 20_000, commissionAmount: 0, incentiveAmount: 4_000, deductionAmount: 0, netPay: 24_000, paidAmount: 10_000, outstandingAmount: 14_000, statusCode: "APPROVED" },
+      { periodMonth: "2026-10-01", storeId: TEST_STORE_ID, storeName: "Main Store", staffId: "p2", employeeCode: "10300002", employeeName: "Zaman", designation: "Salesman", baseSalary: 30_000, commissionAmount: 0, incentiveAmount: 0, deductionAmount: 0, netPay: 30_000, paidAmount: 0, outstandingAmount: 30_000, statusCode: "DRAFT" },
     ],
     totalBaseSalary: 50_000,
     totalCommission: 0,
@@ -99,7 +99,7 @@ describe("Staff Salary Report", () => {
 
 describe("Salary Outstanding Report", () => {
   const report: SalaryOutstandingReportResponse = {
-    rows: [{ periodMonth: "2026-10-01", storeId: TEST_STORE_ID, storeName: "Main Store", employeePartyId: "p1", employeeName: "Part Paid", netPay: 20_000, paidAmount: 5_000, outstandingAmount: 15_000 }],
+    rows: [{ periodMonth: "2026-10-01", storeId: TEST_STORE_ID, storeName: "Main Store", staffId: "p1", employeeName: "Part Paid", netPay: 20_000, paidAmount: 5_000, outstandingAmount: 15_000 }],
     totalNetPay: 20_000,
     totalPaid: 5_000,
     totalOutstanding: 15_000,
@@ -139,7 +139,7 @@ describe("Salary Payments", () => {
   const payment: SalaryPaymentResponse = {
     id: "payment-1",
     payrollLineId: "line-1",
-    employeePartyId: "p1",
+    staffId: "p1",
     employeeName: "Imran",
     storeId: TEST_STORE_ID,
     storeName: "Main Store",

@@ -134,7 +134,7 @@ export function GeneralJournalPage() {
                       <TableCell>{line.typeCode}</TableCell>
                       <TableCell dir="ltr">{line.voucherNumber ?? ""}</TableCell>
                       <TableCell dir="ltr">{line.accountCode}</TableCell>
-                      <TableCell>{line.partyName ? `${line.partyName} (${line.accountTitle})` : line.accountTitle}</TableCell>
+                      <TableCell>{line.contactName ? `${line.contactName} (${line.accountTitle})` : line.accountTitle}</TableCell>
                       {isDetailed && <TableCell>{line.description ?? ""}</TableCell>}
                       <TableCell className="text-end">{formatColumnAmount(line.debitAmount)}</TableCell>
                       <TableCell className="text-end">{formatColumnAmount(line.creditAmount)}</TableCell>

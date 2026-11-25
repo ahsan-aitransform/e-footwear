@@ -79,9 +79,9 @@ function SaleCustomerPicker({
           autoComplete="off"
           aria-label={translateMessage("sales.header.customer")}
         />
-        {hasPermission(PermissionCodes.PARTY.NEW_PARTY.ADD) && (
+        {hasPermission(PermissionCodes.CUSTOMERS.NEW_CUSTOMER.ADD) && (
           <Link
-            href={ApplicationRoutes.newParty}
+            href={ApplicationRoutes.newCustomer}
             target="_blank"
             aria-label={translateMessage("sales.header.addCustomer")}
             className={buttonVariants({ variant: "outline", size: "icon" })}
@@ -93,7 +93,7 @@ function SaleCustomerPicker({
       {(suggestions.data ?? []).length > 0 && (
         <ul className="max-h-40 divide-y overflow-auto rounded-lg border" role="listbox" aria-label={translateMessage("sales.header.customerResults")}>
           {(suggestions.data ?? []).map((candidate) => (
-            <li key={candidate.partyId}>
+            <li key={candidate.customerId}>
               <button
                 type="button"
                 role="option"
@@ -157,10 +157,10 @@ export function SaleHeaderPanel({
       </div>
       <FormField label={translateMessage("sales.header.salesman")} name="sale-salesman">
         {(controlProps) => (
-          <NativeSelect {...controlProps} value={header.salesmanPartyId ?? ""} onChange={(event) => onHeaderChange({ salesmanPartyId: event.target.value || null })}>
+          <NativeSelect {...controlProps} value={header.salesmanStaffId ?? ""} onChange={(event) => onHeaderChange({ salesmanStaffId: event.target.value || null })}>
             <option value="">{translateMessage("sales.header.noSalesman")}</option>
             {salesmen.map((salesman) => (
-              <option key={salesman.partyId} value={salesman.partyId}>
+              <option key={salesman.staffId} value={salesman.staffId}>
                 {salesman.name}
               </option>
             ))}

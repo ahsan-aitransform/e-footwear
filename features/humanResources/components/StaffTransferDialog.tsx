@@ -32,21 +32,21 @@ export function StaffTransferDialog({
   onClose,
   onTransferred,
 }: {
-  fixedStaff?: Pick<StaffListItemResponse, "partyId" | "name" | "currentStoreId">;
+  fixedStaff?: Pick<StaffListItemResponse, "staffId" | "name" | "currentStoreId">;
   onClose: () => void;
   onTransferred: () => void;
 }) {
   const { translateMessage } = useTranslation();
   const { stores } = useAccessibleStores();
   const staffList = useApiQuery<PaginatedResponse<StaffListItemResponse>>(fixedStaff ? null : ApiEndpoints.staff.list, { query: { pageSize: STAFF_PICKER_PAGE_SIZE } });
-  const [values, setValues] = useState<TransferFormValues>({ staffPartyId: fixedStaff?.partyId ?? "", toStoreId: "", effectiveOn: todayAsIsoDate() });
+  const [values, setValues] = useState<TransferFormValues>({ staffId: fixedStaff?.staffId ?? "", toStoreId: "", effectiveOn: todayAsIsoDate() });
   const [errors, setErrors] = useState<TransferFormErrors>({});
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<string>();
 
-  const staffOptions: OptionSelectOption[] = (staffList.data?.items ?? []).map((staff) => ({ value: staff.partyId, label: `${staff.name} (${staff.code}), ${staff.currentStoreName}` }));
+  const staffOptions: OptionSelectOption[] = (staffList.data?.items ?? []).map((staff) => ({ value: staff.staffId, label: `${staff.name} (${staff.code}), ${staff.currentStoreName}` }));
   const storeOptions: OptionSelectOption[] = stores.filter((store) => !store.isHeadOffice).map((store) => ({ value: store.id, label: store.name }));
-  const currentStoreId = fixedStaff?.currentStoreId ?? staffList.data?.items.find((staff) => staff.partyId === values.staffPartyId)?.currentStoreId ?? "";
+  const currentStoreId = fixedStaff?.currentStoreId ?? staffList.data?.items.find((staff) => staff.staffId === values.staffId)?.currentStoreId ?? "";
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -55,7 +55,7 @@ export function StaffTransferDialog({
     if (hasFormErrors(found)) return;
     const body: TransferStaffRequest = { toStoreId: values.toStoreId, effectiveOn: values.effectiveOn };
     setIsSaving(true);
-    const result = await apiRequest<void>(ApiEndpoints.parties.staffTransfers(values.staffPartyId), { method: "POST", body });
+    const result = await apiRequest<void>(ApiEndpoints.staffMembers.transfers(values.staffId), { method: "POST", body });
     setIsSaving(false);
     if (!result.ok) return setMessage(result.problem.message);
     showToast(translateMessage("humanResources.transfer.saved"), ToneNames.success);
@@ -74,13 +74,13 @@ export function StaffTransferDialog({
           {fixedStaff ? (
             <p className="text-sm font-medium">{fixedStaff.name}</p>
           ) : (
-            <FormField label={translateMessage("humanResources.transfer.field.staff")} name="staffTransferStaff" isRequired errorMessage={translateValidationMessage(translateMessage, errors.staffPartyId)}>
+            <FormField label={translateMessage("humanResources.transfer.field.staff")} name="staffTransferStaff" isRequired errorMessage={translateValidationMessage(translateMessage, errors.staffId)}>
               {(controlProps) => (
                 <OptionSelect
                   {...controlProps}
                   options={staffOptions}
-                  value={values.staffPartyId}
-                  onValueChange={(staffPartyId) => setValues((current) => ({ ...current, staffPartyId }))}
+                  value={values.staffId}
+                  onValueChange={(staffId) => setValues((current) => ({ ...current, staffId }))}
                   emptyOptionLabel={translateMessage("humanResources.transfer.field.chooseStaff")}
                 />
               )}

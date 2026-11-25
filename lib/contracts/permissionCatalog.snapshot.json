@@ -578,117 +578,117 @@
       ]
     },
     {
-      "moduleCode": "PARTY",
-      "displayName": "Party",
+      "moduleCode": "CUSTOMERS",
+      "displayName": "Customers",
       "screens": [
         {
-          "screenCode": "NEW_PARTY",
-          "displayName": "New Party",
+          "screenCode": "NEW_CUSTOMER",
+          "displayName": "New Customer",
           "subGroupCode": null,
           "actions": [
             {
-              "permissionCode": "PARTY.NEW_PARTY.VIEW",
+              "permissionCode": "CUSTOMERS.NEW_CUSTOMER.VIEW",
               "actionCode": "VIEW",
               "displayName": "View"
             },
             {
-              "permissionCode": "PARTY.NEW_PARTY.ADD",
+              "permissionCode": "CUSTOMERS.NEW_CUSTOMER.ADD",
               "actionCode": "ADD",
               "displayName": "Add"
             },
             {
-              "permissionCode": "PARTY.NEW_PARTY.EDIT",
+              "permissionCode": "CUSTOMERS.NEW_CUSTOMER.EDIT",
               "actionCode": "EDIT",
               "displayName": "Edit"
             },
             {
-              "permissionCode": "PARTY.NEW_PARTY.DELETE",
+              "permissionCode": "CUSTOMERS.NEW_CUSTOMER.DELETE",
               "actionCode": "DELETE",
               "displayName": "Delete"
             },
             {
-              "permissionCode": "PARTY.NEW_PARTY.PRINT",
+              "permissionCode": "CUSTOMERS.NEW_CUSTOMER.PRINT",
               "actionCode": "PRINT",
               "displayName": "Print"
             },
             {
-              "permissionCode": "PARTY.NEW_PARTY.EXPORT",
+              "permissionCode": "CUSTOMERS.NEW_CUSTOMER.EXPORT",
               "actionCode": "EXPORT",
               "displayName": "Export"
             }
           ]
         },
         {
-          "screenCode": "VIEW_PARTY",
-          "displayName": "View Party",
+          "screenCode": "VIEW_CUSTOMERS",
+          "displayName": "View Customers",
           "subGroupCode": null,
           "actions": [
             {
-              "permissionCode": "PARTY.VIEW_PARTY.VIEW",
+              "permissionCode": "CUSTOMERS.VIEW_CUSTOMERS.VIEW",
               "actionCode": "VIEW",
               "displayName": "View"
             },
             {
-              "permissionCode": "PARTY.VIEW_PARTY.EDIT",
+              "permissionCode": "CUSTOMERS.VIEW_CUSTOMERS.EDIT",
               "actionCode": "EDIT",
               "displayName": "Edit"
             },
             {
-              "permissionCode": "PARTY.VIEW_PARTY.DELETE",
+              "permissionCode": "CUSTOMERS.VIEW_CUSTOMERS.DELETE",
               "actionCode": "DELETE",
               "displayName": "Delete"
             },
             {
-              "permissionCode": "PARTY.VIEW_PARTY.PRINT",
+              "permissionCode": "CUSTOMERS.VIEW_CUSTOMERS.PRINT",
               "actionCode": "PRINT",
               "displayName": "Print"
             },
             {
-              "permissionCode": "PARTY.VIEW_PARTY.EXPORT",
+              "permissionCode": "CUSTOMERS.VIEW_CUSTOMERS.EXPORT",
               "actionCode": "EXPORT",
               "displayName": "Export"
             }
           ]
         },
         {
-          "screenCode": "SEARCH_PARTY",
-          "displayName": "Search Party",
+          "screenCode": "SEARCH_CUSTOMER",
+          "displayName": "Search Customer",
           "subGroupCode": null,
           "actions": [
             {
-              "permissionCode": "PARTY.SEARCH_PARTY.VIEW",
+              "permissionCode": "CUSTOMERS.SEARCH_CUSTOMER.VIEW",
               "actionCode": "VIEW",
               "displayName": "View"
             }
           ]
         },
         {
-          "screenCode": "ACCOUNT_DETAIL",
-          "displayName": "Account Detail",
+          "screenCode": "CUSTOMER_ACCOUNT_DETAIL",
+          "displayName": "Customer Account Detail",
           "subGroupCode": null,
           "actions": [
             {
-              "permissionCode": "PARTY.ACCOUNT_DETAIL.VIEW",
+              "permissionCode": "CUSTOMERS.CUSTOMER_ACCOUNT_DETAIL.VIEW",
               "actionCode": "VIEW",
               "displayName": "View"
             },
             {
-              "permissionCode": "PARTY.ACCOUNT_DETAIL.EDIT",
+              "permissionCode": "CUSTOMERS.CUSTOMER_ACCOUNT_DETAIL.EDIT",
               "actionCode": "EDIT",
               "displayName": "Edit"
             },
             {
-              "permissionCode": "PARTY.ACCOUNT_DETAIL.DELETE",
+              "permissionCode": "CUSTOMERS.CUSTOMER_ACCOUNT_DETAIL.DELETE",
               "actionCode": "DELETE",
               "displayName": "Delete"
             },
             {
-              "permissionCode": "PARTY.ACCOUNT_DETAIL.PRINT",
+              "permissionCode": "CUSTOMERS.CUSTOMER_ACCOUNT_DETAIL.PRINT",
               "actionCode": "PRINT",
               "displayName": "Print"
             },
             {
-              "permissionCode": "PARTY.ACCOUNT_DETAIL.EXPORT",
+              "permissionCode": "CUSTOMERS.CUSTOMER_ACCOUNT_DETAIL.EXPORT",
               "actionCode": "EXPORT",
               "displayName": "Export"
             }
@@ -700,69 +700,75 @@
           "subGroupCode": null,
           "actions": [
             {
-              "permissionCode": "PARTY.PROMISE.VIEW",
+              "permissionCode": "CUSTOMERS.PROMISE.VIEW",
               "actionCode": "VIEW",
               "displayName": "View"
             },
             {
-              "permissionCode": "PARTY.PROMISE.ADD",
+              "permissionCode": "CUSTOMERS.PROMISE.ADD",
               "actionCode": "ADD",
               "displayName": "Add"
             },
             {
-              "permissionCode": "PARTY.PROMISE.EDIT",
+              "permissionCode": "CUSTOMERS.PROMISE.EDIT",
               "actionCode": "EDIT",
               "displayName": "Edit"
             },
             {
-              "permissionCode": "PARTY.PROMISE.DELETE",
+              "permissionCode": "CUSTOMERS.PROMISE.DELETE",
               "actionCode": "DELETE",
               "displayName": "Delete"
             },
             {
-              "permissionCode": "PARTY.PROMISE.PRINT",
+              "permissionCode": "CUSTOMERS.PROMISE.PRINT",
               "actionCode": "PRINT",
               "displayName": "Print"
             },
             {
-              "permissionCode": "PARTY.PROMISE.EXPORT",
+              "permissionCode": "CUSTOMERS.PROMISE.EXPORT",
               "actionCode": "EXPORT",
               "displayName": "Export"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "moduleCode": "CASH_MANAGEMENT",
+      "displayName": "Cash Management",
+      "screens": [
         {
           "screenCode": "CASH_CALCULATOR",
           "displayName": "Cash Calculator",
           "subGroupCode": null,
           "actions": [
             {
-              "permissionCode": "PARTY.CASH_CALCULATOR.VIEW",
+              "permissionCode": "CASH_MANAGEMENT.CASH_CALCULATOR.VIEW",
               "actionCode": "VIEW",
               "displayName": "View"
             },
             {
-              "permissionCode": "PARTY.CASH_CALCULATOR.ADD",
+              "permissionCode": "CASH_MANAGEMENT.CASH_CALCULATOR.ADD",
               "actionCode": "ADD",
               "displayName": "Add"
             },
             {
-              "permissionCode": "PARTY.CASH_CALCULATOR.EDIT",
+              "permissionCode": "CASH_MANAGEMENT.CASH_CALCULATOR.EDIT",
               "actionCode": "EDIT",
               "displayName": "Edit"
             },
             {
-              "permissionCode": "PARTY.CASH_CALCULATOR.DELETE",
+              "permissionCode": "CASH_MANAGEMENT.CASH_CALCULATOR.DELETE",
               "actionCode": "DELETE",
               "displayName": "Delete"
             },
             {
-              "permissionCode": "PARTY.CASH_CALCULATOR.PRINT",
+              "permissionCode": "CASH_MANAGEMENT.CASH_CALCULATOR.PRINT",
               "actionCode": "PRINT",
               "displayName": "Print"
             },
             {
-              "permissionCode": "PARTY.CASH_CALCULATOR.EXPORT",
+              "permissionCode": "CASH_MANAGEMENT.CASH_CALCULATOR.EXPORT",
               "actionCode": "EXPORT",
               "displayName": "Export"
             }
@@ -774,96 +780,27 @@
           "subGroupCode": null,
           "actions": [
             {
-              "permissionCode": "PARTY.VIEW_CASH_DETAIL.VIEW",
+              "permissionCode": "CASH_MANAGEMENT.VIEW_CASH_DETAIL.VIEW",
               "actionCode": "VIEW",
               "displayName": "View"
             },
             {
-              "permissionCode": "PARTY.VIEW_CASH_DETAIL.EDIT",
+              "permissionCode": "CASH_MANAGEMENT.VIEW_CASH_DETAIL.EDIT",
               "actionCode": "EDIT",
               "displayName": "Edit"
             },
             {
-              "permissionCode": "PARTY.VIEW_CASH_DETAIL.DELETE",
+              "permissionCode": "CASH_MANAGEMENT.VIEW_CASH_DETAIL.DELETE",
               "actionCode": "DELETE",
               "displayName": "Delete"
             },
             {
-              "permissionCode": "PARTY.VIEW_CASH_DETAIL.PRINT",
+              "permissionCode": "CASH_MANAGEMENT.VIEW_CASH_DETAIL.PRINT",
               "actionCode": "PRINT",
               "displayName": "Print"
             },
             {
-              "permissionCode": "PARTY.VIEW_CASH_DETAIL.EXPORT",
-              "actionCode": "EXPORT",
-              "displayName": "Export"
-            }
-          ]
-        },
-        {
-          "screenCode": "NEW_SALARY_SHEET",
-          "displayName": "New Salary Sheet",
-          "subGroupCode": null,
-          "actions": [
-            {
-              "permissionCode": "PARTY.NEW_SALARY_SHEET.VIEW",
-              "actionCode": "VIEW",
-              "displayName": "View"
-            },
-            {
-              "permissionCode": "PARTY.NEW_SALARY_SHEET.ADD",
-              "actionCode": "ADD",
-              "displayName": "Add"
-            },
-            {
-              "permissionCode": "PARTY.NEW_SALARY_SHEET.EDIT",
-              "actionCode": "EDIT",
-              "displayName": "Edit"
-            },
-            {
-              "permissionCode": "PARTY.NEW_SALARY_SHEET.DELETE",
-              "actionCode": "DELETE",
-              "displayName": "Delete"
-            },
-            {
-              "permissionCode": "PARTY.NEW_SALARY_SHEET.PRINT",
-              "actionCode": "PRINT",
-              "displayName": "Print"
-            },
-            {
-              "permissionCode": "PARTY.NEW_SALARY_SHEET.EXPORT",
-              "actionCode": "EXPORT",
-              "displayName": "Export"
-            }
-          ]
-        },
-        {
-          "screenCode": "VIEW_SALARY_SHEET",
-          "displayName": "View Salary Sheet",
-          "subGroupCode": null,
-          "actions": [
-            {
-              "permissionCode": "PARTY.VIEW_SALARY_SHEET.VIEW",
-              "actionCode": "VIEW",
-              "displayName": "View"
-            },
-            {
-              "permissionCode": "PARTY.VIEW_SALARY_SHEET.EDIT",
-              "actionCode": "EDIT",
-              "displayName": "Edit"
-            },
-            {
-              "permissionCode": "PARTY.VIEW_SALARY_SHEET.DELETE",
-              "actionCode": "DELETE",
-              "displayName": "Delete"
-            },
-            {
-              "permissionCode": "PARTY.VIEW_SALARY_SHEET.PRINT",
-              "actionCode": "PRINT",
-              "displayName": "Print"
-            },
-            {
-              "permissionCode": "PARTY.VIEW_SALARY_SHEET.EXPORT",
+              "permissionCode": "CASH_MANAGEMENT.VIEW_CASH_DETAIL.EXPORT",
               "actionCode": "EXPORT",
               "displayName": "Export"
             }
@@ -4165,6 +4102,119 @@
       "displayName": "Vendors",
       "screens": [
         {
+          "screenCode": "NEW_VENDOR",
+          "displayName": "New Vendor",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VENDORS.NEW_VENDOR.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VENDORS.NEW_VENDOR.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "VENDORS.NEW_VENDOR.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VENDORS.NEW_VENDOR.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VENDORS.NEW_VENDOR.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VENDORS.NEW_VENDOR.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_VENDORS",
+          "displayName": "View Vendors",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VENDORS.VIEW_VENDORS.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VENDORS.VIEW_VENDORS.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VENDORS.VIEW_VENDORS.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VENDORS.VIEW_VENDORS.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VENDORS.VIEW_VENDORS.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SEARCH_VENDOR",
+          "displayName": "Search Vendor",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VENDORS.SEARCH_VENDOR.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            }
+          ]
+        },
+        {
+          "screenCode": "VENDOR_ACCOUNT_DETAIL",
+          "displayName": "Vendor Account Detail",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "VENDORS.VENDOR_ACCOUNT_DETAIL.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_ACCOUNT_DETAIL.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_ACCOUNT_DETAIL.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_ACCOUNT_DETAIL.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "VENDORS.VENDOR_ACCOUNT_DETAIL.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
           "screenCode": "VENDOR_MANAGEMENT",
           "displayName": "Vendor Management",
           "subGroupCode": null,
@@ -4440,6 +4490,188 @@
       "moduleCode": "HUMAN_RESOURCES",
       "displayName": "Human Resources",
       "screens": [
+        {
+          "screenCode": "NEW_STAFF",
+          "displayName": "New Staff",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_STAFF.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_STAFF.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_STAFF.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_STAFF.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_STAFF.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_STAFF.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_STAFF",
+          "displayName": "View Staff",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.VIEW_STAFF.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.VIEW_STAFF.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.VIEW_STAFF.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.VIEW_STAFF.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.VIEW_STAFF.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "SEARCH_STAFF",
+          "displayName": "Search Staff",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.SEARCH_STAFF.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            }
+          ]
+        },
+        {
+          "screenCode": "STAFF_ACCOUNT_DETAIL",
+          "displayName": "Staff Account Detail",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_ACCOUNT_DETAIL.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_ACCOUNT_DETAIL.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_ACCOUNT_DETAIL.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_ACCOUNT_DETAIL.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.STAFF_ACCOUNT_DETAIL.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "NEW_SALARY_SHEET",
+          "displayName": "New Salary Sheet",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_SALARY_SHEET.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_SALARY_SHEET.ADD",
+              "actionCode": "ADD",
+              "displayName": "Add"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_SALARY_SHEET.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_SALARY_SHEET.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_SALARY_SHEET.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.NEW_SALARY_SHEET.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
+        {
+          "screenCode": "VIEW_SALARY_SHEET",
+          "displayName": "View Salary Sheet",
+          "subGroupCode": null,
+          "actions": [
+            {
+              "permissionCode": "HUMAN_RESOURCES.VIEW_SALARY_SHEET.VIEW",
+              "actionCode": "VIEW",
+              "displayName": "View"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.VIEW_SALARY_SHEET.EDIT",
+              "actionCode": "EDIT",
+              "displayName": "Edit"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.VIEW_SALARY_SHEET.DELETE",
+              "actionCode": "DELETE",
+              "displayName": "Delete"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.VIEW_SALARY_SHEET.PRINT",
+              "actionCode": "PRINT",
+              "displayName": "Print"
+            },
+            {
+              "permissionCode": "HUMAN_RESOURCES.VIEW_SALARY_SHEET.EXPORT",
+              "actionCode": "EXPORT",
+              "displayName": "Export"
+            }
+          ]
+        },
         {
           "screenCode": "STAFF_PROFILES",
           "displayName": "Staff Profiles",
@@ -5188,7 +5420,7 @@
             {
               "permissionCode": "USER_PASSWORD_RESET",
               "actionCode": "USER_PASSWORD_RESET",
-              "displayName": "Reset another user's password (temporary password, forced change at next login)"
+              "displayName": "Reset another user\u0027s password (temporary password, forced change at next login)"
             },
             {
               "permissionCode": "USER_BLOCK",

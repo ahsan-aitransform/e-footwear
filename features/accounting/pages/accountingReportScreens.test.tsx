@@ -39,7 +39,7 @@ function trialBalance(overrides: Partial<TrialBalanceResponse> = {}): TrialBalan
     rows: [
       { rowKindCode: "GROUP", groupCode: "101", groupTitle: "Cash", accountId: null, accountCode: null, accountTitle: null, mainTypeCode: "ASSET", totalDebitAmount: 25_000, totalCreditAmount: 60_000, balanceDebitAmount: 0, balanceCreditAmount: 35_000 },
       { rowKindCode: "ACCOUNT", groupCode: "101", groupTitle: "Cash", accountId: "a1", accountCode: "CASH-S1", accountTitle: "Cash in hand", mainTypeCode: "ASSET", totalDebitAmount: 25_000, totalCreditAmount: 60_000, balanceDebitAmount: 0, balanceCreditAmount: 35_000 },
-      { rowKindCode: "GROUP", groupCode: "103", groupTitle: "Party control", accountId: null, accountCode: null, accountTitle: null, mainTypeCode: "ASSET", totalDebitAmount: 60_000, totalCreditAmount: 25_000, balanceDebitAmount: 35_000, balanceCreditAmount: 0 },
+      { rowKindCode: "GROUP", groupCode: "103", groupTitle: "Subledger control", accountId: null, accountCode: null, accountTitle: null, mainTypeCode: "ASSET", totalDebitAmount: 60_000, totalCreditAmount: 25_000, balanceDebitAmount: 35_000, balanceCreditAmount: 0 },
     ],
     totalDebitAmount: 85_000,
     totalCreditAmount: 85_000,

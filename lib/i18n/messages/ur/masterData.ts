@@ -1,6 +1,6 @@
 import type { masterDataEnglishMessages } from "../en/masterData";
 
-// Master data and chart of accounts screens (module: masterdata-parties). Keys: masterData.* and accounting.*. Urdu wording is a draft for review.
+// Master data and chart of accounts screens (module: master-data). Keys: masterData.* and accounting.*. Urdu wording is a draft for review.
 export const masterDataUrduMessages: Record<keyof typeof masterDataEnglishMessages, string> = {
   "masterData.action.cancelEdit": "منسوخ کریں",
   "masterData.action.delete": "حذف کریں",
@@ -38,7 +38,7 @@ export const masterDataUrduMessages: Record<keyof typeof masterDataEnglishMessag
   "masterData.sizes.title": "سائز گروپ کے سائز",
   "masterData.subtitle.brands": "آپ کی کمپنی کے برانڈ۔",
   "masterData.subtitle.categories": "شعبے کے زمرے؛ ایک زمرہ دوسرے کے نیچے ہو سکتا ہے۔",
-  "masterData.subtitle.citiesAndAreas": "پارٹی کے پتوں میں استعمال ہونے والے شہر اور علاقے۔",
+  "masterData.subtitle.citiesAndAreas": "گاہکوں، سپلائروں اور عملے کے  استعمال ہونے والے شہر اور علاقے۔",
   "masterData.subtitle.colors": "مصنوعات کے رنگ۔",
   "masterData.subtitle.departments": "شعبے، مثلاً مردانہ، زنانہ اور بچے۔",
   "masterData.subtitle.genders": "وہ جنس جس کے لیے مصنوعات بنی ہیں۔",
@@ -76,7 +76,7 @@ export const masterDataUrduMessages: Record<keyof typeof masterDataEnglishMessag
   "accounting.openingBalance.entryDate": "ابتدائی تاریخ",
   "accounting.openingBalance.saved": "محفوظ: {posted} نئے، {unchanged} بغیر تبدیلی، {cleared} صاف۔",
   "accounting.openingBalance.store": "دکان",
-  "accounting.openingBalance.subtitle": "اکاؤنٹس اور پارٹیوں کے ابتدائی بیلنس۔ بدلا ہوا بیلنس الٹ کر دوبارہ چڑھتا ہے؛ کچھ بھی اسی جگہ تبدیل نہیں ہوتا۔",
+  "accounting.openingBalance.subtitle": "اکاؤنٹس، گاہکوں، سپلائروں اور عملے کے ابتدائی بیلنس۔ بدلا ہوا بیلنس الٹ کر دوبارہ چڑھتا ہے؛ کچھ بھی اسی جگہ تبدیل نہیں ہوتا۔",
   "accounting.openingBalance.totals": "کل",
   "accounting.toast.accountSaved": "اکاؤنٹ محفوظ ہو گیا۔",
   "accounting.toast.groupRenamed": "گروپ کا نام بدل گیا۔",

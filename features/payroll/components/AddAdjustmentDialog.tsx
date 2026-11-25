@@ -52,7 +52,7 @@ export function AddAdjustmentDialog({
     setErrors(found);
     if (hasAdjustmentFormErrors(found) || values.amount === null || !isPayrollAdjustmentTypeCode(values.adjustmentTypeCode)) return;
     const body: CreatePayrollAdjustmentRequest = {
-      employeePartyId: line.employeePartyId,
+      staffId: line.staffId,
       month: salaryMonthIsoDate,
       adjustmentTypeCode: values.adjustmentTypeCode,
       amount: values.amount,

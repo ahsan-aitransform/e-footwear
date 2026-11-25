@@ -21,7 +21,7 @@ import { useTranslation } from "@/lib/i18n/useTranslation";
 import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import { usePermissions } from "@/lib/permissions/usePermissions";
 import { showToast } from "@/lib/toast/toastStore";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import { useAccessibleStores } from "@/features/accounting/hooks/useAccessibleStores";
 import { todayAsIsoDate } from "@/features/accounting/logic/reportDates";
 import { ReturnedItemsSection } from "../components/ReturnedItemsSection";
@@ -61,7 +61,7 @@ export function SaleReturnPage() {
   const returnTotal = calculateReturnTotal(invoices, selections, roundingMode);
 
   // The customer of the original invoice gets the credit; a return from invoices of different customers is refused here, before the server is asked.
-  const customerIds = new Set(invoices.map((invoice) => invoice.customerPartyId ?? ""));
+  const customerIds = new Set(invoices.map((invoice) => invoice.customerId ?? ""));
 
   async function save(shouldPrint: boolean) {
     if (isSaving) return;
@@ -77,7 +77,7 @@ export function SaleReturnPage() {
       storeId,
       returnDate,
       clientTransactionId,
-      customerPartyId: invoices[0]?.customerPartyId ?? null,
+      customerId: invoices[0]?.customerId ?? null,
       description: description.trim() || null,
       lines: toReturnedLineRequests(invoices, selections),
     };

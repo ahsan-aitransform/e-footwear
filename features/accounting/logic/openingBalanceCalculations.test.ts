@@ -7,14 +7,14 @@ import {
 } from "./openingBalanceCalculations";
 
 const loadedRows = [
-  { accountId: "a1", partyId: null, code: "101", name: "Cash", areaName: null, debitAmount: 5_000, creditAmount: 0, entryDate: "2026-01-01" },
-  { accountId: null, partyId: "p1", code: "10300001", name: "Ali", areaName: "Multan", debitAmount: 0, creditAmount: 2_000, entryDate: null },
+  { accountId: "a1", customerId: null, vendorId: null, staffId: null, code: "101", name: "Cash", areaName: null, debitAmount: 5_000, creditAmount: 0, entryDate: "2026-01-01" },
+  { accountId: null, customerId: "p1", vendorId: null, staffId: null, code: "10300001", name: "Ali", areaName: "Multan", debitAmount: 0, creditAmount: 2_000, entryDate: null },
 ];
 
 describe("opening balance calculations", () => {
-  it("turns loaded zero amounts into empty fields and keys party and account rows apart", () => {
+  it("turns loaded zero amounts into empty fields and keys customer and account rows apart", () => {
     const rows = toEditableRows(loadedRows);
-    expect(rows.map((row) => row.rowKey)).toEqual(["account-a1", "party-p1"]);
+    expect(rows.map((row) => row.rowKey)).toEqual(["account-a1", "customer-p1"]);
     expect(rows[0].creditAmount).toBeNull();
     expect(rows[1].debitAmount).toBeNull();
   });
@@ -37,8 +37,8 @@ describe("opening balance calculations", () => {
     const rows = toEditableRows(loadedRows);
     rows[0] = setRowAmount(rows[0], "debit", null);
     expect(toSaveLines(rows)).toEqual([
-      { accountId: "a1", partyId: null, debitAmount: 0, creditAmount: 0 },
-      { accountId: null, partyId: "p1", debitAmount: 0, creditAmount: 2_000 },
+      { accountId: "a1", customerId: null, vendorId: null, staffId: null, debitAmount: 0, creditAmount: 0 },
+      { accountId: null, customerId: "p1", vendorId: null, staffId: null, debitAmount: 0, creditAmount: 2_000 },
     ]);
   });
 });

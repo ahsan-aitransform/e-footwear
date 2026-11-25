@@ -43,7 +43,7 @@ export function SaleActionBar({
 }) {
   const { translateMessage } = useTranslation();
   const { hasPermission } = usePermissions();
-  const maySeePromises = hasPermission(PermissionCodes.PARTY.PROMISE.ADD) || hasPermission(PermissionCodes.PARTY.PROMISE.VIEW);
+  const maySeePromises = hasPermission(PermissionCodes.CUSTOMERS.PROMISE.ADD) || hasPermission(PermissionCodes.CUSTOMERS.PROMISE.VIEW);
 
   return (
     <div className="space-y-4 print:hidden" data-testid="sale-action-bar">

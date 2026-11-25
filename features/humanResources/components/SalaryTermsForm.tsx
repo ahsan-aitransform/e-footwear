@@ -44,7 +44,7 @@ export function SalaryTermsForm({
     if (hasFormErrors(found) || values.baseSalary === null || !isPayFrequencyCode(values.payFrequencyCode)) return;
     const body: UpdateStaffSalaryTermsRequest = { baseSalary: values.baseSalary, payFrequencyCode: values.payFrequencyCode, rowVersion: detail.rowVersion };
     setIsSaving(true);
-    const result = await apiRequest<void>(ApiEndpoints.staff.salaryTerms(detail.profile.partyId), { method: "PUT", body });
+    const result = await apiRequest<void>(ApiEndpoints.staff.salaryTerms(detail.profile.staffId), { method: "PUT", body });
     setIsSaving(false);
     if (!result.ok) {
       if (result.kind === "conflict") {

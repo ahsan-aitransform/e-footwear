@@ -16,10 +16,10 @@ const store = { id: TEST_STORE_ID, code: "MAIN", name: "Main Store", isHeadOffic
 const RUN_ID = "0197c3a0-aaaa-7000-8000-000000000001";
 
 const permissions = {
-  view: PermissionCodes.PARTY.NEW_SALARY_SHEET.VIEW,
-  add: PermissionCodes.PARTY.NEW_SALARY_SHEET.ADD,
-  edit: PermissionCodes.PARTY.NEW_SALARY_SHEET.EDIT,
-  viewSheet: PermissionCodes.PARTY.VIEW_SALARY_SHEET.VIEW,
+  view: PermissionCodes.HUMAN_RESOURCES.NEW_SALARY_SHEET.VIEW,
+  add: PermissionCodes.HUMAN_RESOURCES.NEW_SALARY_SHEET.ADD,
+  edit: PermissionCodes.HUMAN_RESOURCES.NEW_SALARY_SHEET.EDIT,
+  viewSheet: PermissionCodes.HUMAN_RESOURCES.VIEW_SALARY_SHEET.VIEW,
   prepare: PermissionCodes.RESTRICTED_OPERATIONS.EXPENSES_AND_PAYROLL.PAYROLL_PREPARE,
   approve: PermissionCodes.HUMAN_RESOURCES.PAYROLL_RUNS.APPROVE,
   approveLegacy: PermissionCodes.RESTRICTED_OPERATIONS.EXPENSES_AND_PAYROLL.PAYROLL_APPROVE,
@@ -34,7 +34,7 @@ function sessionWith(grantedPermissionCodes: string[], hasAccessToAllStores = tr
 function line(overrides: Partial<PayrollSheetLineResponse> = {}): PayrollSheetLineResponse {
   return {
     lineId: "0197c3a0-bbbb-7000-8000-000000000001",
-    employeePartyId: "0197c3a0-cccc-7000-8000-000000000001",
+    staffId: "0197c3a0-cccc-7000-8000-000000000001",
     employeeCode: "10300001",
     employeeName: "Imran",
     designation: "Manager",
@@ -78,7 +78,7 @@ function sheetOf(lines: PayrollSheetLineResponse[], overrides: Partial<PayrollSh
 }
 
 const draftSheet = () =>
-  sheetOf([line(), line({ lineId: "0197c3a0-bbbb-7000-8000-000000000002", employeePartyId: "0197c3a0-cccc-7000-8000-000000000002", employeeCode: "10300002", employeeName: "Zaman", designation: "Salesman", baseSalary: 30_000, incentiveAmount: 0, deductionAmount: 0, netPay: 30_000, outstandingAmount: 30_000 })]);
+  sheetOf([line(), line({ lineId: "0197c3a0-bbbb-7000-8000-000000000002", staffId: "0197c3a0-cccc-7000-8000-000000000002", employeeCode: "10300002", employeeName: "Zaman", designation: "Salesman", baseSalary: 30_000, incentiveAmount: 0, deductionAmount: 0, netPay: 30_000, outstandingAmount: 30_000 })]);
 
 async function openScreen(session: CurrentSessionResponse, handler: (request: RecordedRequest) => { status?: number; body?: unknown }, screen_: React.ReactElement) {
   await seedVerifiedSession(session, () => installFetchMock((request) => (request.url.endsWith("/auth/me") ? { body: session } : handler(request))));
@@ -201,7 +201,7 @@ describe("New Salary Sheet", () => {
     await user.click(within(dialog).getByRole("button", { name: "Save adjustment" }));
 
     const post = requests.find((request) => request.method === "POST" && request.url.endsWith("/payroll/adjustments"));
-    expect(post?.body).toMatchObject({ employeePartyId: "0197c3a0-cccc-7000-8000-000000000001", adjustmentTypeCode: "INCENTIVE", amount: 1500, reason: null });
+    expect(post?.body).toMatchObject({ staffId: "0197c3a0-cccc-7000-8000-000000000001", adjustmentTypeCode: "INCENTIVE", amount: 1500, reason: null });
     expect((post?.body as { month: string }).month).toMatch(/^\d{4}-\d{2}-01$/);
   });
 });
@@ -219,7 +219,7 @@ describe("View Salary Sheet", () => {
   });
   const paidLine = line({
     lineId: "0197c3a0-bbbb-7000-8000-000000000011",
-    employeePartyId: "0197c3a0-cccc-7000-8000-000000000011",
+    staffId: "0197c3a0-cccc-7000-8000-000000000011",
     employeeName: "Zaman",
     baseSalary: 15_000,
     netPay: 15_000,
@@ -233,7 +233,7 @@ describe("View Salary Sheet", () => {
   const payment: SalaryPaymentResponse = {
     id: "payment-1",
     payrollLineId: paidLine.lineId,
-    employeePartyId: paidLine.employeePartyId,
+    staffId: paidLine.staffId,
     employeeName: "Zaman",
     storeId: TEST_STORE_ID,
     storeName: "Main Store",

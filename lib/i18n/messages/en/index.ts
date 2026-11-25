@@ -12,7 +12,10 @@ import { securityEnglishMessages } from "./security";
 import { settingsEnglishMessages } from "./settings";
 import { securityManagementEnglishMessages } from "./securityManagement";
 import { masterDataEnglishMessages } from "./masterData";
-import { partiesEnglishMessages } from "./parties";
+import { cashEnglishMessages } from "./cash";
+import { customersEnglishMessages } from "./customers";
+import { staffEnglishMessages } from "./staff";
+import { vendorsEnglishMessages } from "./vendors";
 import { accountingEnglishMessages } from "./accounting";
 import { cashManagementEnglishMessages } from "./cashManagement";
 import { catalogueEnglishMessages } from "./catalogue";
@@ -32,7 +35,10 @@ export const englishMessages = {
   ...settingsEnglishMessages,
   ...securityManagementEnglishMessages,
   ...masterDataEnglishMessages,
-  ...partiesEnglishMessages,
+  ...customersEnglishMessages,
+  ...vendorsEnglishMessages,
+  ...staffEnglishMessages,
+  ...cashEnglishMessages,
   ...accountingEnglishMessages,
   ...cashManagementEnglishMessages,
   ...catalogueEnglishMessages,

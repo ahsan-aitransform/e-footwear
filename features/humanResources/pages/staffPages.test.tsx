@@ -20,7 +20,7 @@ const stores = [
 function detail(overrides: Partial<StaffDetailResponse> = {}): StaffDetailResponse {
   return {
     profile: {
-      partyId: STAFF_ID,
+      staffId: STAFF_ID,
       code: "10300003",
       name: "Imran Manager",
       designation: "Manager",
@@ -31,7 +31,7 @@ function detail(overrides: Partial<StaffDetailResponse> = {}): StaffDetailRespon
       payFrequencyCode: "MONTHLY",
       joinedOn: "2026-01-01",
       leftOn: null,
-      partyStatusCode: "ACTIVE",
+      statusCode: "ACTIVE",
     },
     rowVersion: 7,
     salaryTerms: [
@@ -75,7 +75,7 @@ describe("staff page", () => {
         state.detail = detail({ rowVersion: 8, profile: { ...state.detail.profile, baseSalary: 25_000 } });
         return { status: 204 };
       }
-      if (request.method === "POST" && path === `/parties/${STAFF_ID}/staff-transfers`) return { status: 204 };
+      if (request.method === "POST" && path === `/staff-members/${STAFF_ID}/transfers`) return { status: 204 };
       return { status: 404, body: {} };
     };
   }
@@ -84,7 +84,7 @@ describe("staff page", () => {
 
   it("shows the profile and pay terms, and the salary history and store history on their own tabs", async () => {
     const user = userEvent.setup();
-    await openScreen(sessionWith(...editor), server({ detail: detail() }), <StaffDetailPage partyId={STAFF_ID} />);
+    await openScreen(sessionWith(...editor), server({ detail: detail() }), <StaffDetailPage staffId={STAFF_ID} />);
 
     expect(await screen.findByText("Imran Manager (10300003)")).toBeInTheDocument();
     expect(screen.getByText("Manager", { selector: "dd" })).toBeInTheDocument();
@@ -102,7 +102,7 @@ describe("staff page", () => {
 
   it("saves new pay terms with the row version it was shown", async () => {
     const user = userEvent.setup();
-    const requests = await openScreen(sessionWith(...editor), server({ detail: detail() }), <StaffDetailPage partyId={STAFF_ID} />);
+    const requests = await openScreen(sessionWith(...editor), server({ detail: detail() }), <StaffDetailPage staffId={STAFF_ID} />);
     const basicPay = await screen.findByLabelText(/Basic pay \(Rs\)/);
 
     await user.clear(basicPay);
@@ -115,7 +115,7 @@ describe("staff page", () => {
 
   it("refuses a negative or empty basic pay before sending anything", async () => {
     const user = userEvent.setup();
-    const requests = await openScreen(sessionWith(...editor), server({ detail: detail() }), <StaffDetailPage partyId={STAFF_ID} />);
+    const requests = await openScreen(sessionWith(...editor), server({ detail: detail() }), <StaffDetailPage staffId={STAFF_ID} />);
     const basicPay = await screen.findByLabelText(/Basic pay \(Rs\)/);
 
     await user.clear(basicPay);
@@ -127,7 +127,7 @@ describe("staff page", () => {
 
   it("says so when somebody else changed the person in the meantime", async () => {
     const user = userEvent.setup();
-    await openScreen(sessionWith(...editor), server({ detail: detail(), saveStatus: 409 }), <StaffDetailPage partyId={STAFF_ID} />);
+    await openScreen(sessionWith(...editor), server({ detail: detail(), saveStatus: 409 }), <StaffDetailPage staffId={STAFF_ID} />);
     const basicPay = await screen.findByLabelText(/Basic pay \(Rs\)/);
 
     await user.clear(basicPay);
@@ -138,7 +138,7 @@ describe("staff page", () => {
   });
 
   it("shows the pay terms read-only to a person who may not edit them", async () => {
-    await openScreen(sessionWith(PermissionCodes.HUMAN_RESOURCES.STAFF_PROFILES.VIEW), server({ detail: detail() }), <StaffDetailPage partyId={STAFF_ID} />);
+    await openScreen(sessionWith(PermissionCodes.HUMAN_RESOURCES.STAFF_PROFILES.VIEW), server({ detail: detail() }), <StaffDetailPage staffId={STAFF_ID} />);
 
     expect(await screen.findByLabelText(/Basic pay \(Rs\)/)).toBeDisabled();
     expect(screen.queryByRole("button", { name: "Save pay terms" })).not.toBeInTheDocument();
@@ -149,7 +149,7 @@ describe("staff page", () => {
     const requests = await openScreen(
       sessionWith(PermissionCodes.HUMAN_RESOURCES.STAFF_PROFILES.VIEW, PermissionCodes.HUMAN_RESOURCES.STAFF_TRANSFERS.ADD),
       server({ detail: detail() }),
-      <StaffDetailPage partyId={STAFF_ID} />,
+      <StaffDetailPage staffId={STAFF_ID} />,
     );
     await screen.findByText("Imran Manager (10300003)");
     await user.click(screen.getByRole("tab", { name: "Store history" }));
@@ -165,14 +165,14 @@ describe("staff page", () => {
     await user.click(within(dialog).getByRole("button", { name: "Transfer" }));
 
     const post = requests.find((request) => request.method === "POST");
-    expect(post?.url).toContain(`/parties/${STAFF_ID}/staff-transfers`);
+    expect(post?.url).toContain(`/staff-members/${STAFF_ID}/transfers`);
     expect(post?.body).toMatchObject({ toStoreId: SECOND_STORE_ID });
     expect((post?.body as { effectiveOn: string }).effectiveOn).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 
   it("does not offer a transfer without the Add permission", async () => {
     const user = userEvent.setup();
-    await openScreen(sessionWith(PermissionCodes.HUMAN_RESOURCES.STAFF_PROFILES.VIEW), server({ detail: detail() }), <StaffDetailPage partyId={STAFF_ID} />);
+    await openScreen(sessionWith(PermissionCodes.HUMAN_RESOURCES.STAFF_PROFILES.VIEW), server({ detail: detail() }), <StaffDetailPage staffId={STAFF_ID} />);
     await screen.findByText("Imran Manager (10300003)");
 
     await user.click(screen.getByRole("tab", { name: "Store history" }));
@@ -181,7 +181,7 @@ describe("staff page", () => {
   });
 
   it("shows a not-found notice and sends no request for an id that is not a UUID", async () => {
-    const requests = await openScreen(sessionWith(...editor), server({ detail: detail() }), <StaffDetailPage partyId="not-a-uuid" />);
+    const requests = await openScreen(sessionWith(...editor), server({ detail: detail() }), <StaffDetailPage staffId="not-a-uuid" />);
 
     expect(await screen.findByText(/This staff member was not found/)).toBeInTheDocument();
     expect(requests.some((request) => request.url.includes("/staff/"))).toBe(false);

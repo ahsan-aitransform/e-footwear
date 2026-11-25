@@ -44,7 +44,7 @@ export const navigationIconByName: Record<NavigationIconName, LucideIcon> = {
   sessions: KeyRound,
   masterList: ListChecks,
   chartOfAccounts: Scale,
-  party: Contact,
+  contact: Contact,
   cash: Banknote,
   product: Package,
   barcode: ScanBarcode,

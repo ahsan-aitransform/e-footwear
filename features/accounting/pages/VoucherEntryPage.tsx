@@ -31,7 +31,7 @@ import { requireAnyPermission } from "@/lib/permissions/permissionChecks";
 import { usePermissions } from "@/lib/permissions/usePermissions";
 import { showToast } from "@/lib/toast/toastStore";
 import type { PaginatedResponse } from "@/lib/types/pagination";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import { VoucherDetailCard } from "../components/VoucherDetailCard";
 import { VoucherTargetPicker } from "../components/VoucherTargetPicker";
 import { useAccessibleStores } from "../hooks/useAccessibleStores";

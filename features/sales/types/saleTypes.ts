@@ -42,8 +42,8 @@ export type CreateSaleInvoiceRequest = {
   storeId: string;
   saleDate: string;
   clientTransactionId: string;
-  customerPartyId: string | null;
-  salesmanPartyId: string | null;
+  customerId: string | null;
+  salesmanStaffId: string | null;
   walkInCustomerName: string | null;
   walkInCustomerMobile: string | null;
   posTerminalDeviceId: string | null;
@@ -64,7 +64,7 @@ export type CreateSaleReturnRequest = {
   storeId: string;
   returnDate: string;
   clientTransactionId: string;
-  customerPartyId: string | null;
+  customerId: string | null;
   description: string | null;
   lines: ReturnedLineRequest[];
 };
@@ -73,8 +73,8 @@ export type CreateExchangeRequest = {
   storeId: string;
   exchangeDate: string;
   clientTransactionId: string;
-  customerPartyId: string | null;
-  salesmanPartyId: string | null;
+  customerId: string | null;
+  salesmanStaffId: string | null;
   walkInCustomerName: string | null;
   walkInCustomerMobile: string | null;
   posTerminalDeviceId: string | null;
@@ -131,11 +131,11 @@ export type SaleInvoiceResponse = {
   dailyBillNumber: number | null;
   saleDate: string;
   occurredAt: string;
-  customerPartyId: string | null;
+  customerId: string | null;
   customerName: string | null;
   walkInCustomerName: string | null;
   walkInCustomerMobile: string | null;
-  salesmanPartyId: string | null;
+  salesmanStaffId: string | null;
   salesmanName: string | null;
   posTerminalLabel: string | null;
   description: string | null;
@@ -228,22 +228,21 @@ export type ReturnableInvoiceResponse = {
   invoiceNumber: number;
   storeId: string;
   saleDate: string;
-  customerPartyId: string | null;
+  customerId: string | null;
   customerName: string | null;
   walkInCustomerName: string | null;
   lines: ReturnableSaleLineResponse[];
 };
 
 export type SaleCustomerLookupResponse = {
-  partyId: string;
+  customerId: string;
   code: string;
   name: string;
   phoneNumber: string | null;
   balanceAmount: number;
-  creditLimitAmount: number | null;
 };
 
-export type SaleSalesmanLookupResponse = { partyId: string; code: string; name: string; isManager: boolean };
+export type SaleSalesmanLookupResponse = { staffId: string; code: string; name: string; isManager: boolean };
 export type SalePaymentAccountResponse = { accountId: string; code: string; title: string; kindCode: "CASH" | "BANK"; storeId: string };
 export type SalePosTerminalResponse = { deviceId: string; label: string };
 export type SalePaymentMethodResponse = { code: SalePaymentMethodCode; displayNameEnglish: string; displayNameUrdu: string | null };

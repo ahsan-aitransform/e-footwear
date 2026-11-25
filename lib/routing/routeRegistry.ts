@@ -15,7 +15,10 @@ import type { MessageKey } from "@/lib/i18n/messageKeys";
 import type { PermissionRequirement } from "@/lib/types/permissions";
 import { NavigationGroupCodes, type NavigationGroupCode } from "./navigationGroups";
 import { masterDataRouteDefinitions } from "@/features/masterData/masterDataRouteDefinitions";
-import { partyRouteDefinitions } from "@/features/parties/partyRouteDefinitions";
+import { cashRouteDefinitions } from "@/features/cashManagement/cashRouteDefinitions";
+import { customerRouteDefinitions } from "@/features/customers/customerRouteDefinitions";
+import { staffRouteDefinitions } from "@/features/staff/staffRouteDefinitions";
+import { vendorRouteDefinitions } from "@/features/vendors/vendorRouteDefinitions";
 import { humanResourcesRouteDefinitions } from "@/features/humanResources/humanResourcesRouteDefinitions";
 import { payrollRouteDefinitions } from "@/features/payroll/payrollRouteDefinitions";
 import { catalogueRouteDefinitions } from "@/features/catalogue/catalogueRouteDefinitions";
@@ -36,7 +39,7 @@ export type NavigationIconName =
   | "sessions"
   | "masterList"
   | "chartOfAccounts"
-  | "party"
+  | "contact"
   | "cash"
   | "product"
   | "barcode"
@@ -378,7 +381,10 @@ export const applicationRouteRegistry: readonly ApplicationRouteDefinition[] = [
     },
   },
   ...masterDataRouteDefinitions,
-  ...partyRouteDefinitions,
+  ...customerRouteDefinitions,
+  ...vendorRouteDefinitions,
+  ...staffRouteDefinitions,
+  ...cashRouteDefinitions,
   ...catalogueRouteDefinitions,
   ...(
     [

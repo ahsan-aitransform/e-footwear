@@ -13,7 +13,10 @@ import { securityUrduMessages } from "./security";
 import { settingsUrduMessages } from "./settings";
 import { securityManagementUrduMessages } from "./securityManagement";
 import { masterDataUrduMessages } from "./masterData";
-import { partiesUrduMessages } from "./parties";
+import { cashUrduMessages } from "./cash";
+import { customersUrduMessages } from "./customers";
+import { staffUrduMessages } from "./staff";
+import { vendorsUrduMessages } from "./vendors";
 import { accountingUrduMessages } from "./accounting";
 import { cashManagementUrduMessages } from "./cashManagement";
 import { catalogueUrduMessages } from "./catalogue";
@@ -33,7 +36,10 @@ export const urduMessages: Record<keyof typeof englishMessages, string> = {
   ...settingsUrduMessages,
   ...securityManagementUrduMessages,
   ...masterDataUrduMessages,
-  ...partiesUrduMessages,
+  ...customersUrduMessages,
+  ...vendorsUrduMessages,
+  ...staffUrduMessages,
+  ...cashUrduMessages,
   ...accountingUrduMessages,
   ...cashManagementUrduMessages,
   ...catalogueUrduMessages,

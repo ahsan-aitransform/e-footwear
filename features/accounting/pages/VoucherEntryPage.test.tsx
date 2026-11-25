@@ -15,9 +15,11 @@ const vendorId = "0197c3a0-aaaa-7000-8000-000000000001";
 const cashAccountId = "0197c3a0-bbbb-7000-8000-000000000002";
 
 const vendorOption: VoucherTargetOptionResponse = {
-  kindCode: "PARTY",
+  kindCode: "VENDOR",
   accountId: null,
-  partyId: vendorId,
+  customerId: null,
+  vendorId,
+  staffId: null,
   code: "10300001",
   title: "Zubair Umair Shoes",
   typeTitle: "Vendor",
@@ -27,7 +29,9 @@ const vendorOption: VoucherTargetOptionResponse = {
 const cashOption: VoucherTargetOptionResponse = {
   kindCode: "ACCOUNT",
   accountId: cashAccountId,
-  partyId: null,
+  customerId: null,
+  vendorId: null,
+  staffId: null,
   code: "CASH-S1",
   title: "Cash in hand",
   typeTitle: "Cash",
@@ -42,8 +46,10 @@ const savedVoucher: VoucherResponse = {
   voucherNumber: 7,
   voucherDate: "2026-11-20",
   amount: 60_000,
-  partyId: vendorId,
-  partyName: "Zubair Umair Shoes",
+  customerId: null,
+  vendorId,
+  staffId: null,
+  contactName: "Zubair Umair Shoes",
   paymentMode: "CASH",
   referenceNumber: null,
   description: null,
@@ -53,8 +59,8 @@ const savedVoucher: VoucherResponse = {
   createdAt: "2026-11-20T10:00:00Z",
   rowVersion: 1,
   lines: [
-    { accountCode: "1030", accountTitle: "Party control", partyId: vendorId, partyName: "Zubair Umair Shoes", debitAmount: 60_000, creditAmount: 0, description: null },
-    { accountCode: "CASH-S1", accountTitle: "Cash in hand", partyId: null, partyName: null, debitAmount: 0, creditAmount: 60_000, description: null },
+    { accountCode: "1030", accountTitle: "Subledger control", customerId: null, vendorId, staffId: null, contactName: "Zubair Umair Shoes", debitAmount: 60_000, creditAmount: 0, description: null },
+    { accountCode: "CASH-S1", accountTitle: "Cash in hand", customerId: null, vendorId: null, staffId: null, contactName: null, debitAmount: 0, creditAmount: 60_000, description: null },
   ],
   allocations: [],
 };
@@ -71,7 +77,7 @@ function buildServer(postAnswer: (request: RecordedRequest) => { status: number;
     if (path.startsWith("/vouchers/payment/entry-context")) {
       return { body: { voucherTypeCode: "PAYMENT", storeId: TEST_STORE_ID, nextVoucherNumber: 7 } };
     }
-    if (path.startsWith("/vouchers/payment/targets")) return { body: path.includes("kindCode=PARTY") ? [vendorOption] : [cashOption] };
+    if (path.startsWith("/vouchers/payment/targets")) return { body: path.includes("kindCode=VENDOR") ? [vendorOption] : [cashOption] };
     if (path === "/vouchers/payment" && request.method === "POST") return postAnswer(request);
     return { status: 404, body: {} };
   };
@@ -121,13 +127,13 @@ describe("payment voucher entry screen", () => {
 
     await user.click(screen.getByRole("button", { name: "Save" }));
 
-    expect(await screen.findByText("Choose the account or party in the To box.")).toBeInTheDocument();
-    expect(screen.getByText("Choose the account or party in the From box.")).toBeInTheDocument();
+    expect(await screen.findByText("Choose the account, customer, vendor or staff member in the To box.")).toBeInTheDocument();
+    expect(screen.getByText("Choose the account, customer, vendor or staff member in the From box.")).toBeInTheDocument();
     expect(screen.getByText("Enter an amount of one rupee or more.")).toBeInTheDocument();
     expect(requests.some((request) => request.method === "POST")).toBe(false);
   });
 
-  it("posts a party by party id, an account by account id and whole rupees, then shows the saved voucher", async () => {
+  it("posts a vendor by vendor id, an account by account id and whole rupees, then shows the saved voucher", async () => {
     const user = userEvent.setup();
     const requests = await openPaymentVoucher(buildServer());
     await fillValidPayment(user);
@@ -141,8 +147,8 @@ describe("payment voucher entry screen", () => {
     });
     expect(post.body).toMatchObject({
       storeId: TEST_STORE_ID,
-      debitTarget: { accountId: null, partyId: vendorId },
-      creditTarget: { accountId: cashAccountId, partyId: null },
+      debitTarget: { accountId: null, customerId: null, vendorId, staffId: null },
+      creditTarget: { accountId: cashAccountId, customerId: null, vendorId: null, staffId: null },
       amount: 60_000,
       paymentMode: "CASH",
     });

@@ -35,7 +35,7 @@ export function VoucherDetailCard({ voucher }: { voucher: VoucherResponse }) {
             label={translateMessage("accounting.view.detail.status")}
             value={translateMessage(voucher.statusCode === VoucherStatusCodes.void ? "accounting.common.statusVoid" : "accounting.common.statusPosted")}
           />
-          {voucher.partyName && <DetailRow label={translateMessage("accounting.view.detail.party")} value={voucher.partyName} />}
+          {voucher.contactName && <DetailRow label={translateMessage("accounting.view.detail.contact")} value={voucher.contactName} />}
           {voucher.referenceNumber && <DetailRow label={translateMessage("accounting.view.detail.reference")} value={voucher.referenceNumber} />}
           {voucher.paymentMode && (
             <DetailRow label={translateMessage("accounting.view.detail.paymentMode")} value={translateMessage(paymentModeMessageKeys[voucher.paymentMode])} />
@@ -58,7 +58,7 @@ export function VoucherDetailCard({ voucher }: { voucher: VoucherResponse }) {
               {voucher.lines.map((line, index) => (
                 <TableRow key={`${line.accountCode}-${index}`}>
                   <TableCell dir="ltr">{line.accountCode}</TableCell>
-                  <TableCell>{line.partyName ? `${line.partyName} (${line.accountTitle})` : line.accountTitle}</TableCell>
+                  <TableCell>{line.contactName ? `${line.contactName} (${line.accountTitle})` : line.accountTitle}</TableCell>
                   <TableCell className="text-end">{formatColumnAmount(line.debitAmount)}</TableCell>
                   <TableCell className="text-end">{formatColumnAmount(line.creditAmount)}</TableCell>
                   <TableCell>{line.description ?? ""}</TableCell>

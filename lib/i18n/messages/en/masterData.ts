@@ -1,4 +1,4 @@
-// Master data and chart of accounts screens (module: masterdata-parties). Keys: masterData.* and accounting.*.
+// Master data and chart of accounts screens (module: master-data). Keys: masterData.* and accounting.*.
 export const masterDataEnglishMessages = {
   "masterData.action.cancelEdit": "Cancel",
   "masterData.action.delete": "Delete",
@@ -36,7 +36,7 @@ export const masterDataEnglishMessages = {
   "masterData.sizes.title": "Sizes of a size group",
   "masterData.subtitle.brands": "The brands your company sells.",
   "masterData.subtitle.categories": "Categories of a department; a category can sit under another one.",
-  "masterData.subtitle.citiesAndAreas": "Cities and areas used on party addresses.",
+  "masterData.subtitle.citiesAndAreas": "Cities and areas used by customers, vendors and staff.",
   "masterData.subtitle.colors": "Colours of products.",
   "masterData.subtitle.departments": "Departments such as Gents, Ladies and Kids.",
   "masterData.subtitle.genders": "Genders a product is made for.",
@@ -74,7 +74,7 @@ export const masterDataEnglishMessages = {
   "accounting.openingBalance.entryDate": "Opening date",
   "accounting.openingBalance.saved": "Saved: {posted} posted, {unchanged} unchanged, {cleared} cleared.",
   "accounting.openingBalance.store": "Store",
-  "accounting.openingBalance.subtitle": "Opening balances of accounts and parties. A changed balance is reversed and posted again; nothing is edited in place.",
+  "accounting.openingBalance.subtitle": "Opening balances of accounts, customers, vendors and staff. A changed balance is reversed and posted again; nothing is edited in place.",
   "accounting.openingBalance.totals": "Totals",
   "accounting.toast.accountSaved": "Account saved.",
   "accounting.toast.groupRenamed": "Group renamed.",

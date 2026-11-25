@@ -26,7 +26,7 @@ import { useTranslation } from "@/lib/i18n/useTranslation";
 import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import { requireAnyPermission } from "@/lib/permissions/permissionChecks";
 import { showToast } from "@/lib/toast/toastStore";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import { PrintButton } from "../components/PrintControls";
 import { VoucherDetailCard } from "../components/VoucherDetailCard";
 import { useAccessibleStores } from "../hooks/useAccessibleStores";

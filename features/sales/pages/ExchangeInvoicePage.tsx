@@ -68,7 +68,7 @@ export function ExchangeInvoicePage() {
   const returnAmount = calculateReturnTotal(returnedInvoices, selections, workspace.roundingMode);
   const amounts = calculateExchangeAmounts(returnAmount, workspace.totals.netAmount);
   const split = workspace.buildPaymentSplit(amounts.customerPaysAmount);
-  const returnedCustomerId = returnedInvoices[0]?.customerPartyId ?? null;
+  const returnedCustomerId = returnedInvoices[0]?.customerId ?? null;
   const hasEntry = workspace.hasUnsavedEntry || returnedInvoices.length > 0;
 
   function handleItemAdded(added: AddedItem) {
@@ -95,12 +95,12 @@ export function ExchangeInvoicePage() {
     if (isSaving) return;
     setErrorMessages([]);
     setNotSavedMessage(undefined);
-    const customerPartyId = workspace.header.customer?.partyId ?? returnedCustomerId;
+    const customerId = workspace.header.customer?.customerId ?? returnedCustomerId;
     const problems = findReturnProblems(returnedInvoices, selections).map((problem) => translateMessage(problem.messageKey));
     for (const problem of workspace.findProblems(split.outstandingAmount).filter((candidate) => candidate.messageKey !== "sales.problem.creditNeedsCustomer")) {
       problems.push(translateMessage(problem.messageKey as never, problem.params));
     }
-    if ((split.outstandingAmount > 0 || amounts.customerIsOwedAmount > 0) && customerPartyId === null) problems.push(translateMessage("sales.exchange.problem.differenceNeedsCustomer"));
+    if ((split.outstandingAmount > 0 || amounts.customerIsOwedAmount > 0) && customerId === null) problems.push(translateMessage("sales.exchange.problem.differenceNeedsCustomer"));
     if (!split.isChangeCoveredByCash) problems.push(translateMessage("sales.payment.changeNeedsCash"));
     if (problems.length > 0) {
       setErrorMessages(problems);
@@ -111,10 +111,10 @@ export function ExchangeInvoicePage() {
       storeId: workspace.storeId,
       exchangeDate: workspace.header.saleDate,
       clientTransactionId: workspace.clientTransactionId,
-      customerPartyId,
-      salesmanPartyId: workspace.header.salesmanPartyId,
-      walkInCustomerName: customerPartyId ? null : workspace.header.walkInCustomerName.trim() || null,
-      walkInCustomerMobile: customerPartyId ? null : workspace.header.walkInCustomerMobile.trim() || null,
+      customerId,
+      salesmanStaffId: workspace.header.salesmanStaffId,
+      walkInCustomerName: customerId ? null : workspace.header.walkInCustomerName.trim() || null,
+      walkInCustomerMobile: customerId ? null : workspace.header.walkInCustomerMobile.trim() || null,
       posTerminalDeviceId: workspace.header.posTerminalDeviceId,
       description: workspace.header.description.trim() || null,
       returnedLines: toReturnedLineRequests(returnedInvoices, selections),

@@ -71,7 +71,7 @@ export function SalaryOutstandingReportPage() {
                   {data.rows.map((row) => {
                     const rowMonth = salaryMonthFromIsoDate(row.periodMonth);
                     return (
-                      <TableRow key={`${row.periodMonth}-${row.employeePartyId}-${row.storeId}`}>
+                      <TableRow key={`${row.periodMonth}-${row.staffId}-${row.storeId}`}>
                         <TableCell>{rowMonth ? formatSalaryMonth(rowMonth, translateMessage) : row.periodMonth}</TableCell>
                         <TableCell>{row.storeName}</TableCell>
                         <TableCell>{row.employeeName}</TableCell>

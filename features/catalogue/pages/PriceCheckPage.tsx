@@ -14,7 +14,7 @@ import { ToneNames } from "@/lib/design/semanticTones";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 import { formatPercentage, formatQuantity } from "@/lib/money/quantityAndPercentage";
 import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import { useCatalogueLookups } from "../hooks/useCatalogueLookups";
 import type { VariantPriceLookupResponse } from "../types/catalogueTypes";
 

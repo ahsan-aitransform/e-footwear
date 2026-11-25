@@ -15,13 +15,13 @@ export function validateSalaryTermsForm(values: SalaryTermsFormValues): SalaryTe
   return errors;
 }
 
-export type TransferFormValues = { staffPartyId: string; toStoreId: string; effectiveOn: string };
+export type TransferFormValues = { staffId: string; toStoreId: string; effectiveOn: string };
 export type TransferFormErrors = Partial<Record<keyof TransferFormValues, ValidationMessage>>;
 
 // The checks of the Transfer staff dialog. currentStoreId is the store the chosen person works in now (empty when it is not known yet).
 export function validateTransferForm(values: TransferFormValues, currentStoreId: string): TransferFormErrors {
   const errors: TransferFormErrors = {};
-  if (values.staffPartyId === "") errors.staffPartyId = validationMessage("humanResources.transfer.error.staff");
+  if (values.staffId === "") errors.staffId = validationMessage("humanResources.transfer.error.staff");
   if (values.toStoreId === "") errors.toStoreId = validationMessage("humanResources.transfer.error.store");
   else if (currentStoreId !== "" && values.toStoreId === currentStoreId) errors.toStoreId = validationMessage("humanResources.transfer.error.sameStore");
   if (!isValidIsoDate(values.effectiveOn)) errors.effectiveOn = validationMessage("humanResources.transfer.error.date");

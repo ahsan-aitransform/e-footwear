@@ -44,10 +44,10 @@ export function buildCorrectionDraft(invoice: SaleInvoiceResponse, clientTransac
     clientTransactionId,
     header: {
       saleDate: invoice.saleDate,
-      customer: invoice.customerPartyId
-        ? { partyId: invoice.customerPartyId, code: "", name: invoice.customerName ?? "", phoneNumber: null, balanceAmount: 0, creditLimitAmount: null }
+      customer: invoice.customerId
+        ? { customerId: invoice.customerId, code: "", name: invoice.customerName ?? "", phoneNumber: null, balanceAmount: 0 }
         : null,
-      salesmanPartyId: invoice.salesmanPartyId,
+      salesmanStaffId: invoice.salesmanStaffId,
       walkInCustomerName: invoice.walkInCustomerName ?? "",
       walkInCustomerMobile: invoice.walkInCustomerMobile ?? "",
       posTerminalDeviceId: null,

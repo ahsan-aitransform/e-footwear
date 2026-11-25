@@ -15,7 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { PrintButton, PrintedReportHeading } from "@/features/accounting/components/PrintControls";
 import { firstDayOfCurrentMonthAsIsoDate, isIsoDateRangeOrdered, todayAsIsoDate } from "@/features/accounting/logic/reportDates";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import { apiRequest } from "@/lib/api/apiRequest";
 import { ApiEndpoints } from "@/lib/constants/apiEndpoints";
 import { PermissionCodes } from "@/lib/contracts/permissionCodes";

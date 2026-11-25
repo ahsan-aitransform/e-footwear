@@ -5,7 +5,9 @@ import type { OpeningBalanceLineRequest, OpeningBalanceRowResponse } from "../ty
 export type OpeningBalanceEditableRow = {
   rowKey: string;
   accountId: string | null;
-  partyId: string | null;
+  customerId: string | null;
+  vendorId: string | null;
+  staffId: string | null;
   code: string;
   name: string;
   areaName: string | null;
@@ -17,9 +19,11 @@ export type OpeningBalanceTotals = { totalDebitAmount: number; totalCreditAmount
 
 export function toEditableRows(rows: readonly OpeningBalanceRowResponse[]): OpeningBalanceEditableRow[] {
   return rows.map((row) => ({
-    rowKey: row.partyId ? `party-${row.partyId}` : `account-${row.accountId}`,
+    rowKey: row.customerId ? `customer-${row.customerId}` : row.vendorId ? `vendor-${row.vendorId}` : row.staffId ? `staff-${row.staffId}` : `account-${row.accountId}`,
     accountId: row.accountId,
-    partyId: row.partyId,
+    customerId: row.customerId,
+    vendorId: row.vendorId,
+    staffId: row.staffId,
     code: row.code,
     name: row.name,
     areaName: row.areaName,
@@ -51,7 +55,9 @@ export function setRowAmount(
 export function toSaveLines(rows: readonly OpeningBalanceEditableRow[]): OpeningBalanceLineRequest[] {
   return rows.map((row) => ({
     accountId: row.accountId,
-    partyId: row.partyId,
+    customerId: row.customerId,
+    vendorId: row.vendorId,
+    staffId: row.staffId,
     debitAmount: row.debitAmount ?? 0,
     creditAmount: row.creditAmount ?? 0,
   }));

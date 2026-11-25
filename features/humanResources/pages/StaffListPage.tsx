@@ -23,7 +23,7 @@ import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import { requireAnyPermission } from "@/lib/permissions/permissionChecks";
 import type { StaffListItemResponse } from "../types/staffTypes";
 
-// Staff: everyone who works in the stores the person may use, with the store, designation and basic pay. A person is added as a party of type Staff (New Party);
+// Staff: everyone who works in the stores the person may use, with the store, designation and basic pay. A person is added with New Staff.
 // opening a row shows their pay terms, salary history and store history. Former staff (who have a leaving date in the past) are hidden unless asked for.
 export function StaffListPage() {
   const { translateMessage } = useTranslation();
@@ -60,8 +60,8 @@ export function StaffListPage() {
         title={translateMessage("humanResources.staff.title")}
         subtitle={translateMessage("humanResources.staff.subtitle")}
         actions={
-          <PermissionGate requirement={requireAnyPermission(PermissionCodes.PARTY.NEW_PARTY.ADD)}>
-            <Link href={ApplicationRoutes.newParty} className={buttonVariants()}>
+          <PermissionGate requirement={requireAnyPermission(PermissionCodes.HUMAN_RESOURCES.NEW_STAFF.ADD)}>
+            <Link href={ApplicationRoutes.newStaffMember} className={buttonVariants()}>
               <UserPlus />
               {translateMessage("humanResources.staff.addStaff")}
             </Link>
@@ -87,13 +87,13 @@ export function StaffListPage() {
         <ServerPaginatedDataGrid<StaffListItemResponse>
           path={ApiEndpoints.staff.list}
           columns={columns}
-          getRowKey={(staff) => staff.partyId}
+          getRowKey={(staff) => staff.staffId}
           caption={translateMessage("humanResources.staff.title")}
           emptyTitle={translateMessage("humanResources.staff.empty.title")}
           emptyText={translateMessage("humanResources.staff.empty.text")}
           filters={{ storeId: storeId || undefined, includeFormerStaff: includeFormerStaff || undefined }}
           searchPlaceholder={translateMessage("humanResources.staff.searchPlaceholder")}
-          onRowOpen={(staff) => router.push(ApplicationRoutes.staffDetail(staff.partyId))}
+          onRowOpen={(staff) => router.push(ApplicationRoutes.staffDetail(staff.staffId))}
           offlineCacheName="staffList"
         />
       </SectionCard>

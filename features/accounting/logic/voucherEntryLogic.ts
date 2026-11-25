@@ -13,7 +13,7 @@ import {
   type VoucherTypeCode,
 } from "../types/voucherTypes";
 
-// What a person chose in one box of the voucher form ("To" or "From"): the type of thing, and the account or party.
+// What a person chose in one box of the voucher form ("To" or "From"): the type of thing, and the account, customer, vendor or staff member.
 export type VoucherTargetChoice = {
   typeCode: VoucherTargetTypeCode;
   option: VoucherTargetOptionResponse | null;
@@ -77,8 +77,8 @@ export function createEmptyVoucherForm(voucherTypeCode: VoucherTypeCode, storeId
   };
 }
 
-// The same account or party can not be on both sides, and two parties can not be posted against each other (the books keep every
-// party on the party control account, so an account has to sit between them). The server checks the same rules.
+// The same account or contact can not be on both sides, and two customers, vendors or staff members can not be posted against each other (the books keep every
+// one of them on the subledger control account, so an account has to sit between them). The server checks the same rules.
 export function validateVoucherForm(form: VoucherFormState): VoucherFormErrors {
   const errors: VoucherFormErrors = {};
   if (form.storeId === "") errors.storeId = "accounting.voucher.error.storeRequired";
@@ -90,8 +90,8 @@ export function validateVoucherForm(form: VoucherFormState): VoucherFormErrors {
   if (form.debit.option !== null && form.credit.option !== null) {
     if (isSameTarget(form.debit.option, form.credit.option)) {
       errors.credit = "accounting.voucher.error.sameBothSides";
-    } else if (form.debit.option.kindCode === VoucherTargetKindCodes.party && form.credit.option.kindCode === VoucherTargetKindCodes.party) {
-      errors.credit = "accounting.voucher.error.twoParties";
+    } else if (form.debit.option.kindCode !== VoucherTargetKindCodes.account && form.credit.option.kindCode !== VoucherTargetKindCodes.account) {
+      errors.credit = "accounting.voucher.error.twoContacts";
     }
   }
   return errors;
@@ -102,13 +102,17 @@ export function hasVoucherFormErrors(errors: VoucherFormErrors): boolean {
 }
 
 function isSameTarget(first: VoucherTargetOptionResponse, second: VoucherTargetOptionResponse): boolean {
-  return first.kindCode === second.kindCode && first.accountId === second.accountId && first.partyId === second.partyId;
+  return first.kindCode === second.kindCode && first.accountId === second.accountId
+    && first.customerId === second.customerId && first.vendorId === second.vendorId && first.staffId === second.staffId;
 }
 
 export function toVoucherTargetRequest(option: VoucherTargetOptionResponse): VoucherTargetRequest {
-  return option.kindCode === VoucherTargetKindCodes.party
-    ? { accountId: null, partyId: option.partyId }
-    : { accountId: option.accountId, partyId: null };
+  return {
+    accountId: option.kindCode === VoucherTargetKindCodes.account ? option.accountId : null,
+    customerId: option.kindCode === VoucherTargetKindCodes.customer ? option.customerId : null,
+    vendorId: option.kindCode === VoucherTargetKindCodes.vendor ? option.vendorId : null,
+    staffId: option.kindCode === VoucherTargetKindCodes.staff ? option.staffId : null,
+  };
 }
 
 // The request the server receives. The client transaction id belongs to one saving attempt of one voucher: a retry after a
@@ -133,9 +137,7 @@ export function buildPostVoucherRequest(form: VoucherFormState, clientTransactio
   };
 }
 
-// The lookup the dropdown of a box needs: accounts, or one kind of party.
-export function toTargetLookupQuery(typeCode: VoucherTargetTypeCode): { kindCode: string; partyTypeCode?: string } {
-  return typeCode === VoucherTargetTypeCodes.account
-    ? { kindCode: VoucherTargetKindCodes.account }
-    : { kindCode: VoucherTargetKindCodes.party, partyTypeCode: typeCode };
+// The lookup the dropdown of a box needs: accounts, or one kind of contact (the type codes are the kind codes).
+export function toTargetLookupQuery(typeCode: VoucherTargetTypeCode): { kindCode: string } {
+  return { kindCode: typeCode };
 }

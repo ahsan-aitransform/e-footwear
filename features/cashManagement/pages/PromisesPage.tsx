@@ -27,9 +27,9 @@ import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import { usePermissions } from "@/lib/permissions/usePermissions";
 import { showToast } from "@/lib/toast/toastStore";
 import { promiseStatusMessageKey } from "../logic/promiseStatusMessages";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
-import { formatPartyBalance } from "@/features/parties/logic/partyBalanceFormatting";
-import { PartyTypeFilterCodes, type PartyLookupItemResponse } from "@/features/parties/types/partyTypes";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
+import { formatContactBalance } from "@/features/contacts/logic/contactBalanceFormatting";
+import type { ContactLookupItemResponse } from "@/features/contacts/types/contactTypes";
 import {
   PromiseStatusCodes,
   type CreatePromiseRequest,
@@ -54,7 +54,7 @@ export function PromisesPage() {
   const { hasPermission } = usePermissions();
   const storeId = useWorkingStoreId();
   const [customerSearchText, setCustomerSearchText] = useState("");
-  const [customerPartyId, setCustomerPartyId] = useState("");
+  const [customerId, setCustomerId] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [promisedAmount, setPromisedAmount] = useState<number | null>(null);
   const [note, setNote] = useState("");
@@ -63,26 +63,26 @@ export function PromisesPage() {
   const [pageNumber, setPageNumber] = useState(1);
   const [toCancel, setToCancel] = useState<PromiseResponse | null>(null);
 
-  const customers = useApiQuery<PartyLookupItemResponse[]>(ApiEndpoints.parties.lookup, {
-    query: { partyTypeCode: PartyTypeFilterCodes.customer, searchText: customerSearchText || undefined },
+  const customers = useApiQuery<ContactLookupItemResponse[]>(ApiEndpoints.customers.lookup, {
+    query: { searchText: customerSearchText || undefined },
   });
-  const balance = useApiQuery<CustomerBalanceResponse>(customerPartyId ? ApiEndpoints.promises.customerBalance(customerPartyId) : "", {
-    enabled: customerPartyId !== "",
+  const balance = useApiQuery<CustomerBalanceResponse>(customerId ? ApiEndpoints.promises.customerBalance(customerId) : "", {
+    enabled: customerId !== "",
   });
   const promises = useApiQuery<PromiseListResponse>(ApiEndpoints.promises.list, {
     query: { storeId: storeId ?? undefined, pageNumber, pageSize: PROMISE_PAGE_SIZE },
   });
   const create = useApiMutation<CreatePromiseRequest>(ApiEndpoints.promises.list);
   const update = useApiMutation<UpdatePromiseRequest>(ApiEndpoints.promises.list, { method: "PUT" });
-  const mayAdd = hasPermission(PermissionCodes.PARTY.PROMISE.ADD);
-  const mayEdit = hasPermission(PermissionCodes.PARTY.PROMISE.EDIT);
-  const mayCancel = hasPermission(PermissionCodes.PARTY.PROMISE.DELETE);
+  const mayAdd = hasPermission(PermissionCodes.CUSTOMERS.PROMISE.ADD);
+  const mayEdit = hasPermission(PermissionCodes.CUSTOMERS.PROMISE.EDIT);
+  const mayCancel = hasPermission(PermissionCodes.CUSTOMERS.PROMISE.DELETE);
   const isFormVisible = editing ? mayEdit : mayAdd;
-  const words = { receivable: translateMessage("parties.balance.receivable"), payable: translateMessage("parties.balance.payable") };
+  const words = { receivable: translateMessage("customers.balance.receivable"), payable: translateMessage("customers.balance.payable") };
 
   function reset() {
     setEditing(null);
-    setCustomerPartyId("");
+    setCustomerId("");
     setDueDate("");
     setPromisedAmount(null);
     setNote("");
@@ -91,7 +91,7 @@ export function PromisesPage() {
 
   function startEditing(promise: PromiseResponse) {
     setEditing(promise);
-    setCustomerPartyId(promise.customerPartyId);
+    setCustomerId(promise.customerId);
     setDueDate(promise.dueDate);
     setPromisedAmount(promise.promisedAmount);
     setNote(promise.note ?? "");
@@ -102,7 +102,7 @@ export function PromisesPage() {
     event.preventDefault();
     setMessage(undefined);
     if (!editing && storeId === null) return setMessage(translateMessage("cash.noStore"));
-    if (customerPartyId === "") return setMessage(translateMessage("cash.promise.customerRequired"));
+    if (customerId === "") return setMessage(translateMessage("cash.promise.customerRequired"));
     if (!isValidIsoDate(dueDate)) return setMessage(translateMessage("cash.promise.dueDateRequired"));
     if (promisedAmount === null || promisedAmount <= 0) return setMessage(translateMessage("cash.promise.amountRequired"));
     const trimmedNote = note.trim() === "" ? null : note.trim();
@@ -111,7 +111,7 @@ export function PromisesPage() {
           { dueDate, promisedAmount, note: trimmedNote, rowVersion: editing.rowVersion },
           { path: ApiEndpoints.promises.byId(editing.id) },
         )
-      : await create.execute({ storeId: storeId as string, customerPartyId, promiseDate: todayAsIsoDate(), dueDate, promisedAmount, note: trimmedNote });
+      : await create.execute({ storeId: storeId as string, customerId, promiseDate: todayAsIsoDate(), dueDate, promisedAmount, note: trimmedNote });
     if (!result.ok) return setMessage(result.problem.message);
     showToast(translateMessage("cash.promise.saved"), ToneNames.success);
     reset();
@@ -141,26 +141,26 @@ export function PromisesPage() {
           <SectionCard title={translateMessage(editing ? "cash.promise.editTitle" : "cash.promise.newTitle")}>
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>
               {!editing && (
-                <FormField label={translateMessage("parties.ledger.findParty")} name="promiseCustomerSearch">
+                <FormField label={translateMessage("customers.ledger.find")} name="promiseCustomerSearch">
                   {(controlProps) => <Input {...controlProps} type="search" value={customerSearchText} onChange={(event) => setCustomerSearchText(event.target.value)} />}
                 </FormField>
               )}
               <FormField label={translateMessage("cash.promise.customer")} name="promiseCustomer" isRequired>
                 {(controlProps) => (
-                  <NativeSelect {...controlProps} value={customerPartyId} disabled={editing !== null} onChange={(event) => setCustomerPartyId(event.target.value)}>
+                  <NativeSelect {...controlProps} value={customerId} disabled={editing !== null} onChange={(event) => setCustomerId(event.target.value)}>
                     <option value="">{translateMessage("masterData.choose")}</option>
                     {(customers.data ?? []).map((customer) => (
                       <option key={customer.id} value={customer.id}>{customer.code} {customer.name}</option>
                     ))}
-                    {editing && !(customers.data ?? []).some((customer) => customer.id === editing.customerPartyId) && (
-                      <option value={editing.customerPartyId}>{editing.customerName}</option>
+                    {editing && !(customers.data ?? []).some((customer) => customer.id === editing.customerId) && (
+                      <option value={editing.customerId}>{editing.customerName}</option>
                     )}
                   </NativeSelect>
                 )}
               </FormField>
               {balance.data && (
                 <p className="text-sm" data-testid="promise-customer-balance">
-                  {translateMessage("cash.promise.currentBalance")}: {formatPartyBalance(balance.data.balanceAmount, words)}
+                  {translateMessage("cash.promise.currentBalance")}: {formatContactBalance(balance.data.balanceAmount, words)}
                 </p>
               )}
               <DateField label={translateMessage("cash.promise.dueDate")} name="promiseDueDate" value={dueDate} onValueChange={setDueDate} isRequired />
@@ -191,7 +191,7 @@ export function PromisesPage() {
                     <TableHead className="text-end">{translateMessage("cash.promise.amount")}</TableHead>
                     <TableHead className="text-end">{translateMessage("cash.promise.paid")}</TableHead>
                     <TableHead className="text-end">{translateMessage("cash.promise.remaining")}</TableHead>
-                    <TableHead>{translateMessage("parties.field.status")}</TableHead>
+                    <TableHead>{translateMessage("customers.field.status")}</TableHead>
                     <TableHead className="text-end">{translateMessage("masterData.column.actions")}</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -225,7 +225,7 @@ export function PromisesPage() {
                 </TableBody>
                 <TableFooter>
                   <TableRow>
-                    <TableCell colSpan={3}>{translateMessage("parties.ledger.totals")}</TableCell>
+                    <TableCell colSpan={3}>{translateMessage("customers.ledger.totals")}</TableCell>
                     <TableCell className="text-end" data-testid="promise-total-promised">{formatWholeRupees(promises.data.totalPromisedAmount)}</TableCell>
                     <TableCell className="text-end" data-testid="promise-total-paid">{formatWholeRupees(promises.data.totalPaidAmount)}</TableCell>
                     <TableCell className="text-end" data-testid="promise-total-remaining">{formatWholeRupees(promises.data.totalRemainingAmount)}</TableCell>
@@ -236,9 +236,9 @@ export function PromisesPage() {
             )}
             {totalPages > 1 && (
               <div className="flex items-center justify-end gap-2 p-3">
-                <Button type="button" variant="outline" size="sm" disabled={pageNumber <= 1} onClick={() => setPageNumber(pageNumber - 1)}>{translateMessage("parties.ledger.previousPage")}</Button>
+                <Button type="button" variant="outline" size="sm" disabled={pageNumber <= 1} onClick={() => setPageNumber(pageNumber - 1)}>{translateMessage("customers.ledger.previousPage")}</Button>
                 <span className="text-sm">{pageNumber} / {totalPages}</span>
-                <Button type="button" variant="outline" size="sm" disabled={pageNumber >= totalPages} onClick={() => setPageNumber(pageNumber + 1)}>{translateMessage("parties.ledger.nextPage")}</Button>
+                <Button type="button" variant="outline" size="sm" disabled={pageNumber >= totalPages} onClick={() => setPageNumber(pageNumber + 1)}>{translateMessage("customers.ledger.nextPage")}</Button>
               </div>
             )}
           </SectionCard>

@@ -113,7 +113,7 @@ export function AccountBalancePage() {
                 </TableHeader>
                 <TableBody>
                   {report.data.rows.map((row) => (
-                    <TableRow key={row.accountId ?? row.partyId ?? row.code}>
+                    <TableRow key={row.accountId ?? row.customerId ?? row.vendorId ?? row.staffId ?? row.code}>
                       <TableCell dir="ltr">{row.code}</TableCell>
                       <TableCell>{row.title}</TableCell>
                       <TableCell>{row.typeTitle}</TableCell>

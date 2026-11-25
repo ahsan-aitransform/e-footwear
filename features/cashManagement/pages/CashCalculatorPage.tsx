@@ -19,7 +19,7 @@ import { useTranslation } from "@/lib/i18n/useTranslation";
 import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import { usePermissions } from "@/lib/permissions/usePermissions";
 import { showToast } from "@/lib/toast/toastStore";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import {
   calculateCashDifference,
   calculateCountedCash,
@@ -61,7 +61,7 @@ export function CashCalculatorPage() {
     enabled: storeId !== null && isValidIsoDate(countDate),
   });
   const save = useApiMutation<SaveCashCountRequest, { id: string }>(ApiEndpoints.cashCounts.list, { method: "PUT" });
-  const maySave = hasPermission(PermissionCodes.PARTY.CASH_CALCULATOR.ADD);
+  const maySave = hasPermission(PermissionCodes.CASH_MANAGEMENT.CASH_CALCULATOR.ADD);
 
   // A freshly loaded context replaces the typed values (adjusting state while rendering, not in an effect).
   const [shownContext, setShownContext] = useState<CashCountContextResponse | undefined>();

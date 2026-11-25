@@ -12,7 +12,7 @@ export type PromiseResponse = {
   id: string;
   promiseNumber: number | null;
   storeId: string;
-  customerPartyId: string;
+  customerId: string;
   customerName: string;
   promiseDate: string;
   dueDate: string;
@@ -33,7 +33,7 @@ export type PromiseListResponse = {
 
 export type CreatePromiseRequest = {
   storeId: string;
-  customerPartyId: string;
+  customerId: string;
   promiseDate: string;
   dueDate: string;
   promisedAmount: number;
@@ -41,7 +41,7 @@ export type CreatePromiseRequest = {
 };
 
 export type UpdatePromiseRequest = { dueDate: string; promisedAmount: number; note: string | null; rowVersion: number };
-export type CustomerBalanceResponse = { customerPartyId: string; customerName: string; balanceAmount: number };
+export type CustomerBalanceResponse = { customerId: string; customerName: string; balanceAmount: number };
 
 export type CashCountDenominationLine = { denomination: number; noteCount: number };
 

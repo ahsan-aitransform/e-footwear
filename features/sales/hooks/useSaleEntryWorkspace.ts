@@ -5,7 +5,7 @@ import { useApiQuery } from "@/lib/api/hooks/useApiQuery";
 import { createClientTransactionId } from "@/lib/api/sendApiRequest";
 import { RoundingModes, type RoundingMode } from "@/lib/constants/moneyFormat";
 import { useCurrentSession } from "@/lib/session/useSessionState";
-import { useWorkingStoreId } from "@/features/parties/hooks/useWorkingStoreId";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import { useAccessibleStores } from "@/features/accounting/hooks/useAccessibleStores";
 import { todayAsIsoDate } from "@/features/accounting/logic/reportDates";
 import { calculateSaleTotals, splitPaymentsAfterChange, type PaymentEntryRow, type PaymentSplit, type SaleTotals } from "../logic/saleCalculations";
@@ -39,7 +39,7 @@ function createEmptyHeader(): SaleHeaderState {
   return {
     saleDate: todayAsIsoDate(),
     customer: null,
-    salesmanPartyId: null,
+    salesmanStaffId: null,
     walkInCustomerName: "",
     walkInCustomerMobile: "",
     posTerminalDeviceId: null,

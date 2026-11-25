@@ -40,7 +40,7 @@ scripts/                     generatePermissionCodes, generateServiceWorkerShell
 tests/                       setup/, support/ (fetch mock, session fixtures), architecture/ (rules enforced as tests)
 ```
 
-Feature module folder names: `platform security settings masterData parties catalogue inventory sales purchases orders accounting cashManagement
+Feature module folder names: `platform security settings masterData contacts customers vendors staff catalogue inventory sales purchases orders accounting cashManagement
 humanResources payroll commissions expenses promotions reporting offlineSync shopify dashboards`.
 
 ## 2. Naming rules (the user asked for long, self-explanatory names)
