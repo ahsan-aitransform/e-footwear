@@ -98,8 +98,8 @@ describe("DataGridTable sorting", () => {
     expect(onChange).toHaveBeenLastCalledWith(undefined);
   });
 
-  it("does not turn headers into buttons without an onSortChange", () => {
-    renderGrid();
+  it("does not turn headers into buttons when client sorting is switched off and there is no onSortChange", () => {
+    renderGrid({ isClientSortDisabled: true });
     expect(within(screen.getByRole("columnheader", { name: /Name/ })).queryByRole("button")).not.toBeInTheDocument();
   });
 });

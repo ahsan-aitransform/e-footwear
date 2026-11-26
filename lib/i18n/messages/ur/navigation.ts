@@ -128,6 +128,10 @@ export const navigationUrduMessages: Record<keyof typeof navigationEnglishMessag
   "navigation.item.stockTransferSummaryReport": "اسٹاک ٹرانسفر خلاصہ",
   "navigation.item.stockAuditReport": "اسٹاک آڈٹ رپورٹ",
   "navigation.item.claimReport": "کلیم رپورٹ",
+  "navigation.item.commissionPlans": "کمیشن پلانز",
+  "navigation.item.commissionEntries": "کمیشن اندراجات",
+  "navigation.item.commissionReport": "کمیشن رپورٹ",
+  "navigation.item.commissionAccrualAndPaymentReport": "کمیشن جمع اور ادائیگی",
   // <navigation-messages:end> (shared file: add the entries of a new screen above this marker, with Edit only)
   "navigation.mainMenuLabel": "مین مینو",
   "navigation.openMenu": "مینو کھولیں",

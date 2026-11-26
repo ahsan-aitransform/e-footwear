@@ -128,6 +128,10 @@ export const navigationEnglishMessages = {
   "navigation.item.stockTransferSummaryReport": "Stock Transfer Summary",
   "navigation.item.stockAuditReport": "Stock Audit Report",
   "navigation.item.claimReport": "Claim Report",
+  "navigation.item.commissionPlans": "Commission Plans",
+  "navigation.item.commissionEntries": "Commission Entries",
+  "navigation.item.commissionReport": "Commission Report",
+  "navigation.item.commissionAccrualAndPaymentReport": "Commission Accrual and Payment",
   // <navigation-messages:end> (shared file: add the entries of a new screen above this marker, with Edit only)
   "navigation.mainMenuLabel": "Main menu",
   "navigation.openMenu": "Open menu",

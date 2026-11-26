@@ -20,6 +20,7 @@ import { customerRouteDefinitions } from "@/features/customers/customerRouteDefi
 import { staffRouteDefinitions } from "@/features/staff/staffRouteDefinitions";
 import { vendorRouteDefinitions } from "@/features/vendors/vendorRouteDefinitions";
 import { humanResourcesRouteDefinitions } from "@/features/humanResources/humanResourcesRouteDefinitions";
+import { commissionRouteDefinitions } from "@/features/commissions/commissionRouteDefinitions";
 import { payrollRouteDefinitions } from "@/features/payroll/payrollRouteDefinitions";
 import { catalogueRouteDefinitions } from "@/features/catalogue/catalogueRouteDefinitions";
 
@@ -46,6 +47,7 @@ export type NavigationIconName =
   | "priceTag"
   | "staff"
   | "payroll"
+  | "commission"
   | "sale"
   | "invoice"
   | "saleReturn"
@@ -379,6 +381,7 @@ export const applicationRouteRegistry: readonly ApplicationRouteDefinition[] = [
   ),
   ...humanResourcesRouteDefinitions,
   ...payrollRouteDefinitions,
+  ...commissionRouteDefinitions,
   ...(
     [
       ["newSale", ApplicationRoutePatterns.newSale, PermissionCodes.INVOICE.NEW_SALE.VIEW, "navigation.item.newSale", "sale", 10],

@@ -390,5 +390,18 @@ export const ApiEndpoints = {
       stockTransferSummary: "/inventory/reports/stock-transfer-summary",
     },
   },
+  commissions: {
+    plans: "/commissions/plans",
+    planById: (planId: string) => `/commissions/plans/${encodeURIComponent(planId)}`,
+    planRules: (planId: string) => `/commissions/plans/${encodeURIComponent(planId)}/rules`,
+    endPlanRule: (planId: string, ruleId: string) =>
+      `/commissions/plans/${encodeURIComponent(planId)}/rules/${encodeURIComponent(ruleId)}/end`,
+    entries: "/commissions/entries",
+    entryTotals: "/commissions/entries/totals",
+    approveEntries: "/commissions/entries/approve",
+    commissionReportSummary: "/commissions/reports/commission/summary",
+    commissionReportDetail: "/commissions/reports/commission/detail",
+    accrualAndPaymentReport: "/commissions/reports/accrual-and-payment",
+  },
   // <api-endpoints:end> (shared file: append new groups above this marker, with Edit only)
 } as const;

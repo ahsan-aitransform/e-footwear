@@ -136,6 +136,11 @@ export const ApplicationRoutes = {
   stockTransferSummaryReport: "/reports/stock-transfer-summary",
   stockAuditReport: "/reports/stock-audit",
   claimReport: "/reports/claim",
+  // Commissions (module hr-payroll-expenses slice 2, Part 16.2) and the two commission reports.
+  commissionPlans: "/commissions/plans",
+  commissionEntries: "/commissions/entries",
+  commissionReport: "/reports/commission",
+  commissionAccrualAndPaymentReport: "/reports/commission-accrual-and-payment",
   // <application-routes:end> (shared file: append new routes above this marker, with Edit only)
 } as const;
 
@@ -260,6 +265,10 @@ export const ApplicationRoutePatterns = {
   stockTransferSummaryReport: "/reports/stock-transfer-summary",
   stockAuditReport: "/reports/stock-audit",
   claimReport: "/reports/claim",
+  commissionPlans: "/commissions/plans",
+  commissionEntries: "/commissions/entries",
+  commissionReport: "/reports/commission",
+  commissionAccrualAndPaymentReport: "/reports/commission-accrual-and-payment",
   // <application-route-patterns:end> (shared file: append above this marker, with Edit only)
 } as const;
 

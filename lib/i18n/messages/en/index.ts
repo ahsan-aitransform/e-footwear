@@ -20,6 +20,7 @@ import { accountingEnglishMessages } from "./accounting";
 import { cashManagementEnglishMessages } from "./cashManagement";
 import { catalogueEnglishMessages } from "./catalogue";
 import { humanResourcesEnglishMessages } from "./humanResources";
+import { commissionsEnglishMessages } from "./commissions";
 import { payrollEnglishMessages } from "./payroll";
 import { salesEnglishMessages } from "./sales";
 import { inventoryEnglishMessages } from "./inventory";
@@ -44,6 +45,7 @@ export const englishMessages = {
   ...catalogueEnglishMessages,
   ...humanResourcesEnglishMessages,
   ...payrollEnglishMessages,
+  ...commissionsEnglishMessages,
   ...salesEnglishMessages,
   ...inventoryEnglishMessages,
   // <english-messages-spread:end>
