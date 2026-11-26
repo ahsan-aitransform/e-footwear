@@ -20,7 +20,9 @@ import { accountingEnglishMessages } from "./accounting";
 import { cashManagementEnglishMessages } from "./cashManagement";
 import { catalogueEnglishMessages } from "./catalogue";
 import { humanResourcesEnglishMessages } from "./humanResources";
+import { commissionsEnglishMessages } from "./commissions";
 import { payrollEnglishMessages } from "./payroll";
+import { promotionsEnglishMessages } from "./promotions";
 import { salesEnglishMessages } from "./sales";
 import { inventoryEnglishMessages } from "./inventory";
 // <english-messages-imports:end>
@@ -44,6 +46,8 @@ export const englishMessages = {
   ...catalogueEnglishMessages,
   ...humanResourcesEnglishMessages,
   ...payrollEnglishMessages,
+  ...commissionsEnglishMessages,
+  ...promotionsEnglishMessages,
   ...salesEnglishMessages,
   ...inventoryEnglishMessages,
   // <english-messages-spread:end>

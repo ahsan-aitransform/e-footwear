@@ -50,11 +50,8 @@ export const ApiEndpoints = {
     activity: "/users/activity",
     loginHistory: "/users/login-history",
   },
-  // The signed-in person's own account: sessions, sign-in history, quick-action toolbar (no permission needed).
+  // The signed-in person's own account: sign-in history, quick-action toolbar (no permission needed).
   account: {
-    sessions: "/account/sessions",
-    endOtherSessions: "/account/sessions/others",
-    session: (sessionId: string) => `/account/sessions/${encodeURIComponent(sessionId)}`,
     loginHistory: "/account/login-history",
     quickActions: "/account/quick-actions",
   },
@@ -104,9 +101,6 @@ export const ApiEndpoints = {
   },
   posTerminals: {
     list: "/pos-terminals",
-  },
-  userPreferences: {
-    ownPreferences: "/my-preferences",
   },
   backup: {
     overview: "/backup/overview",
@@ -391,6 +385,37 @@ export const ApiEndpoints = {
       stockTransfers: "/inventory/reports/stock-transfers",
       stockTransferSummary: "/inventory/reports/stock-transfer-summary",
     },
+  },
+  commissions: {
+    plans: "/commissions/plans",
+    planById: (planId: string) => `/commissions/plans/${encodeURIComponent(planId)}`,
+    planRules: (planId: string) => `/commissions/plans/${encodeURIComponent(planId)}/rules`,
+    endPlanRule: (planId: string, ruleId: string) =>
+      `/commissions/plans/${encodeURIComponent(planId)}/rules/${encodeURIComponent(ruleId)}/end`,
+    entries: "/commissions/entries",
+    entryTotals: "/commissions/entries/totals",
+    approveEntries: "/commissions/entries/approve",
+    commissionReportSummary: "/commissions/reports/commission/summary",
+    commissionReportDetail: "/commissions/reports/commission/detail",
+    accrualAndPaymentReport: "/commissions/reports/accrual-and-payment",
+  },
+  promotions: {
+    specialOffers: "/promotions/special-offers",
+    specialOfferById: (offerId: string) => `/promotions/special-offers/${encodeURIComponent(offerId)}`,
+    specialOfferLines: (offerId: string) => `/promotions/special-offers/${encodeURIComponent(offerId)}/lines`,
+    specialOfferLineById: (offerId: string, lineId: string) =>
+      `/promotions/special-offers/${encodeURIComponent(offerId)}/lines/${encodeURIComponent(lineId)}`,
+    salesOnStores: "/promotions/sales-on-stores",
+    saleOnStoresById: (saleId: string) => `/promotions/sales-on-stores/${encodeURIComponent(saleId)}`,
+    salesOnCategories: "/promotions/sales-on-categories",
+    saleOnCategoriesById: (saleId: string) => `/promotions/sales-on-categories/${encodeURIComponent(saleId)}`,
+    saleOnCategoriesCategoryOptions: "/promotions/sales-on-categories/category-options",
+    deals: "/promotions/deals",
+    dealById: (dealId: string) => `/promotions/deals/${encodeURIComponent(dealId)}`,
+    dealVariantByBarcode: "/promotions/deals/variant-by-barcode",
+    conflicts: "/promotions/conflicts",
+    resolveConflict: (groupId: string) => `/promotions/conflicts/${encodeURIComponent(groupId)}/resolve`,
+    refreshPrices: "/promotions/refresh-prices",
   },
   // <api-endpoints:end> (shared file: append new groups above this marker, with Edit only)
 } as const;

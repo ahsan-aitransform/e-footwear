@@ -131,6 +131,18 @@ export const ApplicationRoutes = {
   stockTransferSummaryReport: "/reports/stock-transfer-summary",
   stockAuditReport: "/reports/stock-audit",
   claimReport: "/reports/claim",
+  // Commissions (module hr-payroll-expenses slice 2, Part 16.2) and the two commission reports.
+  commissionPlans: "/commissions/plans",
+  commissionEntries: "/commissions/entries",
+  commissionReport: "/reports/commission",
+  commissionAccrualAndPaymentReport: "/reports/commission-accrual-and-payment",
+  // Promotions (docx 2.12 to 2.16, Part 18): deals, special offers and their products, sales on stores, sales on categories, and the conflicts between promotions.
+  deals: "/promotions/deals",
+  specialOffers: "/promotions/special-offers",
+  specialOfferDetails: "/promotions/special-offer-details",
+  saleOnStores: "/promotions/sale-on-stores",
+  saleOnCategories: "/promotions/sale-on-categories",
+  promotionConflicts: "/promotions/conflicts",
   // <application-routes:end> (shared file: append new routes above this marker, with Edit only)
 } as const;
 
@@ -250,6 +262,16 @@ export const ApplicationRoutePatterns = {
   stockTransferSummaryReport: "/reports/stock-transfer-summary",
   stockAuditReport: "/reports/stock-audit",
   claimReport: "/reports/claim",
+  commissionPlans: "/commissions/plans",
+  commissionEntries: "/commissions/entries",
+  commissionReport: "/reports/commission",
+  commissionAccrualAndPaymentReport: "/reports/commission-accrual-and-payment",
+  deals: "/promotions/deals",
+  specialOffers: "/promotions/special-offers",
+  specialOfferDetails: "/promotions/special-offer-details",
+  saleOnStores: "/promotions/sale-on-stores",
+  saleOnCategories: "/promotions/sale-on-categories",
+  promotionConflicts: "/promotions/conflicts",
   // <application-route-patterns:end> (shared file: append above this marker, with Edit only)
 } as const;
 

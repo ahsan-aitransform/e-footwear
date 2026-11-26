@@ -14,10 +14,16 @@ beforeEach(async () => {
 });
 afterEach(() => vi.unstubAllGlobals());
 
+// The beforeEach signs in a person with no permission; these tests need one who may open the Backup screen.
+async function signInWithBackupPermission() {
+  await resetBrowserStateForTests();
+  await seedStoredSession(buildCompanyUserSession({ grantedPermissionCodes: [PermissionCodes.SETTINGS.BACKUP.VIEW] }));
+}
+
 describe("quick-action toolbar", () => {
   it("shows a button only when its screen exists and the person may open it", async () => {
     // DASHBOARD and NEW_SALE have no screen; BACKUP has one, and this person has its permission.
-    await seedStoredSession(buildCompanyUserSession({ grantedPermissionCodes: [PermissionCodes.SETTINGS.BACKUP.VIEW] }));
+    await signInWithBackupPermission();
     installFetchMock(() => ({ body: { actionCodes: ["DASHBOARD", "NEW_SALE", "BACKUP"] } }));
     render(<QuickActionToolbar />);
 
@@ -35,9 +41,10 @@ describe("quick-action toolbar", () => {
   });
 
   it("ignores a code this build does not know", async () => {
-    installFetchMock(() => ({ body: { actionCodes: ["MAKE_COFFEE", "DASHBOARD"] } }));
+    await signInWithBackupPermission();
+    installFetchMock(() => ({ body: { actionCodes: ["MAKE_COFFEE", "BACKUP"] } }));
     render(<QuickActionToolbar />);
-    expect(await screen.findByRole("link", { name: "Dashboard" })).toBeInTheDocument();
+    expect(await screen.findByRole("link", { name: "Backup" })).toBeInTheDocument();
     expect(screen.getAllByRole("link")).toHaveLength(1);
   });
 });
