@@ -50,11 +50,8 @@ export const ApiEndpoints = {
     activity: "/users/activity",
     loginHistory: "/users/login-history",
   },
-  // The signed-in person's own account: sessions, sign-in history, quick-action toolbar (no permission needed).
+  // The signed-in person's own account: sign-in history, quick-action toolbar (no permission needed).
   account: {
-    sessions: "/account/sessions",
-    endOtherSessions: "/account/sessions/others",
-    session: (sessionId: string) => `/account/sessions/${encodeURIComponent(sessionId)}`,
     loginHistory: "/account/login-history",
     quickActions: "/account/quick-actions",
   },
@@ -104,9 +101,6 @@ export const ApiEndpoints = {
   },
   posTerminals: {
     list: "/pos-terminals",
-  },
-  userPreferences: {
-    ownPreferences: "/my-preferences",
   },
   backup: {
     overview: "/backup/overview",
