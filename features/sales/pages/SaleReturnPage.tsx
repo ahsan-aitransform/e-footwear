@@ -41,7 +41,7 @@ export function SaleReturnPage() {
   const { hasPermission } = usePermissions();
   const workingStoreId = useWorkingStoreId();
   const { stores } = useAccessibleStores();
-  const storeId = workingStoreId ?? stores[0]?.id ?? "";
+  const storeId = workingStoreId ?? stores.find((store) => !store.isHeadOffice && store.isActive)?.id ?? "";
 
   const [returnDate, setReturnDate] = useState(todayAsIsoDate);
   const [invoices, setInvoices] = useState<ReturnableInvoiceResponse[]>([]);

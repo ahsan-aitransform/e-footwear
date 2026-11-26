@@ -59,7 +59,7 @@ export function useSaleEntryWorkspace(screen: SaleScreenConfiguration) {
   const session = useCurrentSession();
   const workingStoreId = useWorkingStoreId();
   const { stores } = useAccessibleStores();
-  const storeId = workingStoreId ?? stores[0]?.id ?? "";
+  const storeId = workingStoreId ?? stores.find((store) => !store.isHeadOffice && store.isActive)?.id ?? "";
 
   const [lines, dispatchLines] = useReducer(saleEntryLinesReducer, [] as SaleEntryLine[]);
   const [header, setHeader] = useState<SaleHeaderState>(createEmptyHeader);

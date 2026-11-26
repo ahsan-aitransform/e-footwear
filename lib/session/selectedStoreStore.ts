@@ -2,6 +2,7 @@
 // The server checks the header against the person's store access; this is only the person's choice, not a permission.
 // An external store (not React state) so the API client and any component read the same value.
 import { LocalStorageKeys } from "@/lib/constants/browserStorageKeys";
+import { HEAD_OFFICE_STORE_ID } from "@/lib/constants/headOfficeStore";
 import type { CurrentSessionResponse } from "@/lib/types/session";
 
 const listeners = new Set<() => void>();
@@ -50,7 +51,8 @@ export function reconcileSelectedStoreWithSession(session: CurrentSessionRespons
     return;
   }
   const selected = getSelectedStoreIdSnapshot();
-  if (selected && !session.hasAccessToAllStores && !session.accessibleStoreIds.includes(selected)) {
+  const isNotAccessible = !session.hasAccessToAllStores && !session.accessibleStoreIds.includes(selected ?? "");
+  if (selected && (selected === HEAD_OFFICE_STORE_ID || isNotAccessible)) {
     setSelectedStoreId(null);
   }
   if (!getSelectedStoreIdSnapshot() && !session.hasAccessToAllStores && session.accessibleStoreIds.length === 1) {

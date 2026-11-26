@@ -35,8 +35,8 @@ export function StoreSelector() {
     offlineCacheName: STORE_SELECTOR_CACHE_NAME,
   });
 
-  const selectableStores = (stores.data ?? []).filter((store) => store.isActive);
-  if (!isCompanyUserWithSeveralStores || selectableStores.length < 2) return null;
+  const selectableStores = (stores.data ?? []).filter((store) => store.isActive && !store.isHeadOffice);
+  if (!isCompanyUserWithSeveralStores || selectableStores.length === 0) return null;
 
   return (
     <div className="flex items-center gap-2">

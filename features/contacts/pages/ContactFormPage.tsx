@@ -166,7 +166,7 @@ export function ContactFormPage({ config, contactId }: { config: ContactScreenCo
               {(controlProps) => (
                 <NativeSelect {...controlProps} value={values.storeId} disabled={isEditing} onChange={(event) => change("storeId", event.target.value)}>
                   <option value="">{translateMessage("masterData.choose")}</option>
-                  {(stores.data ?? []).map((store) => (
+                  {(stores.data ?? []).filter((store) => !store.isHeadOffice).map((store) => (
                     <option key={store.id} value={store.id}>{store.name}</option>
                   ))}
                 </NativeSelect>

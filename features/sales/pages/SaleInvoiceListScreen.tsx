@@ -250,7 +250,7 @@ export function SaleInvoiceListScreen({ mode }: { mode: SaleInvoiceListMode }) {
             {(controlProps) => (
               <NativeSelect {...controlProps} value={draft.storeId} onChange={(event) => setDraft({ ...draft, storeId: event.target.value })}>
                 <option value="">{translateMessage("sales.list.allStores")}</option>
-                {stores.map((store) => (
+                {stores.filter((store) => !store.isHeadOffice).map((store) => (
                   <option key={store.id} value={store.id}>
                     {store.name}
                   </option>

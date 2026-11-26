@@ -160,7 +160,7 @@ export function ContactListPage({
               {(controlProps) => (
                 <NativeSelect {...controlProps} value={storeId} onChange={(event) => setStoreId(event.target.value)}>
                   <option value="">{text("filter.allStores")}</option>
-                  {(stores.data ?? []).map((store) => (
+                  {(stores.data ?? []).filter((store) => !store.isHeadOffice).map((store) => (
                     <option key={store.id} value={store.id}>{store.name}</option>
                   ))}
                 </NativeSelect>
