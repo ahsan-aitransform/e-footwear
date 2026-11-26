@@ -141,6 +141,13 @@ export const ApplicationRoutes = {
   commissionEntries: "/commissions/entries",
   commissionReport: "/reports/commission",
   commissionAccrualAndPaymentReport: "/reports/commission-accrual-and-payment",
+  // Promotions (docx 2.12 to 2.16, Part 18): deals, special offers and their products, sales on stores, sales on categories, and the conflicts between promotions.
+  deals: "/promotions/deals",
+  specialOffers: "/promotions/special-offers",
+  specialOfferDetails: "/promotions/special-offer-details",
+  saleOnStores: "/promotions/sale-on-stores",
+  saleOnCategories: "/promotions/sale-on-categories",
+  promotionConflicts: "/promotions/conflicts",
   // <application-routes:end> (shared file: append new routes above this marker, with Edit only)
 } as const;
 
@@ -269,6 +276,12 @@ export const ApplicationRoutePatterns = {
   commissionEntries: "/commissions/entries",
   commissionReport: "/reports/commission",
   commissionAccrualAndPaymentReport: "/reports/commission-accrual-and-payment",
+  deals: "/promotions/deals",
+  specialOffers: "/promotions/special-offers",
+  specialOfferDetails: "/promotions/special-offer-details",
+  saleOnStores: "/promotions/sale-on-stores",
+  saleOnCategories: "/promotions/sale-on-categories",
+  promotionConflicts: "/promotions/conflicts",
   // <application-route-patterns:end> (shared file: append above this marker, with Edit only)
 } as const;
 

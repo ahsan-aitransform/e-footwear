@@ -22,6 +22,7 @@ import { vendorRouteDefinitions } from "@/features/vendors/vendorRouteDefinition
 import { humanResourcesRouteDefinitions } from "@/features/humanResources/humanResourcesRouteDefinitions";
 import { commissionRouteDefinitions } from "@/features/commissions/commissionRouteDefinitions";
 import { payrollRouteDefinitions } from "@/features/payroll/payrollRouteDefinitions";
+import { promotionRouteDefinitions } from "@/features/promotions/promotionRouteDefinitions";
 import { catalogueRouteDefinitions } from "@/features/catalogue/catalogueRouteDefinitions";
 
 export type RouteAudience = "public" | "platformAdministrator" | "companyUser";
@@ -382,6 +383,7 @@ export const applicationRouteRegistry: readonly ApplicationRouteDefinition[] = [
   ...humanResourcesRouteDefinitions,
   ...payrollRouteDefinitions,
   ...commissionRouteDefinitions,
+  ...promotionRouteDefinitions,
   ...(
     [
       ["newSale", ApplicationRoutePatterns.newSale, PermissionCodes.INVOICE.NEW_SALE.VIEW, "navigation.item.newSale", "sale", 10],

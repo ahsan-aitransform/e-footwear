@@ -132,6 +132,12 @@ export const navigationEnglishMessages = {
   "navigation.item.commissionEntries": "Commission Entries",
   "navigation.item.commissionReport": "Commission Report",
   "navigation.item.commissionAccrualAndPaymentReport": "Commission Accrual and Payment",
+  "navigation.item.deals": "Deals",
+  "navigation.item.specialOffers": "Special Offers",
+  "navigation.item.specialOfferDetails": "Special Offer Details",
+  "navigation.item.saleOnStores": "Sale on Stores",
+  "navigation.item.saleOnCategories": "Sale on Categories",
+  "navigation.item.promotionConflicts": "Promotion Conflicts",
   // <navigation-messages:end> (shared file: add the entries of a new screen above this marker, with Edit only)
   "navigation.mainMenuLabel": "Main menu",
   "navigation.openMenu": "Open menu",
