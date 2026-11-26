@@ -1,7 +1,6 @@
 // Menu groups and entries, access notices and the access-denied screen.
 // Group names: navigation.group.<group code>. Entries: navigation.item.<route key>.
 export const navigationEnglishMessages = {
-  "navigation.group.general": "General",
   "navigation.group.platformAdministration": "Platform administration",
   "navigation.group.USER_ACCOUNT": "User Account",
   "navigation.group.PRODUCTS": "Products",

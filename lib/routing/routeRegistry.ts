@@ -109,17 +109,6 @@ export const applicationRouteRegistry: readonly ApplicationRouteDefinition[] = [
     onlyWhileTemporaryPassword: true,
   },
   {
-    routeKey: "companyDashboard",
-    pathPattern: ApplicationRoutePatterns.companyDashboard,
-    audience: "companyUser",
-    navigation: {
-      labelMessageKey: "navigation.item.companyDashboard",
-      iconName: "dashboard",
-      groupCode: NavigationGroupCodes.general,
-      sortOrder: 10,
-    },
-  },
-  {
     routeKey: "platformCompanies",
     pathPattern: ApplicationRoutePatterns.platformCompanies,
     audience: "platformAdministrator",
@@ -226,17 +215,6 @@ export const applicationRouteRegistry: readonly ApplicationRouteDefinition[] = [
       sortOrder: 30,
     },
   },
-  {
-    routeKey: "accountSessions",
-    pathPattern: ApplicationRoutePatterns.accountSessions,
-    audience: "companyUser",
-    navigation: {
-      labelMessageKey: "navigation.item.accountSessions",
-      iconName: "sessions",
-      groupCode: NavigationGroupCodes.general,
-      sortOrder: 90,
-    },
-  },
   // ---- Settings module (company users): each screen needs its own permission, checked again by the server ----
   {
     routeKey: "companyProfile",
@@ -332,18 +310,6 @@ export const applicationRouteRegistry: readonly ApplicationRouteDefinition[] = [
       iconName: "settings",
       groupCode: PermissionModuleCodes.SETTINGS,
       sortOrder: 80,
-    },
-  },
-  {
-    // Every company user may set their own language, theme and default store: no permission needed.
-    routeKey: "myPreferences",
-    pathPattern: ApplicationRoutePatterns.myPreferences,
-    audience: "companyUser",
-    navigation: {
-      labelMessageKey: "navigation.item.myPreferences",
-      iconName: "settings",
-      groupCode: NavigationGroupCodes.general,
-      sortOrder: 90,
     },
   },
   // ---- Platform administration (settings module): platform administrators only ----

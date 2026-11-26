@@ -25,7 +25,6 @@ export type QuickActionCode = (typeof QuickActionCodes)[keyof typeof QuickAction
 export const QUICK_ACTION_CODES_IN_TOOLBAR_ORDER: readonly QuickActionCode[] = Object.values(QuickActionCodes);
 
 export const quickActionRouteByCode: Partial<Record<QuickActionCode, string>> = {
-  [QuickActionCodes.dashboard]: ApplicationRoutes.companyDashboard,
   [QuickActionCodes.backup]: ApplicationRoutes.backup,
   // <quick-action-routes:end> (shared file: append the route of a quick action above this marker, with Edit only)
 };

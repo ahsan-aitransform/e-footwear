@@ -63,7 +63,7 @@ export function ApplicationNavigation({
     if (isSearching) return true;
     const choiceOfThePerson = sidebarPreference.groupOpenStateByGroupCode[group.groupCode];
     if (choiceOfThePerson !== undefined) return choiceOfThePerson;
-    return group.groupCode === "general" || group.items.some((item) => isActive(item.href));
+    return group.items.some((item) => isActive(item.href));
   }
 
   function handleSearchKeyDown(event: KeyboardEvent<HTMLInputElement>) {

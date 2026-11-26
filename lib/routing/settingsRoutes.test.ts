@@ -24,12 +24,6 @@ describe("routes of the settings module", () => {
     expect(route.requiredPermissions?.permissionCodes).toEqual([permissionCode]);
   });
 
-  it("lets every company user open their own preferences without a permission", () => {
-    const route = routeByKey("myPreferences");
-    expect(route.audience).toBe("companyUser");
-    expect(route.requiredPermissions).toBeUndefined();
-  });
-
   it.each(["platformPlans", "platformAuditLog", "platformBackup"])("%s is for platform administrators only", (routeKey) => {
     const route = routeByKey(routeKey);
     expect(route.audience).toBe("platformAdministrator");

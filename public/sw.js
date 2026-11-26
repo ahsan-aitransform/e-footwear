@@ -8,8 +8,8 @@
 //   where the app controls what is kept and when it is removed.
 
 const CACHE = "efw-shell-v1";
-const SHELL = ["/","/login","/dashboard","/change-password","/platform","/platform/login"];
-const OFFLINE_FALLBACK = "/dashboard";
+const SHELL = ["/","/login","/change-password","/platform","/platform/login"];
+const OFFLINE_FALLBACK = "/";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

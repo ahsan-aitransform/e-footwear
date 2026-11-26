@@ -51,6 +51,7 @@ export function PostPreviewGrid<TRow>({
   return (
     <div className="space-y-3">
       <DataGridTable
+        isClientSortDisabled
         rows={state.items}
         columns={columns}
         getRowKey={getRowKey}

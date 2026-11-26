@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ApplicationRoutes } from "@/lib/constants/applicationRoutes";
+import { PermissionCodes } from "@/lib/contracts/permissionCodes";
 import { SessionStorageKeys } from "@/lib/constants/browserStorageKeys";
 import { getSessionSnapshot, initializeSession } from "@/lib/session/sessionStore";
 import { installFetchMock } from "@/tests/support/fetchMock";
@@ -61,12 +62,12 @@ describe("the route guard on /platform (the super-admin area)", () => {
     expect(navigation.replace).not.toHaveBeenCalled();
   });
 
-  it("sends a company user back to their dashboard, never shows the page, and leaves a 'not authorised' notice", async () => {
+  it("sends a company user back to their home page, never shows the page, and leaves a 'not authorised' notice", async () => {
     await seedStoredSession(buildCompanyUserSession());
     installFetchMock(() => ({ body: buildCompanyUserSession() }));
     renderGuard("platformAdministrator", ApplicationRoutes.platformCompanies);
 
-    await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.companyDashboard));
+    await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.home));
     expect(screen.queryByText(protectedContent)).not.toBeInTheDocument();
     expect(window.sessionStorage.getItem(SessionStorageKeys.pendingAccessNotice)).toBe("accessNotice.notAuthorisedForPage");
   });
@@ -79,7 +80,7 @@ describe("the route guard on /platform (the super-admin area)", () => {
 
     renderGuard("platformAdministrator", ApplicationRoutes.platformCompanies);
 
-    await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.companyDashboard));
+    await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.home));
     expect(screen.queryByText(protectedContent)).not.toBeInTheDocument();
   });
 
@@ -110,7 +111,7 @@ describe("the route guard on /platform (the super-admin area)", () => {
     await seedStoredSession(buildCompanyUserSession());
     installFetchMock(() => "network-failure");
     renderGuard("platformAdministrator", ApplicationRoutes.platformCompanies);
-    await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.companyDashboard));
+    await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.home));
     expect(screen.queryByText(protectedContent)).not.toBeInTheDocument();
   });
 });
@@ -119,7 +120,7 @@ describe("the route guard on company routes", () => {
   it("sends a platform administrator to /platform", async () => {
     await seedStoredSession(buildPlatformAdministratorSession());
     installFetchMock(() => ({ body: buildPlatformAdministratorSession() }));
-    renderGuard("companyUser", ApplicationRoutes.companyDashboard);
+    renderGuard("companyUser", ApplicationRoutes.usersList);
     await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.platformCompanies));
   });
 
@@ -127,14 +128,15 @@ describe("the route guard on company routes", () => {
     const session = buildCompanyUserSession({ mustChangePassword: true });
     await seedStoredSession(session);
     installFetchMock(() => ({ body: session }));
-    renderGuard("companyUser", ApplicationRoutes.companyDashboard);
+    renderGuard("companyUser", ApplicationRoutes.usersList);
     await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.changePassword));
   });
 
-  it("shows the page to a company user", async () => {
-    await seedStoredSession(buildCompanyUserSession());
-    installFetchMock(() => ({ body: buildCompanyUserSession() }));
-    renderGuard("companyUser", ApplicationRoutes.companyDashboard);
+  it("shows the page to a company user who may open it", async () => {
+    const session = buildCompanyUserSession({ grantedPermissionCodes: [PermissionCodes.USER_ACCOUNT.VIEW_USERS.VIEW] });
+    await seedStoredSession(session);
+    installFetchMock(() => ({ body: session }));
+    renderGuard("companyUser", ApplicationRoutes.usersList);
     expect(await screen.findByText(protectedContent)).toBeInTheDocument();
   });
 
@@ -158,7 +160,7 @@ describe("the route guard on public pages", () => {
     await seedStoredSession(buildCompanyUserSession());
     installFetchMock(() => ({ body: buildCompanyUserSession() }));
     renderGuard("public", ApplicationRoutes.platformSignIn);
-    await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.companyDashboard));
+    await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.home));
     expect(screen.queryByText(protectedContent)).not.toBeInTheDocument();
   });
 });

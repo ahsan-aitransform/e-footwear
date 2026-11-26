@@ -25,18 +25,19 @@ export function PosTerminalsPage() {
   const notAvailable = translateMessage("common.notAvailable");
 
   const columns: DataGridColumn<PosTerminalResponse>[] = [
-    { key: "store", header: translateMessage("common.store"), render: (terminal) => <span className="font-mono">{terminal.storeCode}</span> },
+    { key: "store", header: translateMessage("common.store"), sortValue: (terminal) => terminal.storeCode, render: (terminal) => <span className="font-mono">{terminal.storeCode}</span> },
     { key: "label", header: translateMessage("settings.posTerminals.label"), render: (terminal) => terminal.label ?? notAvailable },
     {
       key: "status",
       header: translateMessage("settings.storeManagement.status"),
+      sortValue: (terminal) => (terminal.isActive ? 0 : 1),
       render: (terminal) => (
         <ToneBadge tone={terminal.isActive ? ToneNames.success : ToneNames.warning}>
           {translateMessage(terminal.isActive ? "common.status.active" : "common.status.inactive")}
         </ToneBadge>
       ),
     },
-    { key: "lastSeen", header: translateMessage("settings.posTerminals.lastSeen"), isSecondary: true, render: (terminal) => formatTimestamp(terminal.lastSeenAt, notAvailable) },
+    { key: "lastSeen", header: translateMessage("settings.posTerminals.lastSeen"), isSecondary: true, sortValue: (terminal) => terminal.lastSeenAt, render: (terminal) => formatTimestamp(terminal.lastSeenAt, notAvailable) },
   ];
 
   return (

@@ -172,6 +172,7 @@ export function TransferWorkPanel({ transferId, mode, onChanged, onClosed }: { t
           <FormResultNotice errorMessage={errorMessage} />
 
           <DataGridTable
+            isClientSortDisabled
             rows={current.lines}
             columns={lineColumns}
             getRowKey={(line) => line.lineId}

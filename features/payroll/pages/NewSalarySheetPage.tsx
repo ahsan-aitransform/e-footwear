@@ -166,6 +166,7 @@ export function NewSalarySheetPage() {
         <div className="print:hidden">
           <SectionCard title={translateMessage("payroll.adjustments.title")} description={translateMessage("payroll.adjustments.subtitle")} isPadded={false}>
             <DataGridTable
+              isClientSortDisabled
               rows={adjustments.data ?? []}
               columns={adjustmentColumns}
               getRowKey={(row) => row.id}

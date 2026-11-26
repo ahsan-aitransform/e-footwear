@@ -254,7 +254,7 @@ export function ExchangeInvoicePage() {
           onSave={() => void save(false)}
           onSaveAndPrint={() => void save(true)}
           onReset={resetEverything}
-          onClose={() => router.push(ApplicationRoutes.companyDashboard)}
+          onClose={() => router.push(ApplicationRoutes.home)}
         />
       </SectionCard>
 

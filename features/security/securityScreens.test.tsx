@@ -48,7 +48,7 @@ describe("company sign-in", () => {
     await userEvent.type(screen.getByLabelText(/Password/), "Secret#123");
     await userEvent.click(screen.getByRole("button", { name: "Sign in" }));
 
-    await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.companyDashboard));
+    await waitFor(() => expect(navigation.replace).toHaveBeenCalledWith(ApplicationRoutes.home));
     expect(requests.map(route)).toEqual(["POST /auth/login", "GET /auth/me"]);
     expect(requests[0].headers.authorization).toBeUndefined();
     expect(requests[0].body).toEqual({ email: "cashier@example.test", password: "Secret#123" });

@@ -1,3 +1,5 @@
+"use client";
+
 import { SaleInvoiceListModes, SaleInvoiceListScreen } from "./SaleInvoiceListScreen";
 
 export function ViewDeletedInvoicesPage() {

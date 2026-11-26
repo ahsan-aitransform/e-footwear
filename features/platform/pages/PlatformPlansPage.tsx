@@ -23,12 +23,13 @@ export function PlatformPlansPage() {
   const columns: DataGridColumn<PlanResponse>[] = [
     { key: "code", header: translateMessage("platform.plans.code"), render: (plan) => <span className="font-mono">{plan.code}</span> },
     { key: "name", header: translateMessage("platform.plans.name"), render: (plan) => plan.name },
-    { key: "stores", header: translateMessage("platform.plans.maximumStores"), alignment: "end", render: (plan) => plan.maximumStores },
-    { key: "users", header: translateMessage("platform.plans.maximumUsers"), alignment: "end", render: (plan) => plan.maximumUsers },
-    { key: "companies", header: translateMessage("platform.plans.companies"), alignment: "end", isSecondary: true, render: (plan) => plan.companyCount },
+    { key: "stores", header: translateMessage("platform.plans.maximumStores"), alignment: "end", sortValue: (plan) => plan.maximumStores, render: (plan) => plan.maximumStores },
+    { key: "users", header: translateMessage("platform.plans.maximumUsers"), alignment: "end", sortValue: (plan) => plan.maximumUsers, render: (plan) => plan.maximumUsers },
+    { key: "companies", header: translateMessage("platform.plans.companies"), alignment: "end", isSecondary: true, sortValue: (plan) => plan.companyCount, render: (plan) => plan.companyCount },
     {
       key: "status",
       header: translateMessage("settings.storeManagement.status"),
+      sortValue: (plan) => (plan.isActive ? 0 : 1),
       render: (plan) => (
         <ToneBadge tone={plan.isActive ? ToneNames.success : ToneNames.warning}>
           {translateMessage(plan.isActive ? "common.status.active" : "platform.plans.retired")}

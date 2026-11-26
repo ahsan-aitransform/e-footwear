@@ -26,10 +26,10 @@ describe("platform (super admin) routes", () => {
     });
   });
 
-  it.each(platformPaths)("%s: a company user is sent to their dashboard with a not-authorised notice", (pathname) => {
+  it.each(platformPaths)("%s: a company user is sent to their home page with a not-authorised notice", (pathname) => {
     expect(decideRouteAccess({ pathname, session: companyUser, layoutAudience: "platformAdministrator" })).toEqual({
       kind: "redirect",
-      destination: ApplicationRoutes.companyDashboard,
+      destination: ApplicationRoutes.home,
       reason: "wrongAudience",
       noticeMessageKey: "accessNotice.notAuthorisedForPage",
     });
@@ -47,7 +47,7 @@ describe("platform (super admin) routes", () => {
 
 describe("company routes", () => {
   it("nobody signed in is sent to the company sign-in page", () => {
-    expect(decideRouteAccess({ pathname: ApplicationRoutes.companyDashboard, session: null, layoutAudience: "companyUser" })).toEqual({
+    expect(decideRouteAccess({ pathname: ApplicationRoutes.usersList, session: null, layoutAudience: "companyUser" })).toEqual({
       kind: "redirect",
       destination: ApplicationRoutes.companySignIn,
       reason: "unauthenticated",
@@ -56,29 +56,30 @@ describe("company routes", () => {
 
   it("a platform administrator is sent to /platform", () => {
     expect(
-      decideRouteAccess({ pathname: ApplicationRoutes.companyDashboard, session: platformAdministrator, layoutAudience: "companyUser" }),
+      decideRouteAccess({ pathname: ApplicationRoutes.usersList, session: platformAdministrator, layoutAudience: "companyUser" }),
     ).toMatchObject({ kind: "redirect", destination: ApplicationRoutes.platformCompanies, reason: "wrongAudience" });
   });
 
-  it("a company user may open the dashboard", () => {
-    expect(decideRouteAccess({ pathname: ApplicationRoutes.companyDashboard, session: companyUser, layoutAudience: "companyUser" }).kind).toBe("allow");
+  it("a company user may open a page they have the permission for", () => {
+    const withPermission = buildCompanyUserSession({ grantedPermissionCodes: ["USER_ACCOUNT.VIEW_USERS.VIEW"] });
+    expect(decideRouteAccess({ pathname: ApplicationRoutes.usersList, session: withPermission, layoutAudience: "companyUser" }).kind).toBe("allow");
   });
 });
 
 describe("temporary password", () => {
   it("only the forced password change is reachable", () => {
     expect(
-      decideRouteAccess({ pathname: ApplicationRoutes.companyDashboard, session: companyUserWithTemporaryPassword, layoutAudience: "companyUser" }),
+      decideRouteAccess({ pathname: ApplicationRoutes.usersList, session: companyUserWithTemporaryPassword, layoutAudience: "companyUser" }),
     ).toEqual({ kind: "redirect", destination: ApplicationRoutes.changePassword, reason: "mustChangePassword" });
     expect(
       decideRouteAccess({ pathname: ApplicationRoutes.changePassword, session: companyUserWithTemporaryPassword, layoutAudience: "companyUser" }).kind,
     ).toBe("allow");
   });
 
-  it("once the password is changed, the forced page sends the person to the dashboard", () => {
+  it("once the password is changed, the forced page sends the person to their home page", () => {
     expect(decideRouteAccess({ pathname: ApplicationRoutes.changePassword, session: companyUser, layoutAudience: "companyUser" })).toEqual({
       kind: "redirect",
-      destination: ApplicationRoutes.companyDashboard,
+      destination: ApplicationRoutes.home,
       reason: "temporaryPasswordAlreadyChanged",
     });
   });
@@ -100,7 +101,7 @@ describe("public sign-in pages", () => {
   it("send a signed-in person to their own home", () => {
     expect(decideRouteAccess({ pathname: ApplicationRoutes.companySignIn, session: companyUser, layoutAudience: "public" })).toEqual({
       kind: "redirect",
-      destination: ApplicationRoutes.companyDashboard,
+      destination: ApplicationRoutes.home,
       reason: "alreadySignedIn",
     });
     expect(decideRouteAccess({ pathname: ApplicationRoutes.platformSignIn, session: platformAdministrator, layoutAudience: "public" })).toEqual({
@@ -113,7 +114,7 @@ describe("public sign-in pages", () => {
   it("explain it to a company user who lands on the platform sign-in page", () => {
     expect(decideRouteAccess({ pathname: ApplicationRoutes.platformSignIn, session: companyUser, layoutAudience: "public" })).toEqual({
       kind: "redirect",
-      destination: ApplicationRoutes.companyDashboard,
+      destination: ApplicationRoutes.home,
       reason: "wrongAudience",
       noticeMessageKey: "accessNotice.notAuthorisedForPage",
     });

@@ -192,3 +192,32 @@ describe("DataGridTable selection and totals", () => {
     expect(within(footerRow).getByText("Rs 10,497")).toBeInTheDocument();
   });
 });
+
+describe("DataGridTable client-side sorting", () => {
+  const plainColumns: DataGridColumn<ProductRow>[] = [
+    { key: "name", header: "Name", render: (row) => row.name },
+    { key: "price", header: "Price", render: (row) => `Rs ${row.price}` },
+  ];
+  const namesInOrder = () => screen.getAllByRole("row").slice(1).map((row) => within(row).getAllByRole("cell")[0].textContent);
+
+  it("sorts the given rows by a column, then reverses, then restores the original order", async () => {
+    renderGrid({ columns: plainColumns });
+    await userEvent.click(screen.getByRole("button", { name: /Name/ }));
+    expect(namesInOrder()).toEqual(["Boot", "Sandal", "Sneaker"]);
+    await userEvent.click(screen.getByRole("button", { name: /Name/ }));
+    expect(namesInOrder()).toEqual(["Sneaker", "Sandal", "Boot"]);
+    await userEvent.click(screen.getByRole("button", { name: /Name/ }));
+    expect(namesInOrder()).toEqual(["Sandal", "Boot", "Sneaker"]);
+  });
+
+  it("sorts numbers as numbers", async () => {
+    renderGrid({ columns: plainColumns });
+    await userEvent.click(screen.getByRole("button", { name: /Price/ }));
+    expect(namesInOrder()).toEqual(["Sandal", "Sneaker", "Boot"]);
+  });
+
+  it("offers no sorting when it is switched off", () => {
+    renderGrid({ columns: plainColumns, isClientSortDisabled: true });
+    expect(screen.queryByRole("button", { name: /Name/ })).toBeNull();
+  });
+});

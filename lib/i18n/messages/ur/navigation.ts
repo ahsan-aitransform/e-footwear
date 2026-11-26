@@ -1,7 +1,6 @@
 import type { navigationEnglishMessages } from "../en/navigation";
 
 export const navigationUrduMessages: Record<keyof typeof navigationEnglishMessages, string> = {
-  "navigation.group.general": "عمومی",
   "navigation.group.platformAdministration": "پلیٹ فارم کا انتظام",
   "navigation.group.USER_ACCOUNT": "صارف کا کھاتہ",
   "navigation.group.PRODUCTS": "مصنوعات",

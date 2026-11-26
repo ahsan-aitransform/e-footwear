@@ -5,7 +5,6 @@ import type { MessageKey } from "@/lib/i18n/messageKeys";
 // User Account, Products, Customers, Invoice, Orders, Voucher, Reports, Settings); two extra groups hold the screens that
 // need no permission module.
 export const NavigationGroupCodes = {
-  general: "general",
   platformAdministration: "platformAdministration",
 } as const;
 
@@ -17,7 +16,6 @@ export type NavigationGroupCode =
 type NavigationGroupDefinition = { sortOrder: number; labelMessageKey: MessageKey };
 
 export const navigationGroupDefinitions: Record<NavigationGroupCode, NavigationGroupDefinition> = {
-  [NavigationGroupCodes.general]: { sortOrder: 0, labelMessageKey: "navigation.group.general" },
   [NavigationGroupCodes.platformAdministration]: { sortOrder: 5, labelMessageKey: "navigation.group.platformAdministration" },
   [PermissionModuleCodes.DASHBOARDS]: { sortOrder: 2, labelMessageKey: "navigation.group.DASHBOARDS" },
   [PermissionModuleCodes.CUSTOMERS]: { sortOrder: 10, labelMessageKey: "navigation.group.CUSTOMERS" },

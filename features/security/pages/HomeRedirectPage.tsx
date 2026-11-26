@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { AccessDeniedScreen } from "@/components/feedback/AccessDeniedScreen";
 import { FullPageLoadingIndicator } from "@/components/feedback/LoadingIndicator";
 import { ApplicationRoutes } from "@/lib/constants/applicationRoutes";
 import { homeRouteForSession } from "@/lib/routing/homeRoute";
@@ -18,14 +19,20 @@ export function HomeRedirectPage() {
     void initializeSession();
   }, []);
 
-  useEffect(() => {
-    if (sessionState.phase === "initializing") return;
-    router.replace(
-      sessionState.phase === "authenticated"
+  const destination =
+    sessionState.phase === "initializing"
+      ? null
+      : sessionState.phase === "authenticated"
         ? homeRouteForSession(sessionState.storedSession.currentSession)
-        : ApplicationRoutes.companySignIn,
-    );
-  }, [sessionState, router]);
+        : ApplicationRoutes.companySignIn;
+  // A signed-in person whose menu is empty has nowhere to go: say so instead of redirecting to "/" again.
+  const hasNowhereToGo = destination === ApplicationRoutes.home;
 
+  useEffect(() => {
+    if (destination === null || hasNowhereToGo) return;
+    router.replace(destination);
+  }, [destination, hasNowhereToGo, router]);
+
+  if (hasNowhereToGo) return <AccessDeniedScreen reason="missingPermission" />;
   return <FullPageLoadingIndicator labelMessageKey="common.loading" />;
 }

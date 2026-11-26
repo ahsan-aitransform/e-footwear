@@ -44,6 +44,7 @@ export function UserListTable({
             header: translateMessage("security.userTable.storesColumn"),
             render: (user) =>
               user.allStores ? translateMessage("common.allStores") : user.storeCodes.join(", ") || translateMessage("common.notAvailable"),
+            sortValue: (user) => (user.allStores ? "" : user.storeCodes.join(", ")),
           },
           statusColumn,
         ]
@@ -55,6 +56,7 @@ export function UserListTable({
             key: "otherStores",
             header: translateMessage("security.userTable.otherStoresColumn"),
             render: (user) => user.storeCodes.join(", "),
+            sortValue: (user) => user.storeCodes.join(", "),
             isSecondary: true,
           },
           statusColumn,

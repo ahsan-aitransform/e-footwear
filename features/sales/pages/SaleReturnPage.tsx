@@ -190,7 +190,7 @@ export function SaleReturnPage() {
             <Button type="button" variant="outline" disabled={isSaving} onClick={reset}>
               {translateMessage("sales.bottom.reset")}
             </Button>
-            <Button type="button" variant="ghost" onClick={() => router.push(ApplicationRoutes.companyDashboard)}>
+            <Button type="button" variant="ghost" onClick={() => router.push(ApplicationRoutes.home)}>
               {translateMessage("sales.bottom.close")}
             </Button>
           </div>

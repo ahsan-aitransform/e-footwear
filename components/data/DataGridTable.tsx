@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
-import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { InlineNotice } from "@/components/feedback/InlineNotice";
 import { TableSkeleton } from "@/components/feedback/Skeletons";
@@ -17,6 +17,23 @@ const alignmentClassNames: Record<DataGridColumnAlignment, string> = {
   center: "text-center",
   end: "text-end tabular-nums",
 };
+
+type SortableValue = string | number | boolean | null | undefined;
+
+// Text compares by the alphabet with numbers inside text in numeric order ("Store 2" before "Store 10"); an empty value goes last.
+const textCollator = new Intl.Collator(undefined, { numeric: true, sensitivity: "base" });
+
+function compareSortableValues(left: SortableValue, right: SortableValue): number {
+  const leftIsEmpty = left === null || left === undefined || left === "";
+  const rightIsEmpty = right === null || right === undefined || right === "";
+  if (leftIsEmpty || rightIsEmpty) return Number(leftIsEmpty) - Number(rightIsEmpty);
+  if (typeof left === "number" && typeof right === "number") return left - right;
+  return textCollator.compare(String(left), String(right));
+}
+
+function isPlainValue(value: unknown): value is string | number | boolean {
+  return typeof value === "string" || typeof value === "number" || typeof value === "boolean";
+}
 
 export type DataGridSelection = {
   selectedRowKeys: ReadonlySet<string>;
@@ -42,6 +59,9 @@ export type DataGridTableProps<TRow> = {
   showTotalsRow?: boolean;
   totalsRowLabel?: string;
   skeletonRowCount?: number;
+  // Without onSortChange the grid sorts the rows it was given, in the browser (so it works offline). Set true for a list whose
+  // order has a meaning of its own (a ledger with a running balance, rows being typed in).
+  isClientSortDisabled?: boolean;
 };
 
 // The table of every list screen. Presentational: it shows the rows it is given. Sorting and selection are controlled by the
@@ -64,10 +84,45 @@ export function DataGridTable<TRow>({
   showTotalsRow = false,
   totalsRowLabel,
   skeletonRowCount = 5,
+  isClientSortDisabled = false,
 }: DataGridTableProps<TRow>) {
   const { translateMessage } = useTranslation();
   const bodyReference = useRef<HTMLTableSectionElement>(null);
   const [activeRowIndex, setActiveRowIndex] = useState(0);
+  const [clientSort, setClientSort] = useState<SortState | undefined>(undefined);
+
+  const isClientSorted = onSortChange === undefined && !isClientSortDisabled;
+  const activeSort = isClientSorted ? clientSort : sort;
+  const firstRow = rows[0] as Record<string, unknown> | undefined;
+
+  function canSortColumn(column: DataGridColumn<TRow>): boolean {
+    if (!isClientSorted) return column.isSortable === true && onSortChange !== undefined;
+    if (column.isSortable === false) return false;
+    return column.sortValue !== undefined || (firstRow !== undefined && isPlainValue(firstRow[column.key]));
+  }
+
+  function sortValueOf(column: DataGridColumn<TRow>, row: TRow): SortableValue {
+    if (column.sortValue) return column.sortValue(row);
+    const value = (row as Record<string, unknown>)[column.key];
+    return isPlainValue(value) ? value : undefined;
+  }
+
+  const displayedRows = useMemo(() => {
+    if (!isClientSorted || !clientSort) return rows;
+    const sortColumn = columns.find((column) => column.key === clientSort.columnKey);
+    if (!sortColumn) return rows;
+    const directionFactor = clientSort.direction === "ascending" ? 1 : -1;
+    return [...rows].sort((left, right) => {
+      const leftValue = sortValueOf(sortColumn, left);
+      const rightValue = sortValueOf(sortColumn, right);
+      const leftIsEmpty = leftValue === null || leftValue === undefined || leftValue === "";
+      const rightIsEmpty = rightValue === null || rightValue === undefined || rightValue === "";
+      // An empty value stays last in both directions.
+      if (leftIsEmpty || rightIsEmpty) return compareSortableValues(leftValue, rightValue);
+      return directionFactor * compareSortableValues(leftValue, rightValue);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rows, columns, clientSort, isClientSorted]);
 
   if (errorMessage) return <div className="p-5"><InlineNotice>{errorMessage}</InlineNotice></div>;
   if (isLoading) return <TableSkeleton rowCount={skeletonRowCount} columnCount={Math.max(columns.length, 2)} />;
@@ -77,10 +132,11 @@ export function DataGridTable<TRow>({
   const allRowsAreSelected = selectedRowKeys !== undefined && rows.every((row) => selectedRowKeys.has(getRowKey(row)));
 
   function toggleSort(columnKey: string) {
-    if (!onSortChange) return;
-    if (sort?.columnKey !== columnKey) onSortChange({ columnKey, direction: "ascending" });
-    else if (sort.direction === "ascending") onSortChange({ columnKey, direction: "descending" });
-    else onSortChange(undefined);
+    const changeSort = isClientSorted ? setClientSort : onSortChange;
+    if (!changeSort) return;
+    if (activeSort?.columnKey !== columnKey) changeSort({ columnKey, direction: "ascending" });
+    else if (activeSort.direction === "ascending") changeSort({ columnKey, direction: "descending" });
+    else changeSort(undefined);
   }
 
   function toggleRowSelection(rowKey: string) {
@@ -141,8 +197,8 @@ export function DataGridTable<TRow>({
   }
 
   function sortIcon(columnKey: string): ReactNode {
-    if (sort?.columnKey !== columnKey) return <ArrowUpDown className="size-3.5 opacity-40" aria-hidden="true" />;
-    return sort.direction === "ascending" ? (
+    if (activeSort?.columnKey !== columnKey) return <ArrowUpDown className="size-3.5 opacity-40" aria-hidden="true" />;
+    return activeSort.direction === "ascending" ? (
       <ArrowUp className="size-3.5" aria-hidden="true" />
     ) : (
       <ArrowDown className="size-3.5" aria-hidden="true" />
@@ -150,8 +206,8 @@ export function DataGridTable<TRow>({
   }
 
   function ariaSortFor(columnKey: string): "ascending" | "descending" | "none" {
-    if (sort?.columnKey !== columnKey) return "none";
-    return sort.direction;
+    if (activeSort?.columnKey !== columnKey) return "none";
+    return activeSort.direction;
   }
 
   return (
@@ -171,10 +227,10 @@ export function DataGridTable<TRow>({
             <TableHead
               key={column.key}
               scope="col"
-              aria-sort={column.isSortable ? ariaSortFor(column.key) : undefined}
+              aria-sort={canSortColumn(column) ? ariaSortFor(column.key) : undefined}
               className={cn(alignmentClassNames[column.alignment ?? "start"], column.isSecondary && "hidden md:table-cell")}
             >
-              {column.isSortable && onSortChange ? (
+              {canSortColumn(column) ? (
                 <button
                   type="button"
                   onClick={() => toggleSort(column.key)}
@@ -192,7 +248,7 @@ export function DataGridTable<TRow>({
         </TableRow>
       </TableHeader>
       <TableBody ref={bodyReference}>
-        {rows.map((row, index) => {
+        {displayedRows.map((row, index) => {
           const rowKey = getRowKey(row);
           const isSelected = selectedRowKeys?.has(rowKey) ?? false;
           return (

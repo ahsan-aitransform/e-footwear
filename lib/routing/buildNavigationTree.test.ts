@@ -19,10 +19,8 @@ describe("buildNavigationTree", () => {
   it("shows a company user the dashboard and nothing that belongs to the platform", () => {
     const groups = buildNavigationTree(buildCompanyUserSession());
     const hrefs = groups.flatMap((group) => group.items.map((item) => item.href));
-    // Other modules add personal screens that need no permission (own preferences, own sessions), so the list is not fixed.
-    expect(hrefs).toContain("/dashboard");
     expect(hrefs.some((href) => href.startsWith("/platform"))).toBe(false);
-    expect(groups.map((group) => group.groupCode)).toEqual([NavigationGroupCodes.general]);
+    expect(groups).toEqual([]);
   });
 
   it("shows a platform administrator only the platform entries, in order", () => {
@@ -42,7 +40,7 @@ describe("buildNavigationTree", () => {
       buildCompanyUserSession({ grantedPermissionCodes: ["PRODUCTS.VIEW_PRODUCTS.VIEW"] }),
       registryWithPermissionScreens,
     );
-    expect(withPermission.map((group) => group.groupCode)).toEqual([NavigationGroupCodes.general, "PRODUCTS"]);
+    expect(withPermission.map((group) => group.groupCode)).toEqual(["PRODUCTS"]);
   });
 
   it("shows no menu at all to a person who still has a temporary password", () => {

@@ -68,6 +68,7 @@ export function UsersAccountPage() {
       key: "stores",
       header: translateMessage("security.userTable.storesColumn"),
       isSecondary: true,
+      sortValue: (user) => (user.allStores ? "" : user.storeCodes.join(", ")),
       render: (user) => (user.allStores ? translateMessage("common.allStores") : user.storeCodes.join(", ") || translateMessage("common.notAvailable")),
     },
     {
@@ -78,6 +79,7 @@ export function UsersAccountPage() {
     },
     {
       key: "isSignedInNow",
+      sortValue: (user) => (user.isSignedInNow ? 0 : 1),
       header: translateMessage("securityManagement.usersList.signedInColumn"),
       render: (user) =>
         user.isSignedInNow ? (

@@ -245,7 +245,7 @@ export function NewSalePage() {
           onSave={() => void save(false)}
           onSaveAndPrint={() => void save(true)}
           onReset={handleReset}
-          onClose={() => router.push(ApplicationRoutes.companyDashboard)}
+          onClose={() => router.push(ApplicationRoutes.home)}
         />
       </SectionCard>
 

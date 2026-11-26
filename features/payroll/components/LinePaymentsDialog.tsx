@@ -30,6 +30,7 @@ export function LinePaymentsDialog({ line, onClose }: { line: PayrollSheetLineRe
           <DialogTitle>{translateMessage("payroll.payments.dialog.title", { name: line.employeeName })}</DialogTitle>
         </DialogHeader>
         <DataGridTable
+          isClientSortDisabled
           rows={payments.data ?? []}
           columns={columns}
           getRowKey={(payment) => payment.id}

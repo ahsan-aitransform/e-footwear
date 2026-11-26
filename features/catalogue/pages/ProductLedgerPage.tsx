@@ -161,7 +161,7 @@ export function ProductLedgerPage() {
           </SectionCard>
           {isDetail && (
             <SectionCard title={translateMessage("catalogue.ledger.lines")} isPadded={false}>
-              <DataGridTable rows={ledger.lines} columns={lineColumns} getRowKey={(row) => `${row.documentId}|${row.barcode}|${row.transactionAt}`} caption={translateMessage("catalogue.ledger.lines")} emptyTitle={translateMessage("catalogue.ledger.noMovements")} />
+              <DataGridTable isClientSortDisabled rows={ledger.lines} columns={lineColumns} getRowKey={(row) => `${row.documentId}|${row.barcode}|${row.transactionAt}`} caption={translateMessage("catalogue.ledger.lines")} emptyTitle={translateMessage("catalogue.ledger.noMovements")} />
             </SectionCard>
           )}
         </div>

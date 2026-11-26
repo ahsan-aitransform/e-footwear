@@ -12,7 +12,6 @@ export const ApplicationRoutes = {
   companySignIn: "/login",
   platformSignIn: "/platform/login",
   changePassword: "/change-password",
-  companyDashboard: "/dashboard",
   platformCompanies: "/platform",
   platformDirectory: "/platform/directory",
   platformCompanyDetail: (companyId: string) => `/platform/companies/${encodeURIComponent(companyId)}`,
@@ -26,7 +25,6 @@ export const ApplicationRoutes = {
   usersActivity: "/users/activity",
   roleTemplates: "/users/roles",
   devices: "/devices",
-  accountSessions: "/account/sessions",
   // Settings module (company users)
   companyProfile: "/settings/company-profile",
   businessInfoAndPreferences: "/settings/preference",
@@ -36,7 +34,6 @@ export const ApplicationRoutes = {
   posTerminals: "/settings/pos-terminals",
   backup: "/settings/backup",
   restore: "/settings/restore",
-  myPreferences: "/settings/my-preferences",
   // Platform administration (settings module)
   platformPlans: "/platform/plans",
   platformAuditLog: "/platform/audit-log",
@@ -149,7 +146,6 @@ export const ApplicationRoutePatterns = {
   companySignIn: "/login",
   platformSignIn: "/platform/login",
   changePassword: "/change-password",
-  companyDashboard: "/dashboard",
   platformCompanies: "/platform",
   platformDirectory: "/platform/directory",
   platformCompanyDetail: "/platform/companies/[companyId]",
@@ -161,7 +157,6 @@ export const ApplicationRoutePatterns = {
   usersActivity: "/users/activity",
   roleTemplates: "/users/roles",
   devices: "/devices",
-  accountSessions: "/account/sessions",
   companyProfile: "/settings/company-profile",
   businessInfoAndPreferences: "/settings/preference",
   paymentMethods: "/settings/payment-methods",
@@ -170,7 +165,6 @@ export const ApplicationRoutePatterns = {
   posTerminals: "/settings/pos-terminals",
   backup: "/settings/backup",
   restore: "/settings/restore",
-  myPreferences: "/settings/my-preferences",
   platformPlans: "/platform/plans",
   platformAuditLog: "/platform/audit-log",
   platformBackup: "/platform/backup",
@@ -274,7 +268,6 @@ export const ApplicationRoutePatterns = {
 export const ServiceWorkerPrecachedRoutes = [
   ApplicationRoutes.home,
   ApplicationRoutes.companySignIn,
-  ApplicationRoutes.companyDashboard,
   ApplicationRoutes.changePassword,
   ApplicationRoutes.platformCompanies,
   ApplicationRoutes.platformSignIn,
@@ -284,7 +277,7 @@ export const ServiceWorkerPrecachedRoutes = [
 export const PASSWORD_CHANGED_QUERY_PARAMETER_NAME = "changed";
 
 // The page the service worker shows for a navigation it cannot serve while offline.
-export const SERVICE_WORKER_OFFLINE_FALLBACK_ROUTE = ApplicationRoutes.companyDashboard;
+export const SERVICE_WORKER_OFFLINE_FALLBACK_ROUTE = ApplicationRoutes.home;
 
 // Every path below this prefix belongs to the platform administration area.
 export const PLATFORM_AREA_PATH_PREFIX = "/platform";

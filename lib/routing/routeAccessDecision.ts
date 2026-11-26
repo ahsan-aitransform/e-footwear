@@ -62,7 +62,7 @@ function decideCompanyUserRoute(route: ApplicationRouteDefinition, session: Curr
     return { kind: "redirect", destination: ApplicationRoutes.changePassword, reason: "mustChangePassword" };
   }
   if (!session.mustChangePassword && route.onlyWhileTemporaryPassword) {
-    return { kind: "redirect", destination: ApplicationRoutes.companyDashboard, reason: "temporaryPasswordAlreadyChanged" };
+    return { kind: "redirect", destination: ApplicationRoutes.home, reason: "temporaryPasswordAlreadyChanged" };
   }
 
   const grantedPermissionCodes = new Set(session.grantedPermissionCodes);
