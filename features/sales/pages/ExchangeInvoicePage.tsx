@@ -248,7 +248,6 @@ export function ExchangeInvoicePage() {
           onDescriptionChange={(description) => workspace.updateHeader({ description })}
           printChoices={workspace.printChoices}
           onPrintChoicesChange={workspace.updatePrintChoices}
-          showsGatePassAndPromise={false}
           isSaving={isSaving || !mayAdd}
           mayPrint={mayPrint}
           onSave={() => void save(false)}

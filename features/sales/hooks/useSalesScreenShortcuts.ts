@@ -8,7 +8,7 @@ import { usePermissions } from "@/lib/permissions/usePermissions";
 import { interpretSalesShortcut, SalesShortcutActions } from "../logic/salesKeyboardShortcuts";
 
 // Listens for the shortcuts of the sale screens while the screen is open. The latest handlers are kept in a ref so the listener is added only once.
-// A shortcut for a screen the person may not open does nothing.
+// A shortcut for a screen the person may not open does nothing, and none of them acts while the person is working in a dialog.
 export function useSalesScreenShortcuts({ onFocusBarcode, onSave }: { onFocusBarcode?: () => void; onSave?: () => void }) {
   const router = useRouter();
   const { hasPermission } = usePermissions();
@@ -22,6 +22,8 @@ export function useSalesScreenShortcuts({ onFocusBarcode, onSave }: { onFocusBar
     function handleKeyDown(event: KeyboardEvent) {
       const action = interpretSalesShortcut(event);
       if (action === null) return;
+      // F9 or Ctrl+S inside the Add customer dialog must not save the sale behind it (nor the browser's own page).
+      if (event.target instanceof Element && event.target.closest('[role="dialog"]')) return event.preventDefault();
       const { onFocusBarcode: focusBarcode, onSave: save, hasPermission: mayDo, push } = latest.current;
       event.preventDefault();
       switch (action) {

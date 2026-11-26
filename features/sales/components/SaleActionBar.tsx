@@ -1,16 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { Printer, RotateCcw, Save, X } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { ApplicationRoutes } from "@/lib/constants/applicationRoutes";
-import { PermissionCodes } from "@/lib/contracts/permissionCodes";
 import { useTranslation } from "@/lib/i18n/useTranslation";
-import { usePermissions } from "@/lib/permissions/usePermissions";
 import type { SalePrintChoices } from "../hooks/useSaleEntryWorkspace";
 import { SalePrintFormatCodes, SalePrintLanguageCodes, type SalePrintFormatCode, type SalePrintLanguageCode } from "../types/saleTypes";
 
@@ -21,7 +17,6 @@ export function SaleActionBar({
   onDescriptionChange,
   printChoices,
   onPrintChoicesChange,
-  showsGatePassAndPromise,
   isSaving,
   mayPrint,
   onSave,
@@ -33,7 +28,6 @@ export function SaleActionBar({
   onDescriptionChange: (description: string) => void;
   printChoices: SalePrintChoices;
   onPrintChoicesChange: (changes: Partial<SalePrintChoices>) => void;
-  showsGatePassAndPromise: boolean;
   isSaving: boolean;
   mayPrint: boolean;
   onSave: () => void;
@@ -42,8 +36,6 @@ export function SaleActionBar({
   onClose: () => void;
 }) {
   const { translateMessage } = useTranslation();
-  const { hasPermission } = usePermissions();
-  const maySeePromises = hasPermission(PermissionCodes.CUSTOMERS.PROMISE.ADD) || hasPermission(PermissionCodes.CUSTOMERS.PROMISE.VIEW);
 
   return (
     <div className="space-y-4 print:hidden" data-testid="sale-action-bar">
@@ -52,11 +44,6 @@ export function SaleActionBar({
           <Label htmlFor="field-sale-description">{translateMessage("sales.bottom.description")}</Label>
           <Input id="field-sale-description" value={description} maxLength={500} onChange={(event) => onDescriptionChange(event.target.value)} />
           <div className="flex flex-wrap items-center gap-4 pt-1">
-            {showsGatePassAndPromise && maySeePromises && (
-              <Link href={ApplicationRoutes.customerPromises} target="_blank" className={buttonVariants({ variant: "outline", size: "sm" })}>
-                {translateMessage("sales.bottom.addPromise")}
-              </Link>
-            )}
             {mayPrint && (
               <div className="flex items-center gap-2">
                 <Checkbox

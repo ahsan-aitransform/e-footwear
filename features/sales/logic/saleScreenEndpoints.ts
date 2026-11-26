@@ -11,6 +11,8 @@ export type SaleScreenConfiguration = {
   itemSearchPath: string;
   itemPicturePath: (productId: string) => string;
   customersPath: string;
+  // The purchase history of the chosen customer; a screen without it shows no history button.
+  customerPurchasesPath?: (customerId: string) => string;
   salesmenPath: string;
   paymentAccountsPath: string;
   posTerminalsPath: string;
@@ -28,6 +30,7 @@ export const newSaleScreen: SaleScreenConfiguration = {
   itemSearchPath: ApiEndpoints.sales.newSale.itemSearch,
   itemPicturePath: ApiEndpoints.sales.newSale.itemPicture,
   customersPath: ApiEndpoints.sales.newSale.customers,
+  customerPurchasesPath: ApiEndpoints.sales.newSale.customerPurchases,
   salesmenPath: ApiEndpoints.sales.newSale.salesmen,
   paymentAccountsPath: ApiEndpoints.sales.newSale.paymentAccounts,
   posTerminalsPath: ApiEndpoints.sales.newSale.posTerminals,

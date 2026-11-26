@@ -239,7 +239,6 @@ export function NewSalePage() {
           onDescriptionChange={(description) => workspace.updateHeader({ description })}
           printChoices={workspace.printChoices}
           onPrintChoicesChange={workspace.updatePrintChoices}
-          showsGatePassAndPromise
           isSaving={isSaving || !mayAdd}
           mayPrint={mayPrint}
           onSave={() => void save(false)}

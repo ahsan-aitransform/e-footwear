@@ -187,11 +187,6 @@ export const ApiEndpoints = {
   staffLedger: {
     ledger: "/staff-ledger",
   },
-  promises: {
-    list: "/promises",
-    byId: (promiseId: string) => `/promises/${encodeURIComponent(promiseId)}`,
-    customerBalance: (customerId: string) => `/promises/customers/${encodeURIComponent(customerId)}/balance`,
-  },
   cashCounts: {
     list: "/cash-counts",
     context: "/cash-counts/context",
@@ -298,6 +293,7 @@ export const ApiEndpoints = {
       itemSearch: "/sales/new-sale/items/search",
       itemPicture: (productId: string) => `/sales/new-sale/items/${encodeURIComponent(productId)}/picture`,
       customers: "/sales/new-sale/customers",
+      customerPurchases: (customerId: string) => `/sales/new-sale/customers/${encodeURIComponent(customerId)}/purchases`,
       salesmen: "/sales/new-sale/salesmen",
       paymentAccounts: "/sales/new-sale/payment-accounts",
       posTerminals: "/sales/new-sale/pos-terminals",

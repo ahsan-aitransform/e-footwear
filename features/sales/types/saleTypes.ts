@@ -60,6 +60,27 @@ export type ReturnedLineRequest = {
   itemConditionCode: ReturnedItemConditionCode | null;
 };
 
+// One earlier posted invoice of a customer (the purchase history of New Sale). On a RETURN the quantities and the amounts are negative.
+export type SaleCustomerPurchaseResponse = {
+  invoiceId: string;
+  storeName: string;
+  documentTypeCode: SaleDocumentTypeCode;
+  invoiceNumber: number;
+  saleDate: string;
+  netAmount: number;
+  paidAmount: number;
+  outstandingAmount: number;
+  lines: {
+    lineId: string;
+    productName: string;
+    sizeCode: string;
+    colorName: string | null;
+    quantity: number;
+    unitPrice: number;
+    netAmount: number;
+  }[];
+};
+
 export type CreateSaleReturnRequest = {
   storeId: string;
   returnDate: string;

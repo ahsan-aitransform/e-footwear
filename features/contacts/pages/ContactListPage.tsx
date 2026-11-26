@@ -2,7 +2,7 @@
 
 import { Pencil, ReceiptText, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
 import { ServerPaginatedDataGrid } from "@/components/data/ServerPaginatedDataGrid";
 import type { DataGridColumn } from "@/components/data/dataGridTypes";
 import { ConfirmDialog } from "@/components/feedback/ConfirmDialog";
@@ -27,11 +27,24 @@ import { useFocusSearchWithControlF } from "@/features/masterData/hooks/useFocus
 import type { MasterListOptionResponse } from "@/features/masterData/types/masterListTypes";
 import { formatContactBalance } from "../logic/contactBalanceFormatting";
 import type { ContactScreenConfig } from "../types/contactScreenConfig";
-import { ContactStatusCodes, type ContactListItemResponse } from "../types/contactTypes";
+import { ContactStatusCodes, CustomerTypeCodes, type ContactListItemResponse } from "../types/contactTypes";
 
 // View (edit, delete) and Search (open the account detail) are the same grid with different row actions. Both filter by city and
-// status (and by store for staff).
-export function ContactListPage({ config, mode }: { config: ContactScreenConfig; mode: "manage" | "search" }) {
+// status (and by store for staff). A screen that edits in a dialog passes onEditContact (otherwise Edit opens the edit page of the config) and raises
+// refreshSignal after a save.
+export function ContactListPage({
+  config,
+  mode,
+  onEditContact,
+  toolbarActions,
+  refreshSignal = 0,
+}: {
+  config: ContactScreenConfig;
+  mode: "manage" | "search";
+  onEditContact?: (contactId: string) => void;
+  toolbarActions?: ReactNode;
+  refreshSignal?: number;
+}) {
   const { translateMessage } = useTranslation();
   const { hasPermission } = usePermissions();
   const router = useRouter();
@@ -51,7 +64,12 @@ export function ContactListPage({ config, mode }: { config: ContactScreenConfig;
   const stores = useApiQuery<StoreSummaryResponse[]>(ApiEndpoints.stores.listAccessibleStores, { enabled: isStaff });
   const mayEdit = hasPermission(config.permissions.edit);
   const mayDelete = hasPermission(config.permissions.remove);
-  const mayOpenDetail = hasPermission(config.permissions.accountDetailView);
+  const mayOpenDetail = config.routes.accountDetail !== undefined && hasPermission(config.permissions.accountDetailView);
+
+  function editContact(contactId: string) {
+    if (onEditContact) onEditContact(contactId);
+    else if (config.routes.editContact) router.push(config.routes.editContact(contactId));
+  }
 
   async function confirmDelete() {
     if (!toDelete) return;
@@ -75,6 +93,10 @@ export function ContactListPage({ config, mode }: { config: ContactScreenConfig;
         { key: "phone", header: label("field.phone"), isSecondary: true, render: (row) => <span dir="ltr">{row.phone ?? ""}</span> },
         { key: "cityName", header: label("field.city"), isSecondary: true, render: (row) => row.cityName ?? "" },
       ];
+      if (config.kind === "customer") {
+        result.push({ key: "cnic", header: label("field.cnic"), isSecondary: true, render: (row) => <span dir="ltr">{row.cnic ?? ""}</span> });
+        result.push({ key: "customerTypeCode", header: label("field.customerType"), render: (row) => label(row.customerTypeCode === CustomerTypeCodes.special ? "type.special" : "type.regular") });
+      }
       if (isStaff) {
         result.push({ key: "designation", header: label("field.designation"), isSecondary: true, render: (row) => row.designation ?? "" });
         result.push({ key: "storeName", header: label("field.store"), isSecondary: true, render: (row) => row.storeName ?? "" });
@@ -97,7 +119,7 @@ export function ContactListPage({ config, mode }: { config: ContactScreenConfig;
                 </Button>
               )}
               {mode === "manage" && mayEdit && (
-                <Button type="button" variant="ghost" size="icon-sm" aria-label={translateMessage("masterData.action.edit")} onClick={() => router.push(config.routes.editContact(row.id))}>
+                <Button type="button" variant="ghost" size="icon-sm" aria-label={translateMessage("masterData.action.edit")} onClick={() => editContact(row.id)}>
                   <Pencil />
                 </Button>
               )}
@@ -112,7 +134,9 @@ export function ContactListPage({ config, mode }: { config: ContactScreenConfig;
       );
       return result;
     },
-    [translateMessage, prefix, config, isStaff, mode, mayEdit, mayDelete, mayOpenDetail, router],
+    // editContact only reads the callback, the config and the router.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [translateMessage, prefix, config, isStaff, mode, mayEdit, mayDelete, mayOpenDetail, router, onEditContact],
   );
 
   const titleKey = (mode === "manage" ? config.titleMessageKeys.viewContacts : config.titleMessageKeys.searchContacts) as MessageKey;
@@ -163,8 +187,9 @@ export function ContactListPage({ config, mode }: { config: ContactScreenConfig;
           caption={translateMessage(titleKey)}
           emptyTitle={text("empty.title")}
           emptyText={text("empty.text")}
-          filters={{ cityId: cityId || undefined, storeId: storeId || undefined, statusCode: statusCode || undefined, refreshKey: refreshCounter }}
-          onRowOpen={mode === "manage" && mayEdit ? (row) => router.push(config.routes.editContact(row.id)) : undefined}
+          filters={{ cityId: cityId || undefined, storeId: storeId || undefined, statusCode: statusCode || undefined, refreshKey: refreshCounter + refreshSignal }}
+          onRowOpen={mode === "manage" && mayEdit ? (row) => editContact(row.id) : undefined}
+          toolbarActions={toolbarActions}
           searchPlaceholder={text("search.placeholder")}
           offlineCacheName={mode === "manage" ? config.offlineCacheNames.view : config.offlineCacheNames.search}
         />

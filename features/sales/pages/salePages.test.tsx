@@ -289,6 +289,49 @@ describe("New Sale screen", () => {
     expect(screen.getByTestId("sale-net-bill")).toHaveTextContent("Rs 0");
   });
 
+  it("adds a customer in a dialog, chooses them and shows their purchase history", async () => {
+    const user = userEvent.setup();
+    const otherRequests = baseServer((request) => {
+      const path = pathOf(request);
+      if (path === "/sales/new-sale/customers/customer-1/purchases") {
+        const invoice = {
+          invoiceId: "invoice-1", storeName: "Main Store", documentTypeCode: "SALE", invoiceNumber: 4, saleDate: "2026-11-19",
+          netAmount: 1000, paidAmount: 1000, outstandingAmount: 0,
+          lines: [{ lineId: "line-1", productName: "Gents Sandal", sizeCode: "42", colorName: null, quantity: 1, unitPrice: 1000, netAmount: 1000 }],
+        };
+        return { body: { items: [invoice], page: 1, pageSize: 10, totalCount: 1 } };
+      }
+      if (path === "/cities/options") return { body: [] };
+      return { status: 404, body: {} };
+    });
+    // Answered first: the base server treats every path that ends with "/customers" as the customer search.
+    const customerServer: Handler = (request) =>
+      pathOf(request) === "/customers" && request.method === "POST" ? { status: 201, body: { id: "customer-1" } } : otherRequests(request);
+    const requests = await openScreen([...sellerPermissions, P.CUSTOMERS.NEW_CUSTOMER.ADD], customerServer, <NewSalePage />);
+    await screen.findByDisplayValue("5");
+    await user.click(screen.getByRole("button", { name: "Add a new customer" }));
+    const dialog = await screen.findByRole("dialog");
+    expect(within(dialog).getByLabelText(/Customer type/)).toHaveValue("REGULAR");
+    expect(within(dialog).queryByLabelText(/Status|Opening balance/)).not.toBeInTheDocument();
+
+    await user.click(within(dialog).getByRole("button", { name: "Save" }));
+    expect(await within(dialog).findByText("Type a name.")).toBeInTheDocument();
+    expect(within(dialog).getByText("Type a mobile number.")).toBeInTheDocument();
+
+    await user.type(within(dialog).getByLabelText(/^Name/), "Ali Khan");
+    await user.type(within(dialog).getByLabelText(/^Mobile/), "0300 1234567");
+    await user.click(within(dialog).getByRole("button", { name: "Save" }));
+
+    expect(await screen.findByTestId("sale-selected-customer")).toHaveTextContent("Ali Khan");
+    const post = requests.find((request) => request.method === "POST" && pathOf(request) === "/customers");
+    expect(post?.body).toMatchObject({ name: "Ali Khan", phone: "0300 1234567", customerTypeCode: "REGULAR", statusCode: "ACTIVE", cnic: null, openingBalance: null });
+
+    await user.click(screen.getByRole("button", { name: "Purchase history" }));
+    const history = await screen.findByRole("dialog", { name: "Purchase history of Ali Khan" });
+    expect(await within(history).findByText("Invoice 4")).toBeInTheDocument();
+    expect(within(history).getByText("Gents Sandal")).toBeInTheDocument();
+  });
+
   it("refuses to save an unpaid bill without a customer and says why", async () => {
     const user = userEvent.setup();
     const requests = await openScreen(sellerPermissions, server, <NewSalePage />);

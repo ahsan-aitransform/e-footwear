@@ -23,12 +23,13 @@ export type ContactScreenConfig = {
     accountDetailView: PermissionCode;
     accountDetailPrint: PermissionCode;
   };
+  // A kind without one of the optional screens leaves it out (customers have View Customers only).
   routes: {
-    newContact: string;
-    editContact: (contactId: string) => string;
+    newContact?: string;
+    editContact?: (contactId: string) => string;
     viewContacts: string;
-    accountDetail: string;
+    accountDetail?: string;
   };
-  titleMessageKeys: { newContact: string; viewContacts: string; searchContacts: string; accountDetail: string };
+  titleMessageKeys: { newContact?: string; viewContacts: string; searchContacts?: string; accountDetail?: string };
   offlineCacheNames: { view: string; search: string };
 };

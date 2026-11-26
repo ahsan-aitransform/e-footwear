@@ -66,7 +66,7 @@ function valuesFromContact(contact: ContactDetailResponse, todayIsoDate: string)
   };
 }
 
-// New Customer / New Vendor / New Staff and their edit pages share this form; the config says which kind it is. The code is given by
+// New Vendor / New Staff and their edit pages share this form (customers use CustomerFormDialog); the config says which kind it is. The code is given by
 // the server. A new staff member needs a store (later changes go through a transfer). An opening balance can be entered here (it is
 // posted as a reversal-and-repost entry, the same as the Opening Balance screen).
 export function ContactFormPage({ config, contactId }: { config: ContactScreenConfig; contactId?: string }) {

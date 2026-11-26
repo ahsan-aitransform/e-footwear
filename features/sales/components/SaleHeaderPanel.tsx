@@ -1,36 +1,39 @@
 "use client";
 
-import Link from "next/link";
-import { Plus, X } from "lucide-react";
+import { History, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DateField } from "@/components/forms/DateField";
 import { FormField } from "@/components/forms/FormField";
 import { NativeSelect } from "@/components/forms/NativeSelect";
 import { TextInputField } from "@/components/forms/TextInputField";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useApiQuery } from "@/lib/api/hooks/useApiQuery";
-import { ApplicationRoutes } from "@/lib/constants/applicationRoutes";
 import { SEARCH_INPUT_DEBOUNCE_MILLISECONDS } from "@/lib/constants/paginationDefaults";
 import { PermissionCodes } from "@/lib/contracts/permissionCodes";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import { usePermissions } from "@/lib/permissions/usePermissions";
+import { CustomerFormDialog } from "@/features/customers/components/CustomerFormDialog";
 import type { SaleHeaderState } from "../hooks/useSaleEntryWorkspace";
 import type { SaleScreenConfiguration } from "../logic/saleScreenEndpoints";
 import type { SaleCustomerLookupResponse, SaleEntryContextResponse, SalePosTerminalResponse, SaleSalesmanLookupResponse } from "../types/saleTypes";
+import { SaleCustomerHistoryDialog } from "./SaleCustomerHistoryDialog";
 
 const MINIMUM_SEARCH_LENGTH = 2;
 
 // Customer (docx 5.1): the default is a cash sale (no customer). Typing finds a customer; the balance is shown next to the name so the cashier sees
 // what the customer already owes before putting more on credit. The balance and the credit limit are SHOWN only: whether a limit blocks a sale is
-// [BUSINESS DECISION REQUIRED] and nothing is enforced here.
+// [BUSINESS DECISION REQUIRED] and nothing is enforced here. The plus button adds a customer in a dialog and chooses it; the history button of the
+// chosen customer shows what they bought before.
 function SaleCustomerPicker({
   customersPath,
+  customerPurchasesPath,
   customer,
   onCustomerChange,
 }: {
   customersPath: string;
+  customerPurchasesPath: SaleScreenConfiguration["customerPurchasesPath"];
   customer: SaleCustomerLookupResponse | null;
   onCustomerChange: (customer: SaleCustomerLookupResponse | null) => void;
 }) {
@@ -38,6 +41,8 @@ function SaleCustomerPicker({
   const { hasPermission } = usePermissions();
   const [text, setText] = useState("");
   const [appliedText, setAppliedText] = useState("");
+  const [isAddingCustomer, setIsAddingCustomer] = useState(false);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setAppliedText(text.trim()), SEARCH_INPUT_DEBOUNCE_MILLISECONDS);
@@ -61,9 +66,28 @@ function SaleCustomerPicker({
         <span>
           <span className="font-medium">{customer.name}</span> <span className="text-muted-foreground">({balanceLabel})</span>
         </span>
-        <Button type="button" variant="ghost" size="icon-sm" aria-label={translateMessage("sales.header.clearCustomer")} onClick={() => onCustomerChange(null)}>
-          <X />
-        </Button>
+        <span className="flex gap-1">
+          {customerPurchasesPath && (
+            <Button type="button" variant="ghost" size="icon-sm" aria-label={translateMessage("sales.header.customerHistory")} title={translateMessage("sales.header.customerHistory")} onClick={() => setIsHistoryOpen(true)}>
+              <History />
+            </Button>
+          )}
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-sm"
+            aria-label={translateMessage("sales.header.clearCustomer")}
+            onClick={() => {
+              setIsHistoryOpen(false);
+              onCustomerChange(null);
+            }}
+          >
+            <X />
+          </Button>
+        </span>
+        {isHistoryOpen && customerPurchasesPath && (
+          <SaleCustomerHistoryDialog path={customerPurchasesPath(customer.customerId)} customerName={customer.name} onClose={() => setIsHistoryOpen(false)} />
+        )}
       </div>
     );
   }
@@ -80,16 +104,22 @@ function SaleCustomerPicker({
           aria-label={translateMessage("sales.header.customer")}
         />
         {hasPermission(PermissionCodes.CUSTOMERS.NEW_CUSTOMER.ADD) && (
-          <Link
-            href={ApplicationRoutes.newCustomer}
-            target="_blank"
-            aria-label={translateMessage("sales.header.addCustomer")}
-            className={buttonVariants({ variant: "outline", size: "icon" })}
-          >
+          <Button type="button" variant="outline" size="icon" aria-label={translateMessage("sales.header.addCustomer")} onClick={() => setIsAddingCustomer(true)}>
             <Plus />
-          </Link>
+          </Button>
         )}
       </div>
+      {isAddingCustomer && (
+        <CustomerFormDialog
+          onClose={() => setIsAddingCustomer(false)}
+          onSaved={(saved) => {
+            setIsAddingCustomer(false);
+            setText("");
+            // A customer who was just added owes nothing yet.
+            onCustomerChange({ customerId: saved.id, code: "", name: saved.name, phoneNumber: saved.phone, balanceAmount: 0 });
+          }}
+        />
+      )}
       {(suggestions.data ?? []).length > 0 && (
         <ul className="max-h-40 divide-y overflow-auto rounded-lg border" role="listbox" aria-label={translateMessage("sales.header.customerResults")}>
           {(suggestions.data ?? []).map((candidate) => (
@@ -153,7 +183,7 @@ export function SaleHeaderPanel({
         <label htmlFor="field-sale-customer" className="text-sm font-medium">
           {translateMessage("sales.header.customer")}
         </label>
-        <SaleCustomerPicker customersPath={screen.customersPath} customer={header.customer} onCustomerChange={(customer) => onHeaderChange({ customer })} />
+        <SaleCustomerPicker customersPath={screen.customersPath} customerPurchasesPath={screen.customerPurchasesPath} customer={header.customer} onCustomerChange={(customer) => onHeaderChange({ customer })} />
       </div>
       <FormField label={translateMessage("sales.header.salesman")} name="sale-salesman">
         {(controlProps) => (

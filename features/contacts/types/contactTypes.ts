@@ -4,11 +4,13 @@
 export const ContactStatusCodes = { active: "ACTIVE", inactive: "INACTIVE" } as const;
 export const OpeningBalanceSideCodes = { debit: "DEBIT", credit: "CREDIT" } as const;
 export type OpeningBalanceSideCode = (typeof OpeningBalanceSideCodes)[keyof typeof OpeningBalanceSideCodes];
+export const CustomerTypeCodes = { regular: "REGULAR", special: "SPECIAL" } as const;
+export type CustomerTypeCode = (typeof CustomerTypeCodes)[keyof typeof CustomerTypeCodes];
 export type ContactKind = "customer" | "vendor" | "staff";
 
 export type ContactOpeningBalance = { sideCode: OpeningBalanceSideCode; amount: number; asOfDate: string };
 
-// A row of View / Search for any of the three kinds. The vendor and staff fields are absent on the other kinds.
+// A row of View / Search for any of the three kinds. The customer, vendor and staff fields are absent on the other kinds.
 export type ContactListItemResponse = {
   id: string;
   code: string;
@@ -22,6 +24,8 @@ export type ContactListItemResponse = {
   // Positive = they owe the business (receivable), negative = the business owes them (payable).
   balanceAmount: number;
   rowVersion: number;
+  cnic?: string | null;
+  customerTypeCode?: CustomerTypeCode;
   creditLimit?: number | null;
   designation?: string | null;
   isManager?: boolean;
@@ -46,6 +50,8 @@ export type SaveContactRequest = {
   cityId: string | null;
   statusCode: string;
   openingBalance: ContactOpeningBalance | null;
+  cnic?: string | null;
+  customerTypeCode?: CustomerTypeCode;
   creditLimit?: number | null;
   designation?: string | null;
   isManager?: boolean;

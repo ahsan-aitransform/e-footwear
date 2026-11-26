@@ -22,17 +22,8 @@ export const customerScreenConfig: ContactScreenConfig = {
     accountDetailView: PermissionCodes.CUSTOMERS.CUSTOMER_ACCOUNT_DETAIL.VIEW,
     accountDetailPrint: PermissionCodes.CUSTOMERS.CUSTOMER_ACCOUNT_DETAIL.PRINT,
   },
-  routes: {
-    newContact: ApplicationRoutes.newCustomer,
-    editContact: ApplicationRoutes.editCustomer,
-    viewContacts: ApplicationRoutes.viewCustomers,
-    accountDetail: ApplicationRoutes.customerAccountDetail,
-  },
-  titleMessageKeys: {
-    newContact: "navigation.item.newCustomer",
-    viewContacts: "navigation.item.viewCustomers",
-    searchContacts: "navigation.item.searchCustomers",
-    accountDetail: "navigation.item.customerAccountDetail",
-  },
+  // View Customers is the only customers screen; adding and editing happen in a dialog.
+  routes: { viewContacts: ApplicationRoutes.viewCustomers },
+  titleMessageKeys: { viewContacts: "navigation.item.viewCustomers" },
   offlineCacheNames: { view: "customersView", search: "customersSearch" },
 };
