@@ -93,7 +93,7 @@ export function ContactListPage({
       ];
       if (config.kind === "customer") {
         result.push({ key: "cnic", header: label("field.cnic"), isSecondary: true, render: (row) => <span dir="ltr">{row.cnic ?? ""}</span> });
-        result.push({ key: "customerTypeCode", header: label("field.customerType"), render: (row) => label(row.customerTypeCode === CustomerTypeCodes.special ? "type.special" : "type.regular") });
+        result.push({ key: "customerTypeCode", header: label("field.customerType"), render: (row) => label(row.customerTypeCode === CustomerTypeCodes.special ? "type.premium" : "type.regular") });
       }
       if (isStaff) {
         result.push({ key: "designation", header: label("field.designation"), isSecondary: true, render: (row) => row.designation ?? "" });

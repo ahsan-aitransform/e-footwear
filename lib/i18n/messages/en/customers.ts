@@ -26,7 +26,7 @@ export const customersEnglishMessages = {
   "customers.search.placeholder": "Search by name, code, mobile or e-mail…",
   "customers.toast.saved": "Customer saved.",
   "customers.type.regular": "Regular",
-  "customers.type.special": "Special",
+  "customers.type.premium": "Premium",
   "customers.validation.birthDateFuture": "The birth date cannot be in the future.",
   "customers.validation.cnicFormat": "The CNIC must have 13 digits, for example 35202-1234567-1.",
   "customers.validation.emailFormat": "This does not look like an e-mail address.",

@@ -123,7 +123,7 @@ export function CustomerFormDialog({
                 {(controlProps) => (
                   <NativeSelect {...controlProps} value={values.customerTypeCode} onChange={(event) => change("customerTypeCode", event.target.value as CustomerTypeCode)}>
                     <option value={CustomerTypeCodes.regular}>{text("type.regular")}</option>
-                    <option value={CustomerTypeCodes.special}>{text("type.special")}</option>
+                    <option value={CustomerTypeCodes.special}>{text("type.premium")}</option>
                   </NativeSelect>
                 )}
               </FormField>

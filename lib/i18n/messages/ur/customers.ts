@@ -28,7 +28,7 @@ export const customersUrduMessages: Record<keyof typeof customersEnglishMessages
   "customers.search.placeholder": "نام، کوڈ، موبائل یا ای میل سے تلاش کریں…",
   "customers.toast.saved": "گاہک محفوظ ہو گیا۔",
   "customers.type.regular": "عام",
-  "customers.type.special": "خاص",
+  "customers.type.premium": "پریمیم",
   "customers.validation.birthDateFuture": "تاریخ پیدائش مستقبل کی نہیں ہو سکتی۔",
   "customers.validation.cnicFormat": "شناختی کارڈ نمبر 13 ہندسوں کا ہونا چاہیے، مثلاً 35202-1234567-1۔",
   "customers.validation.emailFormat": "یہ ای میل ایڈریس نہیں لگتا۔",
