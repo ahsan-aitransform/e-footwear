@@ -23,6 +23,7 @@ import { useApiQuery } from "@/lib/api/hooks/useApiQuery";
 import { createClientTransactionId } from "@/lib/api/sendApiRequest";
 import { ApiEndpoints } from "@/lib/constants/apiEndpoints";
 import { ApplicationRoutes } from "@/lib/constants/applicationRoutes";
+import { RoleCodes } from "@/lib/constants/roleCodes";
 import { PermissionCodes } from "@/lib/contracts/permissionCodes";
 import { ToneNames } from "@/lib/design/semanticTones";
 import { useTranslation } from "@/lib/i18n/useTranslation";
@@ -77,6 +78,7 @@ const emptyFilterDraft: FilterDraft = {
 // View Invoices (the designed page of Part 11) and View Deleted Invoices (docx 5.13): filter, list, open, print. From View Invoices a posted sale can be
 // voided (a reason is required; the stock, the journal and the commission are reversed and the invoice stays in the history) or corrected with
 // "void and re-enter", which opens the New Sale screen filled with the same items. Nothing here ever edits a posted invoice in place.
+// On View Invoices a cashier has no filters: only the search box of the list.
 export function SaleInvoiceListScreen({ mode }: { mode: SaleInvoiceListMode }) {
   const { translateMessage } = useTranslation();
   const router = useRouter();
@@ -85,6 +87,7 @@ export function SaleInvoiceListScreen({ mode }: { mode: SaleInvoiceListMode }) {
   const { stores } = useAccessibleStores();
   const isDeletedMode = mode === SaleInvoiceListModes.deleted;
   const permissions = isDeletedMode ? PermissionCodes.INVOICE.VIEW_DELETED_INVOICES : PermissionCodes.INVOICE.VIEW_INVOICES;
+  const areFiltersShown = isDeletedMode || session?.roleCode !== RoleCodes.cashierSalesman;
   const listPath = isDeletedMode ? ApiEndpoints.sales.deletedInvoices.list : ApiEndpoints.sales.invoices.list;
 
   const [draft, setDraft] = useState<FilterDraft>(emptyFilterDraft);
@@ -238,69 +241,71 @@ export function SaleInvoiceListScreen({ mode }: { mode: SaleInvoiceListMode }) {
         subtitle={translateMessage(isDeletedMode ? "sales.deleted.subtitle" : "sales.list.subtitle")}
       />
 
-      <SectionCard>
-        <form
-          className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 print:hidden"
-          onSubmit={(event) => {
-            event.preventDefault();
-            setApplied(draft);
-          }}
-        >
-          <FormField label={translateMessage("sales.detail.store")} name="invoice-filter-store">
-            {(controlProps) => (
-              <NativeSelect {...controlProps} value={draft.storeId} onChange={(event) => setDraft({ ...draft, storeId: event.target.value })}>
-                <option value="">{translateMessage("sales.list.allStores")}</option>
-                {stores.filter((store) => !store.isHeadOffice).map((store) => (
-                  <option key={store.id} value={store.id}>
-                    {store.name}
-                  </option>
-                ))}
-              </NativeSelect>
-            )}
-          </FormField>
-          <DateField label={translateMessage("sales.list.fromDate")} name="invoice-filter-from" value={draft.fromDate} onValueChange={(fromDate) => setDraft({ ...draft, fromDate })} />
-          <DateField label={translateMessage("sales.list.toDate")} name="invoice-filter-to" value={draft.toDate} onValueChange={(toDate) => setDraft({ ...draft, toDate })} />
-          <div className="space-y-1.5">
-            <Label htmlFor="field-invoice-filter-number">{translateMessage("sales.list.invoiceNumber")}</Label>
-            <Input id="field-invoice-filter-number" inputMode="numeric" dir="ltr" value={draft.invoiceNumber} onChange={(event) => setDraft({ ...draft, invoiceNumber: event.target.value })} />
-          </div>
-          <FormField label={translateMessage("sales.list.type")} name="invoice-filter-type">
-            {(controlProps) => (
-              <NativeSelect {...controlProps} value={draft.documentTypeCode} onChange={(event) => setDraft({ ...draft, documentTypeCode: event.target.value })}>
-                <option value="">{translateMessage("sales.list.anyType")}</option>
-                <option value={SaleDocumentTypeCodes.sale}>{translateMessage("sales.detail.typeSale")}</option>
-                <option value={SaleDocumentTypeCodes.return}>{translateMessage("sales.detail.typeReturn")}</option>
-              </NativeSelect>
-            )}
-          </FormField>
-          {!isDeletedMode && (
-            <FormField label={translateMessage("sales.list.status")} name="invoice-filter-status">
+      {areFiltersShown && (
+        <SectionCard>
+          <form
+            className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 print:hidden"
+            onSubmit={(event) => {
+              event.preventDefault();
+              setApplied(draft);
+            }}
+          >
+            <FormField label={translateMessage("sales.detail.store")} name="invoice-filter-store">
               {(controlProps) => (
-                <NativeSelect {...controlProps} value={draft.statusCode} onChange={(event) => setDraft({ ...draft, statusCode: event.target.value })}>
-                  <option value="">{translateMessage("sales.list.anyStatus")}</option>
-                  <option value={SaleInvoiceStatusCodes.posted}>{translateMessage("sales.status.POSTED")}</option>
-                  <option value={SaleInvoiceStatusCodes.void}>{translateMessage("sales.status.VOID")}</option>
+                <NativeSelect {...controlProps} value={draft.storeId} onChange={(event) => setDraft({ ...draft, storeId: event.target.value })}>
+                  <option value="">{translateMessage("sales.list.allStores")}</option>
+                  {stores.filter((store) => !store.isHeadOffice).map((store) => (
+                    <option key={store.id} value={store.id}>
+                      {store.name}
+                    </option>
+                  ))}
                 </NativeSelect>
               )}
             </FormField>
-          )}
-          <WholeRupeeAmountField label={translateMessage("sales.list.minimumAmount")} name="invoice-filter-minimum" value={draft.minimumNetAmount} onValueChange={(minimumNetAmount) => setDraft({ ...draft, minimumNetAmount })} />
-          <WholeRupeeAmountField label={translateMessage("sales.list.maximumAmount")} name="invoice-filter-maximum" value={draft.maximumNetAmount} onValueChange={(maximumNetAmount) => setDraft({ ...draft, maximumNetAmount })} />
-          <div className="flex items-end gap-2">
-            <Button type="submit">{translateMessage("sales.list.search")}</Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => {
-                setDraft(emptyFilterDraft);
-                setApplied(emptyFilterDraft);
-              }}
-            >
-              {translateMessage("sales.list.clearFilters")}
-            </Button>
-          </div>
-        </form>
-      </SectionCard>
+            <DateField label={translateMessage("sales.list.fromDate")} name="invoice-filter-from" value={draft.fromDate} onValueChange={(fromDate) => setDraft({ ...draft, fromDate })} />
+            <DateField label={translateMessage("sales.list.toDate")} name="invoice-filter-to" value={draft.toDate} onValueChange={(toDate) => setDraft({ ...draft, toDate })} />
+            <div className="space-y-1.5">
+              <Label htmlFor="field-invoice-filter-number">{translateMessage("sales.list.invoiceNumber")}</Label>
+              <Input id="field-invoice-filter-number" inputMode="numeric" dir="ltr" value={draft.invoiceNumber} onChange={(event) => setDraft({ ...draft, invoiceNumber: event.target.value })} />
+            </div>
+            <FormField label={translateMessage("sales.list.type")} name="invoice-filter-type">
+              {(controlProps) => (
+                <NativeSelect {...controlProps} value={draft.documentTypeCode} onChange={(event) => setDraft({ ...draft, documentTypeCode: event.target.value })}>
+                  <option value="">{translateMessage("sales.list.anyType")}</option>
+                  <option value={SaleDocumentTypeCodes.sale}>{translateMessage("sales.detail.typeSale")}</option>
+                  <option value={SaleDocumentTypeCodes.return}>{translateMessage("sales.detail.typeReturn")}</option>
+                </NativeSelect>
+              )}
+            </FormField>
+            {!isDeletedMode && (
+              <FormField label={translateMessage("sales.list.status")} name="invoice-filter-status">
+                {(controlProps) => (
+                  <NativeSelect {...controlProps} value={draft.statusCode} onChange={(event) => setDraft({ ...draft, statusCode: event.target.value })}>
+                    <option value="">{translateMessage("sales.list.anyStatus")}</option>
+                    <option value={SaleInvoiceStatusCodes.posted}>{translateMessage("sales.status.POSTED")}</option>
+                    <option value={SaleInvoiceStatusCodes.void}>{translateMessage("sales.status.VOID")}</option>
+                  </NativeSelect>
+                )}
+              </FormField>
+            )}
+            <WholeRupeeAmountField label={translateMessage("sales.list.minimumAmount")} name="invoice-filter-minimum" value={draft.minimumNetAmount} onValueChange={(minimumNetAmount) => setDraft({ ...draft, minimumNetAmount })} />
+            <WholeRupeeAmountField label={translateMessage("sales.list.maximumAmount")} name="invoice-filter-maximum" value={draft.maximumNetAmount} onValueChange={(maximumNetAmount) => setDraft({ ...draft, maximumNetAmount })} />
+            <div className="flex items-end gap-2">
+              <Button type="submit">{translateMessage("sales.list.search")}</Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  setDraft(emptyFilterDraft);
+                  setApplied(emptyFilterDraft);
+                }}
+              >
+                {translateMessage("sales.list.clearFilters")}
+              </Button>
+            </div>
+          </form>
+        </SectionCard>
+      )}
 
       {message && <InlineNotice tone={message.tone === "danger" ? ToneNames.danger : ToneNames.success}>{message.text}</InlineNotice>}
 

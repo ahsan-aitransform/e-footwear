@@ -214,6 +214,7 @@ export function NewSalePage() {
             mayChangeSellingPrice={mayChangeSellingPrice}
             mayGiveDiscount={mayGiveDiscount}
             dispatchLines={workspace.dispatchLines}
+            isUnitShown={false}
           />
         </SectionCard>
 

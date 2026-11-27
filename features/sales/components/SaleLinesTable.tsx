@@ -68,7 +68,7 @@ function GridNumberInput({
 
 const formatPlainRupees = (amount: number) => formatWholeRupees(amount, { withSymbol: false });
 
-// The invoice grid (docx 5.1): Code, Product Name, Unit, Size, Qty, Price, Dis %, Disc/Unit, Total. Quantity is always editable; the price needs the
+// The invoice grid (docx 5.1): Code, Product Name, Unit (not on New Sale), Size, Qty, Price, Dis %, Disc/Unit, Total. Quantity is always editable; the price needs the
 // permission to change the selling price and the two discount columns need the permission to give a discount (the server checks both again).
 export function SaleLinesTable({
   lines,
@@ -77,6 +77,7 @@ export function SaleLinesTable({
   mayGiveDiscount,
   dispatchLines,
   captionMessageKey = "sales.grid.caption",
+  isUnitShown = true,
 }: {
   lines: readonly SaleEntryLine[];
   roundingMode: RoundingMode;
@@ -84,6 +85,7 @@ export function SaleLinesTable({
   mayGiveDiscount: boolean;
   dispatchLines: (action: SaleEntryLinesAction) => void;
   captionMessageKey?: "sales.grid.caption" | "sales.exchange.newItemsCaption";
+  isUnitShown?: boolean;
 }) {
   const { translateMessage } = useTranslation();
   return (
@@ -94,7 +96,7 @@ export function SaleLinesTable({
           <TableRow>
             <TableHead>{translateMessage("sales.grid.code")}</TableHead>
             <TableHead>{translateMessage("sales.grid.productName")}</TableHead>
-            <TableHead>{translateMessage("sales.grid.unit")}</TableHead>
+            {isUnitShown && <TableHead>{translateMessage("sales.grid.unit")}</TableHead>}
             <TableHead>{translateMessage("sales.grid.size")}</TableHead>
             <TableHead className="text-end">{translateMessage("sales.grid.quantity")}</TableHead>
             <TableHead className="text-end">{translateMessage("sales.grid.price")}</TableHead>
@@ -109,7 +111,7 @@ export function SaleLinesTable({
         <TableBody>
           {lines.length === 0 && (
             <TableRow>
-              <TableCell colSpan={10} className="py-6 text-center text-muted-foreground">
+              <TableCell colSpan={isUnitShown ? 10 : 9} className="py-6 text-center text-muted-foreground">
                 {translateMessage("sales.grid.empty")}
               </TableCell>
             </TableRow>
@@ -120,7 +122,7 @@ export function SaleLinesTable({
               <TableRow key={line.lineKey}>
                 <TableCell dir="ltr">{line.item.productCode}</TableCell>
                 <TableCell>{line.item.productName}</TableCell>
-                <TableCell>{line.item.unitName ?? ""}</TableCell>
+                {isUnitShown && <TableCell>{line.item.unitName ?? ""}</TableCell>}
                 <TableCell>{line.item.sizeCode}</TableCell>
                 <TableCell className="text-end">
                   <GridNumberInput

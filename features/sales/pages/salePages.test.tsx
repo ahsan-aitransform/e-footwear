@@ -1,6 +1,7 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { RoleCodes } from "@/lib/constants/roleCodes";
 import { PermissionCodes } from "@/lib/contracts/permissionCodes";
 import { installFetchMock, type MockedApiResponse, type RecordedRequest } from "@/tests/support/fetchMock";
 import { TEST_STORE_ID, buildCompanyUserSession, resetBrowserStateForTests, seedVerifiedSession } from "@/tests/support/sessionFixtures";
@@ -192,8 +193,9 @@ function baseServer(extra: Handler = () => ({ status: 404, body: {} })): Handler
   };
 }
 
-async function openScreen(permissionCodes: string[], handler: Handler, screenElement: React.ReactElement) {
-  const session: CurrentSessionResponse = buildCompanyUserSession({ grantedPermissionCodes: permissionCodes });
+// Signs in a cashier unless another role is asked for.
+async function openScreen(permissionCodes: string[], handler: Handler, screenElement: React.ReactElement, roleCode: string = RoleCodes.cashierSalesman) {
+  const session: CurrentSessionResponse = buildCompanyUserSession({ roleCode, grantedPermissionCodes: permissionCodes });
   await seedVerifiedSession(session, () => installFetchMock((request) => (request.url.endsWith("/auth/me") ? { body: session } : handler(request))));
   const requests = installFetchMock(handler);
   render(screenElement);
@@ -245,6 +247,8 @@ describe("New Sale screen", () => {
     await scanItem(user);
     await waitFor(() => expect(screen.getByTestId("sale-net-bill")).toHaveTextContent("Rs 2,000"));
     expect(within(screen.getByTestId("sale-lines-table")).getAllByRole("row")).toHaveLength(2); // header + one line
+    expect(within(screen.getByTestId("sale-lines-table")).queryByRole("columnheader", { name: "Unit" })).not.toBeInTheDocument();
+    expect(within(screen.getByTestId("sale-lines-table")).queryByText("Pair")).not.toBeInTheDocument();
   });
 
   it("tells the cashier when a barcode is not found and keeps the grid", async () => {
@@ -554,6 +558,21 @@ describe("View Invoices and View Deleted Invoices", () => {
     expect(await screen.findByText("Walk-in Ali")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Open" }));
     expect(await screen.findByTestId("sale-invoice-detail")).toHaveTextContent("Gents Sandal");
+  });
+
+  it("gives a cashier no filters, only the search of the list", async () => {
+    await openScreen(viewPermissions, server, <ViewInvoicesPage />);
+    expect(await screen.findByText("Walk-in Ali")).toBeInTheDocument();
+    expect(screen.queryByLabelText("From date")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Clear" })).not.toBeInTheDocument();
+    expect(screen.getByRole("searchbox")).toBeInTheDocument();
+  });
+
+  it("keeps the filters for a store manager", async () => {
+    await openScreen(viewPermissions, server, <ViewInvoicesPage />, RoleCodes.storeManager);
+    expect(await screen.findByText("Walk-in Ali")).toBeInTheDocument();
+    expect(screen.getByLabelText("From date")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Clear" })).toBeInTheDocument();
   });
 
   it("hides print, void and edit from a person who may only view", async () => {
