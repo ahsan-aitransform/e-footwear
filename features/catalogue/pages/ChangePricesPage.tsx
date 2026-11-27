@@ -78,11 +78,15 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
       : { ...common, categoryIds, brandIds, increasePercent, decreasePercent };
   }
 
-  // The preview needs a complete, valid entry; the all-zero id marks "not an apply".
+  const hasPercentage = increasePercent !== null || decreasePercent !== null;
+  // In % lists the matching sizes as soon as products are picked, before any percentage is typed.
+  const isListingMatches = !isOldToNew && !hasPercentage && (filter.departmentId !== undefined || categoryIds.length > 0 || brandIds.length > 0);
+
+  // The preview needs a complete, valid entry (or only a product choice, above); the all-zero id marks "not an apply".
   const previewBody = useMemo(
-    () => (validationKey === null ? buildRequest("00000000-0000-0000-0000-000000000000") : null),
+    () => (validationKey === null || isListingMatches ? buildRequest("00000000-0000-0000-0000-000000000000") : null),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [validationKey, isOldToNew, priceType, effectiveStoreId, filter.departmentId, filter.categoryId, filter.brandId, categoryIds, brandIds, oldPrice, newPrice, increasePercent, decreasePercent],
+    [validationKey, isListingMatches,isOldToNew, priceType, effectiveStoreId, filter.departmentId, filter.categoryId, filter.brandId, categoryIds, brandIds, oldPrice, newPrice, increasePercent, decreasePercent],
   );
 
   function resetTransaction() {
@@ -123,9 +127,9 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
       { key: "brandName", header: translateMessage("catalogue.field.brand"), isSecondary: true, render: (row) => row.brandName ?? "" },
       { key: "stockQuantity", header: translateMessage("catalogue.field.stock"), alignment: "end", isSecondary: true, render: (row) => formatQuantity(row.stockQuantity) },
       { key: "currentPrice", header: translateMessage("catalogue.changePrices.currentPrice"), alignment: "end", render: (row) => formatWholeRupees(row.currentPrice, { withSymbol: false }) },
-      { key: "newPrice", header: translateMessage("catalogue.changePrices.newPrice"), alignment: "end", render: (row) => <strong>{formatWholeRupees(row.newPrice, { withSymbol: false })}</strong> },
+      { key: "newPrice", header: translateMessage("catalogue.changePrices.newPrice"), alignment: "end", render: (row) => <strong>{isListingMatches ? "-" : formatWholeRupees(row.newPrice, { withSymbol: false })}</strong> },
     ],
-    [translateMessage],
+    [translateMessage, isListingMatches],
   );
 
   const titleKey = isOldToNew ? "navigation.item.changePricesOldToNew" : "navigation.item.changePricesByPercentage";
@@ -211,7 +215,7 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
         isPadded={false}
         action={
           mayApply && (
-            <Button type="button" disabled={previewBody === null || isApplying} onClick={() => setIsConfirming(true)}>
+            <Button type="button" disabled={validationKey !== null || isApplying} onClick={() => setIsConfirming(true)}>
               {translateMessage("catalogue.action.apply")}
             </Button>
           )
@@ -225,7 +229,7 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
           caption={translateMessage("catalogue.changePrices.previewTitle")}
           emptyTitle={translateMessage("catalogue.changePrices.noRows")}
           emptyText={translateMessage("catalogue.changePrices.noRowsText")}
-          idleText={translateMessage("catalogue.changePrices.fillIn")}
+          idleText={translateMessage(isOldToNew ? "catalogue.changePrices.fillIn" : "catalogue.changePrices.chooseProducts")}
           refreshKey={refreshCounter}
         />
       </SectionCard>

@@ -197,6 +197,7 @@ export const catalogueEnglishMessages = {
   "catalogue.changePrices.noRows": "No size matches.",
   "catalogue.changePrices.noRowsText": "Check the department, category, brand and the price.",
   "catalogue.changePrices.confirmTitle": "Change these prices?",
+  "catalogue.changePrices.chooseProducts": "Choose a department, category or brand to list the matching sizes, then enter a percentage.",
   "catalogue.changePrices.confirmText": "The prices of all the listed sizes change at once and are written to the price history.",
   "catalogue.result.pricesChanged": "{count} sizes changed price.",
   "catalogue.result.conflicts": "{count} sizes now overlap a discount; the till uses the store price until an administrator resolves it.",

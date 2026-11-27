@@ -198,6 +198,7 @@ export const catalogueUrduMessages: Record<keyof typeof catalogueEnglishMessages
   "catalogue.changePrices.noRows": "کوئی سائز نہیں ملا۔",
   "catalogue.changePrices.noRowsText": "شعبہ، زمرہ، برانڈ اور قیمت دیکھیں۔",
   "catalogue.changePrices.confirmTitle": "یہ قیمتیں بدلیں؟",
+  "catalogue.changePrices.chooseProducts": "ملتے جلتے سائز دیکھنے کے لیے شعبہ، زمرہ یا برانڈ منتخب کریں، پھر فیصد لکھیں۔",
   "catalogue.changePrices.confirmText": "فہرست کے تمام سائز کی قیمتیں ایک ساتھ بدلیں گی اور قیمتوں کی تاریخ میں لکھی جائیں گی۔",
   "catalogue.result.pricesChanged": "{count} سائز کی قیمت بدل گئی۔",
   "catalogue.result.conflicts": "{count} سائز اب کسی رعایت سے ٹکرا رہے ہیں؛ ایڈمنسٹریٹر کے حل کرنے تک ٹِل اسٹور کی قیمت لگائے گا۔",

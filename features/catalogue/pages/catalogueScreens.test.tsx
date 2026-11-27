@@ -2,6 +2,7 @@ import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactElement } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { ApiEndpoints } from "@/lib/constants/apiEndpoints";
 import { PermissionCodes } from "@/lib/contracts/permissionCodes";
 import type { CurrentSessionResponse } from "@/lib/types/session";
 import { installFetchMock, type RecordedRequest } from "@/tests/support/fetchMock";
@@ -203,6 +204,29 @@ describe("change prices old to new", () => {
     expect(apply?.body).toMatchObject({ priceType: "SALE", oldPrice: 500, newPrice: 600, storeId: null });
     expect((apply?.body as { clientTransactionId: string }).clientTransactionId).toMatch(/^[0-9a-f-]{36}$/);
     expect(apply?.headers["idempotency-key"]).toBe((apply?.body as { clientTransactionId: string }).clientTransactionId);
+  });
+
+  it("lists the matching sizes in Change Prices In % before a percentage is typed, with Apply still disabled", async () => {
+    const user = userEvent.setup();
+    const requests = await openScreen(
+      sessionWith(Products.CHANGE_PRICES_BY_PERCENTAGE.VIEW, Products.CHANGE_PRICES_BY_PERCENTAGE.EDIT),
+      server((path) => {
+        if (path === ApiEndpoints.masterData.optionsOfList(ApiEndpoints.masterData.brands)) return { body: [{ id: "brand-1", name: "Bata", code: null }] };
+        if (path.startsWith("/product-prices/percentage/preview")) return { body: { items: [row], pageNumber: 1, pageSize: 25, totalItemCount: 1 } };
+        return undefined;
+      }),
+      <ChangePricesPage mode="percentage" />,
+    );
+
+    await user.click(screen.getByRole("combobox", { name: /Brand/ }));
+    await user.click(await screen.findByRole("option", { name: "Bata" }));
+
+    expect(await screen.findByText("Alpha Sandal")).toBeInTheDocument();
+    const preview = requests.find((request) => request.url.includes("/percentage/preview"));
+    expect(preview?.body).toMatchObject({ brandIds: ["brand-1"], increasePercent: null, decreasePercent: null });
+    // the open list hides the rest of the page from assistive tools until it is closed
+    await user.keyboard("{Escape}");
+    expect(await screen.findByRole("button", { name: "Apply" })).toBeDisabled();
   });
 
   it("does not offer Apply without the Edit permission and asks for different prices", async () => {
