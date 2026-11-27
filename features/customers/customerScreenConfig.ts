@@ -9,7 +9,6 @@ export const customerScreenConfig: ContactScreenConfig = {
   messagePrefix: "customers",
   endpoints: {
     list: ApiEndpoints.customers.list,
-    search: ApiEndpoints.customers.search,
     lookup: ApiEndpoints.customers.lookup,
     byId: ApiEndpoints.customers.byId,
     ledger: ApiEndpoints.customerLedger.ledger,
@@ -25,5 +24,5 @@ export const customerScreenConfig: ContactScreenConfig = {
   // View Customers is the only customers screen; adding and editing happen in a dialog.
   routes: { viewContacts: ApplicationRoutes.viewCustomers },
   titleMessageKeys: { viewContacts: "navigation.item.viewCustomers" },
-  offlineCacheNames: { view: "customersView", search: "customersSearch" },
+  offlineCacheName: "customersView",
 };

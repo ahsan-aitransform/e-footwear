@@ -5,5 +5,5 @@ import { vendorScreenConfig } from "../vendorScreenConfig";
 
 // View Vendors: edit and delete.
 export function ViewVendorsPage() {
-  return <ContactListPage config={vendorScreenConfig} mode="manage" />;
+  return <ContactListPage config={vendorScreenConfig} />;
 }

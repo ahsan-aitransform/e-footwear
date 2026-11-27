@@ -44,7 +44,6 @@ export const navigationEnglishMessages = {
   "navigation.item.vendorAccountDetail": "Vendor Account Detail",
   "navigation.item.newStaffMember": "New Staff",
   "navigation.item.viewStaffMembers": "View Staff",
-  "navigation.item.searchStaffMembers": "Search Staff",
   "navigation.item.staffAccountDetail": "Staff Account Detail",
   "navigation.item.cashCalculator": "Cash Calculator",
   "navigation.item.viewCashDetails": "View Cash Detail",

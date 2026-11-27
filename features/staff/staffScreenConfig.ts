@@ -9,7 +9,6 @@ export const staffScreenConfig: ContactScreenConfig = {
   messagePrefix: "staff",
   endpoints: {
     list: ApiEndpoints.staffMembers.list,
-    search: ApiEndpoints.staffMembers.search,
     lookup: ApiEndpoints.staffMembers.lookup,
     byId: ApiEndpoints.staffMembers.byId,
     ledger: ApiEndpoints.staffLedger.ledger,
@@ -31,8 +30,7 @@ export const staffScreenConfig: ContactScreenConfig = {
   titleMessageKeys: {
     newContact: "navigation.item.newStaffMember",
     viewContacts: "navigation.item.viewStaffMembers",
-    searchContacts: "navigation.item.searchStaffMembers",
     accountDetail: "navigation.item.staffAccountDetail",
   },
-  offlineCacheNames: { view: "staffView", search: "staffSearch" },
+  offlineCacheName: "staffView",
 };

@@ -27,8 +27,6 @@ export const staffRouteDefinitions: readonly ApplicationRouteDefinition[] = [
   screenRoute("editStaffMember", ApplicationRoutePatterns.editStaffMember, PermissionCodes.HUMAN_RESOURCES.NEW_STAFF.VIEW, undefined),
   screenRoute("viewStaffMembers", ApplicationRoutePatterns.viewStaffMembers, PermissionCodes.HUMAN_RESOURCES.VIEW_STAFF.VIEW,
     { labelMessageKey: "navigation.item.viewStaffMembers", iconName: "contact", sortOrder: 12 }),
-  screenRoute("searchStaffMembers", ApplicationRoutePatterns.searchStaffMembers, PermissionCodes.HUMAN_RESOURCES.SEARCH_STAFF.VIEW,
-    { labelMessageKey: "navigation.item.searchStaffMembers", iconName: "contact", sortOrder: 13 }),
   screenRoute("staffAccountDetail", ApplicationRoutePatterns.staffAccountDetail, PermissionCodes.HUMAN_RESOURCES.STAFF_ACCOUNT_DETAIL.VIEW,
     { labelMessageKey: "navigation.item.staffAccountDetail", iconName: "chartOfAccounts", sortOrder: 14 }),
 ];

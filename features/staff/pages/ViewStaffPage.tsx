@@ -5,5 +5,5 @@ import { staffScreenConfig } from "../staffScreenConfig";
 
 // View Staff: edit and delete.
 export function ViewStaffPage() {
-  return <ContactListPage config={staffScreenConfig} mode="manage" />;
+  return <ContactListPage config={staffScreenConfig} />;
 }

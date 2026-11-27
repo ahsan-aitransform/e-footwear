@@ -44,7 +44,6 @@ export const navigationUrduMessages: Record<keyof typeof navigationEnglishMessag
   "navigation.item.vendorAccountDetail": "سپلائر کی اکاؤنٹ تفصیل",
   "navigation.item.newStaffMember": "نیا عملہ",
   "navigation.item.viewStaffMembers": "عملہ دیکھیں",
-  "navigation.item.searchStaffMembers": "عملہ تلاش کریں",
   "navigation.item.staffAccountDetail": "عملے کی اکاؤنٹ تفصیل",
   "navigation.item.cashCalculator": "کیش کیلکولیٹر",
   "navigation.item.viewCashDetails": "کیش کی تفصیل",

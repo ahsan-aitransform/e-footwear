@@ -9,7 +9,6 @@ export const vendorScreenConfig: ContactScreenConfig = {
   messagePrefix: "vendors",
   endpoints: {
     list: ApiEndpoints.vendors.list,
-    search: ApiEndpoints.vendors.search,
     lookup: ApiEndpoints.vendors.lookup,
     byId: ApiEndpoints.vendors.byId,
     ledger: ApiEndpoints.vendorLedger.ledger,
@@ -33,5 +32,5 @@ export const vendorScreenConfig: ContactScreenConfig = {
     viewContacts: "navigation.item.viewVendors",
     accountDetail: "navigation.item.vendorAccountDetail",
   },
-  offlineCacheNames: { view: "vendorsView", search: "vendorsSearch" },
+  offlineCacheName: "vendorsView",
 };

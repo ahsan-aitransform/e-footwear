@@ -21,7 +21,6 @@ export function ViewCustomersPage() {
     <>
       <ContactListPage
         config={customerScreenConfig}
-        mode="manage"
         refreshSignal={savedCounter}
         onEditContact={(customerId) => setDialog({ customerId })}
         toolbarActions={

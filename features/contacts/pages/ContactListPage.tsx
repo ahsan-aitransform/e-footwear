@@ -29,18 +29,16 @@ import { formatContactBalance } from "../logic/contactBalanceFormatting";
 import type { ContactScreenConfig } from "../types/contactScreenConfig";
 import { ContactStatusCodes, CustomerTypeCodes, type ContactListItemResponse } from "../types/contactTypes";
 
-// View (edit, delete) and Search (open the account detail) are the same grid with different row actions. Both filter by city and
+// The View screen of customers, vendors and staff: search, open the account detail, edit and delete. It filters by city and
 // status (and by store for staff). A screen that edits in a dialog passes onEditContact (otherwise Edit opens the edit page of the config) and raises
 // refreshSignal after a save.
 export function ContactListPage({
   config,
-  mode,
   onEditContact,
   toolbarActions,
   refreshSignal = 0,
 }: {
   config: ContactScreenConfig;
-  mode: "manage" | "search";
   onEditContact?: (contactId: string) => void;
   toolbarActions?: ReactNode;
   refreshSignal?: number;
@@ -118,12 +116,12 @@ export function ContactListPage({
                   <ReceiptText />
                 </Button>
               )}
-              {mode === "manage" && mayEdit && (
+              {mayEdit && (
                 <Button type="button" variant="ghost" size="icon-sm" aria-label={translateMessage("masterData.action.edit")} onClick={() => editContact(row.id)}>
                   <Pencil />
                 </Button>
               )}
-              {mode === "manage" && mayDelete && (
+              {mayDelete && (
                 <Button type="button" variant="ghost" size="icon-sm" aria-label={translateMessage("masterData.action.delete")} onClick={() => setToDelete(row)}>
                   <Trash2 />
                 </Button>
@@ -136,13 +134,13 @@ export function ContactListPage({
     },
     // editContact only reads the callback, the config and the router.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [translateMessage, prefix, config, isStaff, mode, mayEdit, mayDelete, mayOpenDetail, router, onEditContact],
+    [translateMessage, prefix, config, isStaff, mayEdit, mayDelete, mayOpenDetail, router, onEditContact],
   );
 
-  const titleKey = (mode === "manage" ? config.titleMessageKeys.viewContacts : config.titleMessageKeys.searchContacts) as MessageKey;
+  const titleKey = config.titleMessageKeys.viewContacts as MessageKey;
   return (
     <div ref={containerReference} className="space-y-6">
-      <PageHeader title={translateMessage(titleKey)} subtitle={text(mode === "manage" ? "manage.subtitle" : "search.subtitle")} />
+      <PageHeader title={translateMessage(titleKey)} subtitle={text("manage.subtitle")} />
       <SectionCard>
         <div className="grid gap-4 md:grid-cols-3">
           <FormField label={text("field.city")} name="cityFilter">
@@ -181,7 +179,7 @@ export function ContactListPage({
       <FormResultNotice errorMessage={message} />
       <SectionCard isPadded={false}>
         <ServerPaginatedDataGrid<ContactListItemResponse>
-          path={mode === "manage" ? config.endpoints.list : config.endpoints.search}
+          path={config.endpoints.list}
           columns={columns}
           getRowKey={(row) => row.id}
           caption={translateMessage(titleKey)}
@@ -189,10 +187,10 @@ export function ContactListPage({
           emptyText={text("empty.text")}
           filters={{ cityId: cityId || undefined, storeId: storeId || undefined, statusCode: statusCode || undefined }}
           refreshKey={refreshCounter + refreshSignal}
-          onRowOpen={mode === "manage" && mayEdit ? (row) => editContact(row.id) : undefined}
+          onRowOpen={mayEdit ? (row) => editContact(row.id) : undefined}
           toolbarActions={toolbarActions}
           searchPlaceholder={text("search.placeholder")}
-          offlineCacheName={mode === "manage" ? config.offlineCacheNames.view : config.offlineCacheNames.search}
+          offlineCacheName={config.offlineCacheName}
         />
       </SectionCard>
       <ConfirmDialog

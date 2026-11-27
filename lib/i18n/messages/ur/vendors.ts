@@ -46,7 +46,6 @@ export const vendorsUrduMessages: Record<keyof typeof vendorsEnglishMessages, st
   "vendors.openingSide.credit": "کریڈٹ (ہم پر سپلائر کا واجب)",
   "vendors.openingSide.debit": "ڈیبٹ (سپلائر نے دینا ہے)",
   "vendors.search.placeholder": "نام، کوڈ، فون یا ای میل سے تلاش کریں…",
-  "vendors.search.subtitle": "سپلائر تلاش کریں اور اکاؤنٹ کی تفصیل کھولیں۔",
   "vendors.section.account": "اکاؤنٹ",
   "vendors.section.identity": "شناخت",
   "vendors.toast.saved": "سپلائر محفوظ ہو گیا۔",

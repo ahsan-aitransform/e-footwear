@@ -155,7 +155,6 @@ export const ApiEndpoints = {
   },
   customers: {
     list: "/customers",
-    search: "/customers/search",
     lookup: "/customers/lookup",
     byId: (customerId: string) => `/customers/${encodeURIComponent(customerId)}`,
   },
@@ -164,7 +163,6 @@ export const ApiEndpoints = {
   },
   vendors: {
     list: "/vendors",
-    search: "/vendors/search",
     lookup: "/vendors/lookup",
     byId: (vendorId: string) => `/vendors/${encodeURIComponent(vendorId)}`,
   },
@@ -173,7 +171,6 @@ export const ApiEndpoints = {
   },
   staffMembers: {
     list: "/staff-members",
-    search: "/staff-members/search",
     lookup: "/staff-members/lookup",
     byId: (staffId: string) => `/staff-members/${encodeURIComponent(staffId)}`,
     transfers: (staffId: string) => `/staff-members/${encodeURIComponent(staffId)}/transfers`,

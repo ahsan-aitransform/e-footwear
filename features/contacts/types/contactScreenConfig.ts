@@ -9,7 +9,6 @@ export type ContactScreenConfig = {
   messagePrefix: "customers" | "vendors" | "staff";
   endpoints: {
     list: string;
-    search: string;
     lookup: string;
     byId: (contactId: string) => string;
     ledger: string;
@@ -30,6 +29,6 @@ export type ContactScreenConfig = {
     viewContacts: string;
     accountDetail?: string;
   };
-  titleMessageKeys: { newContact?: string; viewContacts: string; searchContacts?: string; accountDetail?: string };
-  offlineCacheNames: { view: string; search: string };
+  titleMessageKeys: { newContact?: string; viewContacts: string; accountDetail?: string };
+  offlineCacheName: string;
 };

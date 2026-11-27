@@ -44,7 +44,6 @@ export const vendorsEnglishMessages = {
   "vendors.openingSide.credit": "Credit (we owe the vendor)",
   "vendors.openingSide.debit": "Debit (the vendor owes us)",
   "vendors.search.placeholder": "Search by name, code, phone or e-mail…",
-  "vendors.search.subtitle": "Find a vendor and open the account detail.",
   "vendors.section.account": "Account",
   "vendors.section.identity": "Identity",
   "vendors.toast.saved": "Vendor saved.",
