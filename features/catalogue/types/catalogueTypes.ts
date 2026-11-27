@@ -48,7 +48,8 @@ export type ProductVariantListItemResponse = {
   sizeCode: string;
   colorName: string | null;
   stockQuantity: number;
-  purchasePrice: number;
+  // null for a cashier
+  purchasePrice: number | null;
   salePrice: number;
   discountPercent: number | null;
   discountAmount: number;

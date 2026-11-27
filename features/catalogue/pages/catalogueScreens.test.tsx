@@ -327,6 +327,7 @@ describe("view products", () => {
       ["Barcode", "Product", "Size", "Colour", "Stock", "Sale price", "Discount", "Category", "Brand"],
     );
     expect(screen.queryByText("600")).not.toBeInTheDocument(); // the purchase price
+    expect(screen.queryByText(/margin|markup/i)).not.toBeInTheDocument(); // neither a column nor in the subtitle
   });
 
   it("offers row actions only to people who may edit or delete", async () => {

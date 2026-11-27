@@ -72,6 +72,7 @@ export const catalogueUrduMessages: Record<keyof typeof catalogueEnglishMessages
   "catalogue.filter.season": "موسم",
   "catalogue.filter.store": "اسٹور",
   "catalogue.view.subtitle": "ہر سائز اس کے اسٹاک، قیمتوں، رعایت، مارجن اور مارک اپ کے ساتھ۔ اسٹاک اور قیمتیں دیکھنے کے لیے اسٹور چنیں۔",
+  "catalogue.view.subtitleWithoutMargin": "ہر سائز اس کے اسٹاک، قیمتوں اور رعایت کے ساتھ۔ اسٹاک اور قیمتیں دیکھنے کے لیے اسٹور چنیں۔",
   "catalogue.search.placeholder": "تلاش (Ctrl+F)",
   "catalogue.toast.productDeleted": "پروڈکٹ حذف ہو گئی۔",
   "catalogue.product.editTitle": "پروڈکٹ میں تبدیلی",

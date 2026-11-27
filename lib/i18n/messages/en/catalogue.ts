@@ -71,6 +71,7 @@ export const catalogueEnglishMessages = {
   "catalogue.filter.season": "Season",
   "catalogue.filter.store": "Store",
   "catalogue.view.subtitle": "Every size with its stock, prices, discount, margin and markup. Pick a store to see its stock and prices.",
+  "catalogue.view.subtitleWithoutMargin": "Every size with its stock, prices and discount. Pick a store to see its stock and prices.",
   "catalogue.search.placeholder": "Search (Ctrl+F)",
   "catalogue.toast.productDeleted": "Product deleted.",
   "catalogue.product.editTitle": "Edit product",

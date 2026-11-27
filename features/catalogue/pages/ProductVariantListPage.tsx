@@ -95,6 +95,8 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
   const canViewMargin = useCanViewMargin();
   const mayOpenProduct = hasPermission(PermissionCodes.PRODUCTS.NEW_PRODUCT.VIEW);
   const isCashier = useCurrentSession()?.roleCode === RoleCodes.cashierSalesman;
+  // The View Products subtitle does not promise figures the person is not shown.
+  const subtitleKey: MessageKey = mode === "view" && !canViewMargin ? "catalogue.view.subtitleWithoutMargin" : settings.subtitleKey;
 
   const selectedProductIds = useMemo(() => [...new Set([...selectedKeys].map((key) => key.split("|")[0]))], [selectedKeys]);
   const storeIsMissing = settings.needsStore && !searchedStoreId;
@@ -112,7 +114,7 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
       { key: "color", header: translateMessage("catalogue.field.color"), isSortable: true, isSecondary: true, render: (row) => row.colorName ?? "" },
       { key: "unit", header: translateMessage("catalogue.field.unit"), isSortable: true, isSecondary: true, render: (row) => row.unitName ?? "" },
       { key: "stock", header: translateMessage("catalogue.field.stock"), isSortable: true, alignment: "end", render: (row) => formatQuantity(row.stockQuantity) },
-      { key: "purchasePrice", header: translateMessage("catalogue.field.purchasePrice"), isSortable: true, alignment: "end", isSecondary: true, render: (row) => formatWholeRupees(row.purchasePrice, { withSymbol: false }) },
+      { key: "purchasePrice", header: translateMessage("catalogue.field.purchasePrice"), isSortable: true, alignment: "end", isSecondary: true, render: (row) => (row.purchasePrice === null ? "" : formatWholeRupees(row.purchasePrice, { withSymbol: false })) },
       { key: "salePrice", header: translateMessage("catalogue.field.salePrice"), isSortable: true, alignment: "end", render: (row) => formatWholeRupees(row.salePrice, { withSymbol: false }) },
       { key: "discountPercent", header: translateMessage("catalogue.field.discountPercent"), alignment: "end", isSecondary: true, render: (row) => (row.discountPercent === null ? "" : formatPercentage(row.discountPercent)) },
       { key: "discountAmount", header: translateMessage("catalogue.field.discountAmount"), alignment: "end", isSecondary: true, render: (row) => formatWholeRupees(row.discountAmount, { withSymbol: false }) },
@@ -215,7 +217,7 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
 
   return (
     <div ref={containerReference} className="space-y-6">
-      {!isEmbedded && <PageHeader title={translateMessage(settings.titleKey)} subtitle={translateMessage(settings.subtitleKey)} />}
+      {!isEmbedded && <PageHeader title={translateMessage(settings.titleKey)} subtitle={translateMessage(subtitleKey)} />}
       <SectionCard>
         <div className="space-y-4">
           <CatalogueFilterFields fields={filterFields} values={filter} onChange={setFilter} lookups={lookups} />
