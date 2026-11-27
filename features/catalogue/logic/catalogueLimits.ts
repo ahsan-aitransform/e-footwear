@@ -27,3 +27,6 @@ export const CatalogueLimits = {
   maximumLabelsPerRequest: 5000,
   maximumReplacementRows: 5000,
 } as const;
+
+// A size group with this name has typed (numeric) sizes instead of a fixed list; the name is the only thing that marks it.
+export const FREE_SIZE_GROUP_NAME = "free size";

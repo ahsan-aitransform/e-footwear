@@ -10,6 +10,9 @@
 */
 
 @custom-variant dark (&:where(.dark, .dark *));
+/* The shadcn components style themselves by the data-orientation attribute (tabs would otherwise sit beside their content). */
+@custom-variant data-horizontal (&:where([data-orientation="horizontal"]));
+@custom-variant data-vertical (&:where([data-orientation="vertical"]));
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
@@ -246,6 +249,13 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* The open list of a native dropdown does not inherit a transparent select background (white in dark mode on Windows). */
+select option,
+select optgroup {
+  background-color: var(--popover);
+  color: var(--popover-foreground);
 }
 
 :focus-visible {

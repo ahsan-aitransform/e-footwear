@@ -83,7 +83,7 @@ export function SalePaymentPanel({
               >
                 {methods.map((method) => (
                   <option key={method.code} value={method.code}>
-                    {languageCode === "ur" && method.displayNameUrdu ? method.displayNameUrdu : method.displayNameEnglish}
+                    {(languageCode === "ur" ? method.displayNameUrdu : null) || method.displayNameEnglish || translateMessage(`settings.paymentMethod.${method.code}`)}
                   </option>
                 ))}
               </NativeSelect>

@@ -171,15 +171,14 @@ export type ProductSavedResponse = { productId: string; code: string };
 export type NextProductCodeResponse = { code: string };
 
 export type PriceHistoryEntryResponse = {
-  id: string;
-  variantId: string;
-  sizeCode: string;
-  barcode: string;
   storeId: string | null;
   storeName: string | null;
-  priceType: string;
-  oldPrice: number | null;
-  newPrice: number;
+  oldPurchasePrice: number | null;
+  newPurchasePriceLowest: number | null;
+  newPurchasePriceHighest: number | null;
+  oldSalePrice: number | null;
+  newSalePriceLowest: number | null;
+  newSalePriceHighest: number | null;
   batchId: string | null;
   reason: string | null;
   changedAt: string;

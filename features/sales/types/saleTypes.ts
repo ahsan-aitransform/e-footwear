@@ -266,7 +266,8 @@ export type SaleCustomerLookupResponse = {
 export type SaleSalesmanLookupResponse = { staffId: string; code: string; name: string; isManager: boolean };
 export type SalePaymentAccountResponse = { accountId: string; code: string; title: string; kindCode: "CASH" | "BANK"; storeId: string };
 export type SalePosTerminalResponse = { deviceId: string; label: string };
-export type SalePaymentMethodResponse = { code: SalePaymentMethodCode; displayNameEnglish: string; displayNameUrdu: string | null };
+// The names are the company's own wording from Settings; null means the app's standard name for the code.
+export type SalePaymentMethodResponse = { code: SalePaymentMethodCode; displayNameEnglish: string | null; displayNameUrdu: string | null };
 
 export type SaleBusinessHeaderResponse = {
   businessName: string;

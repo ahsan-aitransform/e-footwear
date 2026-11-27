@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { InlineNotice } from "@/components/feedback/InlineNotice";
 import { FormField } from "@/components/forms/FormField";
 import { OptionSelect } from "@/components/forms/OptionSelect";
+import { TextInputField } from "@/components/forms/TextInputField";
 import { WholeRupeeAmountField } from "@/components/forms/WholeRupeeAmountField";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,9 +17,10 @@ import { ToneNames } from "@/lib/design/semanticTones";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 import { formatPercentage } from "@/lib/money/quantityAndPercentage";
 import type { CatalogueLookups } from "../hooks/useCatalogueLookups";
-import { CatalogueLimits } from "../logic/catalogueLimits";
+import { CatalogueLimits, FREE_SIZE_GROUP_NAME } from "../logic/catalogueLimits";
 import { calculateMarginPercent, calculateMarkupPercent } from "../logic/productPricingFormulas";
 import {
+  buildNumericSizeCodes,
   buildRowsForSizeRange,
   createRowKey,
   type ProductVariantFormRow,
@@ -52,7 +54,9 @@ export function ProductSizesGrid({
   const [rangeSalePrice, setRangeSalePrice] = useState<number | null>(null);
   const [rangeMessageKey, setRangeMessageKey] = useState<"catalogue.sizes.rangeInvalid" | "catalogue.sizes.rangeAllExist" | null>(null);
 
-  const sizesOfGroup = useApiQuery<SizeResponse[]>(rangeSizeGroupId === "" ? null : ApiEndpoints.masterData.sizesOfSizeGroup(rangeSizeGroupId), { enabled: rangeSizeGroupId !== "" });
+  const isFreeSize = lookups.sizeGroupOptions.find((option) => option.value === rangeSizeGroupId)?.label.trim().toLowerCase() === FREE_SIZE_GROUP_NAME;
+  const isListedSizeGroup = rangeSizeGroupId !== "" && !isFreeSize;
+  const sizesOfGroup = useApiQuery<SizeResponse[]>(isListedSizeGroup ? ApiEndpoints.masterData.sizesOfSizeGroup(rangeSizeGroupId) : null, { enabled: isListedSizeGroup });
   const orderedSizeCodes = useMemo(
     () => [...(sizesOfGroup.data ?? [])].sort((first, second) => first.sortOrder - second.sortOrder).map((size) => size.sizeCode),
     [sizesOfGroup.data],
@@ -74,7 +78,7 @@ export function ProductSizesGrid({
   }
 
   function addRange() {
-    const added = buildRowsForSizeRange({ orderedSizeCodes, startSizeCode: rangeStart, endSizeCode: rangeEnd, sizeGroupId: rangeSizeGroupId, colorId: rangeColorId, purchasePrice: rangePurchasePrice, salePrice: rangeSalePrice, existingRows: rows });
+    const added = buildRowsForSizeRange({ orderedSizeCodes: isFreeSize ? buildNumericSizeCodes(rangeStart, rangeEnd) : orderedSizeCodes,startSizeCode: rangeStart, endSizeCode: rangeEnd, sizeGroupId: rangeSizeGroupId, colorId: rangeColorId, purchasePrice: rangePurchasePrice, salePrice: rangeSalePrice, existingRows: rows });
     if (added === null) return setRangeMessageKey("catalogue.sizes.rangeInvalid");
     if (added.length === 0) return setRangeMessageKey("catalogue.sizes.rangeAllExist");
     setRangeMessageKey(null);
@@ -92,12 +96,21 @@ export function ProductSizesGrid({
           <FormField label={translateMessage("catalogue.field.color")} name="catalogueRangeColor">
             {(controlProps) => <OptionSelect {...controlProps} value={rangeColorId} onValueChange={setRangeColorId} options={colorOptions} emptyOptionLabel={translateMessage("catalogue.sizes.noColor")} />}
           </FormField>
-          <FormField label={translateMessage("catalogue.sizes.startSize")} name="catalogueRangeStart">
-            {(controlProps) => <OptionSelect {...controlProps} value={rangeStart} onValueChange={setRangeStart} options={sizeOptions} isDisabled={sizeOptions.length === 0} emptyOptionLabel={translateMessage("catalogue.sizes.chooseSize")} />}
-          </FormField>
-          <FormField label={translateMessage("catalogue.sizes.endSize")} name="catalogueRangeEnd">
-            {(controlProps) => <OptionSelect {...controlProps} value={rangeEnd} onValueChange={setRangeEnd} options={sizeOptions} isDisabled={sizeOptions.length === 0} emptyOptionLabel={translateMessage("catalogue.sizes.chooseSize")} />}
-          </FormField>
+          {isFreeSize ? (
+            <>
+              <TextInputField label={translateMessage("catalogue.sizes.startSize")} name="catalogueRangeStart" type="number" inputMode="numeric" min={0} step={1} dir="ltr" value={rangeStart} onChange={(event) => setRangeStart(event.target.value)} />
+              <TextInputField label={translateMessage("catalogue.sizes.endSize")} name="catalogueRangeEnd" type="number" inputMode="numeric" min={0} step={1} dir="ltr" value={rangeEnd} onChange={(event) => setRangeEnd(event.target.value)} />
+            </>
+          ) : (
+            <>
+              <FormField label={translateMessage("catalogue.sizes.startSize")} name="catalogueRangeStart">
+                {(controlProps) => <OptionSelect {...controlProps} value={rangeStart} onValueChange={setRangeStart} options={sizeOptions} isDisabled={sizeOptions.length === 0} emptyOptionLabel={translateMessage("catalogue.sizes.chooseSize")} />}
+              </FormField>
+              <FormField label={translateMessage("catalogue.sizes.endSize")} name="catalogueRangeEnd">
+                {(controlProps) => <OptionSelect {...controlProps} value={rangeEnd} onValueChange={setRangeEnd} options={sizeOptions} isDisabled={sizeOptions.length === 0} emptyOptionLabel={translateMessage("catalogue.sizes.chooseSize")} />}
+              </FormField>
+            </>
+          )}
           <WholeRupeeAmountField label={translateMessage("catalogue.field.purchasePrice")} name="catalogueRangePurchase" value={rangePurchasePrice} onValueChange={setRangePurchasePrice} />
           <WholeRupeeAmountField label={translateMessage("catalogue.field.salePrice")} name="catalogueRangeSale" value={rangeSalePrice} onValueChange={setRangeSalePrice} />
         </div>

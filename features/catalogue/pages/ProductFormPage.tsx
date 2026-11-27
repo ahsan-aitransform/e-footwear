@@ -71,7 +71,7 @@ export function ProductFormPage({ productId }: { productId?: string }) {
   const [loadedProduct, setLoadedProduct] = useState<ProductDetailResponse | null>(null);
   const [activeTab, setActiveTab] = useState<string>(TAB_BASIC_INFORMATION);
 
-  const product = useApiQuery<ProductDetailResponse>(isEditing ? ApiEndpoints.products.byId(productId) : null, { enabled: isEditing });
+  const product = useApiQuery<ProductDetailResponse>(isEditing ? ApiEndpoints.products.byId(productId) : null, { enabled: isEditing, offlineCacheName: isEditing ? `catalogue-product-${productId}` : undefined });
   const nextCode = useApiQuery<NextProductCodeResponse>(isEditing ? null : ApiEndpoints.products.nextCode, { enabled: !isEditing });
   const lookups = useCatalogueLookups(values.departmentId || undefined);
   const create = useApiMutation<CreateProductRequest, ProductSavedResponse>(ApiEndpoints.products.list);
@@ -231,7 +231,7 @@ export function ProductFormPage({ productId }: { productId?: string }) {
         {isEditing && (
           <TabsContent value={TAB_PRICE_HISTORY}>
             <SectionCard title={translateMessage("catalogue.history.title")} isPadded={false}>
-              <ProductPriceHistoryPanel productId={productId} />
+              <ProductPriceHistoryPanel productId={productId} productName={loadedProduct?.name ?? ""} categoryName={lookups.categoryOptions.find((option) => option.value === loadedProduct?.categoryId)?.label ?? ""} />
             </SectionCard>
           </TabsContent>
         )}

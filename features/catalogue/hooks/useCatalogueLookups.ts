@@ -19,6 +19,7 @@ export function useCatalogueLookups(departmentId?: string) {
   const departments = useApiQuery<MasterListOptionResponse[]>(ApiEndpoints.masterData.optionsOfList(ApiEndpoints.masterData.departments));
   const categories = useApiQuery<MasterListOptionResponse[]>(ApiEndpoints.masterData.optionsOfList(ApiEndpoints.masterData.categories), {
     query: { departmentId: departmentId || undefined },
+    offlineCacheName: `catalogue-categories-${departmentId || "all"}`,
   });
   const brands = useApiQuery<MasterListOptionResponse[]>(ApiEndpoints.masterData.optionsOfList(ApiEndpoints.masterData.brands));
   const seasons = useApiQuery<MasterListOptionResponse[]>(ApiEndpoints.masterData.optionsOfList(ApiEndpoints.masterData.seasons));

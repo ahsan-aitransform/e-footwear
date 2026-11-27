@@ -129,6 +129,15 @@ export function buildRowsForSizeRange(options: {
   return added;
 }
 
+// The whole-number sizes typed for a free size range. Empty when the text is not a usable range.
+export function buildNumericSizeCodes(startText: string, endText: string): string[] {
+  if (!/^\d+$/.test(startText) || !/^\d+$/.test(endText)) return [];
+  const start = Number(startText);
+  const count = Number(endText) - start + 1;
+  if (!Number.isSafeInteger(start) || count < 1 || count > CatalogueLimits.maximumVariantsPerProduct) return [];
+  return Array.from({ length: count }, (_, index) => String(start + index));
+}
+
 export function validateProductForm(values: ProductFormValues): { errors: ProductFormErrors; rowErrors: ProductVariantRowErrors } {
   const errors: ProductFormErrors = {};
   const rowErrors: ProductVariantRowErrors = {};

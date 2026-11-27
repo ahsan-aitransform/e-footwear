@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  buildNumericSizeCodes,
   buildRowsForSizeRange,
   createEmptyProductForm,
   createRowKey,
@@ -94,5 +95,17 @@ describe("product requests", () => {
 
   it("sends the row version of the product on update", () => {
     expect(toUpdateProductRequest(validForm(), 7).rowVersion).toBe(7);
+  });
+});
+
+describe("buildNumericSizeCodes", () => {
+  it("lists every whole number from start to end", () => {
+    expect(buildNumericSizeCodes("38", "40")).toEqual(["38", "39", "40"]);
+  });
+
+  it("gives nothing for a reversed, fractional or oversized range", () => {
+    expect(buildNumericSizeCodes("40", "38")).toEqual([]);
+    expect(buildNumericSizeCodes("1.5", "3")).toEqual([]);
+    expect(buildNumericSizeCodes("1", "1000")).toEqual([]);
   });
 });
