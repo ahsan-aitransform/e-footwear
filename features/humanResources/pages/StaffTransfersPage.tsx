@@ -79,7 +79,8 @@ export function StaffTransfersPage() {
           caption={translateMessage("humanResources.transfers.title")}
           emptyTitle={translateMessage("humanResources.transfers.empty.title")}
           emptyText={translateMessage("humanResources.transfers.empty.text")}
-          filters={{ storeId: storeId || undefined, fromDate: fromDate || undefined, toDate: toDate || undefined, refreshKey: refreshCounter }}
+          filters={{ storeId: storeId || undefined, fromDate: fromDate || undefined, toDate: toDate || undefined }}
+          refreshKey={refreshCounter}
           searchPlaceholder={translateMessage("humanResources.transfers.searchPlaceholder")}
           defaultSort={{ columnKey: "date", direction: "descending" }}
         />

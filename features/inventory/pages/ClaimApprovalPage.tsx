@@ -93,7 +93,7 @@ export function ClaimApprovalPage() {
       <FormResultNotice errorMessage={errorMessage} />
       <SectionCard isPadded={false}>
         <ServerPaginatedDataGrid<ProductClaimResponse>
-          key={gridVersion}
+          refreshKey={gridVersion}
           path={ApiEndpoints.inventory.claimApprovals.list}
           filters={{ storeId: filters.storeId || undefined, fromDate: filters.fromDate || undefined, toDate: filters.toDate || undefined, statusCode: filters.statusCode || undefined }}
           columns={columns}

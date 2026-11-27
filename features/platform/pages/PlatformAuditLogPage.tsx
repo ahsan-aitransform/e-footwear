@@ -97,6 +97,7 @@ export function PlatformAuditLogPage() {
         caption={translateMessage("platform.auditLog.title")}
         emptyTitle={translateMessage("platform.auditLog.empty")}
         filters={filters}
+        isSearchEnabled={false}
       />
     </>
   );

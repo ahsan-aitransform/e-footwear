@@ -107,7 +107,7 @@ export function TransferDiscrepanciesPage() {
           </FormField>
         </div>
         <ServerPaginatedDataGrid<TransferLossCaseResponse>
-          key={`${statusCode}-${gridVersion}`}
+          refreshKey={gridVersion}
           path={ApiEndpoints.inventory.transferDiscrepancies.list}
           filters={{ statusCode: statusCode || undefined }}
           columns={columns}

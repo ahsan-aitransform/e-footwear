@@ -4,6 +4,7 @@ import { useState } from "react";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { FormResultNotice, InlineNotice } from "@/components/feedback/InlineNotice";
 import { LoadingIndicator } from "@/components/feedback/LoadingIndicator";
+import { SearchButton } from "@/components/forms/SearchButton";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionCard } from "@/components/layout/SectionCard";
 import { PrintButton, PrintedReportHeading } from "@/features/accounting/components/PrintControls";
@@ -14,13 +15,14 @@ import { ToneNames } from "@/lib/design/semanticTones";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 import { usePermissions } from "@/lib/permissions/usePermissions";
 import { useCurrentSession } from "@/lib/session/useSessionState";
+import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import { LinePaymentsDialog } from "../components/LinePaymentsDialog";
 import { PaySalaryDialog } from "../components/PaySalaryDialog";
 import { PayrollStatusBadge } from "../components/PayrollStatusBadge";
 import { SalaryPeriodSelectors } from "../components/SalaryPeriodSelectors";
 import { SalarySheetTable } from "../components/SalarySheetTable";
 import { useSalarySheetSelection } from "../hooks/useSalarySheetSelection";
-import { formatSalaryMonth } from "../logic/salaryMonth";
+import { formatSalaryMonth, salaryMonthFromIsoDate } from "../logic/salaryMonth";
 import type { PayrollSheetLineResponse, PayrollSheetResponse } from "../types/payrollTypes";
 
 // View Salary Sheet (docx 3.9): the sheet of a store and month with what is paid and what is outstanding. Salary is paid here, line by line and in parts.
@@ -31,9 +33,14 @@ export function ViewSalarySheetPage() {
   const { hasPermission } = usePermissions();
   const session = useCurrentSession();
   const { storeId, setStoreId, salaryMonth, setSalaryMonth, monthIsoDate } = useSalarySheetSelection();
-  const isStoreChosen = storeId !== "";
+  // The sheet shows what was last searched; until then the working store (it can arrive after the first render) and the current month.
+  const workingStoreId = useWorkingStoreId();
+  const [firstMonth] = useState(monthIsoDate);
+  const [searchedByPerson, setSearched] = useState<{ storeId: string; month: string }>();
+  const searched = searchedByPerson ?? { storeId: workingStoreId ?? "", month: firstMonth };
+  const isStoreChosen = searched.storeId !== "";
 
-  const sheet = useApiQuery<PayrollSheetResponse | undefined>(ApiEndpoints.payroll.sheet, { query: { storeId, month: monthIsoDate }, enabled: isStoreChosen });
+  const sheet = useApiQuery<PayrollSheetResponse | undefined>(ApiEndpoints.payroll.sheet, { query: searched, enabled: isStoreChosen });
   const [payingLine, setPayingLine] = useState<PayrollSheetLineResponse | null>(null);
   const [paymentsLine, setPaymentsLine] = useState<PayrollSheetLineResponse | null>(null);
 
@@ -43,7 +50,7 @@ export function ViewSalarySheetPage() {
   const maySeePayments = hasPermission(PermissionCodes.HUMAN_RESOURCES.SALARY_PAYMENTS.VIEW);
   const mayPrint = hasPermission(PermissionCodes.HUMAN_RESOURCES.VIEW_SALARY_SHEET.PRINT);
   const currentSheet = sheet.data;
-  const monthLabel = formatSalaryMonth(salaryMonth, translateMessage);
+  const monthLabel = formatSalaryMonth(salaryMonthFromIsoDate(searched.month) ?? salaryMonth, translateMessage);
 
   return (
     <div className="space-y-6">
@@ -54,7 +61,17 @@ export function ViewSalarySheetPage() {
       />
       <div className="print:hidden">
         <SectionCard>
-          <SalaryPeriodSelectors idPrefix="view-salary-sheet" storeId={storeId} onStoreIdChange={setStoreId} salaryMonth={salaryMonth} onSalaryMonthChange={setSalaryMonth} />
+          <form
+            className="space-y-4"
+            onSubmit={(event) => {
+              event.preventDefault();
+              setSearched({ storeId, month: monthIsoDate });
+              if (isStoreChosen) sheet.refetch();
+            }}
+          >
+            <SalaryPeriodSelectors idPrefix="view-salary-sheet" storeId={storeId} onStoreIdChange={setStoreId} salaryMonth={salaryMonth} onSalaryMonthChange={setSalaryMonth} />
+            <SearchButton isDisabled={storeId === ""} />
+          </form>
         </SectionCard>
       </div>
 

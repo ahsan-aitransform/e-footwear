@@ -58,7 +58,7 @@ export function StockAdjustmentHistoryPanel({ storeId, refreshToken }: { storeId
       <ServerPaginatedDataGrid<StockAdjustmentListItemResponse>
         key={`${gridVersion}-${refreshToken}-${storeId}`}
         path={ApiEndpoints.inventory.stockAdjustments.list}
-        filters={{ storeId }}
+        fixedFilters={{ storeId }}
         columns={columns}
         getRowKey={(row) => row.id}
         caption={translateMessage("inventory.adjustment.history.caption")}

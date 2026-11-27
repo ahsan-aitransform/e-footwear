@@ -187,7 +187,8 @@ export function ContactListPage({
           caption={translateMessage(titleKey)}
           emptyTitle={text("empty.title")}
           emptyText={text("empty.text")}
-          filters={{ cityId: cityId || undefined, storeId: storeId || undefined, statusCode: statusCode || undefined, refreshKey: refreshCounter + refreshSignal }}
+          filters={{ cityId: cityId || undefined, storeId: storeId || undefined, statusCode: statusCode || undefined }}
+          refreshKey={refreshCounter + refreshSignal}
           onRowOpen={mode === "manage" && mayEdit ? (row) => editContact(row.id) : undefined}
           toolbarActions={toolbarActions}
           searchPlaceholder={text("search.placeholder")}

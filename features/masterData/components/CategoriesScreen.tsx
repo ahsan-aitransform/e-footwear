@@ -274,7 +274,8 @@ export function CategoriesScreen() {
               getRowKey={(row) => row.id}
               caption={translateMessage("navigation.item.categories")}
               emptyTitle={translateMessage("masterData.empty.title")}
-              filters={{ includeInactive: true, refreshKey: refreshCounter }}
+              fixedFilters={{ includeInactive: true }}
+              refreshKey={refreshCounter}
               onRowOpen={mayEdit ? startEditing : undefined}
               searchPlaceholder={translateMessage("masterData.search.placeholder")}
               offlineCacheName="masterDataCategories"

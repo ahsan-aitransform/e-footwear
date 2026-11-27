@@ -55,9 +55,11 @@ export function StockTransferReceivingPage() {
               </FormField>
             </div>
             <ServerPaginatedDataGrid<StockTransferListItemResponse>
-              key={`${storeId}-${statusCode}-${gridVersion}`}
+              key={storeId}
               path={ApiEndpoints.inventory.stockTransferReceiving.list}
-              filters={{ storeId, statusCode: statusCode || undefined }}
+              fixedFilters={{ storeId }}
+              filters={{ statusCode: statusCode || undefined }}
+              refreshKey={gridVersion}
               columns={columns}
               getRowKey={(transfer) => transfer.id}
               caption={translateMessage("inventory.receiving.caption")}

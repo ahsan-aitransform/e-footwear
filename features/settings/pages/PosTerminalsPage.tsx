@@ -6,6 +6,7 @@ import { DataGridTable } from "@/components/data/DataGridTable";
 import type { DataGridColumn } from "@/components/data/dataGridTypes";
 import { FormField } from "@/components/forms/FormField";
 import { NativeSelect } from "@/components/forms/NativeSelect";
+import { SearchButton } from "@/components/forms/SearchButton";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionCard } from "@/components/layout/SectionCard";
 import { useApiQuery } from "@/lib/api/hooks/useApiQuery";
@@ -21,7 +22,8 @@ export function PosTerminalsPage() {
   const { translateMessage } = useTranslation();
   const { sellingStores } = useSellingStores();
   const [storeId, setStoreId] = useState("");
-  const terminals = useApiQuery<PosTerminalResponse[]>(ApiEndpoints.posTerminals.list, { query: { storeId: storeId || undefined } });
+  const [searchedStoreId, setSearchedStoreId] = useState("");
+  const terminals = useApiQuery<PosTerminalResponse[]>(ApiEndpoints.posTerminals.list, { query: { storeId: searchedStoreId || undefined } });
   const notAvailable = translateMessage("common.notAvailable");
 
   const columns: DataGridColumn<PosTerminalResponse>[] = [
@@ -43,6 +45,14 @@ export function PosTerminalsPage() {
   return (
     <>
       <PageHeader title={translateMessage("settings.posTerminals.title")} subtitle={translateMessage("settings.posTerminals.subtitle")} />
+      <form
+        className="flex flex-wrap items-end gap-3"
+        onSubmit={(event) => {
+          event.preventDefault();
+          setSearchedStoreId(storeId);
+          terminals.refetch();
+        }}
+      >
       <FormField label={translateMessage("common.store")} name="pos-terminals-store">
         {(controlProps) => (
           <NativeSelect {...controlProps} value={storeId} onChange={(event) => setStoreId(event.target.value)}>
@@ -55,6 +65,8 @@ export function PosTerminalsPage() {
           </NativeSelect>
         )}
       </FormField>
+      <SearchButton />
+      </form>
       <SectionCard isPadded={false}>
         <DataGridTable
           rows={terminals.data ?? []}

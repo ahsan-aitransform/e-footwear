@@ -7,6 +7,7 @@ import type { DataGridColumn } from "@/components/data/dataGridTypes";
 import { ConfirmDialog } from "@/components/feedback/ConfirmDialog";
 import { FormResultNotice, InlineNotice } from "@/components/feedback/InlineNotice";
 import { FormField } from "@/components/forms/FormField";
+import { SearchButton } from "@/components/forms/SearchButton";
 import { OptionSelect } from "@/components/forms/OptionSelect";
 import { WholeRupeeAmountField } from "@/components/forms/WholeRupeeAmountField";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -71,6 +72,8 @@ export function ProductVariantListPage({ mode }: { mode: ProductVariantListMode 
   const workingStoreId = useWorkingStoreId();
 
   const [filter, setFilter] = useState<ProductListFilterValues>({ storeId: workingStoreId ?? undefined });
+  // The store of the list on screen. The actions below work on it, not on a store that was chosen but not searched yet.
+  const [searchedStoreId, setSearchedStoreId] = useState(filter.storeId);
   const [onlyActive, setOnlyActive] = useState(false);
   const [searchField, setSearchField] = useState<string>(ProductSearchFieldCodes.all);
   const [matchMode, setMatchMode] = useState<string>(ProductMatchModeCodes.contains);
@@ -94,7 +97,7 @@ export function ProductVariantListPage({ mode }: { mode: ProductVariantListMode 
   const mayOpenProduct = hasPermission(PermissionCodes.PRODUCTS.NEW_PRODUCT.VIEW);
 
   const selectedProductIds = useMemo(() => [...new Set([...selectedKeys].map((key) => key.split("|")[0]))], [selectedKeys]);
-  const storeIsMissing = settings.needsStore && !filter.storeId;
+  const storeIsMissing = settings.needsStore && !searchedStoreId;
 
   const columns = useMemo<DataGridColumn<ProductVariantListItemResponse>[]>(() => {
     const base: DataGridColumn<ProductVariantListItemResponse>[] = [
@@ -151,7 +154,7 @@ export function ProductVariantListPage({ mode }: { mode: ProductVariantListMode 
     setIsApplying(true);
     setErrorMessage(undefined);
     const body: SetNewSalePriceRequest = {
-      storeId: filter.storeId ?? null,
+      storeId: searchedStoreId ?? null,
       productIds: selectedProductIds,
       newSalePrice,
       clientTransactionId: createClientTransactionId(),
@@ -166,11 +169,11 @@ export function ProductVariantListPage({ mode }: { mode: ProductVariantListMode 
   }
 
   async function removeDiscounts() {
-    if (!filter.storeId) return;
+    if (!searchedStoreId) return;
     setIsApplying(true);
     setErrorMessage(undefined);
     const body: RemoveProductDiscountsRequest = {
-      storeId: filter.storeId,
+      storeId: searchedStoreId,
       productIds: selectedProductIds,
       alsoRestorePreviousSalePrice: alsoRestorePrice,
       clientTransactionId: createClientTransactionId(),
@@ -203,10 +206,9 @@ export function ProductVariantListPage({ mode }: { mode: ProductVariantListMode 
     searchField: mode === "search" ? searchField : undefined,
     matchMode: mode === "search" ? matchMode : undefined,
     includeDescription: mode === "search" && includeDescription ? true : undefined,
-    refreshKey: refreshCounter,
   };
 
-  const canApplyDiscountsChange = mayApply && selectedProductIds.length > 0 && (mode === "discountRemoval" ? Boolean(filter.storeId) : newSalePrice !== null);
+  const canApplyDiscountsChange = mayApply && selectedProductIds.length > 0 && (mode === "discountRemoval" ? Boolean(searchedStoreId) : newSalePrice !== null);
 
   return (
     <div ref={containerReference} className="space-y-6">
@@ -273,7 +275,7 @@ export function ProductVariantListPage({ mode }: { mode: ProductVariantListMode 
                   name="catalogueNewSalePrice"
                   value={newSalePrice}
                   onValueChange={setNewSalePrice}
-                  hint={translateMessage(filter.storeId ? "catalogue.productDiscounts.storePriceHint" : "catalogue.productDiscounts.listPriceHint")}
+                  hint={translateMessage(searchedStoreId ? "catalogue.productDiscounts.storePriceHint" : "catalogue.productDiscounts.listPriceHint")}
                 />
               </div>
             ) : (
@@ -294,7 +296,12 @@ export function ProductVariantListPage({ mode }: { mode: ProductVariantListMode 
 
       <FormResultNotice errorMessage={errorMessage} successMessage={resultMessage} />
       {storeIsMissing ? (
-        <InlineNotice tone={ToneNames.info}>{translateMessage("catalogue.removeDiscounts.chooseStore")}</InlineNotice>
+        <div className="flex flex-wrap items-center gap-3">
+          <InlineNotice tone={ToneNames.info}>{translateMessage("catalogue.removeDiscounts.chooseStore")}</InlineNotice>
+          <form onSubmit={(event) => { event.preventDefault(); setSearchedStoreId(filter.storeId); }}>
+            <SearchButton isDisabled={!filter.storeId} />
+          </form>
+        </div>
       ) : (
         <SectionCard isPadded={false}>
           <ServerPaginatedDataGrid<ProductVariantListItemResponse>
@@ -305,6 +312,9 @@ export function ProductVariantListPage({ mode }: { mode: ProductVariantListMode 
             emptyTitle={translateMessage("catalogue.empty.title")}
             emptyText={translateMessage("catalogue.empty.text")}
             filters={gridFilters}
+            refreshKey={refreshCounter}
+            onSearch={() => setSearchedStoreId(filter.storeId)}
+            isSearchDisabled={settings.needsStore && !filter.storeId}
             isSelectionEnabled={settings.hasSelection && mayApply}
             onSelectedRowKeysChange={setSelectedKeys}
             onRowOpen={mode !== "discounts" && mode !== "discountRemoval" && mayOpenProduct ? (row) => router.push(ApplicationRoutes.editProduct(row.productId)) : undefined}

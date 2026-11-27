@@ -47,10 +47,12 @@ export function CommissionEntriesPage() {
   const hasValidDates = (fromDate === "" || isValidIsoDate(fromDate)) && (toDate === "" || isValidIsoDate(toDate));
   const isDateOrderWrong = fromDate !== "" && toDate !== "" && hasValidDates && fromDate > toDate;
   const filters = useMemo(
-    () => ({ storeId, staffId, statusCode, fromDate: hasValidDates ? fromDate : "", toDate: hasValidDates ? toDate : "", refresh: refreshCounter }),
-    [storeId, staffId, statusCode, fromDate, toDate, hasValidDates, refreshCounter],
+    () => ({ storeId, staffId, statusCode, fromDate: hasValidDates ? fromDate : "", toDate: hasValidDates ? toDate : "" }),
+    [storeId, staffId, statusCode, fromDate, toDate, hasValidDates],
   );
-  const totals = useApiQuery<CommissionEntryTotalsResponse>(ApiEndpoints.commissions.entryTotals, { query: filters, enabled: !isDateOrderWrong });
+  // The totals and the list show what was last searched.
+  const [searchedFilters, setSearchedFilters] = useState(filters);
+  const totals = useApiQuery<CommissionEntryTotalsResponse>(ApiEndpoints.commissions.entryTotals, { query: { ...searchedFilters, refreshKey: refreshCounter } });
 
   const statusOptions: OptionSelectOption[] = commissionEntryStatusFilterCodeList.map((code) => ({ value: code, label: translateMessage(`commissions.status.${code}`) }));
 
@@ -107,21 +109,25 @@ export function CommissionEntriesPage() {
         </div>
       )}
 
-      {!isDateOrderWrong && (
-        <SectionCard isPadded={false}>
-          <ServerPaginatedDataGrid<CommissionEntryResponse>
-            path={ApiEndpoints.commissions.entries}
-            columns={columns}
-            getRowKey={(entry) => entry.id}
-            caption={translateMessage("commissions.entries.title")}
-            emptyTitle={translateMessage("commissions.entries.empty")}
-            emptyText={translateMessage("commissions.entries.emptyText")}
-            searchPlaceholder={translateMessage("commissions.entries.search")}
-            filters={filters}
-            defaultSort={{ columnKey: "saleDate", direction: "descending" }}
-          />
-        </SectionCard>
-      )}
+      <SectionCard isPadded={false}>
+        <ServerPaginatedDataGrid<CommissionEntryResponse>
+          path={ApiEndpoints.commissions.entries}
+          columns={columns}
+          getRowKey={(entry) => entry.id}
+          caption={translateMessage("commissions.entries.title")}
+          emptyTitle={translateMessage("commissions.entries.empty")}
+          emptyText={translateMessage("commissions.entries.emptyText")}
+          searchPlaceholder={translateMessage("commissions.entries.search")}
+          filters={filters}
+          refreshKey={refreshCounter}
+          onSearch={() => {
+            setSearchedFilters(filters);
+            totals.refetch();
+          }}
+          isSearchDisabled={isDateOrderWrong}
+          defaultSort={{ columnKey: "saleDate", direction: "descending" }}
+        />
+      </SectionCard>
 
       {isApproving && (
         <ApproveCommissionsDialog

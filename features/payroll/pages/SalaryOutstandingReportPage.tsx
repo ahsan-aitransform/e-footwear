@@ -4,6 +4,7 @@ import { useState } from "react";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { FormResultNotice, InlineNotice } from "@/components/feedback/InlineNotice";
 import { LoadingIndicator } from "@/components/feedback/LoadingIndicator";
+import { SearchButton } from "@/components/forms/SearchButton";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionCard } from "@/components/layout/SectionCard";
 import { PermissionGate } from "@/components/permissions/PermissionGate";
@@ -23,11 +24,12 @@ import type { SalaryOutstandingReportResponse } from "../types/payrollTypes";
 const money = (amount: number) => formatWholeRupees(amount, { withSymbol: false });
 
 // Salary Outstanding Report (Part 22 additional report): approved salary that is not paid in full, per staff member and month, with totals over every line.
-// A draft sheet is not owed yet and is not listed. The list loads as soon as the screen opens and again when the store filter changes.
+// A draft sheet is not owed yet and is not listed. The list loads as soon as the screen opens and again when Search is pressed.
 export function SalaryOutstandingReportPage() {
   const { translateMessage } = useTranslation();
   const [storeId, setStoreId] = useState("");
-  const report = useApiQuery<SalaryOutstandingReportResponse>(ApiEndpoints.payroll.salaryOutstandingReport, { query: { storeId } });
+  const [searchedStoreId, setSearchedStoreId] = useState("");
+  const report = useApiQuery<SalaryOutstandingReportResponse>(ApiEndpoints.payroll.salaryOutstandingReport, { query: { storeId: searchedStoreId } });
   const data = report.data;
 
   return (
@@ -35,9 +37,17 @@ export function SalaryOutstandingReportPage() {
       <PageHeader title={translateMessage("payroll.salaryOutstandingReport.title")} subtitle={translateMessage("payroll.salaryOutstandingReport.subtitle")} />
       <div className="print:hidden">
         <SectionCard>
-          <div className="grid items-end gap-4 sm:grid-cols-3">
+          <form
+            className="grid items-end gap-4 sm:grid-cols-3"
+            onSubmit={(event) => {
+              event.preventDefault();
+              setSearchedStoreId(storeId);
+              report.refetch();
+            }}
+          >
             <StoreFilterSelect name="salary-outstanding-store" label={translateMessage("payroll.report.store")} allStoresLabel={translateMessage("payroll.report.allStores")} storeId={storeId} onStoreIdChange={setStoreId} />
-          </div>
+            <SearchButton className="w-fit" />
+          </form>
         </SectionCard>
       </div>
 

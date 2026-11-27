@@ -212,7 +212,8 @@ export function GlAccountsPage() {
               getRowKey={(row) => row.id}
               caption={translateMessage("navigation.item.glAccounts")}
               emptyTitle={translateMessage("masterData.empty.title")}
-              filters={{ groupCode: groupCode || undefined, refreshKey: refreshCounter }}
+              filters={{ groupCode: groupCode || undefined }}
+              refreshKey={refreshCounter}
               searchPlaceholder={translateMessage("masterData.search.placeholder")}
               offlineCacheName="chartOfAccountsAccounts"
             />

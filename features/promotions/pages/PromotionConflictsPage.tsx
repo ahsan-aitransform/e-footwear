@@ -29,7 +29,7 @@ export function PromotionConflictsPage() {
   const [storeId, setStoreId] = useState("");
   const [refreshCounter, setRefreshCounter] = useState(0);
   const [message, setMessage] = useState<string>();
-  const filters = useMemo(() => ({ storeId, refresh: refreshCounter }), [storeId, refreshCounter]);
+  const filters = useMemo(() => ({ storeId }), [storeId]);
 
   async function choose(conflict: PromotionConflictResponse, ruleId: string) {
     setMessage(undefined);
@@ -93,6 +93,7 @@ export function PromotionConflictsPage() {
           emptyText={translateMessage("promotions.conflicts.emptyText")}
           isSearchEnabled={false}
           filters={filters}
+          refreshKey={refreshCounter}
         />
       </SectionCard>
     </div>

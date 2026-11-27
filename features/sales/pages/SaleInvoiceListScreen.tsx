@@ -312,7 +312,8 @@ export function SaleInvoiceListScreen({ mode }: { mode: SaleInvoiceListMode }) {
           getRowKey={(row) => row.id}
           caption={translateMessage(isDeletedMode ? "sales.deleted.title" : "sales.list.title")}
           emptyTitle={translateMessage(isDeletedMode ? "sales.deleted.empty" : "sales.list.empty")}
-          filters={filters}
+          fixedFilters={filters}
+          onSearch={() => setApplied(draft)}
           defaultSort={{ columnKey: "saleDate", direction: "descending" }}
           isSearchEnabled
           searchPlaceholder={translateMessage("sales.list.searchPlaceholder")}

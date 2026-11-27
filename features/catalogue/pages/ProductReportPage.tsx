@@ -28,6 +28,7 @@ export function ProductReportPage() {
   const mayPrint = hasPermission(PermissionCodes.PRODUCTS.PRODUCT_REPORT.PRINT);
   const mayExport = hasPermission(PermissionCodes.PRODUCTS.PRODUCT_REPORT.EXPORT);
   const reportFilters = { brandId: filter.brandId, seasonId: filter.seasonId, colorId: filter.colorId };
+  const [searchedFilters, setSearchedFilters] = useState(reportFilters);
 
   const columns = useMemo<DataGridColumn<ProductReportRowResponse>[]>(
     () => [
@@ -45,7 +46,7 @@ export function ProductReportPage() {
   );
 
   async function loadExportTable() {
-    const result = await fetchAllPagesOfList<ProductReportRowResponse>(ApiEndpoints.products.report, reportFilters);
+    const result = await fetchAllPagesOfList<ProductReportRowResponse>(ApiEndpoints.products.report, searchedFilters);
     if (!result.ok) return { errorMessage: result.problem.message };
     return {
       headers: [translateMessage("catalogue.field.productCode"), translateMessage("catalogue.field.productName"), translateMessage("catalogue.field.purchasePrice"), translateMessage("catalogue.field.salePrice"), translateMessage("catalogue.field.brand"), translateMessage("catalogue.field.season"), translateMessage("catalogue.field.color"), translateMessage("catalogue.filter.store"), translateMessage("catalogue.field.stock")],
@@ -80,6 +81,7 @@ export function ProductReportPage() {
           emptyTitle={translateMessage("catalogue.empty.title")}
           emptyText={translateMessage("catalogue.empty.text")}
           filters={reportFilters}
+          onSearch={() => setSearchedFilters(reportFilters)}
           searchPlaceholder={translateMessage("catalogue.search.placeholder")}
           offlineCacheName="catalogueProductReport"
         />

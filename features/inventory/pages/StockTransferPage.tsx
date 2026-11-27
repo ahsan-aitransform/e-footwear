@@ -101,7 +101,7 @@ export function StockTransferPage() {
             <ServerPaginatedDataGrid<StockTransferListItemResponse>
               key={`${storeId}-${gridVersion}`}
               path={ApiEndpoints.inventory.stockTransfers.list}
-              filters={{ storeId, directionCode: TransferDirectionCodes.outgoing }}
+              fixedFilters={{ storeId, directionCode: TransferDirectionCodes.outgoing }}
               columns={columns}
               getRowKey={(transfer) => transfer.id}
               caption={translateMessage("inventory.transfer.list.caption")}

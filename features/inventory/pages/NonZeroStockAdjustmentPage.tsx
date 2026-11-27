@@ -156,7 +156,7 @@ export function NonZeroStockAdjustmentPage() {
             <ServerPaginatedDataGrid<NonZeroStockRowResponse>
               key={`${storeId}-${gridVersion}`}
               path={ApiEndpoints.inventory.nonZeroStock.list}
-              filters={{ storeId }}
+              fixedFilters={{ storeId }}
               columns={columns}
               getRowKey={(row) => row.variantId}
               caption={translateMessage("inventory.nonZero.caption")}

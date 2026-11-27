@@ -7,6 +7,7 @@ import { FormResultNotice } from "@/components/feedback/InlineNotice";
 import { LoadingIndicator } from "@/components/feedback/LoadingIndicator";
 import { FormField } from "@/components/forms/FormField";
 import { NativeSelect } from "@/components/forms/NativeSelect";
+import { SearchButton } from "@/components/forms/SearchButton";
 import { TextInputField } from "@/components/forms/TextInputField";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionCard } from "@/components/layout/SectionCard";
@@ -28,6 +29,7 @@ export function ViewSecondLevelAccountGroupsPage() {
   const { translateMessage } = useTranslation();
   const { hasPermission } = usePermissions();
   const [mainTypeCode, setMainTypeCode] = useState("");
+  const [searchedMainTypeCode, setSearchedMainTypeCode] = useState("");
   const [editingGroup, setEditingGroup] = useState<AccountGroupResponse | null>(null);
   const [editedName, setEditedName] = useState("");
   const [message, setMessage] = useState<string>();
@@ -35,7 +37,7 @@ export function ViewSecondLevelAccountGroupsPage() {
 
   const mainTypes = useApiQuery<AccountMainTypeResponse[]>(ApiEndpoints.chartOfAccounts.mainTypes);
   const groups = useApiQuery<AccountGroupResponse[]>(ApiEndpoints.chartOfAccounts.groups, {
-    query: { mainTypeCode: mainTypeCode || undefined },
+    query: { mainTypeCode: searchedMainTypeCode || undefined },
   });
   const mayEdit = hasPermission(PermissionCodes.SETTINGS.VIEW_SECOND_LEVEL.EDIT);
   const mayDelete = hasPermission(PermissionCodes.SETTINGS.VIEW_SECOND_LEVEL.DELETE);
@@ -68,6 +70,14 @@ export function ViewSecondLevelAccountGroupsPage() {
       <PageHeader title={translateMessage("navigation.item.viewSecondLevelAccountGroups")} subtitle={translateMessage("accounting.groups.viewSubtitle")} />
       <SectionCard isPadded={false}>
         <div className="space-y-4 p-4">
+          <form
+            className="flex flex-wrap items-end gap-3"
+            onSubmit={(event) => {
+              event.preventDefault();
+              setSearchedMainTypeCode(mainTypeCode);
+              groups.refetch();
+            }}
+          >
           <FormField label={translateMessage("accounting.column.mainType")} name="mainTypeFilter">
             {(controlProps) => (
               <NativeSelect {...controlProps} value={mainTypeCode} onChange={(event) => setMainTypeCode(event.target.value)}>
@@ -80,6 +90,8 @@ export function ViewSecondLevelAccountGroupsPage() {
               </NativeSelect>
             )}
           </FormField>
+          <SearchButton />
+          </form>
           <FormResultNotice errorMessage={message} />
           {editingGroup && (
             <div className="flex items-end gap-2">

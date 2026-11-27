@@ -19,8 +19,8 @@ export type ProductSearchFieldCode = (typeof ProductSearchFieldCodes)[keyof type
 // How the search text is compared (backend ProductMatchModeCodes).
 export const ProductMatchModeCodes = {
   contains: "CONTAINS",
-  startsWith: "STARTS_WITH",
-  endsWith: "ENDS_WITH",
+  startsWith: "START",
+  endsWith: "END",
   exact: "EXACT",
 } as const;
 export type ProductMatchModeCode = (typeof ProductMatchModeCodes)[keyof typeof ProductMatchModeCodes];

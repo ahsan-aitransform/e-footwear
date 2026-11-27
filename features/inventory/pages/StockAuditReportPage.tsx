@@ -55,7 +55,7 @@ export function StockAuditReportPage() {
           <ServerPaginatedDataGrid<StockAuditListItemResponse>
             key={`${filters.storeId}-${filters.fromDate}-${filters.toDate}`}
             path={ApiEndpoints.inventory.stockAudits.reportList}
-            filters={{ storeId: filters.storeId || undefined, fromDate: filters.fromDate, toDate: filters.toDate }}
+            fixedFilters={{ storeId: filters.storeId || undefined, fromDate: filters.fromDate, toDate: filters.toDate }}
             columns={columns}
             getRowKey={(audit) => audit.id}
             caption={translateMessage("inventory.audit.reportPage.title")}

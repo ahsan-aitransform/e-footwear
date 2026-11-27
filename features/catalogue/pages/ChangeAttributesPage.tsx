@@ -150,7 +150,9 @@ export function ChangeAttributesPage() {
             getRowKey={(row) => row.productId}
             caption={translateMessage("catalogue.changeAttributes.productsTitle")}
             emptyTitle={translateMessage("catalogue.changeAttributes.noProducts")}
-            filters={{ fieldType: fieldCode, oldValueId, refreshKey: refreshCounter }}
+            // This list previews what the change below will touch, so it follows the chosen value at once.
+            fixedFilters={{ fieldType: fieldCode, oldValueId }}
+            refreshKey={refreshCounter}
             isSearchEnabled={false}
           />
         )}

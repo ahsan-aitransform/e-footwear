@@ -135,7 +135,7 @@ export function ProductClaimPage() {
             <ServerPaginatedDataGrid<ProductClaimResponse>
               key={`${storeId}-${gridVersion}`}
               path={ApiEndpoints.inventory.productClaims.list}
-              filters={{ storeId }}
+              fixedFilters={{ storeId }}
               columns={columns}
               getRowKey={(claim) => claim.id}
               caption={translateMessage("inventory.claim.list.caption")}

@@ -8,6 +8,7 @@ import { LoadingIndicator } from "@/components/feedback/LoadingIndicator";
 import { DateField } from "@/components/forms/DateField";
 import { FormField } from "@/components/forms/FormField";
 import { NativeSelect } from "@/components/forms/NativeSelect";
+import { SearchButton } from "@/components/forms/SearchButton";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionCard } from "@/components/layout/SectionCard";
 import { Button } from "@/components/ui/button";
@@ -38,11 +39,13 @@ export function ContactAccountDetailPage({ config }: { config: ContactScreenConf
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
+  // The ledger shows what was last searched; a link to one contact opens it straight away.
+  const [searched, setSearched] = useState({ contactId, fromDate, toDate });
 
   const candidates = useApiQuery<ContactLookupItemResponse[]>(config.endpoints.lookup, { query: { searchText: searchText || undefined } });
   const ledger = useApiQuery<ContactLedgerResponse>(config.endpoints.ledger, {
-    query: { [config.ledgerContactQueryName]: contactId, from: fromDate || undefined, to: toDate || undefined, pageNumber, pageSize: LEDGER_PAGE_SIZE },
-    enabled: contactId !== "",
+    query: { [config.ledgerContactQueryName]: searched.contactId, from: searched.fromDate || undefined, to: searched.toDate || undefined, pageNumber, pageSize: LEDGER_PAGE_SIZE },
+    enabled: searched.contactId !== "",
   });
   const words = { receivable: text("balance.receivable"), payable: text("balance.payable") };
   const mayPrint = hasPermission(config.permissions.accountDetailPrint);
@@ -54,7 +57,7 @@ export function ContactAccountDetailPage({ config }: { config: ContactScreenConf
         title={translateMessage(config.titleMessageKeys.accountDetail as MessageKey)}
         subtitle={text("ledger.subtitle")}
         actions={
-          mayPrint && contactId ? (
+          mayPrint && searched.contactId ? (
             <Button type="button" variant="outline" onClick={() => window.print()}>
               <Printer /> {text("ledger.print")}
             </Button>
@@ -62,13 +65,21 @@ export function ContactAccountDetailPage({ config }: { config: ContactScreenConf
         }
       />
       <SectionCard>
-        <div className="grid gap-4 md:grid-cols-4 print:hidden">
+        <form
+          className="grid items-end gap-4 md:grid-cols-5 print:hidden"
+          onSubmit={(event) => {
+            event.preventDefault();
+            setSearched({ contactId, fromDate, toDate });
+            setPageNumber(1);
+            if (searched.contactId !== "") ledger.refetch();
+          }}
+        >
           <FormField label={text("ledger.find")} name="ledgerContactSearch">
             {(controlProps) => <Input {...controlProps} type="search" value={searchText} onChange={(event) => setSearchText(event.target.value)} />}
           </FormField>
           <FormField label={text("ledger.contact")} name="ledgerContact">
             {(controlProps) => (
-              <NativeSelect {...controlProps} value={contactId} onChange={(event) => { setContactId(event.target.value); setPageNumber(1); }}>
+              <NativeSelect {...controlProps} value={contactId} onChange={(event) => setContactId(event.target.value)}>
                 <option value="">{translateMessage("masterData.choose")}</option>
                 {(candidates.data ?? []).map((candidate) => (
                   <option key={candidate.id} value={candidate.id}>{candidate.code} {candidate.name}</option>
@@ -76,13 +87,14 @@ export function ContactAccountDetailPage({ config }: { config: ContactScreenConf
               </NativeSelect>
             )}
           </FormField>
-          <DateField label={text("ledger.from")} name="ledgerFrom" value={fromDate} onValueChange={(date) => { setFromDate(date); setPageNumber(1); }} />
-          <DateField label={text("ledger.to")} name="ledgerTo" value={toDate} onValueChange={(date) => { setToDate(date); setPageNumber(1); }} />
-        </div>
+          <DateField label={text("ledger.from")} name="ledgerFrom" value={fromDate} onValueChange={setFromDate} />
+          <DateField label={text("ledger.to")} name="ledgerTo" value={toDate} onValueChange={setToDate} />
+          <SearchButton className="w-fit" />
+        </form>
       </SectionCard>
 
-      {contactId === "" && <p className="text-sm text-muted-foreground">{text("ledger.chooseFirst")}</p>}
-      {ledger.status === "loading" && contactId !== "" && <LoadingIndicator />}
+      {searched.contactId === "" && <p className="text-sm text-muted-foreground">{text("ledger.chooseFirst")}</p>}
+      {ledger.status === "loading" && searched.contactId !== "" && <LoadingIndicator />}
       {ledger.status === "error" && <FormResultNotice errorMessage={ledger.problem?.message} />}
       {ledger.data && (
         <SectionCard isPadded={false}>

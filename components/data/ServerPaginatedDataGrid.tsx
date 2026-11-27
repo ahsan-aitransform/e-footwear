@@ -1,18 +1,14 @@
 "use client";
 
 import { RefreshCw } from "lucide-react";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { InlineNotice } from "@/components/feedback/InlineNotice";
+import { SearchButton } from "@/components/forms/SearchButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { usePaginatedQuery } from "@/lib/api/hooks/usePaginatedQuery";
 import type { QueryStringParameters } from "@/lib/api/queryString";
-import {
-  DEFAULT_PAGE_NUMBER,
-  DEFAULT_PAGE_SIZE,
-  PAGE_SIZE_OPTIONS,
-  SEARCH_INPUT_DEBOUNCE_MILLISECONDS,
-} from "@/lib/constants/paginationDefaults";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE, PAGE_SIZE_OPTIONS } from "@/lib/constants/paginationDefaults";
 import { ToneNames } from "@/lib/design/semanticTones";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 import type { PageRequest, SortState } from "@/lib/types/pagination";
@@ -27,8 +23,17 @@ export type ServerPaginatedDataGridProps<TRow> = {
   caption: string;
   emptyTitle: string;
   emptyText?: string;
-  // Extra filters of the screen (store, date range, status ...). Changing them goes back to page 1.
+  // The filters the person chooses on this screen (store, date range, status ...). They reach the server only when Search is pressed.
   filters?: QueryStringParameters;
+  // Parameters that apply at once, because the screen itself sets them: the store being worked in, or filters the screen has already applied with
+  // its own Search form. Changing them goes back to page 1.
+  fixedFilters?: QueryStringParameters;
+  // Change it to ask the server again after a save or delete; the page stays and any ticked rows are cleared.
+  refreshKey?: string | number;
+  // Called when Search is pressed, for a screen that uses the searched filters elsewhere (an export, totals, an action on the listed rows).
+  onSearch?: () => void;
+  // The chosen filters cannot be searched yet (a From date after the To date, a required store not chosen).
+  isSearchDisabled?: boolean;
   defaultSort?: SortState;
   initialPageSize?: number;
   isSearchEnabled?: boolean;
@@ -44,8 +49,10 @@ export type ServerPaginatedDataGridProps<TRow> = {
   offlineCacheName?: string;
 };
 
-// A list screen in one component: search box, sortable columns, server paging, totals row, selection, double-click to
+// A list screen in one component: search box, Search button, sortable columns, server paging, totals row, selection, double-click to
 // open, loading/empty/error states, and the saved copy when offline. The server does the sorting, searching and paging.
+// Typing in the search box or choosing a filter asks nothing of the server until Search (or Enter) is pressed; paging, sorting and
+// Refresh work on what was last searched.
 export function ServerPaginatedDataGrid<TRow>({
   path,
   columns,
@@ -54,6 +61,10 @@ export function ServerPaginatedDataGrid<TRow>({
   emptyTitle,
   emptyText,
   filters,
+  fixedFilters,
+  refreshKey,
+  onSearch,
+  isSearchDisabled = false,
   defaultSort,
   initialPageSize = DEFAULT_PAGE_SIZE,
   isSearchEnabled = true,
@@ -71,23 +82,42 @@ export function ServerPaginatedDataGrid<TRow>({
   const [sort, setSort] = useState<SortState | undefined>(defaultSort);
   const [searchText, setSearchText] = useState("");
   const [appliedSearch, setAppliedSearch] = useState("");
+  const [appliedFilters, setAppliedFilters] = useState(filters);
   const [selectedRowKeys, setSelectedRowKeys] = useState<ReadonlySet<string>>(new Set());
 
-  // Wait for a pause in typing before asking the server.
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setAppliedSearch(searchText);
-      setPage(DEFAULT_PAGE_NUMBER);
-    }, SEARCH_INPUT_DEBOUNCE_MILLISECONDS);
-    return () => window.clearTimeout(timer);
-  }, [searchText]);
+  // A new fixed filter starts at page 1; a refresh clears the ticked rows (adjusting state while rendering, not in an effect).
+  const fixedFiltersKey = JSON.stringify(fixedFilters ?? {});
+  const [seen, setSeen] = useState({ fixedFiltersKey, refreshKey });
+  if (seen.fixedFiltersKey !== fixedFiltersKey || seen.refreshKey !== refreshKey) {
+    if (seen.fixedFiltersKey !== fixedFiltersKey) setPage(DEFAULT_PAGE_NUMBER);
+    if (seen.refreshKey !== refreshKey) setSelectedRowKeys(new Set());
+    setSeen({ fixedFiltersKey, refreshKey });
+  }
 
   const pageRequest = useMemo<PageRequest>(
     () => ({ page, pageSize, sort, search: appliedSearch }),
     [page, pageSize, sort, appliedSearch],
   );
 
-  const state = usePaginatedQuery<TRow>(path, { pageRequest, filters, offlineCacheName });
+  const requestFilters = useMemo<QueryStringParameters>(
+    () => ({ ...appliedFilters, ...fixedFilters, refreshKey }),
+    [appliedFilters, fixedFilters, refreshKey],
+  );
+  const state = usePaginatedQuery<TRow>(path, { pageRequest, filters: requestFilters, offlineCacheName });
+
+  function handleSearch(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (isSearchDisabled) return;
+    setAppliedSearch(searchText);
+    setAppliedFilters(filters);
+    setPage(DEFAULT_PAGE_NUMBER);
+    setSelectedRowKeys(new Set());
+    onSelectedRowKeysChange?.(new Set());
+    onSearch?.();
+    // Pressing Search again with nothing changed still asks the server (the changes above and this make one request).
+    state.refetch();
+  }
+  const hasSearchButton = isSearchEnabled || filters !== undefined || onSearch !== undefined;
 
   const totalsCells = buildTotalsRow ? buildTotalsRow(state.items, state.totalCount) : undefined;
   const columnsWithTotals = useMemo(
@@ -110,17 +140,22 @@ export function ServerPaginatedDataGrid<TRow>({
 
   return (
     <div className="space-y-3">
-      {(isSearchEnabled || toolbarActions) && (
+      {(hasSearchButton || toolbarActions) && (
         <div className="flex flex-wrap items-center gap-2 px-5 pt-4 sm:px-6">
-          {isSearchEnabled && (
-            <Input
-              type="search"
-              value={searchText}
-              onChange={(event) => setSearchText(event.target.value)}
-              placeholder={searchPlaceholder ?? translateMessage("dataGrid.searchPlaceholder")}
-              aria-label={translateMessage("common.search")}
-              className="max-w-xs"
-            />
+          {hasSearchButton && (
+            <form role="search" onSubmit={handleSearch} className="flex flex-wrap items-center gap-2">
+              {isSearchEnabled && (
+                <Input
+                  type="search"
+                  value={searchText}
+                  onChange={(event) => setSearchText(event.target.value)}
+                  placeholder={searchPlaceholder ?? translateMessage("dataGrid.searchPlaceholder")}
+                  aria-label={translateMessage("common.search")}
+                  className="w-64 max-w-full"
+                />
+              )}
+              <SearchButton isDisabled={isSearchDisabled} />
+            </form>
           )}
           <Button
             type="button"

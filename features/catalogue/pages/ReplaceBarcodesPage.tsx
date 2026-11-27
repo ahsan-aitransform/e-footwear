@@ -239,7 +239,7 @@ export function ReplaceBarcodesPage() {
           getRowKey={(row) => row.id}
           caption={translateMessage("catalogue.replaceBarcodes.historyTitle")}
           emptyTitle={translateMessage("catalogue.replaceBarcodes.historyEmpty")}
-          filters={{ refreshKey: historyRefresh }}
+          refreshKey={historyRefresh}
           searchPlaceholder={translateMessage("catalogue.replaceBarcodes.historySearch")}
         />
       </SectionCard>

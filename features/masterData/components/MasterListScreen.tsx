@@ -282,8 +282,8 @@ export function MasterListScreen({
               caption={translateMessage(titleMessageKey)}
               emptyTitle={translateMessage("masterData.empty.title")}
               emptyText={translateMessage("masterData.empty.text")}
-              // refreshKey only changes after a save or delete so the grid asks the server again; the server ignores it
-              filters={{ includeInactive: true, refreshKey: refreshCounter }}
+              fixedFilters={{ includeInactive: true }}
+              refreshKey={refreshCounter}
               onRowOpen={mayEdit ? startEditing : undefined}
               searchPlaceholder={translateMessage("masterData.search.placeholder")}
               offlineCacheName={offlineCacheName}

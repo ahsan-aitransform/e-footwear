@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { DataGridTable } from "@/components/data/DataGridTable";
 import type { DataGridColumn } from "@/components/data/dataGridTypes";
 import { InlineNotice } from "@/components/feedback/InlineNotice";
+import { SearchButton } from "@/components/forms/SearchButton";
 import { LoadingIndicator } from "@/components/feedback/LoadingIndicator";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionCard } from "@/components/layout/SectionCard";
@@ -25,7 +26,8 @@ type Mismatch = StockReconciliationResponse["mismatches"][number];
 export function StockReconciliationPage() {
   const { translateMessage } = useTranslation();
   const [storeId, setStoreId] = useState("");
-  const reconciliation = useApiQuery<StockReconciliationResponse>(ApiEndpoints.inventory.stockReconciliation, { query: { storeId: storeId || undefined } });
+  const [searchedStoreId, setSearchedStoreId] = useState("");
+  const reconciliation = useApiQuery<StockReconciliationResponse>(ApiEndpoints.inventory.stockReconciliation, { query: { storeId: searchedStoreId || undefined } });
   const result = reconciliation.data;
 
   const columns = useMemo<DataGridColumn<Mismatch>[]>(
@@ -52,9 +54,19 @@ export function StockReconciliationPage() {
         }
       />
       <SectionCard>
-        <div className="sm:w-72">
-          <ReportStoreSelect name="reconciliationStore" storeId={storeId} onStoreIdChange={setStoreId} />
-        </div>
+        <form
+          className="flex flex-wrap items-end gap-3"
+          onSubmit={(event) => {
+            event.preventDefault();
+            setSearchedStoreId(storeId);
+            reconciliation.refetch();
+          }}
+        >
+          <div className="sm:w-72">
+            <ReportStoreSelect name="reconciliationStore" storeId={storeId} onStoreIdChange={setStoreId} />
+          </div>
+          <SearchButton />
+        </form>
       </SectionCard>
       {reconciliation.status === "loading" && !result && <LoadingIndicator />}
       {reconciliation.status === "error" && <InlineNotice>{reconciliation.problem?.message ?? translateMessage("inventory.reconciliation.failed")}</InlineNotice>}
