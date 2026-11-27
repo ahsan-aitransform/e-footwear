@@ -651,18 +651,6 @@
           ]
         },
         {
-          "screenCode": "SEARCH_CUSTOMER",
-          "displayName": "Search Customer",
-          "subGroupCode": null,
-          "actions": [
-            {
-              "permissionCode": "CUSTOMERS.SEARCH_CUSTOMER.VIEW",
-              "actionCode": "VIEW",
-              "displayName": "View"
-            }
-          ]
-        },
-        {
           "screenCode": "CUSTOMER_ACCOUNT_DETAIL",
           "displayName": "Customer Account Detail",
           "subGroupCode": null,
@@ -4171,18 +4159,6 @@
           ]
         },
         {
-          "screenCode": "SEARCH_VENDOR",
-          "displayName": "Search Vendor",
-          "subGroupCode": null,
-          "actions": [
-            {
-              "permissionCode": "VENDORS.SEARCH_VENDOR.VIEW",
-              "actionCode": "VIEW",
-              "displayName": "View"
-            }
-          ]
-        },
-        {
           "screenCode": "VENDOR_ACCOUNT_DETAIL",
           "displayName": "Vendor Account Detail",
           "subGroupCode": null,
@@ -4556,18 +4532,6 @@
               "permissionCode": "HUMAN_RESOURCES.VIEW_STAFF.EXPORT",
               "actionCode": "EXPORT",
               "displayName": "Export"
-            }
-          ]
-        },
-        {
-          "screenCode": "SEARCH_STAFF",
-          "displayName": "Search Staff",
-          "subGroupCode": null,
-          "actions": [
-            {
-              "permissionCode": "HUMAN_RESOURCES.SEARCH_STAFF.VIEW",
-              "actionCode": "VIEW",
-              "displayName": "View"
             }
           ]
         },
@@ -5420,7 +5384,7 @@
             {
               "permissionCode": "USER_PASSWORD_RESET",
               "actionCode": "USER_PASSWORD_RESET",
-              "displayName": "Reset another user\u0027s password (temporary password, forced change at next login)"
+              "displayName": "Reset another user0027s password (temporary password, forced change at next login)"
             },
             {
               "permissionCode": "USER_BLOCK",
