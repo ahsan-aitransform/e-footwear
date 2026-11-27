@@ -22,7 +22,7 @@ import { usePermissions } from "@/lib/permissions/usePermissions";
 import type { PermissionCatalogResponse } from "@/lib/types/permissions";
 import type { RoleTemplateDetailsResponse, RoleTemplateSummaryResponse, SaveRoleTemplateRequest } from "@/lib/types/roleTemplate";
 import { PermissionTreeEditor } from "../components/PermissionTreeEditor";
-import { collectCatalogPermissionCodes } from "../logic/permissionTreeSelection";
+import { collectGrantableCodes } from "../logic/permissionTreeSelection";
 
 type EditorState = { details: RoleTemplateDetailsResponse | undefined };
 
@@ -194,7 +194,7 @@ function RoleTemplateEditor({
     }
   }
 
-  const everyCode = new Set(collectCatalogPermissionCodes(catalog));
+  const everyCode = new Set(collectGrantableCodes(catalog));
 
   return (
     <form onSubmit={handleSubmit} noValidate>

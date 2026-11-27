@@ -32,19 +32,19 @@ import { CompactWholeRupeeInput } from "./CompactWholeRupeeInput";
 
 // The Sizes grid of New Product (docx 4.1): one row per size (and colour) with its barcode, purchase price and sale price, the
 // margin and markup they give (owner only), and the "Start size / End size" shortcut that adds a whole run of sizes at once. An empty barcode is
-// filled in by the server. A person without the "change selling price" permission cannot edit the sale price of a saved size.
+// filled in by the server. Only the company owner can edit the prices of a saved size.
 export function ProductSizesGrid({
   rows,
   onRowsChange,
   rowErrors,
   lookups,
-  canChangeSalePriceOfSavedSizes,
+  canChangePricesOfSavedSizes,
 }: {
   rows: ProductVariantFormRow[];
   onRowsChange: (rows: ProductVariantFormRow[]) => void;
   rowErrors: ProductVariantRowErrors;
   lookups: CatalogueLookups;
-  canChangeSalePriceOfSavedSizes: boolean;
+  canChangePricesOfSavedSizes: boolean;
 }) {
   const { translateMessage } = useTranslation();
   const canViewMargin = useCanViewMargin();
@@ -172,10 +172,10 @@ export function ProductSizesGrid({
                   <Input className="w-44" dir="ltr" autoComplete="off" aria-label={translateMessage("catalogue.field.barcode")} placeholder={translateMessage("catalogue.sizes.barcodeAuto")} value={row.barcode} maxLength={CatalogueLimits.barcodeMaximumLength} onChange={(event) => changeRow(row.rowKey, { barcode: event.target.value })} />
                 </TableCell>
                 <TableCell className="text-end">
-                  <CompactWholeRupeeInput value={row.purchasePrice} ariaLabel={translateMessage("catalogue.field.purchasePrice")} onValueChange={(next) => changeRow(row.rowKey, { purchasePrice: next })} />
+                  <CompactWholeRupeeInput value={row.purchasePrice} ariaLabel={translateMessage("catalogue.field.purchasePrice")} isDisabled={isSaved && !canChangePricesOfSavedSizes} onValueChange={(next) => changeRow(row.rowKey, { purchasePrice: next })} />
                 </TableCell>
                 <TableCell className="text-end">
-                  <CompactWholeRupeeInput value={row.salePrice} ariaLabel={translateMessage("catalogue.field.salePrice")} isDisabled={isSaved && !canChangeSalePriceOfSavedSizes} onValueChange={(next) => changeRow(row.rowKey, { salePrice: next })} />
+                  <CompactWholeRupeeInput value={row.salePrice} ariaLabel={translateMessage("catalogue.field.salePrice")} isDisabled={isSaved && !canChangePricesOfSavedSizes} onValueChange={(next) => changeRow(row.rowKey, { salePrice: next })} />
                 </TableCell>
                 {canViewMargin && <TableCell className="text-end tabular-nums">{margin === null ? "" : formatPercentage(margin)}</TableCell>}
                 {canViewMargin && <TableCell className="text-end tabular-nums">{markup === null ? "" : formatPercentage(markup)}</TableCell>}

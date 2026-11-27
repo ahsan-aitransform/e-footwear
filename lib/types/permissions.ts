@@ -3,6 +3,8 @@ export type PermissionCatalogActionResponse = {
   permissionCode: string;
   actionCode: string;
   displayName: string;
+  // Held by the company owner by role; it cannot be given to anyone else.
+  isOwnerOnly?: boolean;
 };
 
 export type PermissionCatalogScreenResponse = {

@@ -79,18 +79,26 @@ export function toggleCode(
   return setCodesSelected(selectedCodes, [permissionCode], !selectedCodes.has(permissionCode));
 }
 
-// What a person can hand out: the codes they hold, plus the codes the user already has (those may stay, or be removed).
+// The codes that can be given to anyone: all but the owner-only ones (prices and discounts).
+export function collectGrantableCodes(catalog: PermissionCatalogResponse): string[] {
+  const ownerOnlyCodes = new Set(
+    catalog.modules.flatMap((module) => module.screens.flatMap((screen) => screen.actions.filter((action) => action.isOwnerOnly).map((action) => action.permissionCode))),
+  );
+  return collectCatalogPermissionCodes(catalog).filter((code) => !ownerOnlyCodes.has(code));
+}
+
+// What a person can hand out: the grantable codes they hold, plus the codes the user already has (those may stay, or be removed).
 export function buildAssignableCodes(
   catalog: PermissionCatalogResponse,
   codesHeldByCaller: ReadonlySet<string>,
   codesAlreadyGranted: ReadonlySet<string>,
 ): ReadonlySet<string> {
-  return new Set(collectCatalogPermissionCodes(catalog).filter((code) => codesHeldByCaller.has(code) || codesAlreadyGranted.has(code)));
+  return new Set(collectGrantableCodes(catalog).filter((code) => codesHeldByCaller.has(code) || codesAlreadyGranted.has(code)));
 }
 
-// The Administrator checkbox grants every permission, so it exists only for a person who can assign every permission.
+// The Administrator checkbox grants every grantable permission, so it exists only for a person who can assign all of them.
 export function canGrantEveryPermission(catalog: PermissionCatalogResponse, assignableCodes: ReadonlySet<string>): boolean {
-  const allCodes = collectCatalogPermissionCodes(catalog);
+  const allCodes = collectGrantableCodes(catalog);
   return allCodes.length > 0 && allCodes.every((code) => assignableCodes.has(code));
 }
 

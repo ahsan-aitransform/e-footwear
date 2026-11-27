@@ -77,7 +77,7 @@ export function ProductFormPage({ productId }: { productId?: string }) {
   const create = useApiMutation<CreateProductRequest, ProductSavedResponse>(ApiEndpoints.products.list);
   const update = useApiMutation<UpdateProductRequest>(isEditing ? ApiEndpoints.products.byId(productId) : "", { method: "PUT" });
   const maySave = hasPermission(isEditing ? PermissionCodes.PRODUCTS.NEW_PRODUCT.EDIT : PermissionCodes.PRODUCTS.NEW_PRODUCT.ADD);
-  const mayChangeSalePrice = hasPermission(PermissionCodes.PRODUCTS.NEW_PRODUCT.CHANGE_SELLING_PRICE);
+  const mayChangePrices = hasPermission(PermissionCodes.PRODUCTS.NEW_PRODUCT.CHANGE_SELLING_PRICE);
 
   // The loaded product fills the form (adjusting state while rendering, not in an effect).
   if (product.data && product.data !== loadedProduct) {
@@ -198,7 +198,7 @@ export function ProductFormPage({ productId }: { productId?: string }) {
             </div>
           </SectionCard>
           <SectionCard title={translateMessage("catalogue.sizes.title")} description={translateMessage("catalogue.sizes.description")}>
-            <ProductSizesGrid rows={values.variants} onRowsChange={(rows) => change("variants", rows)} rowErrors={rowErrors} lookups={lookups} canChangeSalePriceOfSavedSizes={mayChangeSalePrice} />
+            <ProductSizesGrid rows={values.variants} onRowsChange={(rows) => change("variants", rows)} rowErrors={rowErrors} lookups={lookups} canChangePricesOfSavedSizes={mayChangePrices} />
             {errors.variants && (
               <p role="alert" className="mt-2 text-xs font-medium text-destructive">
                 {translateMessage(errors.variants)}
