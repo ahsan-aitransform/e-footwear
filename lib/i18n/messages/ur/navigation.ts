@@ -80,7 +80,6 @@ export const navigationUrduMessages: Record<keyof typeof navigationEnglishMessag
   "navigation.item.generalJournal": "جنرل جرنل",
   "navigation.item.newProduct": "نئی پروڈکٹ",
   "navigation.item.viewProducts": "پروڈکٹس دیکھیں",
-  "navigation.item.searchProduct": "پروڈکٹ تلاش",
   "navigation.item.productLedger": "پروڈکٹ لیجر",
   "navigation.item.generateBarcodes": "بار کوڈ بنائیں",
   "navigation.item.priceCheck": "قیمت دیکھیں",

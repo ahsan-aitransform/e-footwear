@@ -6,9 +6,7 @@ import { ServerPaginatedDataGrid } from "@/components/data/ServerPaginatedDataGr
 import type { DataGridColumn } from "@/components/data/dataGridTypes";
 import { ConfirmDialog } from "@/components/feedback/ConfirmDialog";
 import { FormResultNotice, InlineNotice } from "@/components/feedback/InlineNotice";
-import { FormField } from "@/components/forms/FormField";
 import { SearchButton } from "@/components/forms/SearchButton";
-import { OptionSelect } from "@/components/forms/OptionSelect";
 import { WholeRupeeAmountField } from "@/components/forms/WholeRupeeAmountField";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionCard } from "@/components/layout/SectionCard";
@@ -34,8 +32,6 @@ import { ProductRowActionsMenu } from "../components/ProductRowActionsMenu";
 import { ProductStatusBadge } from "../components/ProductStatusBadge";
 import { useCatalogueLookups } from "../hooks/useCatalogueLookups";
 import {
-  ProductMatchModeCodes,
-  ProductSearchFieldCodes,
   type PriceChangeAppliedResponse,
   type ProductDiscountAppliedResponse,
   type ProductListFilterValues,
@@ -44,24 +40,23 @@ import {
   type SetNewSalePriceRequest,
 } from "../types/catalogueTypes";
 
-export type ProductVariantListMode = "view" | "search" | "discounts" | "discountRemoval";
+export type ProductVariantListMode = "view" | "discounts" | "discountRemoval";
 
 const modeSettings: Record<
   ProductVariantListMode,
   { path: string; titleKey: MessageKey; subtitleKey: MessageKey; cacheName: string; hasSelection: boolean; needsStore: boolean }
 > = {
   view: { path: ApiEndpoints.products.variants, titleKey: "navigation.item.viewProducts", subtitleKey: "catalogue.view.subtitle", cacheName: "catalogueViewProducts", hasSelection: false, needsStore: false },
-  search: { path: ApiEndpoints.products.variantsSearch, titleKey: "navigation.item.searchProduct", subtitleKey: "catalogue.search.subtitle", cacheName: "catalogueSearchProduct", hasSelection: false, needsStore: false },
   discounts: { path: ApiEndpoints.products.variantsForDiscounts, titleKey: "navigation.item.productDiscounts", subtitleKey: "catalogue.productDiscounts.subtitle", cacheName: "catalogueProductDiscounts", hasSelection: true, needsStore: false },
   discountRemoval: { path: ApiEndpoints.products.variantsForDiscountRemoval, titleKey: "navigation.item.removeDiscountsAndReversePrice", subtitleKey: "catalogue.removeDiscounts.subtitle", cacheName: "catalogueRemoveDiscounts", hasSelection: true, needsStore: true },
 };
 
 const filterFields: readonly CatalogueFilterFieldName[] = ["storeId", "departmentId", "categoryId", "brandId", "genderId", "seasonId", "colorId"];
 
-// The product grid of four screens (docx 4.2 View Products, 4.3 Search Product, 4.10 Product Discounts, 4.12 Remove Discounts and
-// Reverse Price): one row per size, with stock, prices, discount, net price, margin and markup. View edits or deletes a product,
-// Search adds the search-in and match options, Product Discounts sets a new sale price for the ticked products, and Remove
-// Discounts takes the discount rule off the ticked products in one store (and can put the previous sale price back).
+// The product grid of three screens (docx 4.2 View Products, 4.10 Product Discounts, 4.12 Remove Discounts and Reverse Price): one
+// row per size, with stock, prices, discount, net price, margin and markup. View edits or deletes a product, Product Discounts sets a
+// new sale price for the ticked products, and Remove Discounts takes the discount rule off the ticked products in one store (and can
+// put the previous sale price back). Embedded (as a tab of another screen) the grid has no page header of its own.
 export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ mode: ProductVariantListMode; isEmbedded?: boolean }>) {
   const settings = modeSettings[mode];
   const { translateMessage } = useTranslation();
@@ -75,9 +70,6 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
   // The store of the list on screen. The actions below work on it, not on a store that was chosen but not searched yet.
   const [searchedStoreId, setSearchedStoreId] = useState(filter.storeId);
   const [onlyActive, setOnlyActive] = useState(false);
-  const [searchField, setSearchField] = useState<string>(ProductSearchFieldCodes.all);
-  const [matchMode, setMatchMode] = useState<string>(ProductMatchModeCodes.contains);
-  const [includeDescription, setIncludeDescription] = useState(false);
   const [refreshCounter, setRefreshCounter] = useState(0);
   const [selectedKeys, setSelectedKeys] = useState<ReadonlySet<string>>(new Set());
   const [toDelete, setToDelete] = useState<ProductVariantListItemResponse | null>(null);
@@ -203,9 +195,6 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
     seasonId: filter.seasonId,
     colorId: filter.colorId,
     onlyActive: onlyActive || undefined,
-    searchField: mode === "search" ? searchField : undefined,
-    matchMode: mode === "search" ? matchMode : undefined,
-    includeDescription: mode === "search" && includeDescription ? true : undefined,
   };
 
   const canApplyDiscountsChange = mayApply && selectedProductIds.length > 0 && (mode === "discountRemoval" ? Boolean(searchedStoreId) : newSalePrice !== null);
@@ -217,46 +206,6 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
         <div className="space-y-4">
           <CatalogueFilterFields fields={filterFields} values={filter} onChange={setFilter} lookups={lookups} />
           <div className="flex flex-wrap items-end gap-4">
-            {mode === "search" && (
-              <>
-                <FormField label={translateMessage("catalogue.search.searchIn")} name="catalogueSearchField">
-                  {(controlProps) => (
-                    <OptionSelect
-                      {...controlProps}
-                      className="w-44"
-                      value={searchField}
-                      onValueChange={setSearchField}
-                      options={[
-                        { value: ProductSearchFieldCodes.all, label: translateMessage("catalogue.search.fieldAll") },
-                        { value: ProductSearchFieldCodes.name, label: translateMessage("catalogue.search.fieldName") },
-                        { value: ProductSearchFieldCodes.code, label: translateMessage("catalogue.search.fieldCode") },
-                        { value: ProductSearchFieldCodes.barcode, label: translateMessage("catalogue.search.fieldBarcode") },
-                      ]}
-                    />
-                  )}
-                </FormField>
-                <FormField label={translateMessage("catalogue.search.matchMode")} name="catalogueMatchMode">
-                  {(controlProps) => (
-                    <OptionSelect
-                      {...controlProps}
-                      className="w-44"
-                      value={matchMode}
-                      onValueChange={setMatchMode}
-                      options={[
-                        { value: ProductMatchModeCodes.startsWith, label: translateMessage("catalogue.search.matchStartsWith") },
-                        { value: ProductMatchModeCodes.contains, label: translateMessage("catalogue.search.matchContains") },
-                        { value: ProductMatchModeCodes.endsWith, label: translateMessage("catalogue.search.matchEndsWith") },
-                        { value: ProductMatchModeCodes.exact, label: translateMessage("catalogue.search.matchExact") },
-                      ]}
-                    />
-                  )}
-                </FormField>
-                <div className="flex items-center gap-2 pb-1.5">
-                  <Checkbox id="catalogueIncludeDescription" checked={includeDescription} onCheckedChange={(next) => setIncludeDescription(next === true)} />
-                  <Label htmlFor="catalogueIncludeDescription">{translateMessage("catalogue.search.includeDescription")}</Label>
-                </div>
-              </>
-            )}
             <div className="flex items-center gap-2 pb-1.5">
               <Checkbox id="catalogueOnlyActive" checked={onlyActive} onCheckedChange={(next) => setOnlyActive(next === true)} />
               <Label htmlFor="catalogueOnlyActive">{translateMessage("catalogue.filter.onlyActive")}</Label>

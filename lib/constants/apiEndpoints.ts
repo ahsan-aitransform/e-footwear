@@ -215,7 +215,6 @@ export const ApiEndpoints = {
   products: {
     list: "/products",
     variants: "/products/variants",
-    variantsSearch: "/products/variants/search",
     variantsForDiscounts: "/products/variants/for-discounts",
     variantsForDiscountRemoval: "/products/variants/for-discount-removal",
     // The product pickers of the screens that work on one product: names and codes only, each bound to its screen's permission.

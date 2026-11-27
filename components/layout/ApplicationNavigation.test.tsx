@@ -94,7 +94,7 @@ describe("menu groups", () => {
     const onNavigate = vi.fn();
     await renderMenu({ onNavigate });
     expect(screen.getByRole("link", { name: "View Products" })).toHaveAttribute("aria-current", "page");
-    await userEvent.click(screen.getByRole("link", { name: "Search Product" }));
+    await userEvent.click(screen.getByRole("link", { name: "New Product" }));
     expect(onNavigate).toHaveBeenCalledTimes(1);
   });
 });

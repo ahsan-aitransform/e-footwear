@@ -7,24 +7,6 @@ export const ProductStatusCodes = {
 } as const;
 export type ProductStatusCode = (typeof ProductStatusCodes)[keyof typeof ProductStatusCodes];
 
-// Which part of the product a search looks in (backend ProductSearchFieldCodes).
-export const ProductSearchFieldCodes = {
-  all: "ALL",
-  name: "NAME",
-  code: "CODE",
-  barcode: "BARCODE",
-} as const;
-export type ProductSearchFieldCode = (typeof ProductSearchFieldCodes)[keyof typeof ProductSearchFieldCodes];
-
-// How the search text is compared (backend ProductMatchModeCodes).
-export const ProductMatchModeCodes = {
-  contains: "CONTAINS",
-  startsWith: "START",
-  endsWith: "END",
-  exact: "EXACT",
-} as const;
-export type ProductMatchModeCode = (typeof ProductMatchModeCodes)[keyof typeof ProductMatchModeCodes];
-
 // Which price a bulk price change moves (backend PriceTypeCodes).
 export const PriceTypeCodes = {
   sale: "SALE",
@@ -53,9 +35,6 @@ export type ProductListFilterValues = {
   seasonId?: string;
   colorId?: string;
   onlyActive?: boolean;
-  searchField?: ProductSearchFieldCode;
-  matchMode?: ProductMatchModeCode;
-  includeDescription?: boolean;
 };
 
 export type ProductVariantListItemResponse = {

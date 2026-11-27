@@ -29,8 +29,6 @@ export const catalogueRouteDefinitions: readonly ApplicationRouteDefinition[] = 
   catalogueScreenRoute("editProduct", ApplicationRoutePatterns.editProduct, Products.NEW_PRODUCT.VIEW, undefined),
   catalogueScreenRoute("viewProducts", ApplicationRoutePatterns.viewProducts, Products.VIEW_PRODUCTS.VIEW,
     { labelMessageKey: "navigation.item.viewProducts", iconName: "product", sortOrder: 20 }),
-  catalogueScreenRoute("searchProduct", ApplicationRoutePatterns.searchProduct, Products.SEARCH_PRODUCT.VIEW,
-    { labelMessageKey: "navigation.item.searchProduct", iconName: "product", sortOrder: 30 }),
   catalogueScreenRoute("productLedger", ApplicationRoutePatterns.productLedger, Products.PRODUCT_LEDGER.VIEW,
     { labelMessageKey: "navigation.item.productLedger", iconName: "chartOfAccounts", sortOrder: 40 }),
   catalogueScreenRoute("generateBarcodes", ApplicationRoutePatterns.generateBarcodes, Products.GENERATE_BARCODES.VIEW,

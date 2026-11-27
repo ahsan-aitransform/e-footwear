@@ -252,18 +252,6 @@
           ]
         },
         {
-          "screenCode": "SEARCH_PRODUCT",
-          "displayName": "Search Product",
-          "subGroupCode": null,
-          "actions": [
-            {
-              "permissionCode": "PRODUCTS.SEARCH_PRODUCT.VIEW",
-              "actionCode": "VIEW",
-              "displayName": "View"
-            }
-          ]
-        },
-        {
           "screenCode": "PRODUCT_LEDGER",
           "displayName": "Product Ledger",
           "subGroupCode": null,

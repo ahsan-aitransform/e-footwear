@@ -80,7 +80,6 @@ export const navigationEnglishMessages = {
   "navigation.item.generalJournal": "General Journal",
   "navigation.item.newProduct": "New Product",
   "navigation.item.viewProducts": "View Products",
-  "navigation.item.searchProduct": "Search Product",
   "navigation.item.productLedger": "Product Ledger",
   "navigation.item.generateBarcodes": "Generate Bar Codes",
   "navigation.item.priceCheck": "Check Price",
