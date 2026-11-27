@@ -62,7 +62,7 @@ const filterFields: readonly CatalogueFilterFieldName[] = ["storeId", "departmen
 // Reverse Price): one row per size, with stock, prices, discount, net price, margin and markup. View edits or deletes a product,
 // Search adds the search-in and match options, Product Discounts sets a new sale price for the ticked products, and Remove
 // Discounts takes the discount rule off the ticked products in one store (and can put the previous sale price back).
-export function ProductVariantListPage({ mode }: { mode: ProductVariantListMode }) {
+export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ mode: ProductVariantListMode; isEmbedded?: boolean }>) {
   const settings = modeSettings[mode];
   const { translateMessage } = useTranslation();
   const { hasPermission } = usePermissions();
@@ -212,7 +212,7 @@ export function ProductVariantListPage({ mode }: { mode: ProductVariantListMode 
 
   return (
     <div ref={containerReference} className="space-y-6">
-      <PageHeader title={translateMessage(settings.titleKey)} subtitle={translateMessage(settings.subtitleKey)} />
+      {!isEmbedded && <PageHeader title={translateMessage(settings.titleKey)} subtitle={translateMessage(settings.subtitleKey)} />}
       <SectionCard>
         <div className="space-y-4">
           <CatalogueFilterFields fields={filterFields} values={filter} onChange={setFilter} lookups={lookups} />

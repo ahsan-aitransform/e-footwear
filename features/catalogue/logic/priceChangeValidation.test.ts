@@ -43,8 +43,9 @@ describe("old to new prices", () => {
 });
 
 describe("stock range", () => {
-  it("needs both limits with the minimum not above the maximum", () => {
-    expect(validateStockRange(null, 5)).toBe("catalogue.validation.stockRangeRequired");
+  it("allows either limit to be left out, with the minimum not above the maximum", () => {
+    expect(validateStockRange(null, 5)).toBeNull();
+    expect(validateStockRange(null, null)).toBeNull();
     expect(validateStockRange(10, 5)).toBe("catalogue.validation.stockRangeOrder");
     expect(validateStockRange(-1, 5)).toBe("catalogue.validation.stockRangeNegative");
     expect(validateStockRange(0, 5)).toBeNull();

@@ -86,7 +86,6 @@ export const navigationUrduMessages: Record<keyof typeof navigationEnglishMessag
   "navigation.item.priceCheck": "قیمت دیکھیں",
   "navigation.item.changeAttributes": "اوصاف بدلیں",
   "navigation.item.changePricesOldToNew": "قیمتیں پرانی سے نئی",
-  "navigation.item.changePricesByPercentage": "قیمتیں فیصد میں بدلیں",
   "navigation.item.changeDiscounts": "رعایتیں بدلیں",
   "navigation.item.productDiscounts": "پروڈکٹ رعایتیں",
   "navigation.item.productDiscountsOnMultipleStores": "کئی اسٹورز پر پروڈکٹ رعایتیں",

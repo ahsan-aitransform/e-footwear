@@ -300,6 +300,8 @@ export type PercentagePriceChangeRequest = {
   // empty = all
   categoryIds: string[];
   brandIds: string[];
+  minimumStock: number | null;
+  maximumStock: number | null;
   increasePercent: number | null;
   decreasePercent: number | null;
   clientTransactionId: string;
@@ -334,12 +336,20 @@ export type StockRangeDiscountRowResponse = {
   discountAmount: number;
 };
 
+export const DiscountTypeCodes = { percent: "PERCENT", amount: "AMOUNT" } as const;
+export type DiscountTypeCode = (typeof DiscountTypeCodes)[keyof typeof DiscountTypeCodes];
+
 export type StockRangeDiscountRequest = {
   storeId: string;
-  brandId: string | null;
-  minimumStock: number;
-  maximumStock: number;
-  discountPercent: number;
+  departmentId: string | null;
+  // empty = all
+  categoryIds: string[];
+  brandIds: string[];
+  minimumStock: number | null;
+  maximumStock: number | null;
+  discountType: DiscountTypeCode;
+  // null only in a preview
+  discountValue: number | null;
   clientTransactionId: string;
 };
 

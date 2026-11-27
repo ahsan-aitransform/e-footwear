@@ -41,12 +41,12 @@ export const catalogueRouteDefinitions: readonly ApplicationRouteDefinition[] = 
     { labelMessageKey: "navigation.item.changeAttributes", iconName: "masterList", sortOrder: 70 }),
   catalogueScreenRoute("changePricesOldToNew", ApplicationRoutePatterns.changePricesOldToNew, Products.CHANGE_PRICES_OLD_TO_NEW.VIEW,
     { labelMessageKey: "navigation.item.changePricesOldToNew", iconName: "priceTag", sortOrder: 80 }),
-  catalogueScreenRoute("changePricesByPercentage", ApplicationRoutePatterns.changePricesByPercentage, Products.CHANGE_PRICES_BY_PERCENTAGE.VIEW,
-    { labelMessageKey: "navigation.item.changePricesByPercentage", iconName: "priceTag", sortOrder: 90 }),
-  catalogueScreenRoute("changeDiscounts", ApplicationRoutePatterns.changeDiscounts, Products.CHANGE_DISCOUNTS.VIEW,
-    { labelMessageKey: "navigation.item.changeDiscounts", iconName: "priceTag", sortOrder: 100 }),
-  catalogueScreenRoute("productDiscounts", ApplicationRoutePatterns.productDiscounts, Products.PRODUCT_DISCOUNTS.VIEW,
-    { labelMessageKey: "navigation.item.productDiscounts", iconName: "priceTag", sortOrder: 110 }),
+  {
+    // One screen with a tab for each of these permissions.
+    ...catalogueScreenRoute("changeDiscounts", ApplicationRoutePatterns.changeDiscounts, Products.CHANGE_DISCOUNTS.VIEW,
+      { labelMessageKey: "navigation.item.changeDiscounts", iconName: "priceTag", sortOrder: 100 }),
+    requiredPermissions: requireAnyPermission<PermissionCode>(Products.CHANGE_DISCOUNTS.VIEW, Products.CHANGE_PRICES_BY_PERCENTAGE.VIEW, Products.PRODUCT_DISCOUNTS.VIEW),
+  },
   catalogueScreenRoute("productDiscountsOnMultipleStores", ApplicationRoutePatterns.productDiscountsOnMultipleStores,
     Products.PRODUCT_DISCOUNTS_ON_MULTIPLE_STORES.VIEW,
     { labelMessageKey: "navigation.item.productDiscountsOnMultipleStores", iconName: "priceTag", sortOrder: 120 }),

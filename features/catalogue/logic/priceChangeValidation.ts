@@ -39,10 +39,16 @@ export function validateOldToNewPrices(oldPrice: number | null, newPrice: number
   return null;
 }
 
-// Stock range of Change Discounts (docx 4.9): the minimum cannot be above the maximum.
+// A fixed amount off: whole rupees above zero.
+export function validateDiscountAmount(discountAmount: number | null): MessageKey | null {
+  if (discountAmount === null) return "catalogue.validation.discountAmountRequired";
+  if (discountAmount < 1 || discountAmount > CatalogueLimits.maximumPrice) return "catalogue.validation.discountAmountRange";
+  return null;
+}
+
+// The optional stock range of Change Discounts (docx 4.9): neither end is negative and the minimum is not above the maximum.
 export function validateStockRange(minimumStock: number | null, maximumStock: number | null): MessageKey | null {
-  if (minimumStock === null || maximumStock === null) return "catalogue.validation.stockRangeRequired";
-  if (minimumStock < 0 || maximumStock < 0) return "catalogue.validation.stockRangeNegative";
-  if (minimumStock > maximumStock) return "catalogue.validation.stockRangeOrder";
+  if ((minimumStock ?? 0) < 0 || (maximumStock ?? 0) < 0) return "catalogue.validation.stockRangeNegative";
+  if (minimumStock !== null && maximumStock !== null && minimumStock > maximumStock) return "catalogue.validation.stockRangeOrder";
   return null;
 }

@@ -7,6 +7,7 @@ import { FormResultNotice, InlineNotice } from "@/components/feedback/InlineNoti
 import { FormField } from "@/components/forms/FormField";
 import { OptionSelect } from "@/components/forms/OptionSelect";
 import { PercentageField } from "@/components/forms/PercentageField";
+import { QuantityField } from "@/components/forms/QuantityField";
 import { SearchableSelect } from "@/components/forms/SearchableSelect";
 import { WholeRupeeAmountField } from "@/components/forms/WholeRupeeAmountField";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -25,7 +26,7 @@ import { showToast } from "@/lib/toast/toastStore";
 import { CatalogueFilterFields } from "../components/CatalogueFilterFields";
 import { PostPreviewGrid } from "../components/PostPreviewGrid";
 import { useCatalogueLookups } from "../hooks/useCatalogueLookups";
-import { validateOldToNewPrices, validatePercentagePriceChange } from "../logic/priceChangeValidation";
+import { validateOldToNewPrices, validatePercentagePriceChange, validateStockRange } from "../logic/priceChangeValidation";
 import {
   PriceTypeCodes,
   type OldToNewPriceChangeRequest,
@@ -42,7 +43,7 @@ export type ChangePricesMode = "oldToNew" | "percentage";
 // show the rows that will change with their new price, and apply the change as one batch. A sale price can be changed for the
 // company list price or for one store; a purchase price is always company-wide. Applying asks for a confirmation, and the
 // server answers with how many sizes changed and how many now overlap a discount (a conflict an administrator resolves).
-export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
+export function ChangePricesPage({ mode, isEmbedded = false }: Readonly<{ mode: ChangePricesMode; isEmbedded?: boolean }>) {
   const { translateMessage } = useTranslation();
   const { hasPermission } = usePermissions();
   const isOldToNew = mode === "oldToNew";
@@ -52,6 +53,8 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
   // Change Prices In % takes several categories and brands; none chosen means all of them.
   const [categoryIds, setCategoryIds] = useState<string[]>([]);
   const [brandIds, setBrandIds] = useState<string[]>([]);
+  const [minimumStock, setMinimumStock] = useState<number | null>(null);
+  const [maximumStock, setMaximumStock] = useState<number | null>(null);
   const lookups = useCatalogueLookups(filter.departmentId);
   const [priceType, setPriceType] = useState<string>(PriceTypeCodes.sale);
   const [storeId, setStoreId] = useState<string | null>(null);
@@ -67,7 +70,8 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
   // The same id is sent again when an apply is retried, so a lost answer cannot change prices twice.
   const transactionIdReference = useRef<string | null>(null);
 
-  const validationKey = isOldToNew ? validateOldToNewPrices(oldPrice, newPrice) : validatePercentagePriceChange(increasePercent, decreasePercent);
+  const stockRangeKey = validateStockRange(minimumStock, maximumStock);
+  const validationKey = isOldToNew ? validateOldToNewPrices(oldPrice, newPrice) : (stockRangeKey ?? validatePercentagePriceChange(increasePercent, decreasePercent));
   const effectiveStoreId = isOldToNew && priceType === PriceTypeCodes.purchase ? null : storeId;
   const isPurchase = isOldToNew && priceType === PriceTypeCodes.purchase;
 
@@ -75,18 +79,19 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
     const common = { storeId: effectiveStoreId, departmentId: filter.departmentId ?? null, clientTransactionId };
     return isOldToNew
       ? { ...common, categoryId: filter.categoryId ?? null, brandId: filter.brandId ?? null, priceType: priceType as OldToNewPriceChangeRequest["priceType"], oldPrice: oldPrice ?? 0, newPrice: newPrice ?? 0 }
-      : { ...common, categoryIds, brandIds, increasePercent, decreasePercent };
+      : { ...common, categoryIds, brandIds, minimumStock, maximumStock, increasePercent, decreasePercent };
   }
 
   const hasPercentage = increasePercent !== null || decreasePercent !== null;
   // In % lists the matching sizes as soon as products are picked, before any percentage is typed.
-  const isListingMatches = !isOldToNew && !hasPercentage && (filter.departmentId !== undefined || categoryIds.length > 0 || brandIds.length > 0);
+  const hasProductChoice = filter.departmentId !== undefined || categoryIds.length > 0 || brandIds.length > 0 || minimumStock !== null || maximumStock !== null;
+  const isListingMatches = !isOldToNew && !hasPercentage && stockRangeKey === null && hasProductChoice;
 
   // The preview needs a complete, valid entry (or only a product choice, above); the all-zero id marks "not an apply".
   const previewBody = useMemo(
     () => (validationKey === null || isListingMatches ? buildRequest("00000000-0000-0000-0000-000000000000") : null),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [validationKey, isListingMatches,isOldToNew, priceType, effectiveStoreId, filter.departmentId, filter.categoryId, filter.brandId, categoryIds, brandIds, oldPrice, newPrice, increasePercent, decreasePercent],
+    [validationKey, isListingMatches,isOldToNew, priceType, effectiveStoreId, filter.departmentId, filter.categoryId, filter.brandId, categoryIds, brandIds, minimumStock, maximumStock, oldPrice, newPrice, increasePercent, decreasePercent],
   );
 
   function resetTransaction() {
@@ -132,10 +137,10 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
     [translateMessage, isListingMatches],
   );
 
-  const titleKey = isOldToNew ? "navigation.item.changePricesOldToNew" : "navigation.item.changePricesByPercentage";
+  const titleKey = isOldToNew ? "navigation.item.changePricesOldToNew" : "catalogue.changeDiscounts.tabPriceChange";
   return (
     <div className="space-y-6">
-      <PageHeader title={translateMessage(titleKey)} subtitle={translateMessage(isOldToNew ? "catalogue.changePrices.oldToNewSubtitle" : "catalogue.changePrices.percentageSubtitle")} />
+      {!isEmbedded && <PageHeader title={translateMessage(titleKey)} subtitle={translateMessage(isOldToNew ? "catalogue.changePrices.oldToNewSubtitle" : "catalogue.changePrices.percentageSubtitle")} />}
       <SectionCard>
         <div className="space-y-4">
           <CatalogueFilterFields
@@ -201,10 +206,12 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
               <>
                 <PercentageField label={translateMessage("catalogue.changePrices.increasePercent")} name="catalogueIncreasePercent" value={increasePercent} onValueChange={(next) => { resetTransaction(); setIncreasePercent(next); }} />
                 <PercentageField label={translateMessage("catalogue.changePrices.decreasePercent")} name="catalogueDecreasePercent" value={decreasePercent} onValueChange={(next) => { resetTransaction(); setDecreasePercent(next); }} />
+                <QuantityField label={translateMessage("catalogue.changeDiscounts.minimumStock")} name="catalogueChangePricesMinimumStock" value={minimumStock} onValueChange={(next) => { resetTransaction(); setMinimumStock(next); }} />
+                <QuantityField label={translateMessage("catalogue.changeDiscounts.maximumStock")} name="catalogueChangePricesMaximumStock" value={maximumStock} onValueChange={(next) => { resetTransaction(); setMaximumStock(next); }} />
               </>
             )}
           </div>
-          {validationKey !== null && (oldPrice !== null || newPrice !== null || increasePercent !== null || decreasePercent !== null) && (
+          {validationKey !== null && (stockRangeKey !== null || oldPrice !== null || newPrice !== null || increasePercent !== null || decreasePercent !== null) && (
             <InlineNotice tone={ToneNames.warning}>{translateMessage(validationKey)}</InlineNotice>
           )}
         </div>

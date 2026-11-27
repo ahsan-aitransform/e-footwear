@@ -86,7 +86,6 @@ export const navigationEnglishMessages = {
   "navigation.item.priceCheck": "Check Price",
   "navigation.item.changeAttributes": "Change Attributes",
   "navigation.item.changePricesOldToNew": "Change Prices Old to New",
-  "navigation.item.changePricesByPercentage": "Change Prices In %",
   "navigation.item.changeDiscounts": "Change Discounts",
   "navigation.item.productDiscounts": "Product Discounts",
   "navigation.item.productDiscountsOnMultipleStores": "Product Discounts on Multiple Stores",
