@@ -48,6 +48,24 @@ export async function uploadApiFile<TData = void>(path: string, file: File, meth
   return { ok: false, status: response.status, kind, problem: normaliseApiProblem(response.status, payload) };
 }
 
+// Fetches a file with the session token and hands it to the browser to save. Answers false when it could not be fetched.
+export async function downloadApiFile(path: string, fileName: string): Promise<boolean> {
+  const { headers } = await buildSessionHeaders();
+  try {
+    const response = await fetch(`${API_BASE_PATH}${path}`, { method: "GET", headers, cache: "no-store" });
+    if (!response.ok) return false;
+    const url = URL.createObjectURL(await response.blob());
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = fileName;
+    link.click();
+    URL.revokeObjectURL(url);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // Fetches a picture with the session token and returns a temporary object URL for an <img>, or null when there is none.
 // The caller releases it with URL.revokeObjectURL when the picture is no longer shown.
 export async function fetchApiImageObjectUrl(path: string): Promise<string | null> {

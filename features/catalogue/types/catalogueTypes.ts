@@ -147,6 +147,13 @@ export type SaveProductRequestFields = {
 export type CreateProductRequest = SaveProductRequestFields;
 export type UpdateProductRequest = SaveProductRequestFields & { rowVersion: number };
 export type ProductSavedResponse = { productId: string; code: string };
+export type ProductImportResponse = {
+  products: { name: string; departmentName: string; categoryName: string; sizeCount: number }[];
+  problems: { rowNumber: number; productName: string; sizeCode: string; message: string }[];
+  // zero in a preview and when the file has problems
+  createdProductCount: number;
+};
+
 export type NextProductCodeResponse = { code: string };
 
 export type PriceHistoryEntryResponse = {

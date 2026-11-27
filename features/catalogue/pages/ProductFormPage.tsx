@@ -26,6 +26,7 @@ import { useTranslation } from "@/lib/i18n/useTranslation";
 import { usePermissions } from "@/lib/permissions/usePermissions";
 import { showToast } from "@/lib/toast/toastStore";
 import { ProductImagesPanel } from "../components/ProductImagesPanel";
+import { ProductImportDialog } from "../components/ProductImportDialog";
 import { ProductPriceHistoryPanel } from "../components/ProductPriceHistoryPanel";
 import { ProductSizesGrid } from "../components/ProductSizesGrid";
 import { useCatalogueLookups } from "../hooks/useCatalogueLookups";
@@ -148,6 +149,7 @@ export function ProductFormPage({ productId }: { productId?: string }) {
             <Button type="button" variant="outline" onClick={() => router.push(ApplicationRoutes.viewProducts)}>
               {translateMessage("catalogue.product.backToList")}
             </Button>
+            {maySave && !isEditing && <ProductImportDialog onImported={nextCode.refetch} />}
             {maySave && <SubmitButton label={translateMessage("common.save")} pendingLabel={translateMessage("common.pleaseWait")} isPending={isSaving} />}
           </div>
         }
