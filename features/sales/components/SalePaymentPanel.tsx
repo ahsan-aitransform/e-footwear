@@ -12,6 +12,7 @@ import { useTranslation } from "@/lib/i18n/useTranslation";
 import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import type { PaymentRowState } from "../hooks/useSaleEntryWorkspace";
 import type { PaymentSplit } from "../logic/saleCalculations";
+import { accountKindFor } from "../logic/storePaymentAccounts";
 import {
   SalePaymentMethodCodes,
   type SalePaymentAccountResponse,
@@ -61,14 +62,13 @@ export function SalePaymentPanel({
   }
 
   function accountsFor(methodCode: SalePaymentMethodCode) {
-    const wantedKind = methodCode === SalePaymentMethodCodes.cash ? "CASH" : "BANK";
-    return paymentAccounts.filter((account) => account.kindCode === wantedKind);
+    return paymentAccounts.filter((account) => account.kindCode === accountKindFor(methodCode));
   }
 
   return (
     <div className="space-y-3" data-testid="sale-payment-panel">
       {paymentRows.map((row, rowIndex) => (
-        <div key={row.rowKey} className="grid grid-cols-2 items-end gap-2 rounded-lg border p-2 sm:grid-cols-[1fr_1fr_1fr_auto]">
+        <div key={row.rowKey} className="grid grid-cols-[1fr_1fr_auto] items-end gap-2 rounded-lg border p-2">
           <FormField label={translateMessage("sales.payment.method")} name={`sale-payment-method-${rowIndex}`}>
             {(controlProps) => (
               <NativeSelect
@@ -89,24 +89,30 @@ export function SalePaymentPanel({
               </NativeSelect>
             )}
           </FormField>
-          <FormField label={translateMessage("sales.payment.account")} name={`sale-payment-account-${rowIndex}`}>
-            {(controlProps) => (
-              <NativeSelect {...controlProps} value={row.paymentAccountId} disabled={isDisabled} onChange={(event) => updateRow(row.rowKey, { paymentAccountId: event.target.value })}>
-                {accountsFor(row.paymentMethodCode).map((account) => (
-                  <option key={account.accountId} value={account.accountId}>
-                    {account.title}
-                  </option>
-                ))}
-              </NativeSelect>
-            )}
-          </FormField>
-          <WholeRupeeAmountField
-            label={row.paymentMethodCode === SalePaymentMethodCodes.cash ? translateMessage("sales.payment.cashReceived") : translateMessage("sales.payment.amountReceived")}
-            name={`sale-payment-amount-${rowIndex}`}
-            value={row.receivedAmount}
-            isDisabled={isDisabled}
-            onValueChange={(receivedAmount) => updateRow(row.rowKey, { receivedAmount })}
-          />
+          {/* Last and full width, so the whole account name can be read. */}
+          <div className="order-last col-span-full">
+            <FormField label={translateMessage("sales.payment.account")} name={`sale-payment-account-${rowIndex}`}>
+              {(controlProps) => (
+                <NativeSelect {...controlProps} value={row.paymentAccountId} disabled={isDisabled} onChange={(event) => updateRow(row.rowKey, { paymentAccountId: event.target.value })}>
+                  {accountsFor(row.paymentMethodCode).map((account) => (
+                    <option key={account.accountId} value={account.accountId}>
+                      {account.title}
+                    </option>
+                  ))}
+                </NativeSelect>
+              )}
+            </FormField>
+          </div>
+          {/* The amount starts filled in; clicking it selects it, so typing the cash handed over replaces it. */}
+          <div onClick={(event) => event.target instanceof HTMLInputElement && event.target.select()}>
+            <WholeRupeeAmountField
+              label={row.paymentMethodCode === SalePaymentMethodCodes.cash ? translateMessage("sales.payment.cashReceived") : translateMessage("sales.payment.amountReceived")}
+              name={`sale-payment-amount-${rowIndex}`}
+              value={row.receivedAmount}
+              isDisabled={isDisabled}
+              onValueChange={(receivedAmount) => updateRow(row.rowKey, { receivedAmount })}
+            />
+          </div>
           <Button
             type="button"
             variant="ghost"
@@ -132,15 +138,11 @@ export function SalePaymentPanel({
         </div>
       ))}
 
-      <div className="flex flex-wrap gap-2">
-        <Button type="button" variant="outline" disabled={isDisabled || amountDue <= 0} onClick={() => onAddPaymentRow(SalePaymentMethodCodes.cash, amountDue)}>
-          {translateMessage("sales.payment.payInFullCash")}
-        </Button>
-        <Button type="button" variant="outline" disabled={isDisabled} onClick={() => onAddPaymentRow(SalePaymentMethodCodes.cash, null)}>
-          <Plus />
-          {translateMessage("sales.payment.addRow")}
-        </Button>
-      </div>
+      {/* A new row starts as cash with what is still unpaid; the method can then be changed. */}
+      <Button type="button" variant="outline" disabled={isDisabled} onClick={() => onAddPaymentRow(SalePaymentMethodCodes.cash, amountDue > split.receivedAmount ? amountDue - split.receivedAmount : null)}>
+        <Plus />
+        {translateMessage("sales.payment.addRow")}
+      </Button>
 
       <dl className="space-y-1 rounded-lg bg-muted/50 p-3">
         <Figure label={translateMessage("sales.payment.paidAmount")} amount={split.keptAmount} />

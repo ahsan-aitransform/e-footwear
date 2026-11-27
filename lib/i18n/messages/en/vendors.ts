@@ -40,7 +40,7 @@ export const vendorsEnglishMessages = {
   "vendors.ledger.subtitle": "Every debit and credit of a vendor with a running balance. Lines come from the books and are not edited here.",
   "vendors.ledger.to": "To",
   "vendors.ledger.totals": "Totals",
-  "vendors.manage.subtitle": "Edit or delete vendors. A vendor with entries in the books cannot be deleted.",
+  "vendors.manage.subtitle": "Find, edit or delete vendors and open their account detail. A vendor with entries in the books cannot be deleted.",
   "vendors.openingSide.credit": "Credit (we owe the vendor)",
   "vendors.openingSide.debit": "Debit (the vendor owes us)",
   "vendors.search.placeholder": "Search by name, code, phone or e-mail…",

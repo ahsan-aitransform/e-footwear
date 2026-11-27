@@ -41,7 +41,6 @@ export const navigationUrduMessages: Record<keyof typeof navigationEnglishMessag
   "navigation.item.viewCustomers": "گاہک دیکھیں",
   "navigation.item.newVendor": "نیا سپلائر",
   "navigation.item.viewVendors": "سپلائر دیکھیں",
-  "navigation.item.searchVendors": "سپلائر تلاش کریں",
   "navigation.item.vendorAccountDetail": "سپلائر کی اکاؤنٹ تفصیل",
   "navigation.item.newStaffMember": "نیا عملہ",
   "navigation.item.viewStaffMembers": "عملہ دیکھیں",

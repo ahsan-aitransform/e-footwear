@@ -273,6 +273,8 @@ describe("New Sale screen", () => {
     await scanItem(user);
     await screen.findByText("Gents Sandal");
     await user.click(screen.getByRole("button", { name: "Add payment" }));
+    // the new row is filled with what is unpaid; the cashier replaces it with the cash handed over
+    await user.clear(screen.getByLabelText(/Cash Received/));
     await user.type(screen.getByLabelText(/Cash Received/), "2500");
     await user.click(screen.getByRole("button", { name: "Save" }));
 

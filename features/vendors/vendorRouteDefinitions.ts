@@ -27,8 +27,6 @@ export const vendorRouteDefinitions: readonly ApplicationRouteDefinition[] = [
   screenRoute("editVendor", ApplicationRoutePatterns.editVendor, PermissionCodes.VENDORS.NEW_VENDOR.VIEW, undefined),
   screenRoute("viewVendors", ApplicationRoutePatterns.viewVendors, PermissionCodes.VENDORS.VIEW_VENDORS.VIEW,
     { labelMessageKey: "navigation.item.viewVendors", iconName: "contact", sortOrder: 12 }),
-  screenRoute("searchVendors", ApplicationRoutePatterns.searchVendors, PermissionCodes.VENDORS.SEARCH_VENDOR.VIEW,
-    { labelMessageKey: "navigation.item.searchVendors", iconName: "contact", sortOrder: 13 }),
   screenRoute("vendorAccountDetail", ApplicationRoutePatterns.vendorAccountDetail, PermissionCodes.VENDORS.VENDOR_ACCOUNT_DETAIL.VIEW,
     { labelMessageKey: "navigation.item.vendorAccountDetail", iconName: "chartOfAccounts", sortOrder: 14 }),
 ];

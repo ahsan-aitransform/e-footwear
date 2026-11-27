@@ -149,7 +149,6 @@ export const salesUrduMessages: Record<keyof typeof salesEnglishMessages, string
   "sales.payment.heading": "ادائیگی",
   "sales.payment.method": "طریقہ",
   "sales.payment.paidAmount": "ادا شدہ رقم",
-  "sales.payment.payInFullCash": "پوری رقم نقد",
   "sales.payment.reference": "حوالہ",
   "sales.payment.removeRow": "ادائیگی ہٹائیں",
   "sales.problem.creditNeedsCustomer": "بل کا کچھ حصہ ادا نہیں ہوا۔ ادھار کے لیے گاہک منتخب کریں، یا پوری ادائیگی لیں۔",

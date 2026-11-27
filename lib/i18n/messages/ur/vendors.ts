@@ -42,7 +42,7 @@ export const vendorsUrduMessages: Record<keyof typeof vendorsEnglishMessages, st
   "vendors.ledger.subtitle": "سپلائر کے ہر ڈیبٹ اور کریڈٹ کے ساتھ چلتا ہوا بیلنس۔ لائنیں کھاتوں سے آتی ہیں اور یہاں تبدیل نہیں ہوتیں۔",
   "vendors.ledger.to": "تا",
   "vendors.ledger.totals": "کل",
-  "vendors.manage.subtitle": "سپلائروں میں ترمیم یا انہیں حذف کریں۔ جس کا کھاتوں میں اندراج ہو اسے حذف نہیں کیا جا سکتا۔",
+  "vendors.manage.subtitle": "سپلائر تلاش کریں، ان میں ترمیم کریں یا حذف کریں اور اکاؤنٹ کی تفصیل کھولیں۔ جس کا کھاتوں میں اندراج ہو اسے حذف نہیں کیا جا سکتا۔",
   "vendors.openingSide.credit": "کریڈٹ (ہم پر سپلائر کا واجب)",
   "vendors.openingSide.debit": "ڈیبٹ (سپلائر نے دینا ہے)",
   "vendors.search.placeholder": "نام، کوڈ، فون یا ای میل سے تلاش کریں…",

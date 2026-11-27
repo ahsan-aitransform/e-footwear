@@ -147,7 +147,6 @@ export const salesEnglishMessages = {
   "sales.payment.heading": "Payment",
   "sales.payment.method": "Method",
   "sales.payment.paidAmount": "Paid Amount",
-  "sales.payment.payInFullCash": "Pay in full (cash)",
   "sales.payment.reference": "Reference",
   "sales.payment.removeRow": "Remove payment",
   "sales.problem.creditNeedsCustomer": "Part of the bill is unpaid. Choose a customer to put it on credit, or take the full payment.",

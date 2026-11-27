@@ -31,7 +31,6 @@ export const vendorScreenConfig: ContactScreenConfig = {
   titleMessageKeys: {
     newContact: "navigation.item.newVendor",
     viewContacts: "navigation.item.viewVendors",
-    searchContacts: "navigation.item.searchVendors",
     accountDetail: "navigation.item.vendorAccountDetail",
   },
   offlineCacheNames: { view: "vendorsView", search: "vendorsSearch" },

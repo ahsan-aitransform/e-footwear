@@ -19,9 +19,9 @@ import {
   type SaleEntryProblem,
 } from "../logic/saleEntryLines";
 import type { SaleScreenConfiguration } from "../logic/saleScreenEndpoints";
+import { accountKindFor, accountsOfSellingStore } from "../logic/storePaymentAccounts";
 import type { InvoiceBeingCorrected, PaymentRowState, SaleEntryDraft, SaleHeaderState, SalePrintChoices } from "../logic/saleEntryDraftTypes";
 import {
-  SalePaymentMethodCodes,
   SalePrintFormatCodes,
   SalePrintLanguageCodes,
   type SaleEntryContextResponse,
@@ -33,7 +33,6 @@ import {
 } from "../types/saleTypes";
 
 const DRAFT_SAVE_DELAY_MILLISECONDS = 400;
-const NIL_STORE_ID = "00000000-0000-0000-0000-000000000000";
 
 function createEmptyHeader(): SaleHeaderState {
   return {
@@ -89,9 +88,22 @@ export function useSaleEntryWorkspace(screen: SaleScreenConfiguration) {
 
   const totals: SaleTotals = useMemo(() => calculateSaleTotals(lines.map(toCalculationInput), roundingMode), [lines, roundingMode]);
 
+  const paymentAccounts = useMemo(() => accountsOfSellingStore(paymentAccountsQuery.data ?? [], storeId), [paymentAccountsQuery.data, storeId]);
+  const defaultAccountIdFor = useCallback(
+    (methodCode: SalePaymentMethodCode): string => paymentAccounts.find((account) => account.kindCode === accountKindFor(methodCode))?.accountId ?? "",
+    [paymentAccounts],
+  );
+  // A row kept from another store (the store was switched, or an old browser draft) moves to the selling store's account.
+  const storePaymentRows = useMemo(() => {
+    if (paymentAccounts.length === 0) return paymentRows;
+    return paymentRows.map((row) =>
+      paymentAccounts.some((account) => account.accountId === row.paymentAccountId) ? row : { ...row, paymentAccountId: defaultAccountIdFor(row.paymentMethodCode) },
+    );
+  }, [paymentRows, paymentAccounts, defaultAccountIdFor]);
+
   const paymentEntryRows: PaymentEntryRow[] = useMemo(
     () =>
-      paymentRows
+      storePaymentRows
         .filter((row) => (row.receivedAmount ?? 0) > 0 && row.paymentAccountId !== "")
         .map((row) => ({
           paymentMethodCode: row.paymentMethodCode,
@@ -99,7 +111,7 @@ export function useSaleEntryWorkspace(screen: SaleScreenConfiguration) {
           receivedAmount: row.receivedAmount ?? 0,
           referenceNumber: row.referenceNumber.trim() === "" ? null : row.referenceNumber.trim(),
         })),
-    [paymentRows],
+    [storePaymentRows],
   );
 
   // For an exchange the amount to collect is the new sale minus what is returned; the screen passes it as `amountDue`.
@@ -172,16 +184,6 @@ export function useSaleEntryWorkspace(screen: SaleScreenConfiguration) {
   const updateHeader = useCallback((changes: Partial<SaleHeaderState>) => setHeader((current) => ({ ...current, ...changes })), []);
   const updatePrintChoices = useCallback((changes: Partial<SalePrintChoices>) => setPrintOverrides((current) => ({ ...current, ...changes })), []);
 
-  const paymentAccounts = useMemo(() => paymentAccountsQuery.data ?? [], [paymentAccountsQuery.data]);
-  const defaultAccountIdFor = useCallback(
-    (methodCode: SalePaymentMethodCode): string => {
-      const wantedKind = methodCode === SalePaymentMethodCodes.cash ? "CASH" : "BANK";
-      const ofKind = paymentAccounts.filter((account) => account.kindCode === wantedKind);
-      return (ofKind.find((account) => account.storeId === storeId) ?? ofKind.find((account) => account.storeId === NIL_STORE_ID) ?? ofKind[0])?.accountId ?? "";
-    },
-    [paymentAccounts, storeId],
-  );
-
   const addPaymentRow = useCallback(
     (methodCode: SalePaymentMethodCode, receivedAmount: number | null) =>
       setPaymentRows((current) => [
@@ -211,7 +213,7 @@ export function useSaleEntryWorkspace(screen: SaleScreenConfiguration) {
     dispatchLines: dispatchLines as (action: SaleEntryLinesAction) => void,
     header,
     updateHeader,
-    paymentRows,
+    paymentRows: storePaymentRows,
     setPaymentRows,
     addPaymentRow,
     paymentAccounts,
