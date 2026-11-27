@@ -319,6 +319,16 @@ describe("view products", () => {
     expect(screen.queryByText(/Margin|Markup/)).not.toBeInTheDocument();
   });
 
+  it("shows a cashier only the columns needed at the counter", async () => {
+    await openScreen(sessionWith(Products.VIEW_PRODUCTS.VIEW), server(answers), <ProductVariantListPage mode="view" />);
+
+    expect(await screen.findByText("Alpha Sandal")).toBeInTheDocument();
+    expect(screen.getAllByRole("columnheader").map((header) => header.textContent?.trim())).toEqual(
+      ["Barcode", "Product", "Size", "Colour", "Stock", "Sale price", "Discount", "Category", "Brand"],
+    );
+    expect(screen.queryByText("600")).not.toBeInTheDocument(); // the purchase price
+  });
+
   it("offers row actions only to people who may edit or delete", async () => {
     await openScreen(sessionWith(Products.VIEW_PRODUCTS.VIEW), server(answers), <ProductVariantListPage mode="view" />);
     expect(await screen.findByText("Alpha Sandal")).toBeInTheDocument();

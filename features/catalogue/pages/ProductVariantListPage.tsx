@@ -18,6 +18,7 @@ import { apiRequest } from "@/lib/api/apiRequest";
 import { createClientTransactionId } from "@/lib/api/sendApiRequest";
 import { ApiEndpoints } from "@/lib/constants/apiEndpoints";
 import { ApplicationRoutes } from "@/lib/constants/applicationRoutes";
+import { RoleCodes } from "@/lib/constants/roleCodes";
 import { PermissionCodes } from "@/lib/contracts/permissionCodes";
 import { ToneNames } from "@/lib/design/semanticTones";
 import type { MessageKey } from "@/lib/i18n/messageKeys";
@@ -26,6 +27,7 @@ import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import { formatPercentage, formatQuantity } from "@/lib/money/quantityAndPercentage";
 import { useCanViewMargin } from "@/lib/permissions/useCanViewMargin";
 import { usePermissions } from "@/lib/permissions/usePermissions";
+import { useCurrentSession } from "@/lib/session/useSessionState";
 import { showToast } from "@/lib/toast/toastStore";
 import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
 import { CatalogueFilterFields, type CatalogueFilterFieldName } from "../components/CatalogueFilterFields";
@@ -53,6 +55,9 @@ const modeSettings: Record<
 };
 
 const filterFields: readonly CatalogueFilterFieldName[] = ["storeId", "departmentId", "categoryId", "brandId", "genderId", "seasonId", "colorId"];
+
+// The only product fields a cashier sees on View Products (so no purchase price, among others).
+const cashierColumnKeys: ReadonlySet<string> = new Set(["barcode", "productName", "sizeCode", "color", "stock", "salePrice", "discountAmount", "category", "brand"]);
 
 // The product grid of three screens (docx 4.2 View Products, 4.10 Product Discounts, 4.12 Remove Discounts and Reverse Price): one
 // row per size, with stock, prices, discount, net price, margin and markup. View edits or deletes a product, Product Discounts sets a
@@ -89,6 +94,7 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
   );
   const canViewMargin = useCanViewMargin();
   const mayOpenProduct = hasPermission(PermissionCodes.PRODUCTS.NEW_PRODUCT.VIEW);
+  const isCashier = useCurrentSession()?.roleCode === RoleCodes.cashierSalesman;
 
   const selectedProductIds = useMemo(() => [...new Set([...selectedKeys].map((key) => key.split("|")[0]))], [selectedKeys]);
   const storeIsMissing = settings.needsStore && !searchedStoreId;
@@ -117,7 +123,10 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
       { key: "status", header: translateMessage("catalogue.field.status"), isSecondary: true, render: (row) => <ProductStatusBadge statusCode={row.status} /> },
     ];
     if (mode !== "view") return base;
-    base.push({
+    const shown = isCashier ? base.filter((column) => cashierColumnKeys.has(column.key)) : base;
+    // A cashier who may not change products gets no empty actions column either.
+    if (isCashier && !mayEdit && !mayDelete) return shown;
+    shown.push({
       key: "actions",
       header: translateMessage("masterData.column.actions"),
       alignment: "end",
@@ -127,8 +136,8 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
         </div>
       ),
     });
-    return base;
-  }, [translateMessage, mode, mayEdit, mayDelete, canViewMargin, router]);
+    return shown;
+  }, [translateMessage, mode, isCashier, mayEdit, mayDelete, canViewMargin, router]);
 
   async function confirmDelete() {
     if (!toDelete) return;
