@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import type { ReactElement } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiEndpoints } from "@/lib/constants/apiEndpoints";
+import { RoleCodes } from "@/lib/constants/roleCodes";
 import { PermissionCodes } from "@/lib/contracts/permissionCodes";
 import type { CurrentSessionResponse } from "@/lib/types/session";
 import { installFetchMock, type RecordedRequest } from "@/tests/support/fetchMock";
@@ -300,12 +301,22 @@ describe("new product form", () => {
 describe("view products", () => {
   const answers = (path: string) => (path.startsWith("/products/variants") ? { body: { items: [variantRow()], pageNumber: 1, pageSize: 25, totalItemCount: 1 } } : undefined);
 
-  it("shows the money columns in whole rupees and the margin of each size", async () => {
-    await openScreen(sessionWith(Products.VIEW_PRODUCTS.VIEW), server(answers), <ProductVariantListPage mode="view" />);
+  it("shows the money columns in whole rupees and, to the owner, the margin of each size", async () => {
+    const owner = buildCompanyUserSession({ roleCode: RoleCodes.companyOwner, grantedPermissionCodes: [Products.VIEW_PRODUCTS.VIEW] });
+    await openScreen(owner, server(answers), <ProductVariantListPage mode="view" />);
 
     expect(await screen.findByText("Alpha Sandal")).toBeInTheDocument();
     expect(screen.getAllByText("1,000").length).toBeGreaterThan(0);
     expect(screen.getByText("40%")).toBeInTheDocument();
+  });
+
+  it("hides margin and markup from a store manager", async () => {
+    const manager = buildCompanyUserSession({ roleCode: RoleCodes.storeManager, grantedPermissionCodes: [Products.VIEW_PRODUCTS.VIEW] });
+    await openScreen(manager, server(answers), <ProductVariantListPage mode="view" />);
+
+    expect(await screen.findByText("Alpha Sandal")).toBeInTheDocument();
+    expect(screen.queryByText("40%")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Margin|Markup/)).not.toBeInTheDocument();
   });
 
   it("offers row actions only to people who may edit or delete", async () => {

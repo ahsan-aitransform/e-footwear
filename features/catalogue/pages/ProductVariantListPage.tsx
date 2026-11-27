@@ -24,6 +24,7 @@ import type { MessageKey } from "@/lib/i18n/messageKeys";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 import { formatWholeRupees } from "@/lib/money/wholeRupeeAmount";
 import { formatPercentage, formatQuantity } from "@/lib/money/quantityAndPercentage";
+import { useCanViewMargin } from "@/lib/permissions/useCanViewMargin";
 import { usePermissions } from "@/lib/permissions/usePermissions";
 import { showToast } from "@/lib/toast/toastStore";
 import { useWorkingStoreId } from "@/lib/session/useWorkingStoreId";
@@ -86,12 +87,17 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
   const mayApply = hasPermission(
     mode === "discounts" ? PermissionCodes.PRODUCTS.PRODUCT_DISCOUNTS.EDIT : PermissionCodes.PRODUCTS.REMOVE_DISCOUNTS_AND_REVERSE_PRICE.EDIT,
   );
+  const canViewMargin = useCanViewMargin();
   const mayOpenProduct = hasPermission(PermissionCodes.PRODUCTS.NEW_PRODUCT.VIEW);
 
   const selectedProductIds = useMemo(() => [...new Set([...selectedKeys].map((key) => key.split("|")[0]))], [selectedKeys]);
   const storeIsMissing = settings.needsStore && !searchedStoreId;
 
   const columns = useMemo<DataGridColumn<ProductVariantListItemResponse>[]>(() => {
+    const marginColumns: DataGridColumn<ProductVariantListItemResponse>[] = [
+      { key: "marginPercent", header: translateMessage("catalogue.field.marginPercent"), alignment: "end", isSecondary: true, render: (row) => (row.marginPercent === null ? "" : formatPercentage(row.marginPercent)) },
+      { key: "markupPercent", header: translateMessage("catalogue.field.markupPercent"), alignment: "end", isSecondary: true, render: (row) => (row.markupPercent === null ? "" : formatPercentage(row.markupPercent)) },
+    ];
     const base: DataGridColumn<ProductVariantListItemResponse>[] = [
       { key: "productCode", header: translateMessage("catalogue.field.productCode"), isSortable: true, render: (row) => <span dir="ltr">{row.productCode}</span> },
       { key: "barcode", header: translateMessage("catalogue.field.barcode"), isSortable: true, render: (row) => <span dir="ltr">{row.barcode}</span> },
@@ -105,8 +111,7 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
       { key: "discountPercent", header: translateMessage("catalogue.field.discountPercent"), alignment: "end", isSecondary: true, render: (row) => (row.discountPercent === null ? "" : formatPercentage(row.discountPercent)) },
       { key: "discountAmount", header: translateMessage("catalogue.field.discountAmount"), alignment: "end", isSecondary: true, render: (row) => formatWholeRupees(row.discountAmount, { withSymbol: false }) },
       { key: "netPrice", header: translateMessage("catalogue.field.netPrice"), alignment: "end", render: (row) => formatWholeRupees(row.netPrice, { withSymbol: false }) },
-      { key: "marginPercent", header: translateMessage("catalogue.field.marginPercent"), alignment: "end", isSecondary: true, render: (row) => (row.marginPercent === null ? "" : formatPercentage(row.marginPercent)) },
-      { key: "markupPercent", header: translateMessage("catalogue.field.markupPercent"), alignment: "end", isSecondary: true, render: (row) => (row.markupPercent === null ? "" : formatPercentage(row.markupPercent)) },
+      ...(canViewMargin ? marginColumns : []),
       { key: "category", header: translateMessage("catalogue.field.category"), isSortable: true, isSecondary: true, render: (row) => row.categoryName },
       { key: "brand", header: translateMessage("catalogue.field.brand"), isSortable: true, isSecondary: true, render: (row) => row.brandName ?? "" },
       { key: "status", header: translateMessage("catalogue.field.status"), isSecondary: true, render: (row) => <ProductStatusBadge statusCode={row.status} /> },
@@ -123,7 +128,7 @@ export function ProductVariantListPage({ mode, isEmbedded = false }: Readonly<{ 
       ),
     });
     return base;
-  }, [translateMessage, mode, mayEdit, mayDelete, router]);
+  }, [translateMessage, mode, mayEdit, mayDelete, canViewMargin, router]);
 
   async function confirmDelete() {
     if (!toDelete) return;

@@ -14,6 +14,7 @@ import type { SizeResponse } from "@/features/masterData/types/masterListTypes";
 import { useApiQuery } from "@/lib/api/hooks/useApiQuery";
 import { ApiEndpoints } from "@/lib/constants/apiEndpoints";
 import { ToneNames } from "@/lib/design/semanticTones";
+import { useCanViewMargin } from "@/lib/permissions/useCanViewMargin";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 import { formatPercentage } from "@/lib/money/quantityAndPercentage";
 import type { CatalogueLookups } from "../hooks/useCatalogueLookups";
@@ -30,7 +31,7 @@ import { ProductStatusCodes } from "../types/catalogueTypes";
 import { CompactWholeRupeeInput } from "./CompactWholeRupeeInput";
 
 // The Sizes grid of New Product (docx 4.1): one row per size (and colour) with its barcode, purchase price and sale price, the
-// margin and markup they give, and the "Start size / End size" shortcut that adds a whole run of sizes at once. An empty barcode is
+// margin and markup they give (owner only), and the "Start size / End size" shortcut that adds a whole run of sizes at once. An empty barcode is
 // filled in by the server. A person without the "change selling price" permission cannot edit the sale price of a saved size.
 export function ProductSizesGrid({
   rows,
@@ -46,6 +47,7 @@ export function ProductSizesGrid({
   canChangeSalePriceOfSavedSizes: boolean;
 }) {
   const { translateMessage } = useTranslation();
+  const canViewMargin = useCanViewMargin();
   const [rangeSizeGroupId, setRangeSizeGroupId] = useState("");
   const [rangeColorId, setRangeColorId] = useState("");
   const [rangeStart, setRangeStart] = useState("");
@@ -138,8 +140,8 @@ export function ProductSizesGrid({
             <TableHead>{translateMessage("catalogue.field.barcode")}</TableHead>
             <TableHead className="text-end">{translateMessage("catalogue.field.purchasePrice")}</TableHead>
             <TableHead className="text-end">{translateMessage("catalogue.field.salePrice")}</TableHead>
-            <TableHead className="text-end">{translateMessage("catalogue.field.marginPercent")}</TableHead>
-            <TableHead className="text-end">{translateMessage("catalogue.field.markupPercent")}</TableHead>
+            {canViewMargin && <TableHead className="text-end">{translateMessage("catalogue.field.marginPercent")}</TableHead>}
+            {canViewMargin && <TableHead className="text-end">{translateMessage("catalogue.field.markupPercent")}</TableHead>}
             <TableHead>
               <span className="sr-only">{translateMessage("common.actions")}</span>
             </TableHead>
@@ -148,7 +150,7 @@ export function ProductSizesGrid({
         <TableBody>
           {rows.length === 0 && (
             <TableRow>
-              <TableCell colSpan={8} className="py-6 text-center text-muted-foreground">
+              <TableCell colSpan={canViewMargin ? 8 : 6} className="py-6 text-center text-muted-foreground">
                 {translateMessage("catalogue.sizes.empty")}
               </TableCell>
             </TableRow>
@@ -175,8 +177,8 @@ export function ProductSizesGrid({
                 <TableCell className="text-end">
                   <CompactWholeRupeeInput value={row.salePrice} ariaLabel={translateMessage("catalogue.field.salePrice")} isDisabled={isSaved && !canChangeSalePriceOfSavedSizes} onValueChange={(next) => changeRow(row.rowKey, { salePrice: next })} />
                 </TableCell>
-                <TableCell className="text-end tabular-nums">{margin === null ? "" : formatPercentage(margin)}</TableCell>
-                <TableCell className="text-end tabular-nums">{markup === null ? "" : formatPercentage(markup)}</TableCell>
+                {canViewMargin && <TableCell className="text-end tabular-nums">{margin === null ? "" : formatPercentage(margin)}</TableCell>}
+                {canViewMargin && <TableCell className="text-end tabular-nums">{markup === null ? "" : formatPercentage(markup)}</TableCell>}
                 <TableCell className="text-end">
                   <Button type="button" variant="ghost" size="icon-sm" aria-label={translateMessage("catalogue.sizes.removeRow")} onClick={() => onRowsChange(rows.filter((candidate) => candidate.rowKey !== row.rowKey))}>
                     <Trash2 />
