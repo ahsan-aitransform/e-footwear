@@ -297,8 +297,9 @@ export type OldToNewPriceChangeRequest = {
 export type PercentagePriceChangeRequest = {
   storeId: string | null;
   departmentId: string | null;
-  categoryId: string | null;
-  brandId: string | null;
+  // empty = all
+  categoryIds: string[];
+  brandIds: string[];
   increasePercent: number | null;
   decreasePercent: number | null;
   clientTransactionId: string;

@@ -1,6 +1,7 @@
 "use client";
 
 import { FormField } from "@/components/forms/FormField";
+import { SearchableMultiSelect } from "@/components/forms/SearchableMultiSelect";
 import { SearchableSelect } from "@/components/forms/SearchableSelect";
 import { useTranslation } from "@/lib/i18n/useTranslation";
 import type { CatalogueLookups } from "../hooks/useCatalogueLookups";
@@ -35,27 +36,41 @@ export function CatalogueFilterFields({
   values,
   onChange,
   lookups,
+  multipleSelections = {},
 }: {
   fields: readonly CatalogueFilterFieldName[];
   values: ProductListFilterValues;
   onChange: (values: ProductListFilterValues) => void;
   lookups: CatalogueLookups;
+  // A field listed here takes several choices, kept by the screen instead of in `values`.
+  multipleSelections?: Partial<Record<CatalogueFilterFieldName, { values: readonly string[]; onValuesChange: (values: string[]) => void }>>;
 }) {
   const { translateMessage } = useTranslation();
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {fields.map((field) => (
         <FormField key={field} label={translateMessage(labelByField[field])} name={`catalogue-filter-${field}`}>
-          {(controlProps) => (
-            <SearchableSelect
-              {...controlProps}
-              options={lookups[lookupByField[field]]}
-              value={values[field] ?? null}
-              isClearable
-              placeholder={translateMessage("catalogue.filter.all")}
-              onValueChange={(next) => onChange({ ...values, [field]: next ?? undefined, ...(field === "departmentId" ? { categoryId: undefined } : {}) })}
-            />
-          )}
+          {(controlProps) => {
+            const multiple = multipleSelections[field];
+            return multiple ? (
+              <SearchableMultiSelect
+                {...controlProps}
+                options={lookups[lookupByField[field]]}
+                values={multiple.values}
+                placeholder={translateMessage("catalogue.filter.all")}
+                onValuesChange={multiple.onValuesChange}
+              />
+            ) : (
+              <SearchableSelect
+                {...controlProps}
+                options={lookups[lookupByField[field]]}
+                value={values[field] ?? null}
+                isClearable
+                placeholder={translateMessage("catalogue.filter.all")}
+                onValueChange={(next) => onChange({ ...values, [field]: next ?? undefined, ...(field === "departmentId" ? { categoryId: undefined } : {}) })}
+              />
+            );
+          }}
         </FormField>
       ))}
     </div>

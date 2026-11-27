@@ -37,18 +37,22 @@ import {
 
 export type ChangePricesMode = "oldToNew" | "percentage";
 
-// Change Prices Old to New (docx 4.7) and Change Prices In % (docx 4.8). Both pick the products by department, category and brand,
+// Change Prices Old to New (docx 4.7) and Change Prices In % (docx 4.8). Both pick the products by department, category and brand
+// (several categories and brands in Change Prices In %),
 // show the rows that will change with their new price, and apply the change as one batch. A sale price can be changed for the
 // company list price or for one store; a purchase price is always company-wide. Applying asks for a confirmation, and the
 // server answers with how many sizes changed and how many now overlap a discount (a conflict an administrator resolves).
 export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
   const { translateMessage } = useTranslation();
   const { hasPermission } = usePermissions();
-  const lookups = useCatalogueLookups();
   const isOldToNew = mode === "oldToNew";
   const mayApply = hasPermission(isOldToNew ? PermissionCodes.PRODUCTS.CHANGE_PRICES_OLD_TO_NEW.EDIT : PermissionCodes.PRODUCTS.CHANGE_PRICES_BY_PERCENTAGE.EDIT);
 
   const [filter, setFilter] = useState<ProductListFilterValues>({});
+  // Change Prices In % takes several categories and brands; none chosen means all of them.
+  const [categoryIds, setCategoryIds] = useState<string[]>([]);
+  const [brandIds, setBrandIds] = useState<string[]>([]);
+  const lookups = useCatalogueLookups(filter.departmentId);
   const [priceType, setPriceType] = useState<string>(PriceTypeCodes.sale);
   const [storeId, setStoreId] = useState<string | null>(null);
   const [oldPrice, setOldPrice] = useState<number | null>(null);
@@ -68,17 +72,17 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
   const isPurchase = isOldToNew && priceType === PriceTypeCodes.purchase;
 
   function buildRequest(clientTransactionId: string): OldToNewPriceChangeRequest | PercentagePriceChangeRequest {
-    const common = { storeId: effectiveStoreId, departmentId: filter.departmentId ?? null, categoryId: filter.categoryId ?? null, brandId: filter.brandId ?? null, clientTransactionId };
+    const common = { storeId: effectiveStoreId, departmentId: filter.departmentId ?? null, clientTransactionId };
     return isOldToNew
-      ? { ...common, priceType: priceType as OldToNewPriceChangeRequest["priceType"], oldPrice: oldPrice ?? 0, newPrice: newPrice ?? 0 }
-      : { ...common, increasePercent, decreasePercent };
+      ? { ...common, categoryId: filter.categoryId ?? null, brandId: filter.brandId ?? null, priceType: priceType as OldToNewPriceChangeRequest["priceType"], oldPrice: oldPrice ?? 0, newPrice: newPrice ?? 0 }
+      : { ...common, categoryIds, brandIds, increasePercent, decreasePercent };
   }
 
   // The preview needs a complete, valid entry; the all-zero id marks "not an apply".
   const previewBody = useMemo(
     () => (validationKey === null ? buildRequest("00000000-0000-0000-0000-000000000000") : null),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [validationKey, isOldToNew, priceType, effectiveStoreId, filter.departmentId, filter.categoryId, filter.brandId, oldPrice, newPrice, increasePercent, decreasePercent],
+    [validationKey, isOldToNew, priceType, effectiveStoreId, filter.departmentId, filter.categoryId, filter.brandId, categoryIds, brandIds, oldPrice, newPrice, increasePercent, decreasePercent],
   );
 
   function resetTransaction() {
@@ -135,9 +139,19 @@ export function ChangePricesPage({ mode }: { mode: ChangePricesMode }) {
             values={filter}
             onChange={(next) => {
               resetTransaction();
+              // categories belong to one department
+              if (next.departmentId !== filter.departmentId) setCategoryIds([]);
               setFilter(next);
             }}
             lookups={lookups}
+            multipleSelections={
+              isOldToNew
+                ? undefined
+                : {
+                    categoryId: { values: categoryIds, onValuesChange: (next) => { resetTransaction(); setCategoryIds(next); } },
+                    brandId: { values: brandIds, onValuesChange: (next) => { resetTransaction(); setBrandIds(next); } },
+                  }
+            }
           />
           <div className="grid gap-4 md:grid-cols-4">
             {isOldToNew && (
