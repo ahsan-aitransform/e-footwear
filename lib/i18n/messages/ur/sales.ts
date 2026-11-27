@@ -44,7 +44,7 @@ export const salesUrduMessages: Record<keyof typeof salesEnglishMessages, string
   "sales.detail.voidedBy": "منسوخ کرنے والا",
   "sales.entry.addItem": "آئٹم شامل کریں",
   "sales.entry.barcode": "بار کوڈ (F2)",
-  "sales.entry.barcodeHint": "کوڈ اسکین کریں یا لکھیں اور Enter دبائیں۔",
+  "sales.entry.barcodeHint": "بار کوڈ اسکین کریں یا پروڈکٹ کوڈ لکھیں، پھر Enter دبائیں۔",
   "sales.entry.cancelItem": "منسوخ",
   "sales.entry.manual": "دستی",
   "sales.entry.noPicture": "تصویر نہیں",

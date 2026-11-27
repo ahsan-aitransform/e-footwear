@@ -67,7 +67,7 @@ describe("Stock Adjustment screen", () => {
   };
 
   async function scanSandal(user: ReturnType<typeof userEvent.setup>) {
-    await user.type(await screen.findByLabelText("Bar code or product name"), "1S42{Enter}");
+    await user.type(await screen.findByLabelText("Barcode, product code or product name"), "1S42{Enter}");
     await screen.findByText("Gents Sandal");
   }
 
@@ -150,7 +150,7 @@ describe("Stock Audit screen", () => {
     const requests = await openScreen(sessionWith(...permissions), handler, <StockAuditPage />);
 
     await user.click(await screen.findByRole("button", { name: "Continue" }));
-    const barcode = await screen.findByLabelText("Scan bar code");
+    const barcode = await screen.findByLabelText("Scan barcode or type product code");
     await user.type(barcode, "1S42");
     const quantity = screen.getByLabelText("Pieces");
     await user.clear(quantity);
@@ -211,7 +211,7 @@ describe("Stock Transfer Receiving screen", () => {
     const requests = await openScreen(sessionWith(...permissions), handler, <StockTransferReceivingPage />);
 
     await user.dblClick(await screen.findByText("Second Store"));
-    await user.type(await screen.findByLabelText("Scan bar code"), "1S42");
+    await user.type(await screen.findByLabelText("Scan barcode or type product code"), "1S42");
     const quantity = screen.getByLabelText("Pieces");
     await user.clear(quantity);
     await user.type(quantity, "2");

@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { FormResultNotice } from "@/components/feedback/InlineNotice";
 import { FormField } from "@/components/forms/FormField";
+import { ProductSizeChoices } from "@/components/forms/ProductSizeChoices";
 import { SubmitButton } from "@/components/forms/SubmitButton";
 import { TextInputField } from "@/components/forms/TextInputField";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { apiRequest } from "@/lib/api/apiRequest";
+import { useSizesOfProductCode } from "@/lib/api/hooks/useSizesOfProductCode";
 import { ApiEndpoints } from "@/lib/constants/apiEndpoints";
 import { ToneNames } from "@/lib/design/semanticTones";
 import { useTranslation } from "@/lib/i18n/useTranslation";
@@ -51,17 +53,22 @@ export function DealDialog({ deal, onClose, onSaved }: { deal: DealResponse | nu
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<string>();
   const [scanMessage, setScanMessage] = useState<string>();
+  const { sizes, findSizes, clearSizes } = useSizesOfProductCode();
 
   function change(changes: Partial<DealFormValues>) {
     setValues((current) => ({ ...current, ...changes }));
   }
 
-  async function handleScan() {
-    const barcode = scanText.trim();
+  async function handleScan(barcode = scanText.trim()) {
     if (barcode === "") return;
     setScanMessage(undefined);
+    clearSizes();
     const result = await apiRequest<DealVariantLookupResponse>(ApiEndpoints.promotions.dealVariantByBarcode, { query: { barcode } });
-    if (!result.ok) return setScanMessage(result.kind === "notFound" ? translateMessage("promotions.dealForm.lookupFailed") : result.problem.message);
+    if (!result.ok) {
+      if (result.kind !== "notFound") setScanMessage(result.problem.message);
+      else if (!(await findSizes(barcode))) setScanMessage(translateMessage("promotions.dealForm.lookupFailed"));
+      return;
+    }
     const found = result.data;
     if (values.lines.some((line) => line.variantId === found.variantId)) return setScanMessage(translateMessage("promotions.dealForm.alreadyInDeal"));
     change({
@@ -133,6 +140,7 @@ export function DealDialog({ deal, onClose, onSaved }: { deal: DealResponse | nu
               <Switch id="deal-is-active" checked={values.isActive} onCheckedChange={(isActive) => change({ isActive })} />
               <Label htmlFor="deal-is-active">{translateMessage("promotions.dealForm.isActive")}</Label>
             </div>
+            <ProductSizeChoices sizes={sizes} onChosen={(barcode) => void handleScan(barcode)} />
             <div className="flex flex-wrap items-end gap-2">
               <div className="min-w-64 flex-1">
                 <FormField label={translateMessage("promotions.dealForm.scan")} name="dealScan" errorMessage={scanMessage}>

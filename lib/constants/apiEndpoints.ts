@@ -226,6 +226,7 @@ export const ApiEndpoints = {
     importTemplate: "/products/import-template",
     importPreview: "/products/import-preview",
     import: "/products/import",
+    sizesByCode: "/products/sizes-by-code",
     priceHistory: (productId: string) => `/products/${encodeURIComponent(productId)}/price-history`,
     image: (productId: string, slot: number) => `/products/${encodeURIComponent(productId)}/images/${slot}`,
     priceCheck: "/products/price-check",

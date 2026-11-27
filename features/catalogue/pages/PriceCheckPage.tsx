@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { FormResultNotice, InlineNotice } from "@/components/feedback/InlineNotice";
 import { FormField } from "@/components/forms/FormField";
+import { ProductSizeChoices } from "@/components/forms/ProductSizeChoices";
 import { SearchableSelect } from "@/components/forms/SearchableSelect";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionCard } from "@/components/layout/SectionCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { apiRequest } from "@/lib/api/apiRequest";
+import { useSizesOfProductCode } from "@/lib/api/hooks/useSizesOfProductCode";
 import { ApiEndpoints } from "@/lib/constants/apiEndpoints";
 import { ToneNames } from "@/lib/design/semanticTones";
 import { useTranslation } from "@/lib/i18n/useTranslation";
@@ -39,23 +41,29 @@ export function PriceCheckPage() {
   const [storeId, setStoreId] = useState<string | null>(workingStoreId);
   const [isLooking, setIsLooking] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
+  const { sizes, findSizes, clearSizes } = useSizesOfProductCode();
   const [lookup, setLookup] = useState<VariantPriceLookupResponse | null>(null);
 
   useEffect(() => {
     barcodeReference.current?.focus();
   }, []);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (barcode.trim() === "") return setErrorMessage(translateMessage("catalogue.priceCheck.barcodeRequired"));
+    void checkPrice(barcode.trim());
+  }
+
+  async function checkPrice(code: string) {
     setIsLooking(true);
     setErrorMessage(undefined);
-    const result = await apiRequest<VariantPriceLookupResponse>(ApiEndpoints.products.priceCheck, { query: { barcode: barcode.trim(), storeId: storeId ?? undefined } });
+    clearSizes();
+    const result = await apiRequest<VariantPriceLookupResponse>(ApiEndpoints.products.priceCheck, { query: { barcode: code, storeId: storeId ?? undefined } });
     setIsLooking(false);
     if (result.ok) setLookup(result.data);
     else {
       setLookup(null);
-      setErrorMessage(result.problem.message);
+      if (!(result.kind === "notFound" && (await findSizes(code)))) setErrorMessage(result.problem.message);
     }
     barcodeReference.current?.select();
   }
@@ -85,6 +93,7 @@ export function PriceCheckPage() {
         </form>
       </SectionCard>
       <FormResultNotice errorMessage={errorMessage} />
+      <ProductSizeChoices sizes={sizes} onChosen={(code) => void checkPrice(code)} />
       {lookup && (
         <SectionCard title={lookup.productName} description={`${lookup.productCode} · ${translateMessage("catalogue.field.size")} ${lookup.sizeCode}${lookup.colorName ? ` · ${lookup.colorName}` : ""}${lookup.brandName ? ` · ${lookup.brandName}` : ""}`}>
           <dl>

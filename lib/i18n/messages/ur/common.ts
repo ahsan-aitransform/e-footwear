@@ -2,6 +2,7 @@ import type { commonEnglishMessages } from "../en/common";
 
 // Drafted by the assistant; a native Urdu speaker should review the wording before release.
 export const commonUrduMessages: Record<keyof typeof commonEnglishMessages, string> = {
+  "common.chooseSize": "سائز منتخب کریں",
   "common.applicationName": "E-Footwear",
   "common.applicationTagline": "جوتوں اور ریٹیل کا پوائنٹ آف سیل",
   "common.loading": "لوڈ ہو رہا ہے",

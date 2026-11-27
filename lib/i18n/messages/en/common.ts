@@ -1,5 +1,6 @@
 // Words used on many screens. Keys: common.<meaning>. Role names: roles.<role>.
 export const commonEnglishMessages = {
+  "common.chooseSize": "choose a size",
   "common.applicationName": "E-Footwear",
   "common.applicationTagline": "Footwear and retail point of sale",
   "common.loading": "Loading",

@@ -42,7 +42,7 @@ export const salesEnglishMessages = {
   "sales.detail.voidedBy": "Voided by",
   "sales.entry.addItem": "Add item",
   "sales.entry.barcode": "Bar Code (F2)",
-  "sales.entry.barcodeHint": "Scan or type the code and press Enter.",
+  "sales.entry.barcodeHint": "Scan a barcode or type a product code, then press Enter.",
   "sales.entry.cancelItem": "Cancel",
   "sales.entry.manual": "Manual",
   "sales.entry.noPicture": "No picture",

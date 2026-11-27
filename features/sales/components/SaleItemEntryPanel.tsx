@@ -5,6 +5,7 @@ import { useEffect, useState, type KeyboardEvent, type RefObject } from "react";
 import { InlineNotice } from "@/components/feedback/InlineNotice";
 import { FormField } from "@/components/forms/FormField";
 import { PercentageField } from "@/components/forms/PercentageField";
+import { ProductSizeChoices } from "@/components/forms/ProductSizeChoices";
 import { QuantityField } from "@/components/forms/QuantityField";
 import { WholeRupeeAmountField } from "@/components/forms/WholeRupeeAmountField";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { apiRequest } from "@/lib/api/apiRequest";
+import { useSizesOfProductCode } from "@/lib/api/hooks/useSizesOfProductCode";
 import { useApiQuery } from "@/lib/api/hooks/useApiQuery";
 import { fetchApiImageObjectUrl } from "@/lib/api/fileTransfer";
 import type { RoundingMode } from "@/lib/constants/moneyFormat";
@@ -73,6 +75,7 @@ export function SaleItemEntryPanel({
   const [appliedSearchText, setAppliedSearchText] = useState("");
   const [pending, setPending] = useState<PendingEntry | null>(null);
   const [message, setMessage] = useState<string>();
+  const { sizes, findSizes, clearSizes } = useSizesOfProductCode();
   const [pictureUrl, setPictureUrl] = useState<string | null>(null);
 
   useEffect(() => {
@@ -129,13 +132,13 @@ export function SaleItemEntryPanel({
     barcodeInputRef.current?.focus();
   }
 
-  async function lookUpBarcode() {
-    const barcode = barcodeText.trim();
+  async function lookUpBarcode(barcode = barcodeText.trim()) {
     if (barcode === "") return;
     setMessage(undefined);
+    clearSizes();
     const result = await apiRequest<SaleItemResponse>(screen.itemByBarcodePath, { query: { storeId, barcode } });
     if (!result.ok) {
-      setMessage(result.problem.message);
+      if (!(result.kind === "notFound" && (await findSizes(barcode)))) setMessage(result.problem.message);
       setBarcodeText("");
       barcodeInputRef.current?.focus();
       return;
@@ -202,6 +205,8 @@ export function SaleItemEntryPanel({
           <Plus />
         </Button>
       </div>
+
+      <ProductSizeChoices sizes={sizes} onChosen={(barcode) => void lookUpBarcode(barcode)} />
 
       <div className="flex items-center gap-2">
         <Checkbox

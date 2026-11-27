@@ -246,7 +246,7 @@ describe("Special Offer Details", () => {
     await chooseOffer(user);
     await screen.findByText("Gents Sandal (101)");
 
-    await user.type(screen.getByLabelText("Barcode"), "BAR-28");
+    await user.type(screen.getByLabelText("Barcode or product code"), "BAR-28");
     await user.click(screen.getByRole("button", { name: "Add product" }));
     expect(await screen.findByText(/Enter a percentage above 0/)).toBeInTheDocument();
     expect(requests.some((request) => request.method === "POST" && request.url.includes("/lines"))).toBe(false);
@@ -309,7 +309,7 @@ describe("Deals", () => {
       if (path.startsWith("/promotions/deals/variant-by-barcode")) {
         const barcode = new URL(request.url, "http://localhost").searchParams.get("barcode") ?? "";
         const found = onScan?.(barcode);
-        return found ? { body: found } : { status: 404, body: { title: "Not found", status: 404, detail: "No product has that barcode." } };
+        return found ? { body: found } : { status: 404, body: { title: "Not found", status: 404, detail: "No product has that barcode or product code." } };
       }
       if (path.startsWith("/promotions/deals")) return { body: [deal] };
       return { status: 404, body: {} };
@@ -335,7 +335,7 @@ describe("Deals", () => {
     );
 
     await user.click(await screen.findByRole("button", { name: /New deal/ }));
-    await user.type(screen.getByLabelText("Scan or type a product barcode"), "BAR-27");
+    await user.type(screen.getByLabelText("Scan a barcode or type a product code"), "BAR-27");
     await user.click(screen.getByRole("button", { name: "Add" }));
 
     expect(await screen.findByText("Gents Sandal (101)")).toBeInTheDocument();
@@ -373,13 +373,13 @@ describe("Deals", () => {
     await user.click(screen.getByRole("button", { name: "Create deal" }));
     expect(await screen.findByText("A deal needs at least one product.")).toBeInTheDocument();
 
-    await user.type(screen.getByLabelText("Scan or type a product barcode"), "NOPE{Enter}");
-    expect(await screen.findByText("No product has that barcode.")).toBeInTheDocument();
+    await user.type(screen.getByLabelText("Scan a barcode or type a product code"), "NOPE{Enter}");
+    expect(await screen.findByText("No product has that barcode or product code.")).toBeInTheDocument();
 
-    await user.clear(screen.getByLabelText("Scan or type a product barcode"));
-    await user.type(screen.getByLabelText("Scan or type a product barcode"), "BAR-27{Enter}");
+    await user.clear(screen.getByLabelText("Scan a barcode or type a product code"));
+    await user.type(screen.getByLabelText("Scan a barcode or type a product code"), "BAR-27{Enter}");
     await screen.findByText("Gents Sandal (101)");
-    await user.type(screen.getByLabelText("Scan or type a product barcode"), "BAR-27{Enter}");
+    await user.type(screen.getByLabelText("Scan a barcode or type a product code"), "BAR-27{Enter}");
     expect(await screen.findByText("That product is already in the deal. Raise its quantity.")).toBeInTheDocument();
     expect(requests.some((request) => request.method === "POST")).toBe(false);
   });
